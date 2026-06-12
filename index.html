@@ -112,6 +112,24 @@
   .vbar .vtop b{font-weight:600;} .vbar .vtop span{color:var(--mut);}
   .vbar .track{height:10px; background:var(--bg3); border-radius:6px; overflow:hidden;}
   .vbar .fill{height:100%; background:linear-gradient(90deg,var(--acc),var(--acc2)); border-radius:6px;}
+  /* tréner */
+  .coach-title{font-size:19px; font-weight:800; margin-bottom:2px;}
+  .coach-sub{color:var(--mut); font-size:14px; margin-bottom:10px;}
+  .coach-pt{display:flex; gap:8px; padding:5px 0; font-size:14px; align-items:flex-start;}
+  .coach-pt .ic{flex:none;}
+  .zoner{display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .zoner:last-child{border-bottom:none;}
+  .zoner .zb{flex:none; width:38px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:#fff;}
+  .zoner.hl{background:rgba(55,211,155,.10); border-radius:10px; padding:8px;}
+  .zoner .zr{flex:none; font-variant-numeric:tabular-nums; font-weight:700; width:84px;}
+  .zoner .zd{color:var(--mut); font-size:12.5px;}
+  .loadbars{display:flex; align-items:flex-end; gap:3px; height:64px; margin-top:8px;}
+  .loadbars .lb{flex:1; background:var(--acc); border-radius:3px 3px 0 0; min-height:2px;}
+  .loadbars .lb.today{background:var(--acc2);}
+  .acwrtrack{position:relative; height:10px; border-radius:6px; margin:14px 6px 4px;
+    background:linear-gradient(90deg,#4f8cff 0 40%,#37d39b 40% 65%,#ffb23e 65% 78%,#ff5d6c 78% 100%);}
+  .acwrdot{position:absolute; top:-4px; width:18px; height:18px; border-radius:50%; background:#fff;
+    border:3px solid var(--bg2); transform:translateX(-50%); box-shadow:0 2px 6px rgba(0,0,0,.4);}
   /* template chip */
   .tplcard{display:flex; align-items:center; gap:10px; background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:10px 12px; margin-bottom:8px;}
   .tplcard .tnm{font-weight:700;}
@@ -522,6 +540,8 @@ function normalize(s){
   if(s.settings.weeklyGoal==null) s.settings.weeklyGoal=3;
   // predvolený plán na mieru: naberanie svalov · 4 dni · pokročilý · fitko
   if(!('plan' in s)){ s.plan=genPlan('muscle','adv',4,'gym'); s.settings.weeklyGoal=4; }
+  s.strava = s.strava || {clientId:'', clientSecret:'', accessToken:'', refreshToken:'', expiresAt:0,
+    athlete:null, zones:null, activities:[], lastSync:null};
   return s;
 }
 function save(){
@@ -540,6 +560,7 @@ function exById(id){ return allExercises().find(e=>e.id===id) || DEFAULT_EXERCIS
 let route = 'train';
 const TABS = [
   {id:'train',   ic:'🏋️', label:'Tréning'},
+  {id:'coach',   ic:'🤖', label:'Tréner'},
   {id:'history', ic:'📅', label:'História'},
   {id:'progress',ic:'📈', label:'Progres'},
   {id:'exercises',ic:'📋',label:'Cviky'},
@@ -562,6 +583,7 @@ function render(){
   renderRestTimer();
   const app = $('#app'); app.innerHTML='';
   if(route==='train') app.append(viewTrain());
+  else if(route==='coach') app.append(viewCoach());
   else if(route==='history') app.append(viewHistory());
   else if(route==='progress') app.append(viewProgress());
   else if(route==='exercises') app.append(viewExercises());
@@ -1472,6 +1494,264 @@ function openAddExercise(){
   setTimeout(()=>nameIn.focus(),100);
 }
 
+/* ================= AI TRÉNER ================= */
+/* Predvolené tepové zóny (z Davidovho Strava profilu — MaxHeartRateFromAge) */
+const DEFAULT_HR_ZONES=[{min:0,max:127},{min:128,max:158},{min:159,max:174},{min:175,max:189},{min:190,max:null}];
+const ZONE_INFO=[
+  ['Z1','#6b7a90','Regenerácia','úplne ľahké — rozcvička, vychádzka'],
+  ['Z2','#4f8cff','Aeróbny základ','konverzačné tempo — buduje vytrvalosť'],
+  ['Z3','#37d39b','Tempo','svižné, ale udržateľné'],
+  ['Z4','#ffb23e','Prah','tvrdé — intervaly 4–10 min'],
+  ['Z5','#ff5d6c','VO2max','maximum — šprinty do 3 min'],
+];
+function hrZones(){ return (state.strava.zones && state.strava.zones.length>=5)? state.strava.zones : DEFAULT_HR_ZONES; }
+
+/* záťaž jedného tréningu z appky (kalibrované na Strava Relative Effort) */
+function appWorkoutLoad(w){
+  let sets=0, cardioMin=0;
+  for(const e of w.entries){ const ex=exById(e.exerciseId);
+    for(const s of e.sets){ if(ex&&ex.type==='cardio'){ cardioMin+=(s.dur||0); } else sets++; } }
+  return Math.round(workoutVolume(w)/1000 + sets*0.3 + cardioMin*0.9);
+}
+/* záťaž Strava aktivity: Relative Effort, inak odhad z trvania */
+function stravaLoad(a){
+  if(a.re!=null) return a.re;
+  const f={Run:1.1, TrailRun:1.1, Ride:0.6, VirtualRide:0.6, MountainBikeRide:0.8, GravelRide:0.7,
+    Walk:0.3, Hike:0.5, Swim:1.0, WeightTraining:0.18, Workout:0.5, Rowing:0.9, Elliptical:0.6, StairStepper:0.8};
+  return Math.round((a.min||0)*(f[a.type]??0.5));
+}
+/* denné záťaže za posledných N dní (zlúčené: appka + Strava, bez dvojitého počítania posilky) */
+function dailyLoads(days){
+  const map={};
+  const from=new Date(todayISO()+'T00:00:00'); from.setDate(from.getDate()-days+1);
+  const fromISO=isoOf(from);
+  // Strava: na deň max 1 silový záznam (duplikáty hodinky+Hevy), ostatné športy všetky
+  const byDay={};
+  for(const a of state.strava.activities){ if(a.date<fromISO) continue; (byDay[a.date]=byDay[a.date]||[]).push(a); }
+  const stravaWT=new Set();
+  for(const d in byDay){
+    let bestWT=null;
+    for(const a of byDay[d]){
+      if(a.type==='WeightTraining'||a.type==='Workout'){ if(!bestWT||stravaLoad(a)>stravaLoad(bestWT)) bestWT=a; }
+      else map[d]=(map[d]||0)+stravaLoad(a);
+    }
+    if(bestWT){ map[d]=(map[d]||0)+stravaLoad(bestWT); stravaWT.add(d); }
+  }
+  // appka: silový tréning rátaj len ak ten deň nie je už pokrytý Stravou
+  for(const w of state.workouts){ if(w.date<fromISO) continue; if(stravaWT.has(w.date)) continue;
+    map[w.date]=(map[w.date]||0)+appWorkoutLoad(w); }
+  return map;
+}
+function computeCoach(){
+  const loads=dailyLoads(28);
+  const t=new Date(todayISO()+'T00:00:00');
+  const day=i=>{ const d=new Date(t); d.setDate(d.getDate()-i); return isoOf(d); };
+  const sum=(from,to)=>{ let s=0; for(let i=from;i<=to;i++) s+=loads[day(i)]||0; return s; };
+  const acute=sum(0,6)/7, chronic=sum(0,27)/28;
+  const acwr=chronic>0.5? acute/chronic : null;
+  const todayLoad=loads[day(0)]||0, yLoad=loads[day(1)]||0;
+  let consec=0; for(let i=1;i<=14;i++){ if((loads[day(i)]||0)>5) consec++; else break; }
+  // kardio minúty za 7 dní (Strava)
+  let cardioMin7=0, lastRunGap=99;
+  for(const a of state.strava.activities){
+    const gap=Math.round((t-new Date(a.date+'T00:00:00'))/86400000);
+    if(['Run','TrailRun','Ride','VirtualRide','Walk','Hike','Swim'].includes(a.type)){
+      if(gap>=0&&gap<7) cardioMin7+=a.min||0;
+      if(['Run','TrailRun'].includes(a.type)&&gap<lastRunGap&&gap>=0) lastRunGap=gap;
+    }
+  }
+  // ďalší deň v pláne
+  const p=state.plan;
+  const nextIdx=p? ((p.lastDayIdx==null?-1:p.lastDayIdx)+1)%p.week.length : null;
+  const nextName=p? p.week[nextIdx].name : 'silový tréning';
+  const nextIsLower=/spodok|nohy|lower|cel/i.test(nextName);
+  // včera tvrdé kardio? (dlhý beh / dlhý bicykel)
+  const yHardCardio=state.strava.activities.some(a=>a.date===day(1)&&['Run','TrailRun','Ride'].includes(a.type)&&stravaLoad(a)>=60);
+
+  const pts=[]; let title,sub,planIdx=null,zone=null,rpe=null;
+  const fmt=n=>Math.round(n*100)/100;
+  if(acwr!=null) pts.push({ic: acwr>1.5?'🔴':acwr>1.3?'🟠':acwr<0.8?'🔵':'🟢',
+    t:'Pomer záťaže (7 dní / 28 dní): '+fmt(acwr)+' — '+(acwr>1.5?'priveľa naraz, hrozí preťaženie':acwr>1.3?'na hornej hranici, sleduj únavu':acwr<0.8?'máš rezervu, môžeš pridať':'optimálne pásmo')});
+  if(yLoad>0) pts.push({ic:'⏮️', t:'Včerajšia záťaž: '+yLoad+(yHardCardio?' (tvrdé kardio — nohy potrebujú šetriť)':'')});
+  if(consec>=3) pts.push({ic:'📆', t:consec+' tréningových dní v rade'});
+
+  if(todayLoad>8){
+    title='Dnes už máš odtrénované ✅'; sub='Záťaž dňa: '+todayLoad+' — teraz regenerácia';
+    pts.push({ic:'🧘', t:'Strečing 10 min, doplň bielkoviny a vodu'});
+    pts.push({ic:'⏭️', t:'Zajtra ťa čaká: '+nextName}); zone='Z1';
+  } else if(acwr!=null && acwr>1.5 || consec>=6){
+    title='Deň regenerácie 🔋'; sub='Telo potrebuje vstrebať tréning — dnes zľahka';
+    pts.push({ic:'🚶', t:'Prechádzka alebo voľný bicykel 30–45 min v Z1–Z2'});
+    pts.push({ic:'😴', t:'Spánok 8 h — najlepší rastový stimul'}); zone='Z2';
+  } else if(yHardCardio && nextIsLower && p && p.week.length>=4){
+    const swapIdx=p.week.findIndex((d,i)=>i!==nextIdx && !/spodok|nohy|lower/i.test(d.name));
+    title='Dnes: '+(swapIdx>=0? p.week[swapIdx].name : nextName)+' (výmena poradia)';
+    sub='Po včerajšom kardiu šetríme nohy — spodok dáš nabudúce';
+    planIdx=swapIdx>=0?swapIdx:nextIdx; rpe='7–8';
+    pts.push({ic:'💪', t:'Pracovné série RPE 7–8 (2–3 opakovania v zásobe)'});
+  } else if(acwr!=null && acwr<0.8){
+    title='Dnes: '+nextName+' — môžeš si dať do tela 🔥';
+    sub='Si oddýchnutý, ideálny deň na ťažký tréning';
+    planIdx=nextIdx; rpe='8–9';
+    pts.push({ic:'💪', t:'Pridaj váhu na prvých cvikoch — RPE 8–9, posledná séria takmer do zlyhania'});
+  } else {
+    title='Dnes: '+nextName; sub='Štandardný kvalitný tréning podľa plánu';
+    planIdx=nextIdx; rpe='7–8';
+    pts.push({ic:'💪', t:'Pracovné série RPE 7–8, oddych 90 s (veľké cviky pokojne 2–3 min)'});
+  }
+  if(todayLoad<=8 && cardioMin7<90 && planIdx!=null)
+    pts.push({ic:'🏃', t:'Kardio za 7 dní: '+Math.round(cardioMin7)+' min — na voľný deň zaraď Z2 beh/bicykel 40 min'});
+  else if(lastRunGap<99 && lastRunGap>=5)
+    pts.push({ic:'🏃', t:'Posledný beh pred '+lastRunGap+' dňami — nezabudni na Z2'});
+  return {title, sub, pts, planIdx, zone, rpe, acute, chronic, acwr, loads, todayLoad};
+}
+
+/* ---------- Strava API (OAuth priamo v appke) ---------- */
+function stravaConnected(){ return !!state.strava.refreshToken; }
+function stravaAuthorize(){
+  const s=state.strava;
+  if(!s.clientId||!s.clientSecret){ alert('Najprv vyplň Client ID a Client Secret.'); return; }
+  save();
+  const ru=location.origin+location.pathname;
+  location.href='https://www.strava.com/oauth/authorize?client_id='+encodeURIComponent(s.clientId)
+    +'&redirect_uri='+encodeURIComponent(ru)+'&response_type=code&approval_prompt=auto'
+    +'&scope=read,activity:read_all,profile:read_all';
+}
+async function stravaToken(params){
+  const s=state.strava;
+  const body=new URLSearchParams({client_id:s.clientId, client_secret:s.clientSecret, ...params});
+  const r=await fetch('https://www.strava.com/api/v3/oauth/token',{method:'POST', body});
+  if(!r.ok) throw new Error('Token: HTTP '+r.status);
+  const d=await r.json();
+  s.accessToken=d.access_token; s.refreshToken=d.refresh_token; s.expiresAt=d.expires_at*1000;
+  if(d.athlete) s.athlete={name:(d.athlete.firstname||'')+' '+(d.athlete.lastname||'')};
+  save();
+}
+async function stravaEnsure(){
+  const s=state.strava;
+  if(!s.refreshToken) throw new Error('Strava nie je pripojená');
+  if(Date.now()>s.expiresAt-60000) await stravaToken({grant_type:'refresh_token', refresh_token:s.refreshToken});
+}
+async function sget(path){
+  await stravaEnsure();
+  const r=await fetch('https://www.strava.com/api/v3'+path,{headers:{Authorization:'Bearer '+state.strava.accessToken}});
+  if(!r.ok) throw new Error('API: HTTP '+r.status);
+  return r.json();
+}
+async function stravaSync(silent){
+  try{
+    const after=Math.floor((Date.now()-45*86400000)/1000);
+    const acts=await sget('/athlete/activities?per_page=100&after='+after);
+    state.strava.activities=acts.map(a=>({date:(a.start_date_local||a.start_date||'').slice(0,10),
+      type:a.sport_type||a.type, name:a.name, min:Math.round((a.moving_time||0)/60),
+      re:a.suffer_score??null, dist:a.distance?round(a.distance/1000,1):null}));
+    try{ const z=await sget('/athlete/zones');
+      if(z&&z.heart_rate&&z.heart_rate.zones&&z.heart_rate.zones.length) state.strava.zones=z.heart_rate.zones; }catch(e){}
+    state.strava.lastSync=Date.now(); save();
+    if(!silent){ render(); toast('Strava synchronizovaná ✓'); } else if(route==='coach') render();
+  }catch(e){ if(!silent) alert('Synchronizácia zlyhala: '+e.message); }
+}
+function stravaHandleCallback(){
+  const q=new URLSearchParams(location.search);
+  const code=q.get('code');
+  if(!code) return;
+  history.replaceState(null,'',location.pathname);
+  if(!state.strava.clientId||!state.strava.clientSecret) return;
+  stravaToken({grant_type:'authorization_code', code})
+    .then(()=>{ toast('Strava pripojená 🎉'); return stravaSync(true); })
+    .then(()=>{ route='coach'; render(); })
+    .catch(e=>alert('Pripojenie zlyhalo: '+e.message));
+}
+
+/* ---------- Obrazovka Tréner ---------- */
+function viewCoach(){
+  const wrap=el('div');
+  wrap.append(el('header',{class:'top'}, el('h1',{},'🤖 Tréner'),
+    stravaConnected()? el('button',{class:'btn sm', onclick:()=>stravaSync(false)},'🔄 Sync'):null));
+  const C=computeCoach();
+
+  // Dnešné odporúčanie
+  const rec=el('div',{class:'card', style:'border-color:var(--acc)'});
+  rec.append(el('div',{class:'muted small', style:'margin-bottom:4px'}, fmtDate(todayISO())));
+  rec.append(el('div',{class:'coach-title'}, C.title));
+  rec.append(el('div',{class:'coach-sub'}, C.sub));
+  C.pts.forEach(p=>rec.append(el('div',{class:'coach-pt'}, el('span',{class:'ic'},p.ic), el('span',{},p.t))));
+  if(C.planIdx!=null && state.plan)
+    rec.append(el('button',{class:'btn good lg block', style:'margin-top:10px',
+      onclick:()=>startPlanDay(C.planIdx)},'▶ Spustiť: '+state.plan.week[C.planIdx].name+(C.rpe?' (RPE '+C.rpe+')':'')));
+  wrap.append(rec);
+
+  // Tepové zóny
+  const zc=el('div',{class:'card'});
+  zc.append(el('h3',{},'❤️ Tepové zóny'+(state.strava.zones?' (zo Stravy)':'')));
+  const zs=hrZones();
+  ZONE_INFO.forEach(([z,color,nm,desc],i)=>{
+    const zo=zs[i]||{};
+    const range=(zo.max!=null&&zo.max>0)? (zo.min||0)+'–'+zo.max : (zo.min||0)+'+';
+    zc.append(el('div',{class:'zoner'+(C.zone===z?' hl':'')},
+      el('div',{class:'zb', style:'background:'+color}, z),
+      el('div',{class:'zr'}, range+' /min'),
+      el('div',{class:'grow'}, el('div',{style:'font-weight:600;font-size:13.5px'},nm), el('div',{class:'zd'},desc)),
+      C.zone===z? el('span',{class:'tag', style:'color:var(--acc2);border-color:var(--acc2)'},'dnes'):null));
+  });
+  wrap.append(zc);
+
+  // Tréningová záťaž
+  const lc=el('div',{class:'card'});
+  lc.append(el('h3',{},'📊 Tréningová záťaž'));
+  lc.append(el('div',{class:'statgrid'},
+    stat(Math.round(C.acute*10)/10,'Denný priemer 7 dní'),
+    stat(Math.round(C.chronic*10)/10,'Denný priemer 28 dní')));
+  if(C.acwr!=null){
+    const pct=Math.max(2,Math.min(98,C.acwr*50));
+    lc.append(el('div',{class:'acwrtrack'}, el('div',{class:'acwrdot', style:'left:'+pct+'%'})));
+    lc.append(el('div',{class:'row', style:'justify-content:space-between;margin:2px 6px 0'},
+      el('span',{class:'small muted'},'rezerva'), el('span',{class:'small muted'},'optimum'), el('span',{class:'small muted'},'riziko')));
+  }
+  const bars=el('div',{class:'loadbars'});
+  let maxL=1; const seq=[];
+  for(let i=13;i>=0;i--){ const d=new Date(todayISO()+'T00:00:00'); d.setDate(d.getDate()-i);
+    const v=C.loads[isoOf(d)]||0; seq.push(v); maxL=Math.max(maxL,v); }
+  seq.forEach((v,i)=>bars.append(el('div',{class:'lb'+(i===13?' today':''), style:'height:'+Math.max(3,v/maxL*100)+'%', title:String(v)})));
+  lc.append(bars);
+  lc.append(el('div',{class:'center muted small', style:'margin-top:4px'},'posledných 14 dní (dnes zelený)'));
+  wrap.append(lc);
+
+  // Strava
+  const sc=el('div',{class:'card'});
+  if(stravaConnected()){
+    sc.append(el('h3',{},'🟠 Strava — pripojená'));
+    sc.append(el('div',{class:'muted small', style:'margin-bottom:8px'},
+      (state.strava.athlete?state.strava.athlete.name+' · ':'')+state.strava.activities.length+' aktivít za 45 dní'
+      +(state.strava.lastSync?' · sync '+new Date(state.strava.lastSync).toLocaleString('sk'):'')));
+    [...state.strava.activities].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5).forEach(a=>{
+      sc.append(el('div',{class:'hist-ex'},
+        el('b',{}, a.name),
+        el('span',{}, relDay(a.date)+' · '+(a.dist?a.dist+' km · ':'')+a.min+' min'+(a.re!=null?' · RE '+a.re:''))));
+    });
+    sc.append(el('button',{class:'btn danger sm block', style:'margin-top:8px', onclick:()=>{
+      if(confirm('Odpojiť Stravu?')){ state.strava={...state.strava, accessToken:'', refreshToken:'', expiresAt:0, athlete:null, activities:[], lastSync:null}; save(); render(); }
+    }},'Odpojiť Stravu'));
+  } else {
+    sc.append(el('h3',{},'🟠 Pripojiť Stravu'));
+    sc.append(el('div',{class:'muted small', style:'margin-bottom:10px'},
+      'Tréner potom uvidí behy, bicykel aj Relative Effort a odporúčania budú presnejšie. Jednorazové nastavenie:'));
+    sc.append(el('div',{class:'coach-pt'}, el('span',{class:'ic'},'1️⃣'),
+      el('span',{html:'Otvor <a href="https://www.strava.com/settings/api" target="_blank">strava.com/settings/api</a> a vytvor aplikáciu (názov: Gym Denník, Authorization Callback Domain: <b>'+location.hostname+'</b>)'})));
+    sc.append(el('div',{class:'coach-pt'}, el('span',{class:'ic'},'2️⃣'), el('span',{},'Skopíruj sem Client ID a Client Secret')));
+    sc.append(el('div',{class:'coach-pt'}, el('span',{class:'ic'},'3️⃣'), el('span',{},'Klikni Pripojiť a povoľ prístup')));
+    const idIn=el('input',{class:'fld', placeholder:'Client ID', value:state.strava.clientId,
+      oninput:e=>{ state.strava.clientId=e.target.value.trim(); }});
+    const secIn=el('input',{class:'fld', placeholder:'Client Secret', value:state.strava.clientSecret,
+      oninput:e=>{ state.strava.clientSecret=e.target.value.trim(); }});
+    sc.append(el('div',{style:'height:6px'}), idIn, el('div',{style:'height:8px'}), secIn, el('div',{style:'height:10px'}));
+    sc.append(el('button',{class:'btn primary block', onclick:stravaAuthorize},'🔗 Pripojiť Stravu'));
+    sc.append(el('div',{class:'muted small', style:'margin-top:8px'},'Kľúče aj dáta ostávajú len v tomto zariadení.'));
+  }
+  wrap.append(sc);
+  return wrap;
+}
+
 /* ---------------- VIAC / nastavenia ---------------- */
 function viewMore(){
   const wrap=el('div');
@@ -1676,6 +1956,8 @@ function drawChart(canvas, series){
 
 /* ============================================================ */
 render();
+stravaHandleCallback();
+if(stravaConnected() && (!state.strava.lastSync || Date.now()-state.strava.lastSync>6*3600000)) stravaSync(true);
 window.addEventListener('resize', ()=>{ if(route==='progress') render(); });
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); });

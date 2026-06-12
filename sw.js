@@ -1,5 +1,5 @@
 /* Gym Denník — service worker: offline cache */
-const CACHE = 'gymdennik-v1';
+const CACHE = 'gymdennik-v2';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -17,6 +17,7 @@ self.addEventListener('activate', e => {
 /* network-first: aktualizácie sa stiahnu hneď, offline padá na cache */
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  if (new URL(e.request.url).origin !== self.location.origin) return; // Strava API nechaj tak
   e.respondWith(
     fetch(e.request)
       .then(r => {
