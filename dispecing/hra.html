@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
 <style>
   :root{
-    /* Rozloženie: dispečerský pult – pás s hodinami hore, vľavo hovory a udalosti, v strede nočná mapa mesta, vpravo jednotky */
+    /* Rozloženie: dispečerský pult – pás s hodinami hore, vľavo hovory a udalosti, v strede nočné mesto v 3D pohľade, vpravo jednotky */
     --ink:#0a1222;        /* noc, pozadie */
     --panel:#101b30;      /* panely pultu */
     --card:#16233c;       /* karty */
@@ -24,7 +24,12 @@
     --p1:#ff4d5e; --p2:#ff9a3c; --p3:#f4d35e;
     --s1:#3ddc97; --s2:#2aa198; --s3:#ff9a3c; --s4:#ff4d5e; --s5:#b48cff; --s6:#5aa9ff;
     --t-med:#ff6b81; --t-traffic:#f4d35e; --t-fire:#ff8a3d; --t-police:#5aa9ff; --t-prank:#8e9bb4;
-    --river:#0c2341; --road:#1c2a45; --bridge:#2a3a5a; --block:#121d33; --park:#0f2a23; --tree:#17402f; --hosp:#e8edf6;
+    /* mesto */
+    --ground:#070d19; --asphalt:#131c2e; --sidewalk:#1f2b42; --facade:#16223a; --facade-dark:#0f182b; --roof:#1d2a44; --roof-hi:#273755;
+    --water:#0b2240; --water-deep:#06152b; --grass:#0c2620; --tree:#14402f; --tree-hi:#1d5a41; --lamp:#ffc66b; --window-cool:#9cc8ff;
+    --hosp:#e8edf6;
+    /* vozidlá */
+    --veh-rzp:#f2f5fa; --veh-rzp-stripe:#e3263f; --veh-has:#d0283a; --veh-has-top:#9aa6ba; --veh-pz:#e9eef8; --veh-pz-stripe:#1f5ad8; --glass:#0b1730;
     --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
     --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -36,6 +41,7 @@
   body{overflow:hidden; -webkit-tap-highlight-color:transparent;}
   button{font:inherit; color:inherit;}
   kbd{font:600 10px var(--f-mono); border:1px solid currentColor; border-radius:4px; padding:0 4px; opacity:.7;}
+  .ico{width:18px; height:18px; flex:none; display:inline-block; vertical-align:-3px;}
 
   .app{position:relative; height:100%; display:grid; gap:12px;
     grid-template-columns:minmax(290px,340px) minmax(0,1fr) minmax(250px,290px);
@@ -43,7 +49,8 @@
     grid-template-areas:"bar bar bar" "left map right";
     padding-block:12px;
     padding-left:max(16px, env(safe-area-inset-left, 0px));
-    padding-right:max(16px, env(safe-area-inset-right, 0px));}
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+    background:radial-gradient(1200px 500px at 50% -10%, color-mix(in srgb, var(--sodium) 7%, transparent), transparent 70%), var(--ink);}
 
   .btn{display:inline-flex; align-items:center; justify-content:center; gap:7px; font-weight:700; font-size:14px;
     border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text);
@@ -51,7 +58,7 @@
   .btn:hover{border-color:var(--muted);}
   .btn:focus-visible{outline:2px solid var(--sodium); outline-offset:2px;}
   .btn:disabled{opacity:.4; cursor:default;}
-  .btn.go{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium);}
+  .btn.go{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium); box-shadow:0 0 18px color-mix(in srgb, var(--sodium) 30%, transparent);}
   .btn.ghost{background:transparent;}
   .btn.sm{min-height:30px; padding:5px 9px; font-size:13px;}
 
@@ -59,10 +66,13 @@
   .bar{grid-area:bar; display:flex; align-items:center; gap:10px 22px; flex-wrap:wrap; background:var(--panel);
     border:1px solid var(--line); border-radius:12px; padding:8px 14px;}
   .brand{font:800 28px/1 var(--f-display); letter-spacing:.05em; text-transform:uppercase;}
-  .brand b{color:var(--sodium);}
+  .brand b{color:var(--sodium); text-shadow:0 0 18px color-mix(in srgb, var(--sodium) 45%, transparent);}
   .brand small{display:block; font:600 10px var(--f-mono); letter-spacing:.12em; color:var(--muted); margin-top:4px;}
   .clockbox{display:flex; align-items:center; gap:12px;}
-  .clock{font:800 36px/1 var(--f-display); font-variant-numeric:tabular-nums; letter-spacing:.02em;}
+  .clock{font:800 36px/1 var(--f-display); font-variant-numeric:tabular-nums; letter-spacing:.02em; display:flex; align-items:center; gap:8px;}
+  .live{width:9px; height:9px; border-radius:50%; background:var(--bad); box-shadow:0 0 10px var(--bad); animation:blink 1.2s steps(2,start) infinite;}
+  .app:not([data-mode="play"]) .live{visibility:hidden;}
+  @keyframes blink{to{opacity:.25;}}
   .k{font:600 10px var(--f-mono); letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
   .track{height:6px; background:var(--line); border-radius:3px; overflow:hidden;}
   .track i{display:block; height:100%; width:0; background:var(--sodium); border-radius:3px; transition:width .3s;}
@@ -70,8 +80,8 @@
   .stat .v{font:800 26px/1.05 var(--f-display); font-variant-numeric:tabular-nums;}
   .rep{width:130px; display:grid; gap:6px;}
   .rep .track{height:9px;}
-  .rep .track i{background:var(--good);}
-  .rep.low .track i{background:var(--bad);}
+  .rep .track i{background:var(--good); box-shadow:0 0 10px var(--good);}
+  .rep.low .track i{background:var(--bad); box-shadow:0 0 10px var(--bad);}
   .spacer{flex:1;}
   .ctrl{display:flex; gap:6px;}
 
@@ -87,27 +97,34 @@
   .empty{margin:0; color:var(--muted); font-size:14px;}
   .row{display:flex; align-items:center; gap:8px; min-width:0;}
   .grow{flex:1; min-width:0;}
-  .mono{font-family:var(--f-mono);}
   .muted{color:var(--muted);}
 
   .call{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; display:grid; gap:9px;}
   .call.ring{border-color:var(--sodium); animation:ring 1s ease-in-out infinite;}
-  @keyframes ring{50%{box-shadow:0 0 0 3px color-mix(in srgb, var(--sodium) 30%, transparent);}}
-  .call.talk{border-color:var(--sodium);}
+  .call.ring .phone{color:var(--sodium); animation:wiggle .5s ease-in-out infinite;}
+  @keyframes ring{50%{box-shadow:0 0 0 3px color-mix(in srgb, var(--sodium) 30%, transparent), 0 0 24px color-mix(in srgb, var(--sodium) 25%, transparent);}}
+  @keyframes wiggle{25%{transform:rotate(-14deg);}75%{transform:rotate(14deg);}}
+  .call.talk{border-color:var(--sodium); background:linear-gradient(180deg, color-mix(in srgb, var(--sodium) 9%, var(--card)), var(--card));}
   .call.shake{animation:shake .35s;}
   @keyframes shake{25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
-  .lbl{font:600 11px var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--sodium);}
+  .lbl{font:600 11px var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--sodium); display:flex; align-items:center; gap:7px;}
+  .wave{display:inline-flex; align-items:center; gap:2px; height:14px;}
+  .wave i{width:3px; height:100%; background:var(--sodium); border-radius:2px; animation:wave .9s ease-in-out infinite;}
+  .wave i:nth-child(2){animation-delay:-.2s;} .wave i:nth-child(3){animation-delay:-.45s;} .wave i:nth-child(4){animation-delay:-.65s;} .wave i:nth-child(5){animation-delay:-.3s;}
+  @keyframes wave{0%,100%{transform:scaleY(.25);}50%{transform:scaleY(1);}}
   .quote{margin:0; font-size:16px; line-height:1.45;}
   .quote::before{content:"„";} .quote::after{content:"“";}
   .addr{font:500 12px var(--f-mono); color:var(--muted);}
   .cls{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
   .cls .btn{justify-content:flex-start; text-align:left; border-left:4px solid var(--tc); font-size:13px; padding:7px 9px;}
+  .cls .btn .ico{color:var(--tc);}
   .cls .btn:last-child{grid-column:1/-1;}
 
   .inc{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--pc); border-radius:10px;
     padding:9px 10px; cursor:pointer; display:grid; gap:6px;}
   .inc:hover{border-color:var(--muted); border-left-color:var(--pc);}
-  .inc.sel{border-color:var(--sodium); border-left-color:var(--pc);}
+  .inc.sel{border-color:var(--sodium); border-left-color:var(--pc); box-shadow:0 0 16px color-mix(in srgb, var(--sodium) 18%, transparent);}
+  .inc .ico{color:var(--pc);}
   .prio{font:700 11px var(--f-mono); padding:1px 6px; border-radius:5px; background:var(--pc); color:var(--ink); flex:none;}
   .ttl{font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .timer{font:600 12px var(--f-mono); font-variant-numeric:tabular-nums; flex:none;}
@@ -119,29 +136,34 @@
   .tbar i{display:block; height:100%; background:var(--pc, var(--sodium));}
   .tbar.work i{background:var(--good);}
 
-  .disp{background:var(--card); border:1px solid var(--sodium); border-radius:12px; padding:12px; display:grid; gap:10px;}
+  .disp{background:var(--card); border:1px solid var(--sodium); border-radius:12px; padding:12px; display:grid; gap:10px;
+    box-shadow:0 0 22px color-mix(in srgb, var(--sodium) 14%, transparent);}
   .disp .quote{font-size:14px; color:var(--muted);}
+  .disp .ico{color:var(--pc);}
   .cand{display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:8px; font-size:14px;}
   .tag{font:700 11px var(--f-mono); padding:2px 6px; border-radius:5px; background:var(--sc); color:var(--ink); white-space:nowrap;}
   .eta{font:600 12px var(--f-mono); color:var(--muted); white-space:nowrap;}
-  .sub{font-size:12px; color:var(--muted);}
+  .sub{font-size:12px; color:var(--muted); font-weight:400;}
+  .keys{margin:0; font-size:12px; color:var(--muted);}
 
   .unit{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:3px 10px; align-items:center; padding:8px 10px;
     background:var(--card); border:1px solid var(--line); border-left:4px solid var(--sc); border-radius:10px; cursor:pointer;}
   .unit:hover{border-color:var(--muted); border-left-color:var(--sc);}
   .unit.sel{border-color:var(--sodium); border-left-color:var(--sc);}
+  .unit .veh{width:30px; height:30px; display:grid; place-items:center; border-radius:8px; background:color-mix(in srgb, var(--sc) 18%, transparent); color:var(--sc);}
+  .unit .veh .ico{width:22px; height:22px;}
   .unit .nm{font-weight:700;}
   .unit .st{font:600 11px var(--f-mono); color:var(--sc); white-space:nowrap;}
   .unit .what{grid-column:1/-1; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .unit .send{font:700 11px var(--f-mono); color:var(--on-sodium); background:var(--sodium); border-radius:5px; padding:1px 6px;}
 
   /* ---------- mapa ---------- */
-  .mapbox{grid-area:map; position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:var(--ink); min-height:0;}
+  .mapbox{grid-area:map; position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:var(--ground); min-height:0;}
   #map{display:block; width:100%; height:100%; cursor:pointer; touch-action:manipulation;}
   .hints{position:absolute; top:10px; left:50%; transform:translateX(-50%); display:grid; gap:6px; justify-items:center;
     pointer-events:none; width:min(92%,560px);}
   .hint{background:color-mix(in srgb, var(--panel) 94%, transparent); border:1px solid var(--line); border-radius:999px;
-    padding:6px 13px; font-size:13px; font-weight:700; text-align:center; animation:hin .2s ease-out;}
+    padding:6px 13px; font-size:13px; font-weight:700; text-align:center; animation:hin .2s ease-out; box-shadow:0 6px 20px rgba(0,0,0,.4);}
   .hint.good{border-color:var(--good);} .hint.bad{border-color:var(--bad);}
   @keyframes hin{from{opacity:0; transform:translateY(-6px);}}
   .legend{position:absolute; left:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:4px 10px; max-width:calc(100% - 20px);
@@ -151,27 +173,31 @@
 
   /* ---------- prekryvné okná ---------- */
   .overlay{position:absolute; inset:0; z-index:20; display:grid; place-items:center; overflow:auto;
-    background:color-mix(in srgb, var(--ink) 62%, transparent); backdrop-filter:blur(3px);
+    background:radial-gradient(closest-side, color-mix(in srgb, var(--ink) 70%, transparent), color-mix(in srgb, var(--ink) 35%, transparent));
     padding-block:16px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));}
-  .sheet{width:100%; max-width:660px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
-    padding:24px; display:grid; gap:18px; box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .overlay.menu{background:linear-gradient(90deg, color-mix(in srgb, var(--ink) 82%, transparent), color-mix(in srgb, var(--ink) 40%, transparent) 60%, transparent);}
+  @media (min-width:1100px){ .overlay.menu{justify-items:start; padding-left:max(48px, env(safe-area-inset-left, 0px));} .overlay.menu .sheet{max-width:600px;} }
+  .sheet{width:100%; max-width:660px; background:color-mix(in srgb, var(--panel) 94%, transparent); border:1px solid var(--line); border-radius:16px;
+    padding:24px; display:grid; gap:18px; box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px color-mix(in srgb, var(--sodium) 10%, transparent);
+    backdrop-filter:blur(6px);}
   .title{margin:0; font:800 clamp(52px, 10vw, 84px)/.88 var(--f-display); text-transform:uppercase; letter-spacing:.03em; text-wrap:balance;}
-  .title b{color:var(--sodium);}
+  .title b{color:var(--sodium); text-shadow:0 0 30px color-mix(in srgb, var(--sodium) 50%, transparent);}
   .lead{margin:0; font-size:17px; max-width:56ch;}
   .how{margin:0; padding-left:20px; display:grid; gap:7px; max-width:62ch;}
   .how li::marker{color:var(--sodium); font-family:var(--f-mono); font-weight:700;}
   .diffs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
   .diff{text-align:left; padding:13px; border-radius:12px; background:var(--card); border:1px solid var(--line); cursor:pointer;
-    display:grid; gap:4px; align-content:start;}
-  .diff:hover, .diff:focus-visible{border-color:var(--sodium); outline:none;}
+    display:grid; gap:4px; align-content:start; transition:transform .15s, border-color .15s;}
+  .diff:hover, .diff:focus-visible{border-color:var(--sodium); outline:none; transform:translateY(-2px);}
   .diff b{font:800 22px/1 var(--f-display); text-transform:uppercase; letter-spacing:.05em;}
   .diff span{font-size:13px; color:var(--muted);}
   .diff em{font:600 11px var(--f-mono); font-style:normal; color:var(--sodium);}
-  .keys{margin:0; font-size:12px; color:var(--muted);}
   .sumgrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;}
   .sumgrid div{background:var(--card); border-radius:10px; padding:10px 12px;}
   .sumgrid b{display:block; font:800 28px/1.05 var(--f-display); font-variant-numeric:tabular-nums;}
   .grade{margin:0; font:800 30px/1 var(--f-display); text-transform:uppercase; letter-spacing:.05em; color:var(--sodium);}
+  .stars{display:flex; gap:4px;}
+  .stars svg{width:26px; height:26px;}
   .acts{display:flex; gap:8px; flex-wrap:wrap;}
 
   .mtabs{display:none; grid-area:tabs; gap:6px;}
@@ -181,7 +207,7 @@
   @media (max-width:860px){
     .app{gap:8px; padding-block:8px;
       grid-template-columns:minmax(0,1fr);
-      grid-template-rows:auto minmax(200px,42%) auto minmax(0,1fr);
+      grid-template-rows:auto minmax(220px,44%) auto minmax(0,1fr);
       grid-template-areas:"bar" "map" "tabs" "rail";}
     .rail-left, .rail-right{grid-area:rail;}
     .app[data-tab="pult"] .rail-right, .app[data-tab="units"] .rail-left{display:none;}
@@ -196,18 +222,18 @@
     .legend{display:none;}
   }
   @media (prefers-reduced-motion: reduce){
-    .call.ring{animation:none;} .hint{animation:none;} .track i{transition:none;}
+    .call.ring, .call.ring .phone, .wave i, .live, .hint{animation:none;} .track i, .diff{transition:none;}
   }
 </style>
 <style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}</style>
 </head>
 <body>
 
-<div class="app" id="app" data-tab="pult">
+<div class="app" id="app" data-tab="pult" data-mode="menu">
   <header class="bar">
     <div class="brand">Linka <b>112</b><small id="diffLbl">Nočná zmena</small></div>
     <div class="clockbox">
-      <div class="clock" id="clock">22:00</div>
+      <div class="clock"><span class="live" title="Linka je v prevádzke"></span><span id="clock">22:00</span></div>
       <div class="shift"><div class="track"><i id="shiftBar"></i></div><div class="k">22:00 → 06:00</div></div>
     </div>
     <div class="stat"><div class="k">Skóre</div><div class="v" id="score">0</div></div>
@@ -258,12 +284,29 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 const lerp = (a,b,t) => a+(b-a)*t;
+const rand = (a,b) => a+Math.random()*(b-a);
 const pick = a => a[Math.floor(Math.random()*a.length)];
 const pad = n => String(n).padStart(2,'0');
 const REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const rgba = (hex,a) => { const n=parseInt(hex.slice(1),16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; };
 function rng(seed){ return () => { seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15, 1|seed); t=t+Math.imul(t^t>>>7, 61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+/* ---------- ikony ---------- */
+const svg = (body, fill) => `<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="${fill?'currentColor':'none'}" stroke="${fill?'none':'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+const ICON={
+  med:     svg('<path d="M9.5 3.5h5v6h6v5h-6v6h-5v-6h-6v-5h6z"/>', true),
+  traffic: svg('<path d="M4 16.5h16M5.5 16.5l1.8-5.5h9.4l1.8 5.5"/><circle cx="8" cy="17.5" r="1.7"/><circle cx="16" cy="17.5" r="1.7"/><path d="M3 7l3 2M21 7l-3 2M12 4v3"/>'),
+  fire:    svg('<path d="M12 2.5c.8 3.6 5.5 5.3 5.5 10.6a5.5 5.5 0 0 1-11 0c0-3.2 2-4.4 2.4-7.2 1.5 1.1 2.1 2.3 2.2 3.4 1.2-1.4 1.6-3.8.9-6.8z"/>', true),
+  police:  svg('<path d="M12 2.8l7.5 3v5.6c0 5.2-3.3 8.4-7.5 10.4-4.2-2-7.5-5.2-7.5-10.4V5.8z"/><path d="M12 8.2l1.2 2.5 2.7.3-2 1.9.6 2.7-2.5-1.4-2.5 1.4.6-2.7-2-1.9 2.7-.3z" fill="currentColor" stroke="none"/>'),
+  prank:   svg('<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>'),
+  mass:    svg('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),
+  phone:   svg('<path d="M6.5 3h3l2 5-2.2 1.4a11 11 0 0 0 5.3 5.3L16 12.5l5 2v3a2 2 0 0 1-2 2A16.5 16.5 0 0 1 4.5 5a2 2 0 0 1 2-2z"/>'),
+  RZP:     svg('<path d="M2.5 7h11v9.5h-11zM13.5 10h4.2l3.3 3.5v3h-7.5z"/><circle cx="6.5" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/><path d="M8 9.5v4.5M5.8 11.75h4.4"/>'),
+  HAS:     svg('<path d="M2 10h13v6.5H2zM15 12h4l3 3v1.5h-7z"/><circle cx="6" cy="17.5" r="1.7"/><circle cx="18" cy="17.5" r="1.7"/><path d="M3 7.5l12-2M5 7.1v2.9M8.5 6.5v3.5M12 5.9V10"/>'),
+  PZ:      svg('<path d="M3 16.5h18v-3l-2.2-.8-2.3-4H7.5l-2.3 4L3 13.5z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/><path d="M10 5h4M12 5v3.7"/>'),
+};
+const STAR = on => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.5l1.3-6.6L2.5 9.3l6.6-.8z" fill="${on?'var(--sodium)':'none'}" stroke="${on?'var(--sodium)':'var(--line)'}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
 
 /* ---------- mesto ---------- */
 const COLS=15, ROWS=11, RIVER=6;                 // rieka (Dunaj) tečie medzi riadkami 6 a 7
@@ -295,8 +338,8 @@ const adj = Array.from({length:N}, () => []);
 const EDGES = [];
 for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++){
   const a=nid(x,y); if(!exists[a]) continue;
-  if(x+1<COLS && exists[nid(x+1,y)]){ const m=MAIN_H.includes(y); link(a, nid(x+1,y), m, false); }
-  if(y+1<ROWS && exists[nid(x,y+1)] && (y!==RIVER || BRIDGES[x])){ const m=MAIN_V.includes(x); link(a, nid(x,y+1), m, y===RIVER); }
+  if(x+1<COLS && exists[nid(x+1,y)]) link(a, nid(x+1,y), MAIN_H.includes(y), false);
+  if(y+1<ROWS && exists[nid(x,y+1)] && (y!==RIVER || BRIDGES[x])) link(a, nid(x,y+1), MAIN_V.includes(x), y===RIVER);
 }
 function link(a,b,main,bridge){ const w=main?1/MAIN_SPEED:1; adj[a].push([b,w]); adj[b].push([a,w]); EDGES.push([a,b,main,bridge]); }
 function dijkstra(src){
@@ -403,14 +446,17 @@ const DIFFS={
 let G=null;
 function makeUnits(extra){
   return STATIONS.filter(s=>extra || !s.extra).map(s=>({id:s.id, cs:s.id, name:s.name, kind:s.kind, home:nid(s.x,s.y), st:s.st,
-    x:s.x, y:s.y, node:nid(s.x,s.y), path:[], moving:false, status:2, since:0, inc:null, waitUntil:0, hosp:null}));
+    x:s.x, y:s.y, node:nid(s.x,s.y), path:[], moving:false, status:2, since:0, inc:null, waitUntil:0, hosp:null, ang:-Math.PI/2}));
 }
+/* mode: 'play' | 'pause' | 'over' | 'demo' (ukážka v pozadí úvodnej obrazovky) */
 function newGame(diff, mode){
   const D=DIFFS[diff];
   return {mode, diff, t:0, speed:1, score:0, rep:100, seq:0, cseq:0, calls:[], incs:[], units:makeUnits(D.extra),
-    fx:[], nextCall:3, lastRing:-9, sel:{inc:null, unit:null}, ev:{mass:false, midnight:false},
+    fx:[], nextCall:mode==='demo' ? 1 : 3, lastRing:-9, sel:{inc:null, unit:null}, ev:{mass:false, midnight:false}, bot:0,
     stats:{resolved:0, failed:0, hung:0, pranks:0, wrong:0, rejected:0, wasted:0, resp:[]}};
 }
+const running = () => G.mode==='play' || G.mode==='demo';
+const quiet = () => G && G.mode==='demo';
 const unitById = id => G.units.find(u=>u.id===id);
 const incById  = id => G.incs.find(i=>i.id===id);
 const callById = id => G.calls.find(c=>c.id===id);
@@ -427,7 +473,7 @@ function audio(){
   return AC;
 }
 function tone(freq, dur, type='sine', vol=.1, when=0){
-  if(muted || !AC) return;
+  if(muted || !AC || quiet()) return;
   try{
     const t=AC.currentTime+when, o=AC.createOscillator(), g=AC.createGain();
     o.type=type; o.frequency.setValueAtTime(freq,t);
@@ -444,6 +490,7 @@ const SND={
 
 /* ---------- hlásenia na mape ---------- */
 function say(text, kind){
+  if(quiet()) return;
   const box=$('#hints'), el=document.createElement('div');
   el.className='hint'+(kind?' '+kind:''); el.textContent=text;
   box.prepend(el);
@@ -470,6 +517,7 @@ function moveUnit(u, dt){
     const n=u.path[0], tx=nx(n), ty=ny(n);
     const sp = isMainSeg(u.x,u.y,tx,ty) ? MAIN_SPEED : 1;
     const dx=tx-u.x, dy=ty-u.y, d=Math.hypot(dx,dy), step=rem*sp;
+    if(d>1e-6) u.ang=Math.atan2(dy,dx);
     if(d<=step){ u.x=tx; u.y=ty; u.node=n; u.path.shift(); rem-=d/sp; }
     else { u.x+=dx/d*step; u.y+=dy/d*step; rem=0; }
   }
@@ -501,7 +549,7 @@ function arrived(u){
 }
 const dispatchable = (u, inc) => (u.status===1 || u.status===2 || u.status===3) && u.inc!==inc.id;
 function dispatch(u, inc){
-  if(!u || !inc || G.mode!=='play') return;
+  if(!u || !inc || !running()) return;
   if(!dispatchable(u, inc)){
     say(u.inc===inc.id ? u.name+' už ide na túto udalosť.' : u.name+' je teraz obsadená ('+STATUS[u.status].toLowerCase()+').');
     return;
@@ -543,7 +591,7 @@ function recommended(inc){
 }
 function sendRecommended(inc){
   const rec=recommended(inc);
-  if(!rec.length){ say(needInfo(inc).met || !Object.keys(needInfo(inc).missing).length ? 'Všetky potrebné jednotky sú už na ceste.' : 'Žiadna vhodná voľná jednotka. Presmeruj inú alebo počkaj.'); return; }
+  if(!rec.length){ const info=needInfo(inc); say(info.met || !Object.keys(info.missing).length ? 'Všetky potrebné jednotky sú už na ceste.' : 'Žiadna vhodná voľná jednotka. Presmeruj inú alebo počkaj.'); return; }
   for(const c of rec) dispatch(c.u, inc);
 }
 
@@ -568,11 +616,11 @@ function spawnCall(tpl){
     node, addr: tpl && tpl.mass ? 'Viedenská cesta 11' : addrOf(node), district:districtOf(node),
     t0:G.t, state:'ring', talkAt:0});
   SND.ring(); G.lastRing=G.t;
-  if(window.innerWidth<=860) setTab('pult');
+  if(!quiet() && window.innerWidth<=860) setTab('pult');
   dirty();
 }
 function answer(c){
-  if(!c || c.state!=='ring' || G.mode!=='play') return;
+  if(!c || c.state!=='ring' || !running()) return;
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   c.state='talk'; c.talkAt=G.t;
   if(G.t-c.t0<5) G.score+=10;   // rýchlo zdvihnutý hovor
@@ -580,7 +628,7 @@ function answer(c){
 }
 function dropCall(c){ G.calls=G.calls.filter(x=>x!==c); dirty(); }
 function classify(c, type){
-  if(!c || c.state!=='talk' || G.mode!=='play') return;
+  if(!c || c.state!=='talk' || !running()) return;
   if(c.prank){
     if(type==='prank'){ G.score+=40; G.stats.pranks++; say('Zneužitie linky odhalené. Linka je voľná pre skutočné tiesne. +40', 'good'); dropCall(c); }
     else { createIncident(c, type); dropCall(c); }   // hráč uveril – jednotky prídu nadarmo
@@ -606,7 +654,8 @@ function createIncident(c, type){
     mass: !!(tpl && tpl.mass), prank, node:c.node, addr:c.addr, district:c.district, text:c.text,
     created:G.t, deadline:G.t+dl, progress:0, metAt:0, frac:0, units:[]};
   G.incs.push(inc);
-  select(inc.id);
+  if(!quiet()) select(inc.id);
+  shock(inc.node, C['p'+prio]);
   SND.blip();
 }
 function select(id){ G.sel.inc=id; G.sel.unit=null; if(window.innerWidth<=860) setTab('pult'); dirty(); }
@@ -625,6 +674,7 @@ function resolve(inc){
   G.score+=pts; G.rep=Math.min(100, G.rep+REP_OK[inc.prio]);
   G.stats.resolved++; G.stats.resp.push(inc.metAt-inc.created);
   fx(inc.node, '+'+pts, 'good');
+  sparkle(inc.node, C.good);
   let tr=null;
   if(inc.transport) tr=inc.units.map(unitById).find(u=>u && u.kind==='RZP' && u.inc===inc.id && u.status===4) || null;
   releaseUnits(inc, tr);
@@ -636,6 +686,7 @@ function fail(inc){
   if(inc.prank){ say('#'+inc.no+': ukázalo sa, že hovor bol zneužitie linky.'); releaseUnits(inc); removeInc(inc); return; }
   G.rep-=REP_FAIL[inc.prio]; G.stats.failed++;
   fx(inc.node, 'Neskoro', 'bad');
+  shock(inc.node, C.bad, 2);
   say('#'+inc.no+' '+TYPES[inc.type].label+': pomoc neprišla včas. −'+REP_FAIL[inc.prio]+' dôvery', 'bad');
   releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
 }
@@ -646,6 +697,16 @@ function wasted(inc){
   releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
 }
 function checkRep(){ if(G.rep<=0){ G.rep=0; endGame(false); } dirty(); }
+
+/* ukážková hra v pozadí úvodnej obrazovky – hrá sama */
+function demoBot(){
+  if(G.t<G.bot) return;
+  G.bot=G.t+.9;
+  const talk=G.calls.find(c=>c.state==='talk');
+  if(talk){ if(G.t-talk.talkAt>1.2) classify(talk, talk.prank ? 'prank' : talk.tpl.type); }
+  else { const r=G.calls.find(c=>c.state==='ring' && G.t-c.t0>1.5); if(r) answer(r); }
+  for(const inc of G.incs) for(const c of recommended(inc)) dispatch(c.u, inc);
+}
 
 /* ---------- krok simulácie ---------- */
 function step(dt){
@@ -671,7 +732,8 @@ function step(dt){
       if(!c.prank){ G.rep-=5; G.stats.hung++; say('Volajúci to vzdal – hovor trval príliš dlho. −5 dôvery', 'bad'); checkRep(); }
     }
   }
-  if(G.mode!=='play') return;
+  if(!running()) return;
+  if(G.mode==='demo') demoBot();
   if(G.calls.some(c=>c.state==='ring') && G.t-G.lastRing>3){ SND.ring(); G.lastRing=G.t; }
   for(const u of G.units){
     if(u.moving) moveUnit(u, dt);
@@ -684,13 +746,13 @@ function step(dt){
       inc.progress+=dt;
       if(inc.progress>=inc.work) resolve(inc);
     } else if(!inc.metAt && G.t>inc.deadline) fail(inc);
-    if(G.mode!=='play') return;
+    if(!running()) return;
   }
   if(G.t>=SHIFT_LEN) endGame(true);
 }
 
 /* ============================================================
-   MAPA (canvas)
+   MAPA (canvas): nočné mesto v šikmom 3D pohľade
    ============================================================ */
 const cv=$('#map'), cx=cv.getContext('2d');
 let W=0, H=0, DPR=1, SC=30, OX=0, OY=0, staticLayer=null, C={};
@@ -699,7 +761,9 @@ const F_MONO='"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
 const sx = x => OX+x*SC, sy = y => OY+y*SC;
 const hit={units:[], incs:[]};
 function readColors(){
-  for(const k of ['ink','panel','card','line','text','muted','sodium','good','bad','p1','p2','p3','s1','s2','s3','s4','s5','s6','river','road','bridge','block','park','tree','hosp'])
+  for(const k of ['ink','panel','card','line','text','muted','sodium','good','bad','p1','p2','p3','s1','s2','s3','s4','s5','s6',
+    'ground','asphalt','sidewalk','facade','facade-dark','roof','roof-hi','water','water-deep','grass','tree','tree-hi','lamp','window-cool','hosp',
+    'veh-rzp','veh-rzp-stripe','veh-has','veh-has-top','veh-pz','veh-pz-stripe','glass'])
     C[k]=tok('--'+k);
 }
 const statusColor = s => C['s'+s] || C.muted;
@@ -708,90 +772,224 @@ function resize(){
   if(!r.width || !r.height) return;
   DPR=Math.min(2, window.devicePixelRatio||1); W=r.width; H=r.height;
   cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
-  const padX=Math.max(26, W*.05), padY=Math.max(30, H*.07);
+  const padX=Math.max(26, W*.05), padY=Math.max(34, H*.08);
   SC=Math.min((W-2*padX)/(COLS-1), (H-2*padY)/(ROWS-1));
-  OX=(W-SC*(COLS-1))/2; OY=(H-SC*(ROWS-1))/2;
+  OX=(W-SC*(COLS-1))/2; OY=(H-SC*(ROWS-1))/2+SC*.08;
   drawStatic();
 }
 function rr(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+function poly(g, pts){ g.beginPath(); g.moveTo(pts[0],pts[1]); for(let i=2;i<pts.length;i+=2) g.lineTo(pts[i],pts[i+1]); g.closePath(); }
+function glow(g, x, y, r, color, a){
+  const gr=g.createRadialGradient(x,y,0,x,y,r);
+  gr.addColorStop(0, rgba(color,a)); gr.addColorStop(1, rgba(color,0));
+  g.fillStyle=gr; g.fillRect(x-r,y-r,2*r,2*r);
+}
 const parkBlock = (x,y) => PARKS.some(([px,py]) => (x===px-1||x===px) && (y===py-1||y===py));
+/* výška domov podľa štvrte (v násobkoch bloku) */
+function heightRange(x,y){
+  if(x<0 || x>=COLS-1 || y<0 || y>=ROWS-1) return [.05,.16];
+  if(y>RIVER) return x<=8 ? [.16,.34] : [.07,.18];     // Petržalka paneláky / Lúky
+  if(x<=3) return [.06,.16];                           // Karlova Ves – vily
+  if(x>=11) return [.1,.28];                           // Ružinov
+  return y<=2 ? [.09,.24] : [.12,.3];                  // Nové / Staré Mesto
+}
+function drawBuilding(g, R, x, y, w, h, hgt, dim){
+  const dx=hgt*.3, dy=-hgt;
+  g.fillStyle='rgba(0,0,0,.35)'; g.fillRect(x-1.5, y+1, w+3, h+2);                  // tieň pri päte
+  g.fillStyle=C['facade-dark']; poly(g,[x+w,y, x+w,y+h, x+w+dx,y+h+dy, x+w+dx,y+dy]); g.fill();   // východná stena
+  g.fillStyle=C.facade; poly(g,[x,y+h, x+w,y+h, x+w+dx,y+h+dy, x+dx,y+h+dy]); g.fill();            // južná stena
+  /* okná na južnej stene */
+  const floors=Math.max(1, Math.round(hgt/(SC*.055))), cols=Math.max(1, Math.round(w/(SC*.075)));
+  const ww=Math.max(1.2, w/cols*.42), wh=Math.max(1.2, -dy/floors*.42);
+  for(let f=0; f<floors; f++) for(let c=0; c<cols; c++){
+    const r=R(); if(r>.42) continue;
+    const t=(f+.5)/floors;
+    const wx=x + dx*t + (c+.5)*w/cols - ww/2, wy=y+h + dy*t - wh/2;
+    g.fillStyle = r<.05 ? rgba(C['window-cool'], .7*dim) : rgba(C.sodium, (.35+R()*.55)*dim);
+    g.fillRect(wx, wy, ww, wh);
+  }
+  /* strecha */
+  const gr=g.createLinearGradient(x+dx, y+dy, x+dx+w, y+dy+h);
+  gr.addColorStop(0, C['roof-hi']); gr.addColorStop(1, C.roof);
+  g.fillStyle=gr; g.fillRect(x+dx, y+dy, w, h);
+  g.strokeStyle=rgba(C.text,.06); g.lineWidth=1; g.strokeRect(x+dx+.5, y+dy+.5, w-1, h-1);
+  if(R()<.45){ g.fillStyle=C['facade-dark']; g.fillRect(x+dx+w*(.15+R()*.5), y+dy+h*(.15+R()*.5), Math.max(2,w*.18), Math.max(2,h*.18)); }
+  if(hgt>SC*.27){ g.fillStyle=C.bad; g.beginPath(); g.arc(x+dx+w-2.5, y+dy+2.5, 1.3, 0, 7); g.fill(); }   // výstražné svetlo na streche
+}
 function drawStatic(){
   if(!W) return;
   const off=document.createElement('canvas'); off.width=cv.width; off.height=cv.height;
   const g=off.getContext('2d'); g.setTransform(DPR,0,0,DPR,0,0);
   const R=rng(112);
-  g.fillStyle=C.ink; g.fillRect(0,0,W,H);
-  /* bloky domov s rozsvietenými oknami (mesto pokračuje až k okrajom) */
-  const bx0=Math.floor(-OX/SC)-1, bx1=Math.ceil((W-OX)/SC)+1, by0=Math.floor(-OY/SC)-1, by1=Math.ceil((H-OY)/SC)+1;
-  for(let y=by0;y<by1;y++) for(let x=bx0;x<bx1;x++){
-    if(y===RIVER) continue;
-    const inside=x>=0 && x<COLS-1 && y>=0 && y<ROWS-1, park=inside && parkBlock(x,y);
-    const px=sx(x)+SC*.13, py=sy(y)+SC*.13, s=SC*.74;
-    g.globalAlpha=inside ? 1 : .5;
-    g.fillStyle=park ? C.park : C.block; rr(g,px,py,s,s,SC*.08); g.fill();
-    if(park){
-      g.fillStyle=C.tree;
-      for(let i=0;i<8;i++){ g.beginPath(); g.arc(px+s*(.15+R()*.7), py+s*(.15+R()*.7), SC*(.05+R()*.05), 0, 7); g.fill(); }
-    } else {
-      const n=2+Math.floor(R()*7), w=Math.max(1.5, SC*.045);
-      for(let i=0;i<n;i++){ g.fillStyle=rgba(C.sodium, .14+R()*.5); g.fillRect(px+s*(.1+R()*.78), py+s*(.1+R()*.78), w, w*1.3); }
+  const road=Math.max(3, SC*.2), walk=Math.max(5, SC*.3), m=SC*.16;
+  g.fillStyle=C.ground; g.fillRect(0,0,W,H);
+  /* Dunaj */
+  const ry0=sy(RIVER)+SC*.17, ry1=sy(RIVER+1)-SC*.17;
+  let gr=g.createLinearGradient(0,ry0,0,ry1);
+  gr.addColorStop(0,C.water); gr.addColorStop(.5,C['water-deep']); gr.addColorStop(1,C.water);
+  g.fillStyle=gr; g.fillRect(0,ry0,W,ry1-ry0);
+  g.fillStyle=C.sidewalk; g.fillRect(0,ry0-2,W,2); g.fillRect(0,ry1,W,2);          // nábrežné múry
+  /* cesty: chodníky, asfalt, značenie */
+  const line=(x1,y1,x2,y2)=>{ g.beginPath(); g.moveTo(sx(x1),sy(y1)); g.lineTo(sx(x2),sy(y2)); g.stroke(); };
+  const ext=[];
+  for(let x=0;x<COLS;x++){ if(exists[nid(x,0)]) ext.push([x,0,x,-3]); if(exists[nid(x,ROWS-1)]) ext.push([x,ROWS-1,x,ROWS+2]); }
+  for(let y=0;y<ROWS;y++){ if(exists[nid(0,y)]) ext.push([0,y,-3,y]); if(exists[nid(COLS-1,y)]) ext.push([COLS-1,y,COLS+2,y]); }
+  g.lineCap='round';
+  g.strokeStyle=C.sidewalk;
+  for(const [x1,y1,x2,y2] of ext){ g.lineWidth=walk; line(x1,y1,x2,y2); }
+  for(const [a,b,main,bridge] of EDGES){ g.lineWidth=main ? walk*1.2 : walk; if(!bridge) line(nx(a),ny(a),nx(b),ny(b)); }
+  /* mosty – mostovka cez rieku */
+  for(const x in BRIDGES){
+    const X=sx(+x), bw=walk*1.25;
+    g.fillStyle='rgba(0,0,0,.45)'; g.fillRect(X-bw/2-3, ry0, bw+6, ry1-ry0);
+    g.fillStyle=C.sidewalk; g.fillRect(X-bw/2, ry0-2, bw, ry1-ry0+4);
+  }
+  g.strokeStyle=C.asphalt;
+  for(const [x1,y1,x2,y2] of ext){ g.lineWidth=road; line(x1,y1,x2,y2); }
+  for(const [a,b,main] of EDGES){ g.lineWidth=main ? road*1.25 : road; line(nx(a),ny(a),nx(b),ny(b)); }
+  g.lineCap='butt';
+  g.setLineDash([SC*.08,SC*.1]); g.lineWidth=1; g.strokeStyle=rgba(C.text,.13);
+  for(const [a,b,main] of EDGES) if(!main) line(nx(a),ny(a),nx(b),ny(b));
+  g.setLineDash([]); g.strokeStyle=rgba(C.sodium,.5); g.lineWidth=1;
+  for(const [a,b,main] of EDGES) if(main){                                         // dvojitá čiara na hlavných triedach
+    const ax=sx(nx(a)), ay=sy(ny(a)), bx=sx(nx(b)), by=sy(ny(b)), hz=ay===by;
+    g.beginPath(); g.moveTo(ax+(hz?0:-1.5), ay+(hz?-1.5:0)); g.lineTo(bx+(hz?0:-1.5), by+(hz?-1.5:0));
+    g.moveTo(ax+(hz?0:1.5), ay+(hz?1.5:0)); g.lineTo(bx+(hz?0:1.5), by+(hz?1.5:0)); g.stroke();
+  }
+  /* priechody pre chodcov na hlavných križovatkách */
+  g.fillStyle=rgba(C.text,.28);
+  const zebra=(X,Y,horiz)=>{ for(let i=-2;i<=2;i++){ if(horiz) g.fillRect(X+i*road*.22-road*.06, Y-road*.5, road*.12, road); else g.fillRect(X-road*.5, Y+i*road*.22-road*.06, road, road*.12); } };
+  for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++){
+    if(!exists[nid(x,y)] || !(MAIN_H.includes(y) || MAIN_V.includes(x))) continue;
+    if(MAIN_H.includes(y) && MAIN_V.includes(x) || (x+y)%3===0){
+      const X=sx(x), Y=sy(y), o=road*1.15;
+      if(x>0) zebra(X-o, Y, false); if(x<COLS-1) zebra(X+o, Y, false);
+      if(y>0) zebra(X, Y-o, true);  if(y<ROWS-1 && y!==RIVER) zebra(X, Y+o, true);
     }
   }
-  g.globalAlpha=1;
-  /* Dunaj */
-  const ry0=sy(RIVER)+SC*.12, ry1=sy(RIVER+1)-SC*.12;
-  g.fillStyle=C.river; g.fillRect(0,ry0,W,ry1-ry0);
-  g.strokeStyle=rgba(C.text,.07); g.lineWidth=1;
-  for(let i=0;i<Math.round(W/22);i++){ const wx=R()*W, wy=ry0+(ry1-ry0)*(.2+R()*.6); g.beginPath(); g.moveTo(wx,wy); g.quadraticCurveTo(wx+7,wy-3,wx+14,wy); g.stroke(); }
-  g.save(); g.font=`600 ${Math.max(10,SC*.32)}px ${F_DISPLAY}`; g.fillStyle=rgba(C.text,.22); g.textBaseline='middle';
-  if('letterSpacing' in g) g.letterSpacing='6px';
-  g.textAlign='center'; g.fillText('DUNAJ', sx(9.6), (ry0+ry1)/2); g.restore();
-  /* cesty */
-  g.lineCap='round';
-  const line=(x1,y1,x2,y2)=>{ g.beginPath(); g.moveTo(sx(x1),sy(y1)); g.lineTo(sx(x2),sy(y2)); g.stroke(); };
-  g.strokeStyle=C.road; g.lineWidth=Math.max(3,SC*.17); g.globalAlpha=.5;
-  for(let x=0;x<COLS;x++){ if(exists[nid(x,0)]) line(x,0,x,-3); if(exists[nid(x,ROWS-1)]) line(x,ROWS-1,x,ROWS+2); }
-  for(let y=0;y<ROWS;y++){ if(exists[nid(0,y)]) line(0,y,-3,y); if(exists[nid(COLS-1,y)]) line(COLS-1,y,COLS+2,y); }
-  g.globalAlpha=1;
-  for(const [a,b,main] of EDGES) if(main){ g.strokeStyle=rgba(C.sodium,.09); g.lineWidth=SC*.6; line(nx(a),ny(a),nx(b),ny(b)); }
-  for(const [a,b,main,bridge] of EDGES){
-    g.strokeStyle=bridge ? C.bridge : C.road; g.lineWidth=main ? Math.max(4,SC*.24) : Math.max(3,SC*.17);
-    line(nx(a),ny(a),nx(b),ny(b));
+  /* bloky: parky a domy (od zadných radov dopredu, aby sa prekrývali správne) */
+  const bx0=Math.floor(-OX/SC)-1, bx1=Math.ceil((W-OX)/SC)+1, by0=Math.floor(-OY/SC)-1, by1=Math.ceil((H-OY)/SC)+2;
+  for(let y=by0;y<by1;y++) for(let x=bx0;x<bx1;x++){
+    if(y===RIVER) continue;
+    const inside=x>=0 && x<COLS-1 && y>=0 && y<ROWS-1, dim=inside ? 1 : .55;
+    const px=sx(x)+m, py=sy(y)+m, s=SC-2*m;
+    if(inside && parkBlock(x,y)){
+      g.fillStyle=C.grass; rr(g,px,py,s,s,SC*.05); g.fill();
+      g.strokeStyle=rgba(C.sidewalk,.9); g.lineWidth=Math.max(1,SC*.04);
+      g.beginPath(); g.moveTo(px, py+s*(.3+R()*.4)); g.quadraticCurveTo(px+s*.5, py+s*R(), px+s, py+s*(.3+R()*.4)); g.stroke();
+      for(let i=0;i<9;i++){
+        const tx=px+s*(.12+R()*.76), ty=py+s*(.12+R()*.76), tr=SC*(.05+R()*.05);
+        g.fillStyle='rgba(0,0,0,.35)'; g.beginPath(); g.arc(tx+tr*.35, ty+tr*.45, tr, 0, 7); g.fill();
+        g.fillStyle=C.tree; g.beginPath(); g.arc(tx, ty, tr, 0, 7); g.fill();
+        g.fillStyle=C['tree-hi']; g.beginPath(); g.arc(tx-tr*.3, ty-tr*.3, tr*.45, 0, 7); g.fill();
+      }
+      continue;
+    }
+    const [h0,h1]=heightRange(x,y), lots=[], r=R(), gp=s*.07;
+    if(r<.25) lots.push([px+s*.05, py+s*.08, s*.9, s*.84]);
+    else if(r<.6){ const k=.35+R()*.3; lots.push([px, py, s, s*k-gp/2], [px, py+s*k+gp/2, s, s*(1-k)-gp/2]); }
+    else if(r<.85){ const k=.35+R()*.3; lots.push([px, py, s*k-gp/2, s], [px+s*k+gp/2, py, s*(1-k)-gp/2, s]); }
+    else { const a=s/2-gp/2; lots.push([px,py,a,a],[px+a+gp,py,a,a],[px,py+a+gp,a,a],[px+a+gp,py+a+gp,a,a]); }
+    lots.sort((A,B)=>A[1]-B[1] || A[0]-B[0]);
+    for(const [lx,ly,lw,lh] of lots) drawBuilding(g, R, lx, ly, lw, lh, SC*(h0+R()*(h1-h0)), dim);
   }
-  g.setLineDash([4,6]); g.lineWidth=1; g.strokeStyle=rgba(C.sodium,.38);
-  for(const [a,b,main] of EDGES) if(main) line(nx(a),ny(a),nx(b),ny(b));
-  g.setLineDash([]);
-  /* mosty – zábradlie a názov */
-  g.font=`500 ${Math.max(9,SC*.22)}px ${F_MONO}`; g.textBaseline='middle';
+  /* zábradlie mostov a ich názvy */
+  g.font=`500 ${Math.max(9,SC*.2)}px ${F_MONO}`; g.textBaseline='middle';
   for(const x in BRIDGES){
-    const X=sx(+x), off2=Math.max(4,SC*.17);
-    g.strokeStyle=rgba(C.text,.3); g.lineWidth=1;
-    g.beginPath(); g.moveTo(X-off2, ry0); g.lineTo(X-off2, ry1); g.moveTo(X+off2, ry0); g.lineTo(X+off2, ry1); g.stroke();
-    if(SC>=34){ g.fillStyle=rgba(C.text,.35); g.fillText(BRIDGES[x], X+off2+5, (ry0+ry1)/2); }
+    const X=sx(+x), off2=walk*.62;
+    g.strokeStyle=rgba(C.text,.35); g.lineWidth=1;
+    g.beginPath(); g.moveTo(X-off2, ry0-2); g.lineTo(X-off2, ry1+2); g.moveTo(X+off2, ry0-2); g.lineTo(X+off2, ry1+2); g.stroke();
+    if(SC>=34){ g.fillStyle=rgba(C.text,.42); g.textAlign='left'; g.fillText(BRIDGES[x], X+off2+6, (ry0+ry1)/2); }
   }
-  /* názvy štvrtí */
-  g.save(); g.textAlign='center'; g.textBaseline='middle'; g.fillStyle=rgba(C.text,.17);
-  g.font=`800 ${Math.max(11,SC*.4)}px ${F_DISPLAY}`; if('letterSpacing' in g) g.letterSpacing='3px';
-  for(const [name,x,y] of DISTRICT_LABELS) g.fillText(name.toUpperCase(), sx(x), sy(y));
-  g.restore();
-  /* nemocnice */
-  const hs=Math.max(14,SC*.42);
+  /* pouličné lampy – svetelné kužele (sčítavanie svetla) */
+  g.globalCompositeOperation='lighter';
+  const lamps=[];
+  for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++) if(exists[nid(x,y)]) lamps.push([x,y, MAIN_H.includes(y)||MAIN_V.includes(x)]);
+  for(const [a,b,main,bridge] of EDGES) if(main || bridge) lamps.push([(nx(a)+nx(b))/2, (ny(a)+ny(b))/2, true]);
+  for(const [x,y,main] of lamps){
+    const X=sx(x)+SC*.11, Y=sy(y)-SC*.11;
+    glow(g, X, Y, SC*(main?.62:.48), C.lamp, main ? .2 : .13);
+  }
+  /* odraz svetiel na hladine */
+  for(let x=-2;x<COLS+2;x++){
+    const X=sx(x+.5)+R()*SC*.4-SC*.2;
+    for(let i=0;i<5;i++){ g.fillStyle=rgba(C.lamp, .05+R()*.08); g.fillRect(X+R()*6-3, ry0+(ry1-ry0)*(.08+i*.18), SC*(.08+R()*.14), 1.2); }
+  }
+  g.globalCompositeOperation='source-over';
+  for(const [x,y] of lamps){ g.fillStyle=rgba(C.lamp,.9); g.beginPath(); g.arc(sx(x)+SC*.11, sy(y)-SC*.11, Math.max(1,SC*.025), 0, 7); g.fill(); }
+  /* nemocnice a základne */
+  const hs=Math.max(15,SC*.42);
   for(const h of HOSPITALS){
-    const X=sx(h.x)+SC*.3, Y=sy(h.y)-SC*.3;
+    const X=sx(h.x)+SC*.32, Y=sy(h.y)-SC*.32;
+    g.globalCompositeOperation='lighter'; glow(g, X, Y, hs*1.6, C.bad, .25); g.globalCompositeOperation='source-over';
     g.fillStyle=C.hosp; rr(g,X-hs/2,Y-hs/2,hs,hs,3); g.fill();
-    g.fillStyle=C.bad; g.font=`800 ${hs*.8}px ${F_DISPLAY}`; g.textAlign='center'; g.textBaseline='middle'; g.fillText('H',X,Y+1);
+    g.fillStyle=C.bad; g.font=`800 ${hs*.82}px ${F_DISPLAY}`; g.textAlign='center'; g.textBaseline='middle'; g.fillText('H',X,Y+1);
   }
-  /* základne */
   g.font=`700 ${Math.max(8,SC*.2)}px ${F_MONO}`; g.textAlign='center'; g.textBaseline='middle';
   const lab={RZP:'ZZS',HAS:'HaZZ',PZ:'PZ'};
   for(const s of STATIONS){
-    const X=sx(s.x)-SC*.3, Y=sy(s.y)-SC*.3, t=lab[s.kind], w=g.measureText(t).width+8, h=Math.max(12,SC*.32);
+    const X=sx(s.x)-SC*.32, Y=sy(s.y)-SC*.32, t=lab[s.kind], w=g.measureText(t).width+8, h=Math.max(12,SC*.32);
     g.fillStyle=C.card; rr(g,X-w/2,Y-h/2,w,h,3); g.fill();
-    g.strokeStyle=C.line; g.lineWidth=1; g.stroke();
-    g.fillStyle=C.muted; g.fillText(t,X,Y+.5);
+    g.strokeStyle=C.sodium; g.lineWidth=1; g.stroke();
+    g.fillStyle=C.text; g.fillText(t,X,Y+.5);
   }
+  /* názvy štvrtí a rieky */
+  g.save(); g.textAlign='center'; g.textBaseline='middle';
+  g.font=`800 ${Math.max(12,SC*.42)}px ${F_DISPLAY}`; if('letterSpacing' in g) g.letterSpacing='4px';
+  g.lineWidth=4; g.strokeStyle=rgba(C.ground,.7); g.fillStyle=rgba(C.text,.45);
+  for(const [name,x,y] of DISTRICT_LABELS){ g.strokeText(name.toUpperCase(), sx(x), sy(y)); g.fillText(name.toUpperCase(), sx(x), sy(y)); }
+  g.font=`italic 700 ${Math.max(10,SC*.34)}px ${F_DISPLAY}`; if('letterSpacing' in g) g.letterSpacing='9px';
+  g.fillStyle=rgba(C.text,.3); g.fillText('DUNAJ', sx(9.6), (ry0+ry1)/2);
+  g.restore();
+  /* vinetácia */
+  gr=g.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.max(W,H)*.75);
+  gr.addColorStop(0,'rgba(0,0,0,0)'); gr.addColorStop(1,'rgba(0,0,0,.6)');
+  g.fillStyle=gr; g.fillRect(0,0,W,H);
   staticLayer=off;
 }
+
+/* ---------- častice: plamene, dym, iskry, ohňostroje ---------- */
+const P=[];
+function emit(p){ if(P.length<520) P.push(Object.assign({life:0, vx:0, vy:0, g:0, drag:0}, p)); }
+function shock(node, color, n=1){ for(let i=0;i<n;i++) emit({kind:'ring', x:sx(nx(node)), y:sy(ny(node)), max:.9+i*.25, size:SC*.35, color}); }
+function sparkle(node, color){
+  const X=sx(nx(node)), Y=sy(ny(node));
+  shock(node, color);
+  for(let i=0;i<26;i++){ const a=Math.random()*Math.PI*2, v=rand(30,110); emit({kind:'spark', x:X, y:Y, vx:Math.cos(a)*v, vy:Math.sin(a)*v-30, g:120, max:rand(.5,1), size:rand(1.2,2.4), color}); }
+}
+function firework(){
+  const x=rand(W*.15, W*.85), hue=Math.floor(rand(0,360));
+  emit({kind:'rocket', x, y:H+4, vx:rand(-15,15), vy:-rand(H*.55, H*.85), g:H*.35, max:rand(.9,1.2), size:2, hue});
+}
+function explode(p){
+  const n=REDUCED ? 20 : 46;
+  for(let i=0;i<n;i++){ const a=i/n*Math.PI*2, v=rand(40,95); emit({kind:'fw', x:p.x, y:p.y, vx:Math.cos(a)*v, vy:Math.sin(a)*v, g:38, drag:.9, max:rand(1,1.6), size:rand(1.2,2.2), hue:p.hue+rand(-20,20)}); }
+}
+function drawParticles(dt){
+  for(let i=P.length-1;i>=0;i--){
+    const p=P[i];
+    p.life+=dt;
+    if(p.life>=p.max){ if(p.kind==='rocket') explode(p); P.splice(i,1); continue; }
+    p.vy+=p.g*dt; if(p.drag){ p.vx*=1-p.drag*dt; p.vy*=1-p.drag*dt; }
+    p.x+=p.vx*dt; p.y+=p.vy*dt;
+    const k=p.life/p.max;
+    if(p.kind==='smoke'){
+      cx.globalCompositeOperation='source-over';
+      cx.fillStyle=`rgba(70,80,100,${.28*(1-k)})`; cx.beginPath(); cx.arc(p.x,p.y,p.size*(1+k*1.6),0,7); cx.fill();
+      continue;
+    }
+    cx.globalCompositeOperation='lighter';
+    if(p.kind==='flame'){ cx.fillStyle=`hsla(${48-44*k},100%,${66-22*k}%,${.85*(1-k)})`; cx.beginPath(); cx.arc(p.x,p.y,Math.max(.3,p.size*(1-k*.8)),0,7); cx.fill(); }
+    else if(p.kind==='spark'){ cx.fillStyle=rgba(p.color, 1-k); cx.fillRect(p.x-p.size/2, p.y-p.size/2, p.size, p.size); }
+    else if(p.kind==='ring'){ cx.strokeStyle=rgba(p.color, .8*(1-k)); cx.lineWidth=2.5*(1-k)+.5; cx.beginPath(); cx.arc(p.x,p.y,p.size+k*p.size*3,0,7); cx.stroke(); }
+    else if(p.kind==='rocket'){ cx.fillStyle=`hsla(${p.hue},100%,80%,1)`; cx.beginPath(); cx.arc(p.x,p.y,1.8,0,7); cx.fill();
+      cx.strokeStyle=`hsla(${p.hue},100%,70%,.35)`; cx.lineWidth=1.5; cx.beginPath(); cx.moveTo(p.x,p.y); cx.lineTo(p.x-p.vx*.06, p.y-p.vy*.06); cx.stroke(); }
+    else if(p.kind==='fw'){ cx.fillStyle=`hsla(${p.hue},100%,65%,${1-k})`; cx.beginPath(); cx.arc(p.x,p.y,p.size,0,7); cx.fill(); }
+  }
+  cx.globalCompositeOperation='source-over';
+}
+
+/* ---------- symboly udalostí ---------- */
 function glyph(type, X, Y, r){
   cx.fillStyle=C.ink; cx.strokeStyle=C.ink;
   if(type==='med'){
@@ -813,58 +1011,173 @@ function glyph(type, X, Y, r){
     cx.font=`800 ${r*1.3}px ${F_DISPLAY}`; cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText('!',X,Y+1);
   }
 }
+
+/* ---------- vozidlá zhora ---------- */
+function vehicleLen(kind){ const L=clamp(SC*.44, 15, 32); return kind==='HAS' ? L*1.2 : kind==='PZ' ? L*.9 : L; }
+function drawVehicle(u, X, Y, ang, now, below){
+  const L=vehicleLen(u.kind), Wd=clamp(SC*.44,15,32)*.5, sel=G.sel.unit===u.id, col=statusColor(u.status);
+  const siren=(u.status===3 || u.status===5) && u.moving;
+  cx.save(); cx.translate(X,Y); cx.rotate(ang);
+  /* farebné podsvietenie podľa stavu */
+  cx.globalCompositeOperation='lighter';
+  glow(cx, 0, 0, L*.85, col, sel ? .55 : .3);
+  if(u.moving){                                                    // svetlá reflektorov
+    const gr=cx.createLinearGradient(L/2,0,L*1.9,0);
+    gr.addColorStop(0, rgba(C.lamp,.22)); gr.addColorStop(1, rgba(C.lamp,0));
+    cx.fillStyle=gr; poly(cx,[L/2,-Wd*.35, L*1.9,-Wd*1.1, L*1.9,Wd*1.1, L/2,Wd*.35]); cx.fill();
+  }
+  cx.globalCompositeOperation='source-over';
+  cx.fillStyle='rgba(0,0,0,.5)'; rr(cx,-L/2+1.5,-Wd/2+2,L,Wd,Wd*.28); cx.fill();   // tieň
+  if(u.kind==='RZP'){
+    cx.fillStyle=C['veh-rzp']; rr(cx,-L/2,-Wd/2,L,Wd,Wd*.25); cx.fill();
+    cx.fillStyle=C['veh-rzp-stripe']; cx.fillRect(-L/2+1,-Wd/2,L*.72,Wd*.16); cx.fillRect(-L/2+1,Wd/2-Wd*.16,L*.72,Wd*.16);
+    cx.fillStyle=C.glass; rr(cx,L*.22,-Wd*.36,L*.16,Wd*.72,2); cx.fill();
+    cx.fillStyle=C['veh-rzp-stripe']; cx.fillRect(-L*.2,-Wd*.07,L*.24,Wd*.14); cx.fillRect(-L*.15,-Wd*.24,Wd*.14*1.3,Wd*.48);
+  } else if(u.kind==='HAS'){
+    cx.fillStyle=C['veh-has']; rr(cx,-L/2,-Wd/2,L,Wd,Wd*.2); cx.fill();
+    cx.fillStyle=C.glass; rr(cx,L*.3,-Wd*.36,L*.12,Wd*.72,2); cx.fill();
+    cx.strokeStyle=C['veh-has-top']; cx.lineWidth=1.2;                             // rebrík
+    cx.beginPath(); cx.moveTo(-L*.45,-Wd*.2); cx.lineTo(L*.22,-Wd*.2); cx.moveTo(-L*.45,Wd*.2); cx.lineTo(L*.22,Wd*.2);
+    for(let i=0;i<6;i++){ const lx=-L*.42+i*L*.12; cx.moveTo(lx,-Wd*.2); cx.lineTo(lx,Wd*.2); } cx.stroke();
+  } else {
+    cx.fillStyle=C['veh-pz']; rr(cx,-L/2,-Wd/2,L,Wd,Wd*.32); cx.fill();
+    cx.fillStyle=C['veh-pz-stripe']; cx.fillRect(-L*.36,-Wd/2,L*.6,Wd);
+    cx.fillStyle=C['veh-pz']; cx.fillRect(-L*.36,-Wd*.3,L*.6,Wd*.6);
+    cx.fillStyle=C.glass; rr(cx,L*.14,-Wd*.38,L*.16,Wd*.76,2); cx.fill(); rr(cx,-L*.38,-Wd*.34,L*.1,Wd*.68,2); cx.fill();
+  }
+  /* maják */
+  const on=Math.floor(now/130)%2===0;
+  const bx=u.kind==='HAS' ? L*.3 : u.kind==='PZ' ? -L*.06 : L*.08;
+  const ca = u.kind==='PZ' ? C.s6 : C.bad, cb = C.s6;
+  cx.fillStyle=siren ? (on ? ca : C.ink) : C.ink; cx.fillRect(bx-1.5,-Wd*.38,3,Wd*.32);
+  cx.fillStyle=siren ? (on ? C.ink : cb) : C.ink; cx.fillRect(bx-1.5,Wd*.06,3,Wd*.32);
+  if(siren && !REDUCED){
+    cx.globalCompositeOperation='lighter';
+    glow(cx, bx, on ? -Wd*.25 : Wd*.25, L*1.25, on ? ca : cb, .5);
+    cx.globalCompositeOperation='source-over';
+  }
+  cx.restore();
+  /* menovka */
+  cx.font=`700 10px ${F_MONO}`; cx.textAlign='center'; cx.textBaseline='middle';
+  const tw=cx.measureText(u.cs).width+8, ty=below ? Y+Math.max(L,Wd)*.62+8 : Y-Math.max(L,Wd)*.62-8;
+  cx.fillStyle=col; rr(cx,X-tw/2,ty-7,tw,14,4); cx.fill();
+  if(sel){ cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.stroke(); }
+  cx.fillStyle=C.ink; cx.fillText(u.cs, X, ty+.5);
+  const top=Math.min(ty-8, Y-L*.6), bot=Math.max(ty+8, Y+L*.6);
+  hit.units.push({id:u.id, x:X-L*.7, y:top, w:L*1.4, h:bot-top});
+}
+
+/* ---------- vykreslenie snímky ---------- */
+let lastDraw=0;
 function draw(now){
   if(!staticLayer || !G) return;
+  const dt=Math.min(.05, (now-(lastDraw||now))/1000); lastDraw=now;
   cx.setTransform(1,0,0,1,0,0); cx.drawImage(staticLayer,0,0);
   cx.setTransform(DPR,0,0,DPR,0,0);
   hit.units=[]; hit.incs=[];
   const pulse=REDUCED ? 0 : (now/1400)%1;
-  /* trasy */
-  cx.lineWidth=2; cx.setLineDash([5,6]);
-  for(const u of G.units) if(u.path.length){
-    const rel=G.sel.inc && u.inc===G.sel.inc;
-    cx.strokeStyle=rgba(statusColor(u.status), rel ? .95 : .4);
-    cx.beginPath(); cx.moveTo(sx(u.x),sy(u.y)); for(const n of u.path) cx.lineTo(sx(nx(n)),sy(ny(n))); cx.stroke();
+  /* jagot svetiel na rieke */
+  if(!REDUCED){
+    const ry0=sy(RIVER)+SC*.17, ry1=sy(RIVER+1)-SC*.17;
+    cx.globalCompositeOperation='lighter';
+    for(let i=0;i<26;i++){
+      const ph=now/900+i*1.7, a=.06+.06*Math.sin(ph*2.3);
+      cx.fillStyle=rgba(C.lamp, Math.max(0,a));
+      cx.fillRect(((i*97.3+now*.012)%(W+40))-20, ry0+(ry1-ry0)*((i*.37)%1), SC*.25, 1);
+    }
+    cx.globalCompositeOperation='source-over';
   }
-  cx.setLineDash([]);
+  /* trasy vozidiel */
+  for(const u of G.units) if(u.path.length){
+    const rel=G.sel.inc && u.inc===G.sel.inc, col=statusColor(u.status);
+    cx.beginPath(); cx.moveTo(sx(u.x),sy(u.y)); for(const n of u.path) cx.lineTo(sx(nx(n)),sy(ny(n)));
+    cx.lineJoin='round';
+    if(rel){ cx.strokeStyle=rgba(col,.25); cx.lineWidth=8; cx.stroke(); }
+    cx.setLineDash([6,6]); cx.lineDashOffset=-now/40; cx.strokeStyle=rgba(col, rel ? .95 : .45); cx.lineWidth=2; cx.stroke();
+    cx.setLineDash([]);
+  }
   /* udalosti */
-  const r=Math.max(10, SC*.3);
+  const r=Math.max(10, SC*.3), labels=[];
   for(const inc of G.incs){
     const X=sx(nx(inc.node)), Y=sy(ny(inc.node)), col=C['p'+inc.prio];
-    if(pulse){ cx.strokeStyle=rgba(col,.6*(1-pulse)); cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+pulse*r*1.3,0,7); cx.stroke(); }
-    const frac = inc.metAt ? clamp(inc.progress/inc.work,0,1) : clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1);
-    cx.lineWidth=3; cx.strokeStyle=rgba(C.text,.14); cx.beginPath(); cx.arc(X,Y,r+5,0,7); cx.stroke();
-    cx.strokeStyle=inc.metAt ? C.good : col; cx.beginPath(); cx.arc(X,Y,r+5,-Math.PI/2,-Math.PI/2+frac*Math.PI*2); cx.stroke();
-    cx.fillStyle=col; cx.beginPath(); cx.arc(X,Y,r,0,7); cx.fill();
-    glyph(inc.mass ? 'mass' : inc.type, X, Y, r);
-    if(G.sel.inc===inc.id){ cx.setLineDash([4,4]); cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+11,0,7); cx.stroke(); cx.setLineDash([]); }
-    cx.font=`700 10px ${F_MONO}`; cx.textAlign='center'; cx.textBaseline='alphabetic'; cx.fillStyle=C.text;
-    cx.fillText('#'+inc.no, X, Y-r-10);
-    hit.incs.push({id:inc.id, X, Y, r:r+10});
-  }
-  /* jednotky */
-  const stack=new Map();
-  cx.font=`700 11px ${F_MONO}`; cx.textBaseline='middle';
-  for(const u of G.units){
-    let X=sx(u.x), Y=sy(u.y);
-    if(!u.moving){ const i=stack.get(u.node)||0; stack.set(u.node,i+1); Y+=(G.incs.some(c=>c.node===u.node) ? r+14 : 12)+i*18; }
-    const w=cx.measureText(u.cs).width+12, h=16;
-    cx.fillStyle=statusColor(u.status); rr(cx,X-w/2,Y-h/2,w,h,4); cx.fill();
-    if(G.sel.unit===u.id){ cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.stroke(); }
-    cx.fillStyle=C.ink; cx.textAlign='center'; cx.fillText(u.cs, X, Y+.5);
-    if((u.status===3 || u.status===5) && u.moving){
-      const on=REDUCED ? true : Math.floor(now/180)%2===0;
-      cx.fillStyle=on ? C.s6 : C.bad; cx.beginPath(); cx.arc(X+w/2-1, Y-h/2+1, 3, 0, 7); cx.fill();
+    cx.globalCompositeOperation='lighter';
+    glow(cx, X, Y, r*3.4, col, .32+.12*Math.sin(now/300));
+    if(inc.type==='fire' && !inc.prank){
+      glow(cx, X, Y-r*.4, SC*1.25*(.92+.08*Math.sin(now/90)), C.p2, .32);
+      if(!REDUCED && running()){
+        for(let i=0;i<(inc.mass?3:2);i++) emit({kind:'flame', x:X+rand(-r*.7,r*.7), y:Y-r*.6, vx:rand(-8,8), vy:-rand(28,55), max:rand(.5,.95), size:rand(r*.25,r*.45)});
+        if(Math.random()<.25) emit({kind:'smoke', x:X+rand(-r*.4,r*.4), y:Y-r*1.4, vx:rand(4,14), vy:-rand(10,22), max:rand(1.6,2.6), size:rand(r*.3,r*.5)});
+      }
+    } else if((inc.type==='traffic' || inc.mass) && !REDUCED){
+      const on=Math.floor(now/400)%2===0;
+      if(on){ glow(cx, X-r*1.15, Y+r*.9, r*.9, C.p3, .5); glow(cx, X+r*1.15, Y+r*.9, r*.9, C.p3, .5); }
+    } else if(inc.type==='police' && !REDUCED){
+      const on=Math.floor(now/160)%2===0;
+      glow(cx, X+(on?-r:r), Y, r*2, on ? C.s6 : C.bad, .35);
     }
-    hit.units.push({id:u.id, x:X-w/2-3, y:Y-h/2-3, w:w+6, h:h+6});
+    cx.globalCompositeOperation='source-over';
+    if(pulse){ cx.strokeStyle=rgba(col,.7*(1-pulse)); cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+pulse*r*1.6,0,7); cx.stroke(); }
+    if(inc.type==='med' && !REDUCED){ const hb=(now/1000)%1; cx.strokeStyle=rgba(C.text,.6*(1-hb)); cx.lineWidth=1.5; cx.beginPath(); cx.arc(X,Y,r+hb*r*.9,0,7); cx.stroke(); }
+    const frac = inc.metAt ? clamp(inc.progress/inc.work,0,1) : clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1);
+    cx.lineWidth=3.5; cx.strokeStyle='rgba(0,0,0,.55)'; cx.beginPath(); cx.arc(X,Y,r+5,0,7); cx.stroke();
+    cx.strokeStyle=inc.metAt ? C.good : col; cx.lineCap='round';
+    cx.beginPath(); cx.arc(X,Y,r+5,-Math.PI/2,-Math.PI/2+frac*Math.PI*2); cx.stroke(); cx.lineCap='butt';
+    const gr=cx.createRadialGradient(X-r*.3,Y-r*.35,r*.1,X,Y,r);
+    gr.addColorStop(0, rgba(C.text,.95)); gr.addColorStop(.25, col); gr.addColorStop(1, col);
+    cx.fillStyle='rgba(0,0,0,.5)'; cx.beginPath(); cx.arc(X+1,Y+2,r,0,7); cx.fill();
+    cx.fillStyle=gr; cx.beginPath(); cx.arc(X,Y,r,0,7); cx.fill();
+    cx.strokeStyle=rgba(C.text,.85); cx.lineWidth=1.5; cx.stroke();
+    glyph(inc.mass ? 'mass' : inc.type, X, Y, r);
+    if(G.sel.inc===inc.id){ cx.setLineDash([5,4]); cx.lineDashOffset=now/60; cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+12,0,7); cx.stroke(); cx.setLineDash([]); }
+    labels.push([X, Y-r-18, '#'+inc.no+(inc.metAt ? ' zásah' : ' '+Math.max(0,Math.ceil(inc.deadline-G.t))+' min'), inc.metAt]);
+    hit.incs.push({id:inc.id, X, Y, r:r+12});
   }
-  /* body a hlásenia priamo na mape */
+  /* vozidlá – stojace sa zoradia vedľa seba alebo okolo udalosti */
+  const groups=new Map();
+  for(const u of G.units) if(!u.moving){ if(!groups.has(u.node)) groups.set(u.node, []); groups.get(u.node).push(u); }
+  const pos=new Map();
+  for(const [node, list] of groups){
+    const X=sx(nx(node)), Y=sy(ny(node)), k=list.length, atInc=G.incs.some(i=>i.node===node);
+    list.forEach((u,i)=>{
+      if(atInc){ const a=Math.PI*.15 + Math.PI*.7*(k===1 ? .5 : i/(k-1)), rad=r+vehicleLen(u.kind)*.75+6; pos.set(u.id, [X-Math.cos(a)*rad, Y+Math.sin(a)*rad*.85, a+Math.PI/2, true]); }
+      else pos.set(u.id, [X+(i-(k-1)/2)*clamp(SC*.44,15,32)*.62, Y+SC*.26, -Math.PI/2, false]);
+    });
+  }
+  const order=[...G.units].sort((a,b)=>(pos.get(a.id)?.[1] ?? sy(a.y))-(pos.get(b.id)?.[1] ?? sy(b.y)));
+  for(const u of order){
+    const p=pos.get(u.id);
+    if(p) drawVehicle(u, p[0], p[1], p[2], now, p[3]); else drawVehicle(u, sx(u.x), sy(u.y), u.ang, now, false);
+  }
+  /* ohňostroje na Silvestra */
+  if(G.diff==='hard' && running() && !REDUCED){
+    const t=G.t, rate=(t>100 && t<150) ? .06 : .004;
+    if(Math.random()<rate) firework();
+  }
+  drawParticles(dt);
+  /* štítky udalostí až nad plameňmi, aby boli čitateľné */
+  cx.font=`700 10px ${F_MONO}`; cx.textAlign='center'; cx.textBaseline='middle';
+  for(const [X,Y,t,ok] of labels){
+    const lw=cx.measureText(t).width+10;
+    cx.fillStyle=rgba(C.ink,.88); rr(cx,X-lw/2,Y-7.5,lw,15,4); cx.fill();
+    cx.fillStyle=ok ? C.good : C.text; cx.fillText(t, X, Y+.5);
+  }
+  /* svitanie po 04:40 */
+  if(G.t>400){
+    const a=clamp((G.t-400)/80,0,1);
+    cx.globalCompositeOperation='screen';
+    const gr=cx.createLinearGradient(0,0,0,H);
+    gr.addColorStop(0, `rgba(120,150,210,${.32*a})`); gr.addColorStop(1, `rgba(255,170,110,${.12*a})`);
+    cx.fillStyle=gr; cx.fillRect(0,0,W,H);
+    cx.globalCompositeOperation='source-over';
+  }
+  /* body priamo na mape */
   G.fx=G.fx.filter(f=>now-f.t0<1600);
-  cx.font=`800 ${Math.max(16,SC*.5)}px ${F_DISPLAY}`; cx.textAlign='center'; cx.textBaseline='middle';
+  cx.font=`800 ${Math.max(18,SC*.55)}px ${F_DISPLAY}`; cx.textAlign='center'; cx.textBaseline='middle';
   for(const f of G.fx){
     const k=(now-f.t0)/1600;
-    cx.globalAlpha=1-k; cx.fillStyle=f.kind==='good' ? C.good : C.bad;
-    cx.fillText(f.text, sx(f.x), sy(f.y)-r-18-k*26);
+    cx.globalAlpha=1-k; cx.lineWidth=4; cx.strokeStyle=C.ink;
+    cx.strokeText(f.text, sx(f.x), sy(f.y)-r-22-k*30);
+    cx.fillStyle=f.kind==='good' ? C.good : C.bad; cx.fillText(f.text, sx(f.x), sy(f.y)-r-22-k*30);
   }
   cx.globalAlpha=1;
 }
@@ -879,15 +1192,15 @@ function renderCalls(){
   let h=`<h2>Hovory <span class="count">${G.calls.length}</span></h2>`;
   if(talk){
     h+=`<div class="call talk">
-      <div class="row"><span class="lbl grow">Na linke</span><span class="timer" data-to="${talk.talkAt+30}" data-txt="1"></span></div>
+      <div class="row"><span class="lbl grow"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span>Na linke</span><span class="timer" data-to="${talk.talkAt+30}" data-txt="1"></span></div>
       <p class="quote">${esc(talk.text)}</p>
       <div class="addr">Miesto: ${esc(talk.addr)}, ${esc(talk.district)}</div>
-      <div class="cls">${TYPE_ORDER.map(t=>`<button class="btn" data-act="cls" data-id="${talk.id}" data-type="${t}" style="--tc:var(--t-${t})"><kbd>${TYPES[t].key}</kbd>${TYPES[t].label}</button>`).join('')}</div>
+      <div class="cls">${TYPE_ORDER.map(t=>`<button class="btn" data-act="cls" data-id="${talk.id}" data-type="${t}" style="--tc:var(--t-${t})">${ICON[t]}${TYPES[t].label}<kbd>${TYPES[t].key}</kbd></button>`).join('')}</div>
     </div>`;
   }
   for(const c of ring){
     h+=`<div class="call ring">
-      <div class="row"><span class="lbl grow">Prichádzajúci hovor</span><span class="addr">${esc(c.district)}</span></div>
+      <div class="row"><span class="lbl grow"><span class="phone">${ICON.phone}</span>Prichádzajúci hovor</span><span class="addr">${esc(c.district)}</span></div>
       <div class="tbar"><i data-from="${c.t0}" data-to="${c.t0+DIFFS[G.diff].ring}"></i></div>
       <button class="btn go" data-act="answer" data-id="${c.id}" ${talk?'disabled':''}>${talk?'Čaká na linke':'Prijať hovor'} <kbd>A</kbd></button>
     </div>`;
@@ -910,7 +1223,7 @@ function renderDispatch(){
     </div>`;
   }).join('');
   box.innerHTML=`<div class="disp" style="--pc:var(--p${inc.prio})">
-    <div class="row"><span class="prio">P${inc.prio}</span><span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
+    <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.mass?'mass':inc.type]}<span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
       ${inc.metAt ? `<span class="timer">zásah</span>` : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}
       <button class="btn sm ghost" data-act="desel" aria-label="Zavrieť">✕</button></div>
     <div class="addr">${esc(inc.addr)}, ${esc(inc.district)}</div>
@@ -919,7 +1232,7 @@ function renderDispatch(){
     ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : ''}
     ${rows || `<p class="empty">${info.met ? 'Všetky potrebné jednotky sú na mieste.' : 'Žiadna vhodná jednotka nie je voľná.'}</p>`}
     ${rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>`
-      : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú jednotku. Jednotku môžeš vyslať aj ťuknutím na mapu.</p>` : ''}
+      : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú jednotku. Jednotku môžeš vyslať aj ťuknutím na auto na mape.</p>` : ''}
   </div>`;
 }
 function renderIncs(){
@@ -928,7 +1241,7 @@ function renderIncs(){
   if(!list.length) h+=`<p class="empty">Žiadna otvorená udalosť. Udalosť vznikne, keď správne určíš druh hovoru.</p>`;
   for(const inc of list){
     h+=`<div class="inc${G.sel.inc===inc.id?' sel':''}" style="--pc:var(--p${inc.prio})" data-act="inc" data-id="${inc.id}">
-      <div class="row"><span class="prio">P${inc.prio}</span><span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
+      <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.mass?'mass':inc.type]}<span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
         ${inc.metAt ? '<span class="timer">zásah</span>' : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}</div>
       <div class="addr">${esc(inc.addr)}, ${esc(inc.district)}</div>
       <div class="needs">${needChips(inc)}</div>
@@ -952,7 +1265,7 @@ function renderUnits(){
   for(const u of G.units){
     const can=sel && kinds.has(u.kind) && dispatchable(u, sel);
     h+=`<div class="unit${G.sel.unit===u.id?' sel':''}" style="--sc:${statusColor(u.status)}" data-act="unit" data-id="${u.id}">
-      <span class="tag">${esc(u.cs)}</span>
+      <span class="veh">${ICON[u.kind]}</span>
       <span class="nm">${esc(u.name)} <span class="sub">${KINDS[u.kind].label}</span></span>
       ${can ? '<span class="send">Vyslať</span>' : `<span class="st">${u.status} ${STATUS[u.status]}</span>`}
       <span class="what">${esc(unitWhat(u))}</span>
@@ -962,16 +1275,17 @@ function renderUnits(){
 }
 function renderUI(){
   renderCalls(); renderDispatch(); renderIncs(); renderUnits();
-  const ring=G.calls.filter(c=>c.state==='ring').length + G.calls.filter(c=>c.state==='talk').length;
-  $('#tabPult').textContent=`Hovory ${ring} · Udalosti ${G.incs.length}`;
+  $('#tabPult').textContent=`Hovory ${G.calls.length} · Udalosti ${G.incs.length}`;
+  $('#app').dataset.mode=G.mode;
 }
 /* časomiery a pásy sa obnovujú každý snímok bez prekresľovania panelov */
 let lastScore=null, lastRep=null;
 function updateTimers(){
   $('#clock').textContent=clockOf(Math.min(G.t, SHIFT_LEN));
   $('#shiftBar').style.width=(clamp(G.t/SHIFT_LEN,0,1)*100)+'%';
-  if(G.score!==lastScore){ lastScore=G.score; $('#score').textContent=G.score; }
-  const rep=Math.max(0,Math.round(G.rep));
+  const demo=G.mode==='demo', sc=demo ? 0 : G.score;            // ukážka v pozadí nemení skóre na pulte
+  if(sc!==lastScore){ lastScore=sc; $('#score').textContent=sc; }
+  const rep=demo ? 100 : Math.max(0,Math.round(G.rep));
   if(rep!==lastRep){ lastRep=rep; $('#repBar').style.width=rep+'%'; $('#repTxt').textContent=rep+' %'; $('#repBox').classList.toggle('low', rep<35); }
   for(const el of document.querySelectorAll('[data-to]')){
     const to=+el.dataset.to;
@@ -988,7 +1302,7 @@ function loadBest(){ try{ return JSON.parse(localStorage.getItem('linka112-best'
 function saveBest(b){ try{ localStorage.setItem('linka112-best', JSON.stringify(b)); }catch(e){} }
 function showMenu(){
   const best=loadBest();
-  const ov=$('#overlay'); ov.hidden=false;
+  const ov=$('#overlay'); ov.hidden=false; ov.classList.add('menu');
   ov.innerHTML=`<div class="sheet">
     <h1 class="title">Linka <b>112</b></h1>
     <p class="lead">Nočná zmena na dispečingu integrovaného záchranného systému. Od desiatej večer do šiestej ráno zdvíhaš tiesňové volania a posielaš pomoc po meste.</p>
@@ -1004,31 +1318,30 @@ function showMenu(){
   </div>`;
 }
 function showPause(){
-  const ov=$('#overlay'); ov.hidden=false;
+  const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
   ov.innerHTML=`<div class="sheet" style="max-width:420px">
     <h2 class="grade">Pauza</h2>
     <p class="lead">Hodiny stoja na ${clockOf(G.t)}. Volajúci počkajú.</p>
     <div class="acts"><button class="btn go" data-act="resume">Pokračovať</button><button class="btn" data-act="quit">Ukončiť zmenu</button></div>
   </div>`;
 }
-function gradeOf(score){
+const GRADES=['Na zaškolenie','Nováčik na linke','Dispečer','Starší dispečer','Legenda linky 112'];
+function gradeIdx(score){
   const k=DIFFS[G.diff].grade;
-  if(score>=8000*k) return 'Legenda linky 112';
-  if(score>=5500*k) return 'Starší dispečer';
-  if(score>=3200*k) return 'Dispečer';
-  if(score>=1500*k) return 'Nováčik na linke';
-  return 'Na zaškolenie';
+  return score>=8000*k ? 4 : score>=5500*k ? 3 : score>=3200*k ? 2 : score>=1500*k ? 1 : 0;
 }
 function endGame(complete){
   if(G.mode==='over') return;
+  if(G.mode==='demo'){ G=newGame('normal','demo'); return; }
   G.mode='over';
-  const s=G.stats, best=loadBest(), prev=best[G.diff]||0;
+  const s=G.stats, best=loadBest(), prev=best[G.diff]||0, gi=gradeIdx(G.score);
   if(G.score>prev){ best[G.diff]=G.score; saveBest(best); }
   const avg=s.resp.length ? Math.round(s.resp.reduce((a,b)=>a+b,0)/s.resp.length) : null;
-  const ov=$('#overlay'); ov.hidden=false;
+  const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
   ov.innerHTML=`<div class="sheet">
     <div><div class="k">${esc(DIFFS[G.diff].label)} · ${complete ? 'zmena skončila o 06:00' : 'koniec o '+clockOf(G.t)}</div>
-      <h2 class="grade" style="margin-top:6px">${complete ? esc(gradeOf(G.score)) : 'Vedúci ťa vystriedal'}</h2></div>
+      <h2 class="grade" style="margin-top:6px">${complete ? esc(GRADES[gi]) : 'Vedúci ťa vystriedal'}</h2></div>
+    ${complete ? `<div class="stars" aria-label="Hodnotenie ${gi+1} z 5">${[0,1,2,3,4].map(i=>STAR(i<=gi)).join('')}</div>` : ''}
     <p class="lead">${complete ? 'Ranná zmena preberá linku. Takto vyzerala tvoja noc:' : (G.rep<=0 ? 'Dôvera klesla na nulu. Príliš veľa ľudí nedostalo pomoc včas.' : 'Zmenu si ukončil predčasne.')}</p>
     <div class="sumgrid">
       <div><b>${G.score}</b><span class="k">Skóre</span></div>
@@ -1047,6 +1360,7 @@ function endGame(complete){
 function start(diff){
   audio();
   G=newGame(diff, 'play');
+  P.length=0;
   $('#overlay').hidden=true; $('#overlay').innerHTML='';
   $('#diffLbl').textContent='Nočná zmena · '+DIFFS[diff].label;
   $('#btnSpeed').textContent='×1'; $('#btnPause').textContent='Pauza';
@@ -1057,6 +1371,7 @@ function start(diff){
 function togglePause(){
   if(G.mode==='play'){ G.mode='pause'; $('#btnPause').textContent='Pokračovať'; showPause(); }
   else if(G.mode==='pause'){ G.mode='play'; $('#btnPause').textContent='Pauza'; $('#overlay').hidden=true; }
+  dirty();
 }
 function setTab(t){
   $('#app').dataset.tab=t;
@@ -1067,12 +1382,12 @@ function setTab(t){
 function act(el){
   const a=el.dataset.act, id=el.dataset.id;
   if(a==='start') return start(el.dataset.diff);
-  if(a==='menu'){ G=newGame('normal','menu'); showMenu(); return dirty(); }
+  if(a==='menu'){ G=newGame('normal','demo'); P.length=0; $('#diffLbl').textContent='Nočná zmena'; showMenu(); return dirty(); }
   if(a==='tab') return setTab(el.dataset.tab);
   if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; return; }
   if(a==='pause' || a==='resume') return togglePause();
   if(a==='quit'){ G.mode='play'; return endGame(false); }
-  if(a==='speed'){ G.speed=G.speed===1 ? 2 : 1; el.textContent='×'+G.speed; return; }
+  if(a==='speed'){ if(G.mode!=='play') return; G.speed=G.speed===1 ? 2 : 1; el.textContent='×'+G.speed; return; }
   if(G.mode!=='play') return;
   if(a==='answer') answer(callById(id));
   else if(a==='cls') classify(callById(id), el.dataset.type);
@@ -1137,12 +1452,12 @@ document.addEventListener('visibilitychange', ()=>{ if(document.hidden && G && G
 let last=performance.now(), lastUI=0;
 function frame(now){
   const dt=Math.min(.1, (now-last)/1000); last=now;
-  if(G.mode==='play'){
+  if(running()){
     let left=dt*G.speed;
-    while(left>0 && G.mode==='play'){ const s=Math.min(.05,left); step(s); left-=s; }
+    while(left>0 && running()){ const s=Math.min(.05,left); step(s); left-=s; }
   }
   draw(now);
-  if(uiDirty || (G.mode==='play' && now-lastUI>450)){ uiDirty=false; lastUI=now; renderUI(); }
+  if(uiDirty || (running() && now-lastUI>450)){ uiDirty=false; lastUI=now; renderUI(); }
   updateTimers();
   requestAnimationFrame(frame);
 }
@@ -1150,7 +1465,7 @@ function frame(now){
 /* ---------- štart ---------- */
 readColors();
 $('#legend').innerHTML=[1,2,3,4,5,6].map(s=>`<span style="--sc:var(--s${s})">${s} ${STATUS[s]}</span>`).join('');
-G=newGame('normal','menu');
+G=newGame('normal','demo');
 new ResizeObserver(resize).observe($('#mapbox'));
 resize();
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>drawStatic());
