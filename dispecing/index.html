@@ -18,12 +18,15 @@
     --bg:#0f1115; --bg2:#171a21; --bg3:#20242e; --line:#2b303b;
     --txt:#eef1f6; --mut:#9aa3b2; --acc:#4f8cff; --acc2:#37d39b;
     --warn:#ffb23e; --dang:#ff5d6c; --radius:12px;
+    color-scheme:dark;
   }
   body.light{
     --bg:#f3f5f9; --bg2:#ffffff; --bg3:#e9edf4; --line:#d7dde7;
     --txt:#16202f; --mut:#647082; --warn:#c77700;
+    color-scheme:light;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  [hidden]{display:none !important;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     font-size:15px; line-height:1.4;}
@@ -77,7 +80,7 @@
   .check input{width:18px; height:18px; accent-color:var(--acc);}
 
   /* ---------- hlavička ---------- */
-  header.top{display:flex; align-items:center; gap:10px; padding:7px 14px; padding-top:calc(7px + env(safe-area-inset-top));
+  header.top{display:flex; align-items:center; gap:10px; padding:7px 16px; padding-top:calc(7px + env(safe-area-inset-top));
     background:var(--bg2); border-bottom:1px solid var(--line); flex:none;}
   .brand{font-weight:800; font-size:17px; display:flex; align-items:center; gap:8px; letter-spacing:.3px; margin-right:6px; white-space:nowrap;}
   .brand .dot{width:10px; height:10px; border-radius:50%; background:var(--dang); animation:pulse 2s infinite;}
@@ -104,17 +107,21 @@
   .col{display:flex; flex-direction:column; min-height:0; min-width:0;}
   .col-inc{border-right:1px solid var(--line);}
   .col-units{border-left:1px solid var(--line);}
-  .colhead{padding:7px 12px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--line); background:var(--bg2); min-height:46px; flex:none;}
+  .colhead{padding:7px 16px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--line); background:var(--bg2); min-height:46px; flex:none;}
   .colhead b{font-size:15px;}
-  .colbody{flex:1; overflow:auto; padding:10px;}
-  .colfoot{flex:none; padding:7px 10px; border-top:1px solid var(--line); background:var(--bg2);}
-  .filters{display:flex; gap:6px; padding:8px 10px 0; flex-wrap:wrap; flex:none;}
+  .colbody{flex:1; overflow:auto; padding:10px 16px;}
+  .colfoot{flex:none; padding:7px 16px; border-top:1px solid var(--line); background:var(--bg2);}
+  .filters{display:flex; gap:6px; padding:8px 16px 0; flex-wrap:wrap; flex:none;}
   .mapwrap{position:relative; flex:1; min-height:0;}
   #map{position:absolute; inset:0; background:var(--bg3);}
   .mapoff{display:flex; align-items:center; justify-content:center; height:100%; color:var(--mut); text-align:center; padding:20px;}
   .mapbtns{position:absolute; top:10px; right:10px; z-index:500; display:flex; flex-direction:column; gap:6px;}
   .mapbtns .btn{box-shadow:0 2px 8px rgba(0,0,0,.35); background:var(--bg2); min-width:38px; font-size:16px;}
   .boardtabs{display:none;}
+  .tilemsg{position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:500; max-width:min(90%,440px);
+    background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:7px 12px; font-size:12px; color:var(--mut); text-align:center;}
+  .embedbar{flex:none; display:flex; align-items:center; gap:10px; padding:5px 16px; font-size:12px; color:var(--txt);
+    background:color-mix(in srgb, var(--warn) 16%, var(--bg2)); border-bottom:1px solid var(--line);}
   .legend{display:flex; flex-wrap:wrap; gap:3px 10px; font-size:11px; color:var(--mut);}
   .legend span{white-space:nowrap;}
   .legend span::before{content:''; display:inline-block; width:8px; height:8px; border-radius:2px; background:var(--sc); margin-right:4px;}
@@ -220,7 +227,7 @@
     padding:1px 6px; border-radius:5px; white-space:nowrap; border:2px solid rgba(0,0,0,.4); box-shadow:0 1px 4px rgba(0,0,0,.45);}
 
   /* ---------- stránky (denník, zmena, nastavenia) ---------- */
-  .page{max-width:1000px; margin:0 auto; padding:16px 14px 40px;}
+  .page{max-width:1000px; margin:0 auto; padding:16px 16px 40px;}
   .toolbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;}
   .loglist{background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
   .logrow{display:grid; grid-template-columns:auto 24px 1fr; gap:8px; padding:6px 10px; border-bottom:1px solid var(--line); font-size:14px; align-items:baseline;}
@@ -249,7 +256,7 @@
 
   /* ---------- mobil ---------- */
   @media (max-width:900px){
-    header.top{flex-wrap:wrap; gap:6px 10px; padding:6px 10px; padding-top:calc(6px + env(safe-area-inset-top));}
+    header.top{flex-wrap:wrap; gap:6px 10px; padding:6px 16px; padding-top:calc(6px + env(safe-area-inset-top));}
     .brand{font-size:16px;}
     nav.tabs{order:5; width:100%;}
     nav.tabs button{padding:6px 9px; font-size:14px;}
@@ -260,7 +267,7 @@
     #btnNew .lbl{display:none;}
     #btnNew{min-width:44px; font-size:20px; padding:4px 12px;}
     #view-board.on{display:flex; flex-direction:column;}
-    .boardtabs{display:flex; gap:6px; padding:7px 10px; border-bottom:1px solid var(--line); background:var(--bg2); flex:none;}
+    .boardtabs{display:flex; gap:6px; padding:7px 16px; border-bottom:1px solid var(--line); background:var(--bg2); flex:none;}
     .boardtabs .pill{flex:1; justify-content:center; padding:7px 10px;}
     #view-board .col{display:none; flex:1; border:none;}
     #view-board[data-sub="inc"] .col-inc, #view-board[data-sub="map"] .col-map, #view-board[data-sub="units"] .col-units{display:flex;}
@@ -403,6 +410,7 @@ const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','
 const cmpCs = (a,b) => a.cs.localeCompare(b.cs, 'sk', {numeric:true});
 const lines = s => s.split('\n').map(x=>x.trim()).filter(Boolean);
 function toast(msg, alarm){
+  toast.overdue=false;
   const t=$('#toast'); t.textContent=msg; t.classList.toggle('alarm', !!alarm); t.classList.add('show');
   clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('show'), alarm?6000:2400);
 }
@@ -447,6 +455,9 @@ function parseCoords(s){
 }
 
 /* ---------- Číselníky ---------- */
+/* náhľad v Claude: bez tlače, sťahovania súborov, mapových podkladov a vyhľadávania adries */
+const EMBED = !!window.DISP_EMBED;
+const BASE_TITLE = document.title || 'Dispečing';
 const STORE_KEY = 'dispecing-v1';
 const STATUSES = [
   {code:1, label:'Voľná – v teréne',     short:'Voľná',     color:'#37d39b', free:true},
@@ -501,19 +512,26 @@ function normalize(s){
   if(!st.center)       st.center=[48.67, 19.70];  // stred Slovenska
   if(st.zoom==null)    st.zoom=7;
   if(st.geocode==null) st.geocode=true;
+  if(EMBED)            st.geocode=false;
   if(st.country==null) st.country='sk';
-  if(!st.theme)        st.theme='dark';
+  if(!st.theme)        st.theme=EMBED ? 'auto' : 'dark';
   if(st.darkMap==null) st.darkMap=true;
   if(st.lastWho==null) st.lastWho='';
   return s;
 }
 let state = loadState();
 
-let saveTimer=null, commitTimer=null;
+let saveTimer=null, commitTimer=null, saveWarned=0;
 function save(){
   clearTimeout(saveTimer); saveTimer=null;
   try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); return true; }
-  catch(e){ alert('Nepodarilo sa uložiť dáta ('+e.message+').\nUrob si zálohu (Nastavenia → Dáta) a vymaž staré záznamy.'); return false; }
+  catch(e){
+    if(Date.now()-saveWarned > 30000){
+      saveWarned=Date.now();
+      toast('Dáta sa nepodarilo uložiť. Urob si zálohu a v Nastaveniach vymaž staré záznamy.', true);
+    }
+    return false;
+  }
 }
 function commit(){ clearTimeout(commitTimer); commitTimer=null; save(); renderAll(); }
 function saveSoon(){ clearTimeout(saveTimer); saveTimer=setTimeout(save, 400); }
@@ -571,15 +589,20 @@ function setUnitStatus(uId, code, quiet){
   if(!quiet) commit();
 }
 
-function dispatchUnit(incId, uId){
-  const inc=incById(incId), u=unitById(uId);
+async function dispatchUnit(incId, uId){
+  let inc=incById(incId), u=unitById(uId);
+  if(!inc || !u || !isOpen(inc) || u.inc===inc.id) return;
+  const busy = u.inc ? incById(u.inc) : null;
+  if(busy){
+    if(!await ask({title:'Presunúť '+u.cs+'?', text:u.cs+' je na udalosti '+busy.no+' ('+busy.type+'). Presunúť ju na '+inc.no+'?', ok:'Presunúť'})) return;
+  } else if(u.status===0 && !await ask({title:'Vyslať '+u.cs+'?', text:u.cs+' je mimo prevádzky. Napriek tomu vyslať?', ok:'Vyslať'})) return;
+  inc=incById(incId); u=unitById(uId);  // počas potvrdenia sa mohli zmeniť dáta
   if(!inc || !u || !isOpen(inc) || u.inc===inc.id) return;
   const other = u.inc ? incById(u.inc) : null;
   if(other){
-    if(!confirm(u.cs+' je na udalosti '+other.no+' ('+other.type+').\nPresunúť ju na '+inc.no+'?')) return;
     detach(u, other);
     addLog('inc', other.no+': jednotka '+u.cs+' presunutá na '+inc.no, {inc:other.id, unit:u.id});
-  } else if(u.status===0 && !confirm(u.cs+' je mimo prevádzky. Napriek tomu vyslať?')) return;
+  }
   inc.units.push(u.id);
   if(!inc.allUnits.includes(u.id)) inc.allUnits.push(u.id);
   u.inc = inc.id;
@@ -743,7 +766,7 @@ function go(r){
   route=r;
   for(const t of TABS) $('#view-'+t.id).classList.toggle('on', t.id===r);
   renderTabs();
-  if(r==='board' && map) setTimeout(()=>map.invalidateSize(), 0);
+  if(r==='board' && map) setTimeout(mapShown, 0);
   if(r==='log') buildLogPage();
   if(r==='shift') buildShiftPage();
   if(r==='settings') buildSettings();
@@ -751,11 +774,14 @@ function go(r){
 }
 function setBoardSub(k){
   boardSub=k; $('#view-board').dataset.sub=k; renderBoardTabs();
-  if(k==='map' && map) setTimeout(()=>map.invalidateSize(), 0);
+  if(k==='map' && map) setTimeout(mapShown, 0);
 }
+function mapShown(){ map.invalidateSize(); if(pendingFit) fitAll(); }
 function applyTheme(){
   const t=state.settings.theme;
-  const light = t==='light' || (t==='auto' && window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches);
+  const host=document.documentElement.getAttribute('data-theme');  // téma, ktorú nastaví prostredie (napr. Claude)
+  const light = t==='light' || (t==='auto' && (host ? host==='light'
+    : !!(window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches)));
   document.body.classList.toggle('light', light);
   document.body.classList.toggle('darkmap', !light && state.settings.darkMap);
 }
@@ -858,8 +884,15 @@ const markers={inc:new Map(), unit:new Map()};
 function initMap(){
   if(!window.L){ fill($('#map'), el('div',{class:'mapoff'},'🗺️ Mapu sa nepodarilo načítať.')); return; }
   map = L.map('map', {zoomControl:true}).setView(state.settings.center, state.settings.zoom);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,
+  const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:19,
     attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(map);
+  const tileMsg=el('div',{class:'tilemsg', hidden:true}, EMBED
+    ? 'V náhľade sa mapové podklady nenačítajú. Značky, vzdialenosti a výber miesta fungujú.'
+    : 'Mapové podklady sa nenačítali – skontroluj pripojenie na internet.');
+  $('.mapwrap').append(tileMsg);
+  let tileErr=0;
+  tiles.on('tileerror', ()=>{ if(++tileErr>=3) tileMsg.hidden=false; });
+  tiles.on('tileload', ()=>{ tileErr=0; tileMsg.hidden=true; });
   lineLayer=L.layerGroup().addTo(map); incLayer=L.layerGroup().addTo(map); unitLayer=L.layerGroup().addTo(map);
   map.on('click', e=>{ if(picking) endPick(e.latlng); });
   /* pravý klik (na mobile dlhé podržanie) = nová udalosť na tomto mieste */
@@ -914,8 +947,14 @@ function renderMap(){
     }
   }
 }
+/* skrytá mapa (iná záložka, mobil) má nulovú veľkosť – priblíženie sa vtedy odloží, kým sa mapa ukáže */
+let pendingFit=false;
 function fitAll(){
   if(!map) return;
+  map.invalidateSize();
+  const size=map.getSize();
+  if(!size.x || !size.y){ pendingFit=true; return; }
+  pendingFit=false;
   const pts=[];
   for(const i of state.incidents) if(isOpen(i) && i.lat!=null) pts.push([i.lat,i.lng]);
   for(const u of state.units) if(u.lat!=null) pts.push([u.lat,u.lng]);
@@ -961,15 +1000,17 @@ function openModal(content, opts={}){
   setTimeout(()=>{ const f=$('#modalRoot [autofocus]'); if(f) f.focus(); }, 30);
 }
 function closeModal(){ fill($('#modalRoot')); modal={live:null, guard:null, submit:null}; }
-function tryCloseModal(){
-  if(modal.guard && modal.guard() && !confirm('Zahodiť rozpísané údaje?')) return;
+async function tryCloseModal(){
+  if(modal.guard && modal.guard() &&
+     !await ask({title:'Zahodiť rozpísanú udalosť?', text:'Zadané údaje sa neuložia.', ok:'Zahodiť', danger:true})) return;
   closeModal();
 }
 const modalOpen = () => !!$('#modalRoot').firstChild;
 
 /* jednoduchý dialóg nad modálnym oknom (text alebo potvrdenie) */
 let dialog=null;
-function ask({title, text, input, placeholder, value, ok='OK', danger}){
+function ask({title, text, input, placeholder, value, ok='OK', danger, noCancel}){
+  if(dialog) dialog.cancel();
   return new Promise(res=>{
     const root=$('#dialogRoot');
     const inp = input ? el('input',{class:'fld', placeholder:placeholder||'', value:value||''}) : null;
@@ -980,7 +1021,7 @@ function ask({title, text, input, placeholder, value, ok='OK', danger}){
     const okBtn=el('button',{class:'btn '+(danger?'danger':'primary'), onclick:okFn}, ok);
     fill(root, el('div',{class:'modal-bg dlg'}, el('div',{class:'modal', style:'max-width:460px'},
       el('h2',{}, title), text ? el('p',{class:'muted small'}, text) : null, inp,
-      el('div',{class:'mactions'}, el('button',{class:'btn ghost', onclick:()=>done(null)}, 'Späť'), okBtn))));
+      el('div',{class:'mactions'}, noCancel ? null : el('button',{class:'btn ghost', onclick:()=>done(null)}, 'Späť'), okBtn))));
     setTimeout(()=>(inp||okBtn).focus(), 30);
   });
 }
@@ -1015,7 +1056,8 @@ function incFields(v, set, opts={}){
       if(st.geocode) reverseGeocode(c.lat, c.lng).then(a=>{ if(a && addr.value.trim()===q){ addr.value=a; v.addr=a; set({addr:a}); } }).catch(()=>{});
       return;
     }
-    if(!st.geocode){ fill(results, msg('Vyhľadávanie adries je vypnuté v nastaveniach – miesto vyber na mape (📍).','var(--mut)')); return; }
+    if(!st.geocode){ fill(results, msg(EMBED ? 'V náhľade vyhľadávanie adries nefunguje – miesto vyber na mape (📍) alebo zadaj GPS súradnice.'
+      : 'Vyhľadávanie adries je vypnuté v nastaveniach – miesto vyber na mape (📍).','var(--mut)')); return; }
     fill(results, msg('Hľadám…','var(--mut)'));
     try{
       const r=await geocode(q);
@@ -1244,7 +1286,8 @@ function unitForm(id){
           el('button',{class:'btn sm', onclick:()=>pickOnMap('Poloha základne', ll=>{ if(ll){ d.baseLat=ll.lat; d.baseLng=ll.lng; showB(); } })},'📍 Určiť na mape'),
           el('button',{class:'btn sm ghost', onclick:()=>{ d.baseLat=d.baseLng=null; showB(); }},'Zmazať polohu')))),
     el('div',{class:'mactions'},
-      id ? el('button',{class:'btn danger', onclick:()=>{ if(confirm('Odstrániť jednotku '+u.cs+'?')){ deleteUnit(id); closeModal(); } }},'Odstrániť') : null,
+      id ? el('button',{class:'btn danger', onclick:async()=>{
+        if(await ask({title:'Odstrániť jednotku '+u.cs+'?', text:'Zmizne zo zoznamu aj z mapy. Záznamy v denníku ostanú.', ok:'Odstrániť', danger:true})){ deleteUnit(id); closeModal(); } }},'Odstrániť') : null,
       el('div',{class:'hspacer'}),
       el('button',{class:'btn ghost', onclick:closeModal},'Zrušiť'),
       el('button',{class:'btn primary', onclick:submit},'Uložiť'))),
@@ -1268,8 +1311,8 @@ function buildLogPage(){
   note.addEventListener('keydown', e=>{ if(e.key==='Enter') add(); });
   fill($('#logPage'),
     el('div',{class:'row', style:'margin-bottom:12px'}, el('h2',{class:'grow', style:'margin:0'},'Denník'),
-      el('button',{class:'btn sm', onclick:()=>download('dennik-'+fileStamp()+'.csv', csvLog(filteredLog()), 'text/csv;charset=utf-8')},'⬇ CSV'),
-      el('button',{class:'btn sm', onclick:printLog},'🖨 Tlačiť')),
+      EMBED ? null : el('button',{class:'btn sm', onclick:()=>download('dennik-'+fileStamp()+'.csv', csvLog(filteredLog()), 'text/csv;charset=utf-8')},'⬇ CSV'),
+      EMBED ? null : el('button',{class:'btn sm', onclick:printLog},'🖨 Tlačiť')),
     el('div',{class:'row', style:'margin-bottom:10px'}, note, el('button',{class:'btn primary', onclick:add},'Zapísať')),
     el('div',{class:'toolbar'}, el('div',{class:'row wrap', id:'logKinds'}), el('div',{class:'hspacer'}),
       el('select',{class:'fld', style:'width:auto', value:logFilter.range, onchange:e=>{ logFilter.range=e.target.value; renderLogList(); }},
@@ -1287,7 +1330,7 @@ function renderLogList(){
   const rows=filteredLog().reverse();
   fill(box,
     rows.length ? el('div',{class:'loglist'}, rows.slice(0,500).map(logRow)) : el('div',{class:'empty'},'Žiadne záznamy pre zvolený filter.'),
-    rows.length>500 ? el('p',{class:'small muted center'}, 'Zobrazených najnovších 500 z '+rows.length+' záznamov. Celý výpis stiahneš cez ⬇ CSV.') : null);
+    rows.length>500 ? el('p',{class:'small muted center'}, 'Zobrazených najnovších 500 z '+rows.length+' záznamov.'+(EMBED ? '' : ' Celý výpis stiahneš cez ⬇ CSV.')) : null);
 }
 function logRow(l){
   const inc=l.inc ? incById(l.inc) : null, k=LOG_KINDS[l.k]||{ic:'•', label:''};
@@ -1347,7 +1390,7 @@ function buildShiftPage(){
   fill(pg,
     el('div',{class:'row wrap', style:'margin-bottom:12px'},
       el('h2',{class:'grow', style:'margin:0'}, 'Zmena – '+sh.who),
-      el('button',{class:'btn', onclick:()=>{ flush(); printEl(reportEl(snapshotReport(state.shift, Date.now(), ''), true)); }},'🖨 Priebežný protokol'),
+      EMBED ? null : el('button',{class:'btn', onclick:()=>{ flush(); printEl(reportEl(snapshotReport(state.shift, Date.now(), ''), true)); }},'🖨 Priebežný protokol'),
       el('button',{class:'btn primary', onclick:endShiftFlow},'Odovzdať zmenu…')),
     el('div',{id:'shiftLive'}),
     card('Poznámka pre ďalšiu zmenu', note),
@@ -1387,7 +1430,7 @@ async function endShiftFlow(){
 function showReport(rep){
   openModal(el('div',{},
     el('div',{class:'mhead'}, el('h2',{class:'grow'},'Odovzdávací protokol'),
-      el('button',{class:'btn', onclick:()=>printEl(reportEl(rep, true))},'🖨 Tlačiť / PDF'),
+      EMBED ? null : el('button',{class:'btn', onclick:()=>printEl(reportEl(rep, true))},'🖨 Tlačiť / PDF'),
       el('button',{class:'iconbtn', title:'Zavrieť (Esc)', onclick:closeModal},'✕')),
     reportEl(rep, false)), {wide:true});
 }
@@ -1431,13 +1474,14 @@ function buildSettings(){
     try{
       const obj=JSON.parse(await f.text());
       if(!obj || !Array.isArray(obj.units) || !Array.isArray(obj.incidents)) throw new Error('súbor nie je záloha Dispečingu');
-      if(!confirm('Obnoviť dáta zo zálohy? Súčasné dáta v tomto prehliadači sa nahradia.')) return;
+      if(!await ask({title:'Obnoviť dáta zo zálohy?', text:'Súčasné dáta v tomto prehliadači sa nahradia.', ok:'Obnoviť', danger:true})) return;
       state=normalize(obj); alerted.clear(); overdueKey=null;
       commit(); buildSettings(); fitAll(); toast('Záloha obnovená');
-    }catch(err){ alert('Zálohu sa nepodarilo načítať: '+err.message); }
+    }catch(err){ ask({title:'Zálohu sa nepodarilo načítať', text:err.message, ok:'Rozumiem', noCancel:true}); }
   }});
   const days=el('input',{class:'fld', type:'number', value:30, min:1, style:'width:80px'});
-  const size=new Blob([localStorage.getItem(STORE_KEY)||'']).size;
+  let size=0;
+  try{ size=new Blob([localStorage.getItem(STORE_KEY)||'']).size; }catch(e){}
 
   fill($('#settingsPage'),
     el('h2',{},'Nastavenia'),
@@ -1458,12 +1502,13 @@ function buildSettings(){
       el('div',{class:'row wrap'}, el('span',{},'Priemerná rýchlosť pre odhad dojazdu'), num(st.speed, n=>{ st.speed=n; renderAll(); }, {min:5, step:5}), el('span',{class:'muted'},'km/h')),
       el('div',{class:'row wrap', style:'margin-top:10px'},
         el('button',{class:'btn sm', disabled:!map, onclick:()=>{ const c=map.getCenter(); st.center=[+c.lat.toFixed(5), +c.lng.toFixed(5)]; st.zoom=map.getZoom(); save(); toast('Výrez mapy uložený ako predvolený'); }},'Uložiť aktuálny výrez mapy ako predvolený'),
-        el('button',{class:'btn sm', onclick:openMapWindow},'⧉ Mapa v samostatnom okne')),
+        EMBED ? null : el('button',{class:'btn sm', onclick:openMapWindow},'⧉ Mapa v samostatnom okne')),
       chk('Tmavá mapa (v tmavej téme)', st.darkMap, v=>{ st.darkMap=v; }),
+      EMBED ? el('p',{class:'small muted', style:'margin:8px 0 0'}, 'Mapové podklady a vyhľadávanie adries fungujú až v nainštalovanej appke, nie v tomto náhľade.') : [
       chk('Vyhľadávať adresy cez OpenStreetMap Nominatim', st.geocode, v=>{ st.geocode=v; }),
       el('div',{class:'row', style:'margin:6px 0 0 26px'}, el('span',{class:'small muted'},'Krajina (kód, napr. sk, cz; prázdne = všade):'),
         el('input',{class:'fld', value:st.country, style:'width:80px', onchange:e=>{ st.country=e.target.value.trim().toLowerCase(); save(); toast('Uložené'); }})),
-      el('p',{class:'small muted', style:'margin:8px 0 0 26px'}, 'Pri vyhľadávaní sa text adresy (a pri výbere na mape súradnice) odošle na verejný server OpenStreetMap. Ak to vaše pravidlá ochrany údajov nedovoľujú, vypni to – miesto potom určíš kliknutím na mapu alebo zadaním súradníc.')),
+      el('p',{class:'small muted', style:'margin:8px 0 0 26px'}, 'Pri vyhľadávaní sa text adresy (a pri výbere na mape súradnice) odošle na verejný server OpenStreetMap. Ak to vaše pravidlá ochrany údajov nedovoľujú, vypni to – miesto potom určíš kliknutím na mapu alebo zadaním súradníc.')]),
     card('Vzhľad',
       el('div',{class:'row'}, el('span',{},'Téma'),
         el('select',{class:'fld', style:'width:auto', value:st.theme, onchange:e=>{ st.theme=e.target.value; save(); applyTheme(); }},
@@ -1472,12 +1517,13 @@ function buildSettings(){
       el('p',{class:'small muted', style:'margin-top:0'}, 'Dáta sú uložené iba v tomto prehliadači ('+Math.round(size/1024)+' kB · '
         +state.units.length+' jednotiek · '+state.incidents.length+' udalostí · '+state.log.length+' záznamov v denníku). Pravidelne si rob zálohu.'),
       el('div',{class:'row wrap'},
-        el('button',{class:'btn', onclick:()=>download('dispecing-zaloha-'+fileStamp()+'.json', JSON.stringify(state), 'application/json')},'⬇ Záloha (JSON)'),
+        EMBED ? null : el('button',{class:'btn', onclick:()=>download('dispecing-zaloha-'+fileStamp()+'.json', JSON.stringify(state), 'application/json')},'⬇ Záloha (JSON)'),
         el('button',{class:'btn', onclick:()=>file.click()},'⬆ Obnoviť zo zálohy'), file,
-        el('button',{class:'btn', onclick:()=>download('dennik-cely-'+fileStamp()+'.csv', csvLog(state.log), 'text/csv;charset=utf-8')},'⬇ Celý denník (CSV)')),
+        EMBED ? null : el('button',{class:'btn', onclick:()=>download('dennik-cely-'+fileStamp()+'.csv', csvLog(state.log), 'text/csv;charset=utf-8')},'⬇ Celý denník (CSV)')),
       el('div',{class:'row wrap', style:'margin-top:12px'},
         el('span',{class:'small'},'Vymazať ukončené udalosti, denník a protokoly staršie ako'), days, el('span',{class:'small'},'dní'),
-        el('button',{class:'btn sm', onclick:()=>{ const n=+days.value; if(n>=1 && confirm('Vymazať záznamy staršie ako '+n+' dní? Najprv si urob zálohu.')) cleanup(n); }},'Vymazať')),
+        el('button',{class:'btn sm', onclick:async()=>{ const n=+days.value;
+          if(n>=1 && await ask({title:'Vymazať staré záznamy?', text:'Odstránia sa ukončené udalosti, záznamy denníka a protokoly staršie ako '+n+' dní. Najprv si urob zálohu.', ok:'Vymazať', danger:true})) cleanup(n); }},'Vymazať')),
       el('div',{class:'row wrap', style:'margin-top:12px'},
         el('button',{class:'btn sm', onclick:loadDemo},'Načítať ukážkové dáta'),
         el('button',{class:'btn sm danger', onclick:wipeAll},'Vymazať všetky dáta'))),
@@ -1487,7 +1533,7 @@ function buildSettings(){
       el('li',{}, 'Značky jednotiek a udalostí na mape sa dajú ťahať – tak rýchlo upravíš polohu'),
       el('li',{}, 'Stavy jednotiek: ', STATUSES.map(s=>s.code+' '+s.label).join(' · ')),
       el('li',{}, 'Stav 3 a 4 zapisuje čas vyslania a príjazdu k udalosti; stav 1, 2 alebo 0 jednotku z udalosti uvoľní'),
-      el('li',{}, 'Mapu môžeš otvoriť v samostatnom okne (⧉) na druhom monitore – obe okná sa synchronizujú'),
+      EMBED ? null : el('li',{}, 'Mapu môžeš otvoriť v samostatnom okne (⧉) na druhom monitore – obe okná sa synchronizujú'),
       el('li',{}, 'Do adresy môžeš vložiť aj GPS súradnice, napr. 48.1486, 17.1077'))),
     el('p',{class:'tiny muted center'}, 'Dispečing · pomocný nástroj pre prehľad a evidenciu. Nenahrádza certifikovaný dispečerský systém ani rádiovú komunikáciu.'));
   renderSettingsUnits();
@@ -1509,16 +1555,17 @@ function cleanup(days){
   addLog('sys', 'Upratovanie: odstránených '+(bi-state.incidents.length)+' udalostí a '+(bl-state.log.length)+' záznamov starších ako '+days+' dní');
   commit(); buildSettings(); toast('Hotovo');
 }
-function wipeAll(){
-  if(!confirm('Vymazať VŠETKY jednotky, udalosti, denník a protokoly? Nastavenia ostanú.\nToto sa nedá vrátiť.')) return;
+async function wipeAll(){
+  if(!await ask({title:'Vymazať všetky dáta?', text:'Odstránia sa všetky jednotky, udalosti, denník a protokoly. Nastavenia ostanú. Toto sa nedá vrátiť.',
+    ok:'Vymazať všetko', danger:true})) return;
   state=normalize({settings:state.settings}); alerted.clear(); overdueKey=null;
   commit(); buildSettings(); toast('Dáta vymazané');
 }
 
 /* ---------- Ukážkové dáta (Bratislava) ---------- */
-function loadDemo(){
-  if((state.units.length || state.incidents.length || state.log.length) &&
-     !confirm('Načítať ukážkové dáta? Súčasné jednotky, udalosti a denník sa nahradia.')) return;
+async function loadDemo(silent){
+  if(silent!==true && (state.units.length || state.incidents.length || state.log.length) &&
+     !await ask({title:'Načítať ukážkové dáta?', text:'Súčasné jednotky, udalosti a denník sa nahradia.', ok:'Načítať', danger:true})) return;
   const now=Date.now(), m=60000, y=new Date().getFullYear(), no=n=>y+'-'+String(n).padStart(4,'0');
   const U=(cs,type,crew,base,b,status,ago,pos)=>({id:uid(), cs, type, crew, base, baseLat:b[0], baseLng:b[1],
     status, since:now-ago*m, inc:null, lat:(pos||b)[0], lng:(pos||b)[1]});
@@ -1576,7 +1623,7 @@ function loadDemo(){
   if(route==='shift') buildShiftPage();
   if(route==='log') buildLogPage();
   fitAll();
-  toast('Ukážkové dáta načítané');
+  if(silent!==true) toast('Ukážkové dáta načítané');
 }
 
 /* ============================================================
@@ -1597,10 +1644,11 @@ function tick(){
       const i=fresh.sort(byPrio)[0];
       beep();
       toast('⚠ '+i.no+' ('+PRIO[i.prio].short+' '+i.type+') čaká na vyslanie už '+dur(now-i.created), true);
+      toast.overdue=true;
     }
   }
-  if(!od.length && $('#toast').classList.contains('alarm')) $('#toast').classList.remove('show');
-  document.title=(od.length ? '⚠ ('+od.length+') ' : '')+'Dispečing';
+  if(!od.length && toast.overdue){ toast.overdue=false; $('#toast').classList.remove('show'); }
+  document.title=(od.length ? '⚠ ('+od.length+') ' : '')+BASE_TITLE;
 }
 
 /* ---------- Klávesnica ---------- */
@@ -1627,6 +1675,15 @@ function init(){
   $('#btnAddUnit').addEventListener('click', ()=>unitForm());
   $('#btnFit').addEventListener('click', fitAll);
   $('#btnMapWin').addEventListener('click', openMapWindow);
+  if(EMBED){
+    $('#btnMapWin').hidden=true;
+    const bar=el('div',{class:'embedbar'},
+      el('span',{class:'grow'}, 'Náhľad v Claude · dáta sa ukladajú len v tomto prehliadači · mapové podklady, tlač a export fungujú až v nainštalovanej appke'),
+      el('button',{class:'iconbtn', title:'Skryť', onclick:()=>bar.remove()},'✕'));
+    $('header.top').after(bar);
+  }
+  if(window.matchMedia){ const mq=matchMedia('(prefers-color-scheme: light)'); if(mq.addEventListener) mq.addEventListener('change', applyTheme); }
+  new MutationObserver(applyTheme).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
   fill($('#legend'), STATUSES.map(s=>el('span',{style:'--sc:'+s.color, title:s.label}, s.code+' '+s.short)));
   applyTheme();
   initMap();
@@ -1634,13 +1691,15 @@ function init(){
   try{ r=sessionStorage.getItem('disp-route')||'board'; }catch(e){}
   go(MAPONLY || !TABS.some(t=>t.id===r) ? 'board' : r);
   setBoardSub(MAPONLY ? 'map' : 'inc');
+  /* náhľad sa otvára rovno s ukážkovými dátami, aby bolo čo skúšať */
+  if(EMBED && !state.units.length && !state.incidents.length && !state.log.length) loadDemo(true);
   renderAll();
   tick(); setInterval(tick, 1000);
   if(map) setTimeout(()=>map.invalidateSize(), 100);
 }
 init();
 
-if('serviceWorker' in navigator){
+if(!EMBED && 'serviceWorker' in navigator){
   window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); });
 }
 </script>
