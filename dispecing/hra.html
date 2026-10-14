@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1222">
+<title>Linka 112</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
+<style>
+  :root{
+    /* Rozloženie: dispečerský pult – pás s hodinami hore, vľavo hovory a udalosti, v strede nočná mapa mesta, vpravo jednotky */
+    --ink:#0a1222;        /* noc, pozadie */
+    --panel:#101b30;      /* panely pultu */
+    --card:#16233c;       /* karty */
+    --line:#243450;
+    --text:#e8edf6;
+    --muted:#8e9bb4;
+    --sodium:#f2b33d;     /* sodíkové pouličné lampy – akcent */
+    --on-sodium:#1c1405;
+    --good:#3ddc97; --bad:#ff4d5e;
+    --p1:#ff4d5e; --p2:#ff9a3c; --p3:#f4d35e;
+    --s1:#3ddc97; --s2:#2aa198; --s3:#ff9a3c; --s4:#ff4d5e; --s5:#b48cff; --s6:#5aa9ff;
+    --t-med:#ff6b81; --t-traffic:#f4d35e; --t-fire:#ff8a3d; --t-police:#5aa9ff; --t-prank:#8e9bb4;
+    --river:#0c2341; --road:#1c2a45; --bridge:#2a3a5a; --block:#121d33; --park:#0f2a23; --tree:#17402f; --hosp:#e8edf6;
+    --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+    --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
+  html,body{height:100%; margin:0; background:var(--ink); color:var(--text); font-family:var(--f-body); font-size:15px; line-height:1.4;}
+  body{overflow:hidden; -webkit-tap-highlight-color:transparent;}
+  button{font:inherit; color:inherit;}
+  kbd{font:600 10px var(--f-mono); border:1px solid currentColor; border-radius:4px; padding:0 4px; opacity:.7;}
+
+  .app{position:relative; height:100%; display:grid; gap:12px;
+    grid-template-columns:minmax(290px,340px) minmax(0,1fr) minmax(250px,290px);
+    grid-template-rows:auto minmax(0,1fr);
+    grid-template-areas:"bar bar bar" "left map right";
+    padding-block:12px;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));}
+
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:7px; font-weight:700; font-size:14px;
+    border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text);
+    padding:8px 12px; min-height:38px; cursor:pointer; user-select:none; touch-action:manipulation;}
+  .btn:hover{border-color:var(--muted);}
+  .btn:focus-visible{outline:2px solid var(--sodium); outline-offset:2px;}
+  .btn:disabled{opacity:.4; cursor:default;}
+  .btn.go{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium);}
+  .btn.ghost{background:transparent;}
+  .btn.sm{min-height:30px; padding:5px 9px; font-size:13px;}
+
+  /* ---------- horný pás ---------- */
+  .bar{grid-area:bar; display:flex; align-items:center; gap:10px 22px; flex-wrap:wrap; background:var(--panel);
+    border:1px solid var(--line); border-radius:12px; padding:8px 14px;}
+  .brand{font:800 28px/1 var(--f-display); letter-spacing:.05em; text-transform:uppercase;}
+  .brand b{color:var(--sodium);}
+  .brand small{display:block; font:600 10px var(--f-mono); letter-spacing:.12em; color:var(--muted); margin-top:4px;}
+  .clockbox{display:flex; align-items:center; gap:12px;}
+  .clock{font:800 36px/1 var(--f-display); font-variant-numeric:tabular-nums; letter-spacing:.02em;}
+  .k{font:600 10px var(--f-mono); letter-spacing:.12em; text-transform:uppercase; color:var(--muted);}
+  .track{height:6px; background:var(--line); border-radius:3px; overflow:hidden;}
+  .track i{display:block; height:100%; width:0; background:var(--sodium); border-radius:3px; transition:width .3s;}
+  .shift{width:130px; display:grid; gap:5px;}
+  .stat .v{font:800 26px/1.05 var(--f-display); font-variant-numeric:tabular-nums;}
+  .rep{width:130px; display:grid; gap:6px;}
+  .rep .track{height:9px;}
+  .rep .track i{background:var(--good);}
+  .rep.low .track i{background:var(--bad);}
+  .spacer{flex:1;}
+  .ctrl{display:flex; gap:6px;}
+
+  /* ---------- bočné panely ---------- */
+  .rail{background:var(--panel); border:1px solid var(--line); border-radius:12px; min-height:0; overflow:auto;
+    padding:12px; display:flex; flex-direction:column; gap:16px; overscroll-behavior:contain;}
+  .rail-left{grid-area:left;} .rail-right{grid-area:right;}
+  .sec{display:grid; gap:8px; min-width:0;}
+  .sec h2{font:800 17px/1 var(--f-display); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    margin:0; display:flex; align-items:center; gap:8px;}
+  .count{font:600 11px var(--f-mono); letter-spacing:0; background:var(--card); border:1px solid var(--line);
+    border-radius:999px; padding:1px 8px; color:var(--text);}
+  .empty{margin:0; color:var(--muted); font-size:14px;}
+  .row{display:flex; align-items:center; gap:8px; min-width:0;}
+  .grow{flex:1; min-width:0;}
+  .mono{font-family:var(--f-mono);}
+  .muted{color:var(--muted);}
+
+  .call{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; display:grid; gap:9px;}
+  .call.ring{border-color:var(--sodium); animation:ring 1s ease-in-out infinite;}
+  @keyframes ring{50%{box-shadow:0 0 0 3px color-mix(in srgb, var(--sodium) 30%, transparent);}}
+  .call.talk{border-color:var(--sodium);}
+  .call.shake{animation:shake .35s;}
+  @keyframes shake{25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+  .lbl{font:600 11px var(--f-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--sodium);}
+  .quote{margin:0; font-size:16px; line-height:1.45;}
+  .quote::before{content:"„";} .quote::after{content:"“";}
+  .addr{font:500 12px var(--f-mono); color:var(--muted);}
+  .cls{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+  .cls .btn{justify-content:flex-start; text-align:left; border-left:4px solid var(--tc); font-size:13px; padding:7px 9px;}
+  .cls .btn:last-child{grid-column:1/-1;}
+
+  .inc{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--pc); border-radius:10px;
+    padding:9px 10px; cursor:pointer; display:grid; gap:6px;}
+  .inc:hover{border-color:var(--muted); border-left-color:var(--pc);}
+  .inc.sel{border-color:var(--sodium); border-left-color:var(--pc);}
+  .prio{font:700 11px var(--f-mono); padding:1px 6px; border-radius:5px; background:var(--pc); color:var(--ink); flex:none;}
+  .ttl{font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .timer{font:600 12px var(--f-mono); font-variant-numeric:tabular-nums; flex:none;}
+  .needs{display:flex; flex-wrap:wrap; gap:4px;}
+  .need{font:600 11px var(--f-mono); padding:1px 7px; border-radius:999px; border:1px dashed var(--muted); color:var(--muted);}
+  .need.way{border-style:solid; border-color:var(--s3); color:var(--s3);}
+  .need.on{border-style:solid; border-color:var(--good); background:var(--good); color:var(--ink);}
+  .tbar{height:4px; background:var(--line); border-radius:2px; overflow:hidden;}
+  .tbar i{display:block; height:100%; background:var(--pc, var(--sodium));}
+  .tbar.work i{background:var(--good);}
+
+  .disp{background:var(--card); border:1px solid var(--sodium); border-radius:12px; padding:12px; display:grid; gap:10px;}
+  .disp .quote{font-size:14px; color:var(--muted);}
+  .cand{display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:8px; font-size:14px;}
+  .tag{font:700 11px var(--f-mono); padding:2px 6px; border-radius:5px; background:var(--sc); color:var(--ink); white-space:nowrap;}
+  .eta{font:600 12px var(--f-mono); color:var(--muted); white-space:nowrap;}
+  .sub{font-size:12px; color:var(--muted);}
+
+  .unit{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:3px 10px; align-items:center; padding:8px 10px;
+    background:var(--card); border:1px solid var(--line); border-left:4px solid var(--sc); border-radius:10px; cursor:pointer;}
+  .unit:hover{border-color:var(--muted); border-left-color:var(--sc);}
+  .unit.sel{border-color:var(--sodium); border-left-color:var(--sc);}
+  .unit .nm{font-weight:700;}
+  .unit .st{font:600 11px var(--f-mono); color:var(--sc); white-space:nowrap;}
+  .unit .what{grid-column:1/-1; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .unit .send{font:700 11px var(--f-mono); color:var(--on-sodium); background:var(--sodium); border-radius:5px; padding:1px 6px;}
+
+  /* ---------- mapa ---------- */
+  .mapbox{grid-area:map; position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:var(--ink); min-height:0;}
+  #map{display:block; width:100%; height:100%; cursor:pointer; touch-action:manipulation;}
+  .hints{position:absolute; top:10px; left:50%; transform:translateX(-50%); display:grid; gap:6px; justify-items:center;
+    pointer-events:none; width:min(92%,560px);}
+  .hint{background:color-mix(in srgb, var(--panel) 94%, transparent); border:1px solid var(--line); border-radius:999px;
+    padding:6px 13px; font-size:13px; font-weight:700; text-align:center; animation:hin .2s ease-out;}
+  .hint.good{border-color:var(--good);} .hint.bad{border-color:var(--bad);}
+  @keyframes hin{from{opacity:0; transform:translateY(-6px);}}
+  .legend{position:absolute; left:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:4px 10px; max-width:calc(100% - 20px);
+    background:color-mix(in srgb, var(--panel) 88%, transparent); border:1px solid var(--line); border-radius:8px;
+    padding:5px 9px; font:500 11px var(--f-mono); color:var(--muted); pointer-events:none;}
+  .legend span::before{content:""; display:inline-block; width:8px; height:8px; border-radius:2px; background:var(--sc); margin-right:5px;}
+
+  /* ---------- prekryvné okná ---------- */
+  .overlay{position:absolute; inset:0; z-index:20; display:grid; place-items:center; overflow:auto;
+    background:color-mix(in srgb, var(--ink) 62%, transparent); backdrop-filter:blur(3px);
+    padding-block:16px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));}
+  .sheet{width:100%; max-width:660px; background:var(--panel); border:1px solid var(--line); border-radius:16px;
+    padding:24px; display:grid; gap:18px; box-shadow:0 30px 80px rgba(0,0,0,.5);}
+  .title{margin:0; font:800 clamp(52px, 10vw, 84px)/.88 var(--f-display); text-transform:uppercase; letter-spacing:.03em; text-wrap:balance;}
+  .title b{color:var(--sodium);}
+  .lead{margin:0; font-size:17px; max-width:56ch;}
+  .how{margin:0; padding-left:20px; display:grid; gap:7px; max-width:62ch;}
+  .how li::marker{color:var(--sodium); font-family:var(--f-mono); font-weight:700;}
+  .diffs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+  .diff{text-align:left; padding:13px; border-radius:12px; background:var(--card); border:1px solid var(--line); cursor:pointer;
+    display:grid; gap:4px; align-content:start;}
+  .diff:hover, .diff:focus-visible{border-color:var(--sodium); outline:none;}
+  .diff b{font:800 22px/1 var(--f-display); text-transform:uppercase; letter-spacing:.05em;}
+  .diff span{font-size:13px; color:var(--muted);}
+  .diff em{font:600 11px var(--f-mono); font-style:normal; color:var(--sodium);}
+  .keys{margin:0; font-size:12px; color:var(--muted);}
+  .sumgrid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px;}
+  .sumgrid div{background:var(--card); border-radius:10px; padding:10px 12px;}
+  .sumgrid b{display:block; font:800 28px/1.05 var(--f-display); font-variant-numeric:tabular-nums;}
+  .grade{margin:0; font:800 30px/1 var(--f-display); text-transform:uppercase; letter-spacing:.05em; color:var(--sodium);}
+  .acts{display:flex; gap:8px; flex-wrap:wrap;}
+
+  .mtabs{display:none; grid-area:tabs; gap:6px;}
+  .mtabs .btn{flex:1;}
+  .mtabs .btn.on{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium);}
+
+  @media (max-width:860px){
+    .app{gap:8px; padding-block:8px;
+      grid-template-columns:minmax(0,1fr);
+      grid-template-rows:auto minmax(200px,42%) auto minmax(0,1fr);
+      grid-template-areas:"bar" "map" "tabs" "rail";}
+    .rail-left, .rail-right{grid-area:rail;}
+    .app[data-tab="pult"] .rail-right, .app[data-tab="units"] .rail-left{display:none;}
+    .mtabs{display:flex;}
+    .bar{gap:6px 14px; padding:6px 10px;}
+    .brand{font-size:21px;} .brand small{display:none;}
+    .clock{font-size:28px;} .shift{display:none;}
+    .stat .v{font-size:22px;} .rep{width:90px;}
+    .ctrl .btn{padding:4px 8px;}
+    .diffs, .sumgrid{grid-template-columns:1fr;}
+    .sheet{padding:18px;}
+    .legend{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .call.ring{animation:none;} .hint{animation:none;} .track i{transition:none;}
+  }
+</style>
+<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}</style>
+</head>
+<body>
+
+<div class="app" id="app" data-tab="pult">
+  <header class="bar">
+    <div class="brand">Linka <b>112</b><small id="diffLbl">Nočná zmena</small></div>
+    <div class="clockbox">
+      <div class="clock" id="clock">22:00</div>
+      <div class="shift"><div class="track"><i id="shiftBar"></i></div><div class="k">22:00 → 06:00</div></div>
+    </div>
+    <div class="stat"><div class="k">Skóre</div><div class="v" id="score">0</div></div>
+    <div class="rep" id="repBox"><div class="k">Dôvera <span id="repTxt">100 %</span></div><div class="track"><i id="repBar"></i></div></div>
+    <div class="spacer"></div>
+    <div class="ctrl">
+      <button class="btn sm ghost" data-act="pause" id="btnPause">Pauza</button>
+      <button class="btn sm ghost" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
+      <button class="btn sm ghost" data-act="mute" id="btnMute">Zvuk</button>
+    </div>
+  </header>
+
+  <section class="rail rail-left" id="railL">
+    <div class="sec" id="calls"></div>
+    <div id="dispatch"></div>
+    <div class="sec" id="incs"></div>
+  </section>
+
+  <section class="mapbox" id="mapbox">
+    <canvas id="map" aria-label="Mapa mesta s udalosťami a jednotkami"></canvas>
+    <div class="hints" id="hints"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section class="rail rail-right" id="railR">
+    <div class="sec" id="units"></div>
+  </section>
+
+  <nav class="mtabs" id="mtabs">
+    <button class="btn on" data-act="tab" data-tab="pult" id="tabPult">Hovory a udalosti</button>
+    <button class="btn" data-act="tab" data-tab="units" id="tabUnits">Jednotky</button>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+   Linka 112 — hra na dispečera záchranných zložiek.
+   Nočná zmena 22:00–06:00 (1 sekunda = 1 minúta): zdvíhaš hovory,
+   podľa slov volajúceho určíš druh udalosti a po meste vysielaš
+   záchranky (RZP), hasičov (HaZZ) a políciu (PZ).
+   ============================================================ */
+
+/* ---------- pomocné funkcie ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a+(b-a)*t;
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const pad = n => String(n).padStart(2,'0');
+const REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const rgba = (hex,a) => { const n=parseInt(hex.slice(1),16); return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`; };
+function rng(seed){ return () => { seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15, 1|seed); t=t+Math.imul(t^t>>>7, 61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+/* ---------- mesto ---------- */
+const COLS=15, ROWS=11, RIVER=6;                 // rieka (Dunaj) tečie medzi riadkami 6 a 7
+const BRIDGES={2:'Most Lafranconi', 7:'Starý most', 11:'Prístavný most'};
+const PARKS=[[1,2],[13,2],[4,8]];                // uzly vnútri parkov – tadiaľ cesta nevedie
+const MAIN_H=[3], MAIN_V=[7];                    // hlavné triedy – jazdí sa po nich rýchlejšie
+const MAIN_SPEED=1.35;
+const H_STREETS=['Lesná','Brnianska','Mýtna','Obchodná','Laurinská','Panská','Rázusovo nábrežie','Viedenská cesta','Krasovského','Romanova','Jantárová'];
+const V_STREETS=['Botanická','Karloveská','Lafranconi','Staromestská','Palisády','Kapucínska','Hurbanova','Štúrova','Gorkého','Dunajská','Karadžičova','Košická','Ružinovská','Trnavská','Galvaniho'];
+const DISTRICT_LABELS=[['Karlova Ves',1.5,5.5],['Nové Mesto',6.5,0.5],['Staré Mesto',8.5,4.5],['Ružinov',12.5,5.5],['Petržalka',6.5,9.5],['Lúky',12.5,9.5]];
+const HOSPITALS=[{name:'FN Kramáre',x:3,y:1},{name:'Nemocnica Ružinov',x:12,y:4},{name:'Nemocnica Petržalka',x:6,y:9}];
+const STATIONS=[
+  {id:'R1',name:'RZP 1',kind:'RZP',x:6,y:4,st:'ZZS Staré Mesto'},
+  {id:'R2',name:'RZP 2',kind:'RZP',x:11,y:2,st:'ZZS Ružinov'},
+  {id:'R3',name:'RZP 3',kind:'RZP',x:2,y:8,st:'ZZS Petržalka'},
+  {id:'H1',name:'HaZZ 1',kind:'HAS',x:9,y:2,st:'HaZZ Nové Mesto'},
+  {id:'H2',name:'HaZZ 2',kind:'HAS',x:8,y:9,st:'HaZZ Petržalka'},
+  {id:'PZ1',name:'PZ 1',kind:'PZ',x:4,y:5,st:'OO PZ Staré Mesto'},
+  {id:'PZ2',name:'PZ 2',kind:'PZ',x:12,y:8,st:'OO PZ Lúky'},
+  {id:'R4',name:'RZP 4',kind:'RZP',x:13,y:9,st:'ZZS Lúky',extra:true},
+  {id:'PZ3',name:'PZ 3',kind:'PZ',x:1,y:4,st:'OO PZ Karlova Ves',extra:true},
+];
+const N=COLS*ROWS;
+const nid = (x,y) => y*COLS+x;
+const nx = n => n%COLS, ny = n => (n/COLS)|0;
+const exists = new Array(N).fill(true);
+for(const [x,y] of PARKS) exists[nid(x,y)] = false;
+const adj = Array.from({length:N}, () => []);
+const EDGES = [];
+for(let y=0;y<ROWS;y++) for(let x=0;x<COLS;x++){
+  const a=nid(x,y); if(!exists[a]) continue;
+  if(x+1<COLS && exists[nid(x+1,y)]){ const m=MAIN_H.includes(y); link(a, nid(x+1,y), m, false); }
+  if(y+1<ROWS && exists[nid(x,y+1)] && (y!==RIVER || BRIDGES[x])){ const m=MAIN_V.includes(x); link(a, nid(x,y+1), m, y===RIVER); }
+}
+function link(a,b,main,bridge){ const w=main?1/MAIN_SPEED:1; adj[a].push([b,w]); adj[b].push([a,w]); EDGES.push([a,b,main,bridge]); }
+function dijkstra(src){
+  const d=new Float64Array(N).fill(Infinity), prev=new Int32Array(N).fill(-1), done=new Uint8Array(N);
+  d[src]=0;
+  for(;;){
+    let u=-1, best=Infinity;
+    for(let i=0;i<N;i++) if(!done[i] && d[i]<best){ best=d[i]; u=i; }
+    if(u<0) break;
+    done[u]=1;
+    for(const [v,w] of adj[u]) if(d[u]+w<d[v]){ d[v]=d[u]+w; prev[v]=u; }
+  }
+  return {d, prev};
+}
+/* najkratšia cesta (uzly bez štartu) */
+function shortestPath(from, to){
+  if(from===to) return [];
+  const {prev}=dijkstra(from), p=[];
+  for(let v=to; v!==from && v>=0; v=prev[v]) p.push(v);
+  return p.reverse();
+}
+function districtOf(n){
+  const x=nx(n), y=ny(n);
+  if(y>RIVER) return x<=8 ? 'Petržalka' : 'Lúky';
+  if(x<=3) return 'Karlova Ves';
+  if(x>=11) return 'Ružinov';
+  return y<=2 ? 'Nové Mesto' : 'Staré Mesto';
+}
+function addrOf(n){
+  const x=nx(n), y=ny(n);
+  return Math.random()<.5 ? H_STREETS[y]+' '+(2*x+1+Math.floor(Math.random()*2)) : V_STREETS[x]+' '+(2*y+2+Math.floor(Math.random()*2));
+}
+const isMainSeg = (x1,y1,x2,y2) => (y1===y2 && MAIN_H.includes(y2)) || (x1===x2 && MAIN_V.includes(x2));
+
+/* ---------- hovory a udalosti ---------- */
+const TYPES={
+  med:    {label:'Zdravotná pomoc', key:'1', unit:'RZP'},
+  traffic:{label:'Dopravná nehoda', key:'2', unit:'PZ'},
+  fire:   {label:'Požiar',          key:'3', unit:'HAS'},
+  police: {label:'Polícia',         key:'4', unit:'PZ'},
+  prank:  {label:'Zneužitie linky', key:'5'},
+};
+const TYPE_ORDER=['med','traffic','fire','police','prank'];
+const KINDS={RZP:{label:'Záchranka', speed:1.9}, HAS:{label:'Hasiči', speed:1.55}, PZ:{label:'Polícia', speed:2.15}};
+const STATUS={1:'Voľná',2:'Na základni',3:'Výjazd',4:'Na mieste',5:'Transport',6:'V nemocnici'};
+const BASE_PTS={1:300,2:200,3:120}, REP_OK={1:5,2:3,3:2}, REP_FAIL={1:22,2:15,3:9}, DL_BASE={1:38,2:58,3:85};
+const SHIFT_LEN=480;  // 22:00 → 06:00
+
+/* w = bežná váha, s = váha na Silvestra */
+const TPL=[
+  {type:'med',prio:1,needs:['RZP'],work:10,transport:true,w:7,s:6,texts:[
+    'Môj otec sa zrútil v kuchyni a nedýcha! Prosím, rýchlo!',
+    'Manžel sa chytil za hruď, je celý sivý a spotený.',
+    'Dieťa sa dusí cukríkom, nevie sa nadýchnuť!']},
+  {type:'med',prio:2,needs:['RZP'],work:8,transport:true,w:10,s:7,texts:[
+    'Babka spadla v kúpeľni, nevie sa postaviť a bolí ju bedro.',
+    'Kamarát je opitý a nevieme ho prebudiť, ale dýcha.',
+    'Syn má horúčku štyridsať a teraz dostal kŕče.']},
+  {type:'med',prio:3,needs:['RZP'],work:6,transport:false,w:8,s:5,texts:[
+    'Porezal som sa pri krájaní chleba a stále to krváca.',
+    'Suseda sa cíti slabo, nameral som jej vysoký tlak.']},
+  {type:'traffic',prio:1,needs:['RZP','HAS','PZ'],work:14,transport:true,w:4,s:4,texts:[
+    'Auto narazilo do stĺpa, vodič je zakliesnený a krváca!']},
+  {type:'traffic',prio:2,needs:['RZP','PZ'],work:10,transport:true,w:7,s:6,texts:[
+    'Auto zrazilo cyklistu, je pri vedomí, ale nemôže sa postaviť.',
+    'Motorkár spadol na križovatke a drží sa za nohu.']},
+  {type:'traffic',prio:3,needs:['PZ'],work:7,transport:false,w:7,s:5,texts:[
+    'Ťukli sme do seba, nikto nie je zranený, ale stojíme uprostred križovatky.']},
+  {type:'fire',prio:1,needs:['HAS','RZP'],work:14,transport:true,w:4,s:7,texts:[
+    'Horí byt na treťom poschodí a vo vnútri je ešte suseda!']},
+  {type:'fire',prio:2,needs:['HAS'],work:11,transport:false,w:6,s:10,texts:[
+    'Z pivnice paneláka sa valí hustý dym.',
+    'Horí auto na parkovisku a plamene idú na susedné.',
+    'Od ohňostroja chytila strecha garáže!']},
+  {type:'fire',prio:3,needs:['HAS'],work:7,transport:false,w:7,s:14,texts:[
+    'Pri bytovke horí kontajner.',
+    'Raketa vletela na balkón a horia tam nejaké veci.']},
+  {type:'police',prio:1,needs:['PZ','RZP'],work:12,transport:true,w:4,s:5,texts:[
+    'Pred barom niekto bodol chlapa nožom a útočník uteká!']},
+  {type:'police',prio:2,needs:['PZ'],work:9,transport:false,w:10,s:9,texts:[
+    'Niekto sa vlamuje do auta pod mojím oknom.',
+    'Na zastávke sa bijú dvaja chlapi.']},
+  {type:'police',prio:3,needs:['PZ'],work:6,transport:false,w:10,s:12,texts:[
+    'Susedia majú o druhej ráno hlučnú párty.',
+    'Niekto mi ukradol bicykel spred obchodu.']},
+];
+const MASS={type:'traffic',prio:1,needs:['RZP','RZP','HAS','PZ'],work:18,transport:true,mass:true,node:nid(5,7),
+  texts:['Na Viedenskej ceste sa zrazil autobus s dodávkou! Je tu veľa zranených a niektorí sú zakliesnení!']};
+const MIDNIGHT={type:'med',prio:2,needs:['RZP'],work:8,transport:true,
+  texts:['Kamarátovi vybuchla petarda v ruke, strašne krváca!']};
+const PRANKS=[
+  'Haló, záchranka? Hehe… máte veľmi pekný hlas.',
+  'Dobrý deň, chcel by som si objednať pizzu so šunkou.',
+  'Len skúšam, či to funguje. Ahoj!',
+  'Je tam polícia? Môj kocúr mi zjedol večeru!',
+];
+const DIFFS={
+  easy:  {label:'Pokojná noc', note:'Viac jednotiek a dlhšie limity. Na zoznámenie s linkou.', dl:1.35, ring:22, call:[16,10], prank:.08, extra:true,  mass:false, silvester:false, grade:.8},
+  normal:{label:'Bežná zmena', note:'Bežná noc v meste. Raz za noc príde hromadná nehoda.',     dl:1,    ring:16, call:[12,6.5], prank:.1,  extra:false, mass:true,  silvester:false, grade:1},
+  hard:  {label:'Silvester',   note:'Ohňostroje, petardy a o polnoci záplava hovorov.',          dl:.9,   ring:13, call:[9,5],   prank:.14, extra:false, mass:true,  silvester:true,  grade:1.25},
+};
+
+/* ---------- stav hry ---------- */
+let G=null;
+function makeUnits(extra){
+  return STATIONS.filter(s=>extra || !s.extra).map(s=>({id:s.id, cs:s.id, name:s.name, kind:s.kind, home:nid(s.x,s.y), st:s.st,
+    x:s.x, y:s.y, node:nid(s.x,s.y), path:[], moving:false, status:2, since:0, inc:null, waitUntil:0, hosp:null}));
+}
+function newGame(diff, mode){
+  const D=DIFFS[diff];
+  return {mode, diff, t:0, speed:1, score:0, rep:100, seq:0, cseq:0, calls:[], incs:[], units:makeUnits(D.extra),
+    fx:[], nextCall:3, lastRing:-9, sel:{inc:null, unit:null}, ev:{mass:false, midnight:false},
+    stats:{resolved:0, failed:0, hung:0, pranks:0, wrong:0, rejected:0, wasted:0, resp:[]}};
+}
+const unitById = id => G.units.find(u=>u.id===id);
+const incById  = id => G.incs.find(i=>i.id===id);
+const callById = id => G.calls.find(c=>c.id===id);
+const clockOf = t => { const m=22*60+Math.floor(t); return pad(Math.floor(m/60)%24)+':'+pad(m%60); };
+
+let uiDirty=true;
+const dirty = () => { uiDirty=true; };
+
+/* ---------- zvuk ---------- */
+let AC=null, muted=false;
+function audio(){
+  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
+  if(AC && AC.state==='suspended') AC.resume().catch(()=>{});
+  return AC;
+}
+function tone(freq, dur, type='sine', vol=.1, when=0){
+  if(muted || !AC) return;
+  try{
+    const t=AC.currentTime+when, o=AC.createOscillator(), g=AC.createGain();
+    o.type=type; o.frequency.setValueAtTime(freq,t);
+    g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.015); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+dur+.03);
+  }catch(e){}
+}
+const SND={
+  ring(){ for(let i=0;i<5;i++) tone(i%2?1180:1320,.07,'square',.04,i*.085); },
+  ok(){ tone(660,.12,'sine',.1); tone(880,.12,'sine',.1,.1); tone(1320,.2,'sine',.09,.2); },
+  bad(){ tone(190,.32,'sawtooth',.07); tone(140,.4,'sawtooth',.06,.14); },
+  blip(){ tone(980,.06,'square',.04); },
+};
+
+/* ---------- hlásenia na mape ---------- */
+function say(text, kind){
+  const box=$('#hints'), el=document.createElement('div');
+  el.className='hint'+(kind?' '+kind:''); el.textContent=text;
+  box.prepend(el);
+  while(box.children.length>3) box.lastChild.remove();
+  setTimeout(()=>el.remove(), 3800);
+}
+function fx(node, text, kind){ G.fx.push({x:nx(node), y:ny(node), text, kind, t0:performance.now()}); }
+
+/* ============================================================
+   HERNÁ LOGIKA
+   ============================================================ */
+function setStatus(u, s){ u.status=s; u.since=G.t; dirty(); }
+function routeTo(u, target){
+  const from = u.path.length ? u.path[0] : u.node;
+  const rest = shortestPath(from, target);
+  u.path = u.path.length ? [from, ...rest] : rest;
+  u.moving = u.path.length>0;
+  if(!u.moving) arrived(u);
+}
+function goHome(u){ u.inc=null; setStatus(u,1); routeTo(u, u.home); }
+function moveUnit(u, dt){
+  let rem = KINDS[u.kind].speed * (u.status===1 ? .8 : 1) * dt;
+  while(rem>0 && u.path.length){
+    const n=u.path[0], tx=nx(n), ty=ny(n);
+    const sp = isMainSeg(u.x,u.y,tx,ty) ? MAIN_SPEED : 1;
+    const dx=tx-u.x, dy=ty-u.y, d=Math.hypot(dx,dy), step=rem*sp;
+    if(d<=step){ u.x=tx; u.y=ty; u.node=n; u.path.shift(); rem-=d/sp; }
+    else { u.x+=dx/d*step; u.y+=dy/d*step; rem=0; }
+  }
+  if(u.moving && !u.path.length){ u.moving=false; arrived(u); }
+}
+/* zostávajúci čas jazdy po naplánovanej trase (v sekundách = minútach hry) */
+function etaPath(u){
+  let len=0, px=u.x, py=u.y;
+  for(const n of u.path){ const x=nx(n), y=ny(n); len += Math.hypot(x-px,y-py)/(isMainSeg(px,py,x,y)?MAIN_SPEED:1); px=x; py=y; }
+  return len / (KINDS[u.kind].speed * (u.status===1 ? .8 : 1));
+}
+/* odhad dojazdu k cieľu podľa vzdialeností z dijkstra(cieľ) */
+function etaTo(u, d){
+  const from = u.path.length ? u.path[0] : u.node;
+  return (Math.hypot(nx(from)-u.x, ny(from)-u.y) + d[from]) / KINDS[u.kind].speed;
+}
+function arrived(u){
+  if(u.status===3){
+    const inc=incById(u.inc);
+    if(!inc){ goHome(u); return; }
+    setStatus(u,4);
+    if(inc.prank){ wasted(inc); return; }
+    SND.blip();
+  } else if(u.status===5){
+    setStatus(u,6); u.waitUntil=G.t+4;
+  } else if(u.status===1){
+    setStatus(u,2);
+  }
+}
+const dispatchable = (u, inc) => (u.status===1 || u.status===2 || u.status===3) && u.inc!==inc.id;
+function dispatch(u, inc){
+  if(!u || !inc || G.mode!=='play') return;
+  if(!dispatchable(u, inc)){
+    say(u.inc===inc.id ? u.name+' už ide na túto udalosť.' : u.name+' je teraz obsadená ('+STATUS[u.status].toLowerCase()+').');
+    return;
+  }
+  if(u.inc){ const old=incById(u.inc); if(old) old.units=old.units.filter(x=>x!==u.id); }
+  u.inc=inc.id; if(!inc.units.includes(u.id)) inc.units.push(u.id);
+  setStatus(u,3);
+  routeTo(u, inc.node);
+  SND.blip();
+}
+function needInfo(inc){
+  const need={}, on={}, way={};
+  for(const k of inc.needs) need[k]=(need[k]||0)+1;
+  for(const id of inc.units){
+    const u=unitById(id); if(!u || u.inc!==inc.id) continue;
+    if(u.status===4) on[u.kind]=(on[u.kind]||0)+1; else if(u.status===3) way[u.kind]=(way[u.kind]||0)+1;
+  }
+  const slots=[], missing={};
+  for(const k of Object.keys(need)){
+    const o=Math.min(on[k]||0, need[k]), w=Math.min(way[k]||0, need[k]-o);
+    for(let i=0;i<need[k];i++) slots.push({kind:k, st: i<o ? 'on' : i<o+w ? 'way' : 'miss'});
+    if(need[k]-o-w>0) missing[k]=need[k]-o-w;
+  }
+  return {slots, missing, met:Object.keys(need).every(k=>(on[k]||0)>=need[k])};
+}
+function candidates(inc){
+  const {d}=dijkstra(inc.node), kinds=new Set(inc.needs);
+  return G.units.filter(u=>kinds.has(u.kind) && dispatchable(u, inc))
+    .map(u=>({u, eta:etaTo(u, d), free:u.status!==3}))
+    .sort((a,b)=>(b.free-a.free) || a.eta-b.eta);
+}
+function recommended(inc){
+  const {missing}=needInfo(inc), out=[];
+  for(const c of candidates(inc)){
+    if(!c.free || !missing[c.u.kind]) continue;
+    missing[c.u.kind]--; out.push(c);
+  }
+  return out;
+}
+function sendRecommended(inc){
+  const rec=recommended(inc);
+  if(!rec.length){ say(needInfo(inc).met || !Object.keys(needInfo(inc).missing).length ? 'Všetky potrebné jednotky sú už na ceste.' : 'Žiadna vhodná voľná jednotka. Presmeruj inú alebo počkaj.'); return; }
+  for(const c of rec) dispatch(c.u, inc);
+}
+
+/* ---------- hovory ---------- */
+function freeNode(){
+  const busy=new Set([...G.incs.map(i=>i.node), ...G.calls.map(c=>c.node)]);
+  const free=[]; for(let n=0;n<N;n++) if(exists[n] && !busy.has(n)) free.push(n);
+  return pick(free);
+}
+function weighted(list, key){
+  let sum=0; for(const t of list) sum+=t[key];
+  let r=Math.random()*sum;
+  for(const t of list){ r-=t[key]; if(r<=0) return t; }
+  return list[list.length-1];
+}
+function spawnCall(tpl){
+  const D=DIFFS[G.diff];
+  let prank=false;
+  if(!tpl){ if(Math.random()<D.prank) prank=true; else tpl=weighted(TPL, D.silvester?'s':'w'); }
+  const node = tpl && tpl.node!=null ? tpl.node : freeNode();
+  G.calls.push({id:'C'+(++G.cseq), tpl, prank, text: prank ? pick(PRANKS) : pick(tpl.texts),
+    node, addr: tpl && tpl.mass ? 'Viedenská cesta 11' : addrOf(node), district:districtOf(node),
+    t0:G.t, state:'ring', talkAt:0});
+  SND.ring(); G.lastRing=G.t;
+  if(window.innerWidth<=860) setTab('pult');
+  dirty();
+}
+function answer(c){
+  if(!c || c.state!=='ring' || G.mode!=='play') return;
+  if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
+  c.state='talk'; c.talkAt=G.t;
+  if(G.t-c.t0<5) G.score+=10;   // rýchlo zdvihnutý hovor
+  dirty();
+}
+function dropCall(c){ G.calls=G.calls.filter(x=>x!==c); dirty(); }
+function classify(c, type){
+  if(!c || c.state!=='talk' || G.mode!=='play') return;
+  if(c.prank){
+    if(type==='prank'){ G.score+=40; G.stats.pranks++; say('Zneužitie linky odhalené. Linka je voľná pre skutočné tiesne. +40', 'good'); dropCall(c); }
+    else { createIncident(c, type); dropCall(c); }   // hráč uveril – jednotky prídu nadarmo
+    return;
+  }
+  if(type===c.tpl.type){ G.score+=25; createIncident(c, type); dropCall(c); return; }
+  if(type==='prank'){
+    G.rep-=15; G.stats.rejected++; SND.bad();
+    say('Bol to skutočný hovor! Volajúci ostal bez pomoci. −15 dôvery', 'bad');
+    dropCall(c); checkRep(); return;
+  }
+  G.score-=20; G.rep-=3; G.stats.wrong++;
+  say('Nesedí to – vypočuj si volajúceho ešte raz. −20', 'bad');
+  const el=document.querySelector('.call.talk');
+  if(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
+  checkRep();
+}
+function createIncident(c, type){
+  const tpl=c.tpl, prank=c.prank, prio=prank?3:tpl.prio;
+  const needs = prank ? [TYPES[type].unit] : tpl.needs.slice();
+  const dl = (DL_BASE[prio] + 8*(needs.length-1)) * DIFFS[G.diff].dl * (tpl && tpl.mass ? 1.4 : 1);
+  const inc={id:'I'+(++G.seq), no:G.seq, type, prio, needs, work: prank ? 5 : tpl.work, transport: !prank && !!tpl.transport,
+    mass: !!(tpl && tpl.mass), prank, node:c.node, addr:c.addr, district:c.district, text:c.text,
+    created:G.t, deadline:G.t+dl, progress:0, metAt:0, frac:0, units:[]};
+  G.incs.push(inc);
+  select(inc.id);
+  SND.blip();
+}
+function select(id){ G.sel.inc=id; G.sel.unit=null; if(window.innerWidth<=860) setTab('pult'); dirty(); }
+
+/* ---------- výsledky zásahov ---------- */
+function removeInc(inc){ G.incs=G.incs.filter(x=>x!==inc); if(G.sel.inc===inc.id) G.sel.inc=null; dirty(); }
+function releaseUnits(inc, keep){
+  for(const id of inc.units){ const u=unitById(id); if(u && u!==keep && u.inc===inc.id) goHome(u); }
+}
+function nearestHospital(node){
+  const {d}=dijkstra(node);
+  return HOSPITALS.reduce((a,h)=>d[nid(h.x,h.y)]<d[nid(a.x,a.y)] ? h : a);
+}
+function resolve(inc){
+  const pts=Math.round(BASE_PTS[inc.prio]*(.5+.5*inc.frac)*(inc.mass?2:1));
+  G.score+=pts; G.rep=Math.min(100, G.rep+REP_OK[inc.prio]);
+  G.stats.resolved++; G.stats.resp.push(inc.metAt-inc.created);
+  fx(inc.node, '+'+pts, 'good');
+  let tr=null;
+  if(inc.transport) tr=inc.units.map(unitById).find(u=>u && u.kind==='RZP' && u.inc===inc.id && u.status===4) || null;
+  releaseUnits(inc, tr);
+  if(tr){ const h=nearestHospital(inc.node); tr.inc=null; tr.hosp=h.name; setStatus(tr,5); routeTo(tr, nid(h.x,h.y)); }
+  removeInc(inc);
+  SND.ok();
+}
+function fail(inc){
+  if(inc.prank){ say('#'+inc.no+': ukázalo sa, že hovor bol zneužitie linky.'); releaseUnits(inc); removeInc(inc); return; }
+  G.rep-=REP_FAIL[inc.prio]; G.stats.failed++;
+  fx(inc.node, 'Neskoro', 'bad');
+  say('#'+inc.no+' '+TYPES[inc.type].label+': pomoc neprišla včas. −'+REP_FAIL[inc.prio]+' dôvery', 'bad');
+  releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
+}
+function wasted(inc){
+  G.score-=40; G.rep-=5; G.stats.wasted++;
+  fx(inc.node, 'Planý výjazd', 'bad');
+  say('Na mieste nikto nie je – hovor bol zneužitie linky. −40', 'bad');
+  releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
+}
+function checkRep(){ if(G.rep<=0){ G.rep=0; endGame(false); } dirty(); }
+
+/* ---------- krok simulácie ---------- */
+function step(dt){
+  const D=DIFFS[G.diff];
+  G.t+=dt;
+  const prog=clamp(G.t/SHIFT_LEN,0,1);
+  if(G.t>=G.nextCall){
+    spawnCall();
+    const base=lerp(D.call[0], D.call[1], prog);
+    G.nextCall = G.t + base*(.7+Math.random()*.6);
+  }
+  if(D.mass && !G.ev.mass && G.t>=SHIFT_LEN*.45){ G.ev.mass=true; spawnCall(MASS); say('Hromadná nehoda! Bude treba viac jednotiek naraz.', 'bad'); }
+  if(D.silvester && !G.ev.midnight && G.t>=120){
+    G.ev.midnight=true; say('Polnoc! Ohňostroje a petardy – linka sa rozozvučí.', 'bad');
+    spawnCall(MIDNIGHT); spawnCall(TPL[8]); spawnCall(TPL[11]);
+  }
+  for(const c of [...G.calls]){
+    if(c.state==='ring' && G.t-c.t0>D.ring){
+      dropCall(c);
+      if(!c.prank){ G.rep-=8; G.stats.hung++; say('Volajúci zložil – nikto nezdvihol. −8 dôvery', 'bad'); SND.bad(); checkRep(); }
+    } else if(c.state==='talk' && G.t-c.talkAt>30){
+      dropCall(c);
+      if(!c.prank){ G.rep-=5; G.stats.hung++; say('Volajúci to vzdal – hovor trval príliš dlho. −5 dôvery', 'bad'); checkRep(); }
+    }
+  }
+  if(G.mode!=='play') return;
+  if(G.calls.some(c=>c.state==='ring') && G.t-G.lastRing>3){ SND.ring(); G.lastRing=G.t; }
+  for(const u of G.units){
+    if(u.moving) moveUnit(u, dt);
+    if(u.status===6 && G.t>=u.waitUntil){ u.hosp=null; goHome(u); }
+  }
+  for(const inc of [...G.incs]){
+    const info=needInfo(inc);
+    if(info.met){
+      if(!inc.metAt){ inc.metAt=G.t; inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); dirty(); }
+      inc.progress+=dt;
+      if(inc.progress>=inc.work) resolve(inc);
+    } else if(!inc.metAt && G.t>inc.deadline) fail(inc);
+    if(G.mode!=='play') return;
+  }
+  if(G.t>=SHIFT_LEN) endGame(true);
+}
+
+/* ============================================================
+   MAPA (canvas)
+   ============================================================ */
+const cv=$('#map'), cx=cv.getContext('2d');
+let W=0, H=0, DPR=1, SC=30, OX=0, OY=0, staticLayer=null, C={};
+const F_DISPLAY='"Big Shoulders Display","Arial Narrow",Impact,sans-serif';
+const F_MONO='"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
+const sx = x => OX+x*SC, sy = y => OY+y*SC;
+const hit={units:[], incs:[]};
+function readColors(){
+  for(const k of ['ink','panel','card','line','text','muted','sodium','good','bad','p1','p2','p3','s1','s2','s3','s4','s5','s6','river','road','bridge','block','park','tree','hosp'])
+    C[k]=tok('--'+k);
+}
+const statusColor = s => C['s'+s] || C.muted;
+function resize(){
+  const r=cv.parentElement.getBoundingClientRect();
+  if(!r.width || !r.height) return;
+  DPR=Math.min(2, window.devicePixelRatio||1); W=r.width; H=r.height;
+  cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+  const padX=Math.max(26, W*.05), padY=Math.max(30, H*.07);
+  SC=Math.min((W-2*padX)/(COLS-1), (H-2*padY)/(ROWS-1));
+  OX=(W-SC*(COLS-1))/2; OY=(H-SC*(ROWS-1))/2;
+  drawStatic();
+}
+function rr(g,x,y,w,h,r){ g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); }
+const parkBlock = (x,y) => PARKS.some(([px,py]) => (x===px-1||x===px) && (y===py-1||y===py));
+function drawStatic(){
+  if(!W) return;
+  const off=document.createElement('canvas'); off.width=cv.width; off.height=cv.height;
+  const g=off.getContext('2d'); g.setTransform(DPR,0,0,DPR,0,0);
+  const R=rng(112);
+  g.fillStyle=C.ink; g.fillRect(0,0,W,H);
+  /* bloky domov s rozsvietenými oknami (mesto pokračuje až k okrajom) */
+  const bx0=Math.floor(-OX/SC)-1, bx1=Math.ceil((W-OX)/SC)+1, by0=Math.floor(-OY/SC)-1, by1=Math.ceil((H-OY)/SC)+1;
+  for(let y=by0;y<by1;y++) for(let x=bx0;x<bx1;x++){
+    if(y===RIVER) continue;
+    const inside=x>=0 && x<COLS-1 && y>=0 && y<ROWS-1, park=inside && parkBlock(x,y);
+    const px=sx(x)+SC*.13, py=sy(y)+SC*.13, s=SC*.74;
+    g.globalAlpha=inside ? 1 : .5;
+    g.fillStyle=park ? C.park : C.block; rr(g,px,py,s,s,SC*.08); g.fill();
+    if(park){
+      g.fillStyle=C.tree;
+      for(let i=0;i<8;i++){ g.beginPath(); g.arc(px+s*(.15+R()*.7), py+s*(.15+R()*.7), SC*(.05+R()*.05), 0, 7); g.fill(); }
+    } else {
+      const n=2+Math.floor(R()*7), w=Math.max(1.5, SC*.045);
+      for(let i=0;i<n;i++){ g.fillStyle=rgba(C.sodium, .14+R()*.5); g.fillRect(px+s*(.1+R()*.78), py+s*(.1+R()*.78), w, w*1.3); }
+    }
+  }
+  g.globalAlpha=1;
+  /* Dunaj */
+  const ry0=sy(RIVER)+SC*.12, ry1=sy(RIVER+1)-SC*.12;
+  g.fillStyle=C.river; g.fillRect(0,ry0,W,ry1-ry0);
+  g.strokeStyle=rgba(C.text,.07); g.lineWidth=1;
+  for(let i=0;i<Math.round(W/22);i++){ const wx=R()*W, wy=ry0+(ry1-ry0)*(.2+R()*.6); g.beginPath(); g.moveTo(wx,wy); g.quadraticCurveTo(wx+7,wy-3,wx+14,wy); g.stroke(); }
+  g.save(); g.font=`600 ${Math.max(10,SC*.32)}px ${F_DISPLAY}`; g.fillStyle=rgba(C.text,.22); g.textBaseline='middle';
+  if('letterSpacing' in g) g.letterSpacing='6px';
+  g.textAlign='center'; g.fillText('DUNAJ', sx(9.6), (ry0+ry1)/2); g.restore();
+  /* cesty */
+  g.lineCap='round';
+  const line=(x1,y1,x2,y2)=>{ g.beginPath(); g.moveTo(sx(x1),sy(y1)); g.lineTo(sx(x2),sy(y2)); g.stroke(); };
+  g.strokeStyle=C.road; g.lineWidth=Math.max(3,SC*.17); g.globalAlpha=.5;
+  for(let x=0;x<COLS;x++){ if(exists[nid(x,0)]) line(x,0,x,-3); if(exists[nid(x,ROWS-1)]) line(x,ROWS-1,x,ROWS+2); }
+  for(let y=0;y<ROWS;y++){ if(exists[nid(0,y)]) line(0,y,-3,y); if(exists[nid(COLS-1,y)]) line(COLS-1,y,COLS+2,y); }
+  g.globalAlpha=1;
+  for(const [a,b,main] of EDGES) if(main){ g.strokeStyle=rgba(C.sodium,.09); g.lineWidth=SC*.6; line(nx(a),ny(a),nx(b),ny(b)); }
+  for(const [a,b,main,bridge] of EDGES){
+    g.strokeStyle=bridge ? C.bridge : C.road; g.lineWidth=main ? Math.max(4,SC*.24) : Math.max(3,SC*.17);
+    line(nx(a),ny(a),nx(b),ny(b));
+  }
+  g.setLineDash([4,6]); g.lineWidth=1; g.strokeStyle=rgba(C.sodium,.38);
+  for(const [a,b,main] of EDGES) if(main) line(nx(a),ny(a),nx(b),ny(b));
+  g.setLineDash([]);
+  /* mosty – zábradlie a názov */
+  g.font=`500 ${Math.max(9,SC*.22)}px ${F_MONO}`; g.textBaseline='middle';
+  for(const x in BRIDGES){
+    const X=sx(+x), off2=Math.max(4,SC*.17);
+    g.strokeStyle=rgba(C.text,.3); g.lineWidth=1;
+    g.beginPath(); g.moveTo(X-off2, ry0); g.lineTo(X-off2, ry1); g.moveTo(X+off2, ry0); g.lineTo(X+off2, ry1); g.stroke();
+    if(SC>=34){ g.fillStyle=rgba(C.text,.35); g.fillText(BRIDGES[x], X+off2+5, (ry0+ry1)/2); }
+  }
+  /* názvy štvrtí */
+  g.save(); g.textAlign='center'; g.textBaseline='middle'; g.fillStyle=rgba(C.text,.17);
+  g.font=`800 ${Math.max(11,SC*.4)}px ${F_DISPLAY}`; if('letterSpacing' in g) g.letterSpacing='3px';
+  for(const [name,x,y] of DISTRICT_LABELS) g.fillText(name.toUpperCase(), sx(x), sy(y));
+  g.restore();
+  /* nemocnice */
+  const hs=Math.max(14,SC*.42);
+  for(const h of HOSPITALS){
+    const X=sx(h.x)+SC*.3, Y=sy(h.y)-SC*.3;
+    g.fillStyle=C.hosp; rr(g,X-hs/2,Y-hs/2,hs,hs,3); g.fill();
+    g.fillStyle=C.bad; g.font=`800 ${hs*.8}px ${F_DISPLAY}`; g.textAlign='center'; g.textBaseline='middle'; g.fillText('H',X,Y+1);
+  }
+  /* základne */
+  g.font=`700 ${Math.max(8,SC*.2)}px ${F_MONO}`; g.textAlign='center'; g.textBaseline='middle';
+  const lab={RZP:'ZZS',HAS:'HaZZ',PZ:'PZ'};
+  for(const s of STATIONS){
+    const X=sx(s.x)-SC*.3, Y=sy(s.y)-SC*.3, t=lab[s.kind], w=g.measureText(t).width+8, h=Math.max(12,SC*.32);
+    g.fillStyle=C.card; rr(g,X-w/2,Y-h/2,w,h,3); g.fill();
+    g.strokeStyle=C.line; g.lineWidth=1; g.stroke();
+    g.fillStyle=C.muted; g.fillText(t,X,Y+.5);
+  }
+  staticLayer=off;
+}
+function glyph(type, X, Y, r){
+  cx.fillStyle=C.ink; cx.strokeStyle=C.ink;
+  if(type==='med'){
+    const a=r*.95, b=r*.32; cx.fillRect(X-a/2,Y-b/2,a,b); cx.fillRect(X-b/2,Y-a/2,b,a);
+  } else if(type==='fire'){
+    cx.beginPath(); cx.moveTo(X,Y-r*.62);
+    cx.bezierCurveTo(X+r*.55,Y-r*.1, X+r*.45,Y+r*.55, X,Y+r*.55);
+    cx.bezierCurveTo(X-r*.45,Y+r*.55, X-r*.55,Y-r*.05, X-r*.12,Y-r*.25);
+    cx.quadraticCurveTo(X-r*.05,Y, X,Y-r*.62); cx.fill();
+  } else if(type==='traffic'){
+    rr(cx,X-r*.55,Y-r*.18,r*1.1,r*.42,r*.1); cx.fill();
+    rr(cx,X-r*.32,Y-r*.42,r*.64,r*.3,r*.1); cx.fill();
+    cx.beginPath(); cx.arc(X-r*.3,Y+r*.27,r*.14,0,7); cx.arc(X+r*.3,Y+r*.27,r*.14,0,7); cx.fill();
+  } else if(type==='police'){
+    cx.beginPath();
+    for(let i=0;i<10;i++){ const a=-Math.PI/2+i*Math.PI/5, rad=i%2 ? r*.28 : r*.62; cx.lineTo(X+Math.cos(a)*rad, Y+Math.sin(a)*rad); }
+    cx.closePath(); cx.fill();
+  } else {
+    cx.font=`800 ${r*1.3}px ${F_DISPLAY}`; cx.textAlign='center'; cx.textBaseline='middle'; cx.fillText('!',X,Y+1);
+  }
+}
+function draw(now){
+  if(!staticLayer || !G) return;
+  cx.setTransform(1,0,0,1,0,0); cx.drawImage(staticLayer,0,0);
+  cx.setTransform(DPR,0,0,DPR,0,0);
+  hit.units=[]; hit.incs=[];
+  const pulse=REDUCED ? 0 : (now/1400)%1;
+  /* trasy */
+  cx.lineWidth=2; cx.setLineDash([5,6]);
+  for(const u of G.units) if(u.path.length){
+    const rel=G.sel.inc && u.inc===G.sel.inc;
+    cx.strokeStyle=rgba(statusColor(u.status), rel ? .95 : .4);
+    cx.beginPath(); cx.moveTo(sx(u.x),sy(u.y)); for(const n of u.path) cx.lineTo(sx(nx(n)),sy(ny(n))); cx.stroke();
+  }
+  cx.setLineDash([]);
+  /* udalosti */
+  const r=Math.max(10, SC*.3);
+  for(const inc of G.incs){
+    const X=sx(nx(inc.node)), Y=sy(ny(inc.node)), col=C['p'+inc.prio];
+    if(pulse){ cx.strokeStyle=rgba(col,.6*(1-pulse)); cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+pulse*r*1.3,0,7); cx.stroke(); }
+    const frac = inc.metAt ? clamp(inc.progress/inc.work,0,1) : clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1);
+    cx.lineWidth=3; cx.strokeStyle=rgba(C.text,.14); cx.beginPath(); cx.arc(X,Y,r+5,0,7); cx.stroke();
+    cx.strokeStyle=inc.metAt ? C.good : col; cx.beginPath(); cx.arc(X,Y,r+5,-Math.PI/2,-Math.PI/2+frac*Math.PI*2); cx.stroke();
+    cx.fillStyle=col; cx.beginPath(); cx.arc(X,Y,r,0,7); cx.fill();
+    glyph(inc.mass ? 'mass' : inc.type, X, Y, r);
+    if(G.sel.inc===inc.id){ cx.setLineDash([4,4]); cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.beginPath(); cx.arc(X,Y,r+11,0,7); cx.stroke(); cx.setLineDash([]); }
+    cx.font=`700 10px ${F_MONO}`; cx.textAlign='center'; cx.textBaseline='alphabetic'; cx.fillStyle=C.text;
+    cx.fillText('#'+inc.no, X, Y-r-10);
+    hit.incs.push({id:inc.id, X, Y, r:r+10});
+  }
+  /* jednotky */
+  const stack=new Map();
+  cx.font=`700 11px ${F_MONO}`; cx.textBaseline='middle';
+  for(const u of G.units){
+    let X=sx(u.x), Y=sy(u.y);
+    if(!u.moving){ const i=stack.get(u.node)||0; stack.set(u.node,i+1); Y+=(G.incs.some(c=>c.node===u.node) ? r+14 : 12)+i*18; }
+    const w=cx.measureText(u.cs).width+12, h=16;
+    cx.fillStyle=statusColor(u.status); rr(cx,X-w/2,Y-h/2,w,h,4); cx.fill();
+    if(G.sel.unit===u.id){ cx.strokeStyle=C.sodium; cx.lineWidth=2; cx.stroke(); }
+    cx.fillStyle=C.ink; cx.textAlign='center'; cx.fillText(u.cs, X, Y+.5);
+    if((u.status===3 || u.status===5) && u.moving){
+      const on=REDUCED ? true : Math.floor(now/180)%2===0;
+      cx.fillStyle=on ? C.s6 : C.bad; cx.beginPath(); cx.arc(X+w/2-1, Y-h/2+1, 3, 0, 7); cx.fill();
+    }
+    hit.units.push({id:u.id, x:X-w/2-3, y:Y-h/2-3, w:w+6, h:h+6});
+  }
+  /* body a hlásenia priamo na mape */
+  G.fx=G.fx.filter(f=>now-f.t0<1600);
+  cx.font=`800 ${Math.max(16,SC*.5)}px ${F_DISPLAY}`; cx.textAlign='center'; cx.textBaseline='middle';
+  for(const f of G.fx){
+    const k=(now-f.t0)/1600;
+    cx.globalAlpha=1-k; cx.fillStyle=f.kind==='good' ? C.good : C.bad;
+    cx.fillText(f.text, sx(f.x), sy(f.y)-r-18-k*26);
+  }
+  cx.globalAlpha=1;
+}
+
+/* ============================================================
+   PANELY
+   ============================================================ */
+const needChips = inc => needInfo(inc).slots.map(s=>`<span class="need ${s.st}">${s.kind}</span>`).join('');
+const fmtMin = s => Math.max(0, Math.ceil(s))+' min';
+function renderCalls(){
+  const talk=G.calls.find(c=>c.state==='talk'), ring=G.calls.filter(c=>c.state==='ring');
+  let h=`<h2>Hovory <span class="count">${G.calls.length}</span></h2>`;
+  if(talk){
+    h+=`<div class="call talk">
+      <div class="row"><span class="lbl grow">Na linke</span><span class="timer" data-to="${talk.talkAt+30}" data-txt="1"></span></div>
+      <p class="quote">${esc(talk.text)}</p>
+      <div class="addr">Miesto: ${esc(talk.addr)}, ${esc(talk.district)}</div>
+      <div class="cls">${TYPE_ORDER.map(t=>`<button class="btn" data-act="cls" data-id="${talk.id}" data-type="${t}" style="--tc:var(--t-${t})"><kbd>${TYPES[t].key}</kbd>${TYPES[t].label}</button>`).join('')}</div>
+    </div>`;
+  }
+  for(const c of ring){
+    h+=`<div class="call ring">
+      <div class="row"><span class="lbl grow">Prichádzajúci hovor</span><span class="addr">${esc(c.district)}</span></div>
+      <div class="tbar"><i data-from="${c.t0}" data-to="${c.t0+DIFFS[G.diff].ring}"></i></div>
+      <button class="btn go" data-act="answer" data-id="${c.id}" ${talk?'disabled':''}>${talk?'Čaká na linke':'Prijať hovor'} <kbd>A</kbd></button>
+    </div>`;
+  }
+  if(!G.calls.length) h+=`<p class="empty">Linka je tichá. Ďalší hovor môže prísť každú chvíľu.</p>`;
+  $('#calls').innerHTML=h;
+}
+function renderDispatch(){
+  const box=$('#dispatch'), inc=incById(G.sel.inc);
+  if(!inc){ box.innerHTML=''; return; }
+  const info=needInfo(inc), cands=candidates(inc), rec=recommended(inc);
+  const recIds=new Set(rec.map(c=>c.u.id));
+  const rows=cands.slice(0,6).map(c=>{
+    const other=c.u.inc ? incById(c.u.inc) : null;
+    return `<div class="cand">
+      <span class="tag" style="--sc:${statusColor(c.u.status)}">${esc(c.u.cs)}</span>
+      <span class="ttl">${esc(c.u.name)}${other?` <span class="sub">· presmerovať z #${other.no}</span>`:''}${recIds.has(c.u.id)?' <span class="sub">· odporúčaná</span>':''}</span>
+      <span class="eta">${fmtMin(c.eta)}</span>
+      <button class="btn sm${recIds.has(c.u.id)?' go':''}" data-act="send" data-id="${inc.id}" data-unit="${c.u.id}">Vyslať</button>
+    </div>`;
+  }).join('');
+  box.innerHTML=`<div class="disp" style="--pc:var(--p${inc.prio})">
+    <div class="row"><span class="prio">P${inc.prio}</span><span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
+      ${inc.metAt ? `<span class="timer">zásah</span>` : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}
+      <button class="btn sm ghost" data-act="desel" aria-label="Zavrieť">✕</button></div>
+    <div class="addr">${esc(inc.addr)}, ${esc(inc.district)}</div>
+    <p class="quote">${esc(inc.text)}</p>
+    <div class="row"><span class="k">Potrebné</span><div class="needs">${needChips(inc)}</div></div>
+    ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : ''}
+    ${rows || `<p class="empty">${info.met ? 'Všetky potrebné jednotky sú na mieste.' : 'Žiadna vhodná jednotka nie je voľná.'}</p>`}
+    ${rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>`
+      : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú jednotku. Jednotku môžeš vyslať aj ťuknutím na mapu.</p>` : ''}
+  </div>`;
+}
+function renderIncs(){
+  const list=[...G.incs].sort((a,b)=>(a.metAt?1:0)-(b.metAt?1:0) || a.deadline-b.deadline);
+  let h=`<h2>Udalosti <span class="count">${list.length}</span></h2>`;
+  if(!list.length) h+=`<p class="empty">Žiadna otvorená udalosť. Udalosť vznikne, keď správne určíš druh hovoru.</p>`;
+  for(const inc of list){
+    h+=`<div class="inc${G.sel.inc===inc.id?' sel':''}" style="--pc:var(--p${inc.prio})" data-act="inc" data-id="${inc.id}">
+      <div class="row"><span class="prio">P${inc.prio}</span><span class="ttl grow">#${inc.no} ${TYPES[inc.type].label}</span>
+        ${inc.metAt ? '<span class="timer">zásah</span>' : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}</div>
+      <div class="addr">${esc(inc.addr)}, ${esc(inc.district)}</div>
+      <div class="needs">${needChips(inc)}</div>
+      ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : `<div class="tbar"><i data-from="${inc.created}" data-to="${inc.deadline}"></i></div>`}
+    </div>`;
+  }
+  $('#incs').innerHTML=h;
+}
+function unitWhat(u){
+  const inc=u.inc ? incById(u.inc) : null;
+  if(u.status===3 && inc) return `→ #${inc.no} ${TYPES[inc.type].label} · ${fmtMin(etaPath(u))}`;
+  if(u.status===4 && inc) return `zasahuje na #${inc.no}, ${inc.addr}`;
+  if(u.status===5) return `vezie pacienta: ${u.hosp} · ${fmtMin(etaPath(u))}`;
+  if(u.status===6) return `odovzdáva pacienta: ${u.hosp}`;
+  if(u.status===1) return `vracia sa na základňu · ${fmtMin(etaPath(u))}`;
+  return u.st;
+}
+function renderUnits(){
+  const sel=incById(G.sel.inc), kinds=sel ? new Set(sel.needs) : null;
+  let h=`<h2>Jednotky <span class="count">${G.units.filter(u=>u.status<=2).length} voľné</span></h2>`;
+  for(const u of G.units){
+    const can=sel && kinds.has(u.kind) && dispatchable(u, sel);
+    h+=`<div class="unit${G.sel.unit===u.id?' sel':''}" style="--sc:${statusColor(u.status)}" data-act="unit" data-id="${u.id}">
+      <span class="tag">${esc(u.cs)}</span>
+      <span class="nm">${esc(u.name)} <span class="sub">${KINDS[u.kind].label}</span></span>
+      ${can ? '<span class="send">Vyslať</span>' : `<span class="st">${u.status} ${STATUS[u.status]}</span>`}
+      <span class="what">${esc(unitWhat(u))}</span>
+    </div>`;
+  }
+  $('#units').innerHTML=h;
+}
+function renderUI(){
+  renderCalls(); renderDispatch(); renderIncs(); renderUnits();
+  const ring=G.calls.filter(c=>c.state==='ring').length + G.calls.filter(c=>c.state==='talk').length;
+  $('#tabPult').textContent=`Hovory ${ring} · Udalosti ${G.incs.length}`;
+}
+/* časomiery a pásy sa obnovujú každý snímok bez prekresľovania panelov */
+let lastScore=null, lastRep=null;
+function updateTimers(){
+  $('#clock').textContent=clockOf(Math.min(G.t, SHIFT_LEN));
+  $('#shiftBar').style.width=(clamp(G.t/SHIFT_LEN,0,1)*100)+'%';
+  if(G.score!==lastScore){ lastScore=G.score; $('#score').textContent=G.score; }
+  const rep=Math.max(0,Math.round(G.rep));
+  if(rep!==lastRep){ lastRep=rep; $('#repBar').style.width=rep+'%'; $('#repTxt').textContent=rep+' %'; $('#repBox').classList.toggle('low', rep<35); }
+  for(const el of document.querySelectorAll('[data-to]')){
+    const to=+el.dataset.to;
+    if(el.dataset.txt) el.textContent=fmtMin(to-G.t);
+    else { const from=+el.dataset.from; el.style.width=(clamp((to-G.t)/(to-from),0,1)*100)+'%'; }
+  }
+  for(const el of document.querySelectorAll('[data-work]')){
+    const inc=incById(el.dataset.work); if(inc) el.style.width=(clamp(inc.progress/inc.work,0,1)*100)+'%';
+  }
+}
+
+/* ---------- prekryvné okná: úvod, pauza, koniec zmeny ---------- */
+function loadBest(){ try{ return JSON.parse(localStorage.getItem('linka112-best')||'{}') || {}; }catch(e){ return {}; } }
+function saveBest(b){ try{ localStorage.setItem('linka112-best', JSON.stringify(b)); }catch(e){} }
+function showMenu(){
+  const best=loadBest();
+  const ov=$('#overlay'); ov.hidden=false;
+  ov.innerHTML=`<div class="sheet">
+    <h1 class="title">Linka <b>112</b></h1>
+    <p class="lead">Nočná zmena na dispečingu integrovaného záchranného systému. Od desiatej večer do šiestej ráno zdvíhaš tiesňové volania a posielaš pomoc po meste.</p>
+    <ol class="how">
+      <li>Zdvihni zvoniaci hovor a podľa slov volajúceho urči, o čo ide. Zneužitie linky odmietni.</li>
+      <li>Na mape sa objaví udalosť. Vyšli jednotky, ktoré potrebuje: záchranku (RZP), hasičov (HaZZ) alebo políciu (PZ).</li>
+      <li>Keď sú všetky potrebné jednotky na mieste, zásah sa dokončí. Čím skôr dorazia, tým viac bodov.</li>
+      <li>Keď pomoc nepríde včas alebo volajúci zloží, klesá dôvera. Pri nule ťa vedúci vystrieda.</li>
+    </ol>
+    <div class="diffs">${Object.entries(DIFFS).map(([k,d])=>`<button class="diff" data-act="start" data-diff="${k}">
+      <b>${d.label}</b><span>${d.note}</span><em>${best[k] ? 'Rekord '+best[k]+' b.' : 'Zatiaľ bez rekordu'}</em></button>`).join('')}</div>
+    <p class="keys">Klávesy: <kbd>A</kbd> prijať hovor · <kbd>1</kbd>–<kbd>5</kbd> druh udalosti · <kbd>Enter</kbd> vyslať odporúčané · <kbd>Medzerník</kbd> pauza · <kbd>Esc</kbd> zrušiť výber</p>
+  </div>`;
+}
+function showPause(){
+  const ov=$('#overlay'); ov.hidden=false;
+  ov.innerHTML=`<div class="sheet" style="max-width:420px">
+    <h2 class="grade">Pauza</h2>
+    <p class="lead">Hodiny stoja na ${clockOf(G.t)}. Volajúci počkajú.</p>
+    <div class="acts"><button class="btn go" data-act="resume">Pokračovať</button><button class="btn" data-act="quit">Ukončiť zmenu</button></div>
+  </div>`;
+}
+function gradeOf(score){
+  const k=DIFFS[G.diff].grade;
+  if(score>=8000*k) return 'Legenda linky 112';
+  if(score>=5500*k) return 'Starší dispečer';
+  if(score>=3200*k) return 'Dispečer';
+  if(score>=1500*k) return 'Nováčik na linke';
+  return 'Na zaškolenie';
+}
+function endGame(complete){
+  if(G.mode==='over') return;
+  G.mode='over';
+  const s=G.stats, best=loadBest(), prev=best[G.diff]||0;
+  if(G.score>prev){ best[G.diff]=G.score; saveBest(best); }
+  const avg=s.resp.length ? Math.round(s.resp.reduce((a,b)=>a+b,0)/s.resp.length) : null;
+  const ov=$('#overlay'); ov.hidden=false;
+  ov.innerHTML=`<div class="sheet">
+    <div><div class="k">${esc(DIFFS[G.diff].label)} · ${complete ? 'zmena skončila o 06:00' : 'koniec o '+clockOf(G.t)}</div>
+      <h2 class="grade" style="margin-top:6px">${complete ? esc(gradeOf(G.score)) : 'Vedúci ťa vystriedal'}</h2></div>
+    <p class="lead">${complete ? 'Ranná zmena preberá linku. Takto vyzerala tvoja noc:' : (G.rep<=0 ? 'Dôvera klesla na nulu. Príliš veľa ľudí nedostalo pomoc včas.' : 'Zmenu si ukončil predčasne.')}</p>
+    <div class="sumgrid">
+      <div><b>${G.score}</b><span class="k">Skóre</span></div>
+      <div><b>${s.resolved}</b><span class="k">Vyriešené</span></div>
+      <div><b>${s.failed+s.hung}</b><span class="k">Bez pomoci</span></div>
+      <div><b>${avg==null ? '—' : avg+' min'}</b><span class="k">Ø do príchodu</span></div>
+      <div><b>${s.pranks}</b><span class="k">Odhalené zneužitia</span></div>
+      <div><b>${Math.max(0,Math.round(G.rep))} %</b><span class="k">Dôvera</span></div>
+    </div>
+    <p class="keys">${G.score>prev ? 'Nový rekord pre túto obťažnosť!' : 'Rekord: '+prev+' b.'}${s.wrong ? ' · Nesprávne určené hovory: '+s.wrong : ''}${s.wasted ? ' · Plané výjazdy: '+s.wasted : ''}${s.rejected ? ' · Odmietnuté skutočné tiesne: '+s.rejected : ''}</p>
+    <div class="acts"><button class="btn go" data-act="start" data-diff="${G.diff}">Hrať znova</button><button class="btn" data-act="menu">Zmeniť obťažnosť</button></div>
+  </div>`;
+  (G.rep<=0 ? SND.bad : SND.ok)();
+  dirty();
+}
+function start(diff){
+  audio();
+  G=newGame(diff, 'play');
+  $('#overlay').hidden=true; $('#overlay').innerHTML='';
+  $('#diffLbl').textContent='Nočná zmena · '+DIFFS[diff].label;
+  $('#btnSpeed').textContent='×1'; $('#btnPause').textContent='Pauza';
+  lastScore=lastRep=null; $('#hints').innerHTML='';
+  say('Zmena začína. Prvý hovor je na ceste.');
+  dirty();
+}
+function togglePause(){
+  if(G.mode==='play'){ G.mode='pause'; $('#btnPause').textContent='Pokračovať'; showPause(); }
+  else if(G.mode==='pause'){ G.mode='play'; $('#btnPause').textContent='Pauza'; $('#overlay').hidden=true; }
+}
+function setTab(t){
+  $('#app').dataset.tab=t;
+  $('#tabPult').classList.toggle('on', t==='pult'); $('#tabUnits').classList.toggle('on', t==='units');
+}
+
+/* ---------- ovládanie ---------- */
+function act(el){
+  const a=el.dataset.act, id=el.dataset.id;
+  if(a==='start') return start(el.dataset.diff);
+  if(a==='menu'){ G=newGame('normal','menu'); showMenu(); return dirty(); }
+  if(a==='tab') return setTab(el.dataset.tab);
+  if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; return; }
+  if(a==='pause' || a==='resume') return togglePause();
+  if(a==='quit'){ G.mode='play'; return endGame(false); }
+  if(a==='speed'){ G.speed=G.speed===1 ? 2 : 1; el.textContent='×'+G.speed; return; }
+  if(G.mode!=='play') return;
+  if(a==='answer') answer(callById(id));
+  else if(a==='cls') classify(callById(id), el.dataset.type);
+  else if(a==='inc') select(G.sel.inc===id ? null : id);
+  else if(a==='desel'){ G.sel.inc=null; dirty(); }
+  else if(a==='send') dispatch(unitById(el.dataset.unit), incById(id));
+  else if(a==='sendall') sendRecommended(incById(id));
+  else if(a==='unit') unitClick(unitById(id));
+}
+function unitClick(u){
+  if(!u) return;
+  const inc=incById(G.sel.inc);
+  if(inc && dispatchable(u, inc)) return dispatch(u, inc);
+  G.sel.unit = G.sel.unit===u.id ? null : u.id; dirty();
+}
+/* akcia sa vykoná až pri pustení prsta/myši na tom istom prvku – posúvanie zoznamu nič nespustí
+   a prvok sa medzitým môže prekresliť */
+let down=null;
+const keyOf = el => ['act','id','type','unit','diff','tab'].map(k=>el.dataset[k]||'').join('|');
+document.addEventListener('pointerdown', e=>{
+  audio();
+  const el=e.target.closest('[data-act]');
+  down = el && !el.disabled ? {key:keyOf(el), x:e.clientX, y:e.clientY} : null;
+});
+document.addEventListener('pointerup', e=>{
+  if(!down) return;
+  const d=down; down=null;
+  if(Math.hypot(e.clientX-d.x, e.clientY-d.y)>12) return;
+  const t=document.elementFromPoint(e.clientX, e.clientY), el=t && t.closest('[data-act]');
+  if(el && !el.disabled && keyOf(el)===d.key){ e.preventDefault(); act(el); }
+});
+document.addEventListener('pointercancel', ()=>{ down=null; });
+document.addEventListener('click', e=>{   // klávesnica (Enter/medzerník na tlačidle)
+  if(e.detail!==0) return;
+  const el=e.target.closest('[data-act]'); if(el && !el.disabled) act(el);
+});
+cv.addEventListener('pointerdown', e=>{ cv._down={x:e.clientX, y:e.clientY}; });
+cv.addEventListener('pointerup', e=>{
+  const d=cv._down; cv._down=null;
+  if(!d || Math.hypot(e.clientX-d.x, e.clientY-d.y)>12 || !G || G.mode!=='play') return;
+  const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  const hu=[...hit.units].reverse().find(b=>x>=b.x && x<=b.x+b.w && y>=b.y && y<=b.y+b.h);
+  if(hu) return unitClick(unitById(hu.id));
+  const hi=hit.incs.find(b=>Math.hypot(x-b.X, y-b.Y)<=b.r);
+  if(hi) return select(hi.id);
+  G.sel.inc=null; G.sel.unit=null; dirty();
+});
+document.addEventListener('keydown', e=>{
+  if(!G) return;
+  const onBtn=e.target.closest && e.target.closest('button');
+  if(e.key===' '){ if(onBtn) return; e.preventDefault(); if(G.mode==='play' || G.mode==='pause') togglePause(); return; }
+  if(G.mode!=='play' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k=e.key.toLowerCase();
+  if(k==='a'){ answer(G.calls.find(c=>c.state==='ring')); }
+  else if(k.length===1 && k>='1' && k<='5'){ classify(G.calls.find(c=>c.state==='talk'), TYPE_ORDER[+k-1]); }
+  else if(k==='enter' && !onBtn){ const inc=incById(G.sel.inc); if(inc){ e.preventDefault(); sendRecommended(inc); } }
+  else if(k==='escape'){ G.sel.inc=null; G.sel.unit=null; dirty(); }
+});
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden && G && G.mode==='play') togglePause(); });
+
+/* ---------- slučka ---------- */
+let last=performance.now(), lastUI=0;
+function frame(now){
+  const dt=Math.min(.1, (now-last)/1000); last=now;
+  if(G.mode==='play'){
+    let left=dt*G.speed;
+    while(left>0 && G.mode==='play'){ const s=Math.min(.05,left); step(s); left-=s; }
+  }
+  draw(now);
+  if(uiDirty || (G.mode==='play' && now-lastUI>450)){ uiDirty=false; lastUI=now; renderUI(); }
+  updateTimers();
+  requestAnimationFrame(frame);
+}
+
+/* ---------- štart ---------- */
+readColors();
+$('#legend').innerHTML=[1,2,3,4,5,6].map(s=>`<span style="--sc:var(--s${s})">${s} ${STATUS[s]}</span>`).join('');
+G=newGame('normal','menu');
+new ResizeObserver(resize).observe($('#mapbox'));
+resize();
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>drawStatic());
+showMenu();
+renderUI();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

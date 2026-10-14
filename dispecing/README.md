@@ -23,3 +23,9 @@ udalosti s prioritami, jednotky a ich stavy, mapa, denník a odovzdanie zmeny.
   pridáš na plochu a funguje aj offline.
 
 Na vyskúšanie: Nastavenia → **Načítať ukážkové dáta**.
+
+## Hra Linka 112
+
+`hra.html` je samostatná hra na dispečera: nočná zmena 22:00–06:00, v ktorej zdvíhaš hovory,
+určuješ druh udalosti a po meste vysielaš záchranky, hasičov a políciu. Stačí ju otvoriť v prehliadači.
+Ovládanie: `A` prijať hovor, `1`–`5` druh udalosti, `Enter` vyslať odporúčané jednotky, medzerník pauza.
