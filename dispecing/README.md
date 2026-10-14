@@ -26,6 +26,20 @@ Na vyskúšanie: Nastavenia → **Načítať ukážkové dáta**.
 
 ## Hra Linka 112
 
-`hra.html` je samostatná hra na dispečera: nočná zmena 22:00–06:00, v ktorej zdvíhaš hovory,
-určuješ druh udalosti a po meste vysielaš záchranky, hasičov a políciu. Stačí ju otvoriť v prehliadači.
-Ovládanie: `A` prijať hovor, `1`–`5` druh udalosti, `Enter` vyslať odporúčané jednotky, medzerník pauza.
+`hra.html` je samostatná 3D hra na dispečera integrovaného záchranného systému v **Košickom kraji**.
+Zdvíhaš hovory na 112, určuješ druh udalosti a po kraji vysielaš posádky: záchranky (RZP, RLP, vrtuľník LZS),
+hasičov, políciu, mestskú políciu, CBRN/biohazard tím a Horskú záchrannú službu. Služba nemá koniec ani
+dennú/nočnú zmenu – hrá sa, kým kraju neklesne dôvera.
+
+- **Mapa:** 3D terén kraja s hranicou, mestami (Košice, Michalovce, Spišská Nová Ves, Trebišov, Rožňava…),
+  hlavnými cestami, riekami, Šíravou a Ružínom, Slovenským rajom, Volovskými vrchmi a Vihorlatom.
+- **Udalosti:** zdravotné, dopravné, požiare, technické, polícia, mestská polícia, chemické a biologické
+  ohrozenie (únik amoniaku, podozrivý prášok, podozrenie na nákazu…), horské a jaskynné záchrany.
+- **Progres:** za vyriešené udalosti získavaš XP a úrovne, body míňaš v strome schopností
+  (nové základne a posádky, vrtuľník, CBRN, horská služba, dispečerské vylepšenia). Postup sa ukladá v prehliadači.
+
+Ovládanie: `A` prijať hovor, `1`–`9` druh udalosti, `Enter` vyslať odporúčané posádky, `Esc` zrušiť výber,
+medzerník pauza; mapu otáčaš a približuješ myšou alebo prstami. Potrebuje prehliadač s WebGL.
+
+Knižnice a dáta: `vendor/three/` – three.js r147 (MIT), `vendor/amcharts-geodata/` – licencia amCharts
+geodát (linkware), z ktorých je zjednodušená hranica kraja. Polohy obcí, ciest, riek a pohorí sú približné.
