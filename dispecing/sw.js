@@ -1,6 +1,6 @@
 /* Dispečing — service worker: offline cache */
-const CACHE = 'dispecing-v1';
-const ASSETS = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png',
+const CACHE = 'dispecing-v2';
+const ASSETS = ['./', './index.html', './app.js', './style.css', './manifest.webmanifest', './icon-192.png', './icon-512.png',
   './apple-touch-icon.png', './vendor/leaflet/leaflet.js', './vendor/leaflet/leaflet.css'];
 
 self.addEventListener('install', e => {
