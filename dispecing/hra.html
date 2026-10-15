@@ -8,7 +8,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@500;600;700&family=Barlow+Condensed:wght@700;800&display=swap">
 <style>
   :root{
     /* Rozloženie: dispečerský pult – pás s postupom hore, vľavo hovory a udalosti, v strede 3D mapa Košického kraja, vpravo posádky */
@@ -177,7 +177,7 @@
 
   .disp{background:var(--card); border:1px solid var(--sodium); border-radius:12px; padding:12px; display:grid; gap:10px; box-shadow:0 0 22px color-mix(in srgb, var(--sodium) 14%, transparent);}
   .disp .quote{font-size:14px; color:var(--muted);}
-  .cand{display:grid; grid-template-columns:auto minmax(0,1fr) auto auto; align-items:center; gap:8px; font-size:14px;}
+  .cand{display:grid; grid-template-columns:auto auto minmax(0,1fr) auto auto; align-items:center; gap:8px; font-size:14px;}
   .tag{font:700 11px var(--f-mono); padding:2px 6px; border-radius:5px; background:var(--sc); color:var(--ink); white-space:nowrap;}
   .eta{font:600 12px var(--f-mono); color:var(--muted); white-space:nowrap;}
   .sub{font-size:12px; color:var(--muted); font-weight:400;}
@@ -187,8 +187,12 @@
     background:var(--card); border:1px solid var(--line); border-left:4px solid var(--sc); border-radius:10px; cursor:pointer;}
   .unit:hover{border-color:var(--muted); border-left-color:var(--sc);}
   .unit.sel{border-color:var(--sodium); border-left-color:var(--sc);}
-  .unit .veh{width:30px; height:30px; display:grid; place-items:center; border-radius:8px; background:color-mix(in srgb, var(--sc) 18%, transparent); color:var(--sc);}
+  .unit .veh{min-width:30px; height:32px; padding:0 6px; display:grid; place-items:center; border-radius:8px; background:color-mix(in srgb, var(--sc) 18%, transparent); color:var(--sc);}
   .unit .veh .ico{width:22px; height:22px;}
+  .vimg{display:block; height:22px; width:auto; max-width:78px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.45));}
+  .usel .veh{display:grid; place-items:center; height:30px;}
+  .cand .vimg{height:16px; max-width:56px;}
+  .hero{display:block; width:100%; height:auto; aspect-ratio:1280/360; border-radius:12px; border:1px solid var(--line); background:#1a2029; object-fit:cover;}
   .unit .nm{font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .unit .st{font:600 11px var(--f-mono); color:var(--sc); white-space:nowrap;}
   .unit .what{grid-column:1/-1; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
@@ -372,10 +376,11 @@
 
     .call{padding:10px;} .quote{font-size:15px;}
     .cls .btn{min-height:44px;}
-    .cand{grid-template-columns:auto minmax(0,1fr) auto auto; gap:6px; font-size:13px;}
+    .cand{grid-template-columns:auto auto minmax(0,1fr) auto auto; gap:6px; font-size:13px;}
     .cand .btn{min-height:36px;}
     .unit{padding:7px 9px;}
     .diffs, .chals{grid-template-columns:1fr;}
+    .prog .grow{flex-basis:100%; order:3;}
     .sumgrid{grid-template-columns:1fr 1fr;}
     .chals{max-height:none;}
     .tree{grid-template-columns:1fr;}
@@ -2038,6 +2043,404 @@ function placeLabel(L, extraY=0){
   L.el.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-100%)`;
   L.el.style.zIndex=String(1000-Math.round(V3.z*1000));
 }
+/* ============================================================
+   VOZIDLÁ ZHORA – grafika z návrhu „Záchranné vozidlá – top-down“
+   (RZP, RLP, PZ, HaZZ; RV, MsP, HZS a CBRN dokreslené v rovnakom štýle).
+   Kreslí sa do plátna: strecha 3D vozidiel, ikony posádok a obrázok v menu.
+   ============================================================ */
+const VSVG={
+  RZP:`<svg width="200" height="440" viewBox="0 0 200 440" role="img" aria-label="Sanitka RZP z pohľadu zhora">
+<defs>
+<filter id="rzpBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"></feGaussianBlur></filter>
+</defs>
+<rect x="46" y="48" width="120" height="360" rx="18" fill="#000" opacity="0.28" filter="url(#rzpBlur)"></rect>
+<rect x="28" y="104" width="14" height="10" rx="3" fill="#2A2F36"></rect>
+<rect x="158" y="104" width="14" height="10" rx="3" fill="#2A2F36"></rect>
+<rect x="40" y="40" width="120" height="360" rx="16" fill="#F2D21B"></rect>
+<rect x="44" y="35" width="112" height="8" rx="4" fill="#2A2F36"></rect>
+<rect x="46" y="42" width="20" height="6" rx="2" fill="#FFF7D6"></rect>
+<rect x="134" y="42" width="20" height="6" rx="2" fill="#FFF7D6"></rect>
+<path d="M50 50 Q100 44 150 50 L148 92 L52 92 Z" fill="#E3C312"></path>
+<path d="M50 94 L150 94 L146 124 L54 124 Z" fill="#1C2733"></path>
+<path d="M58 98 L92 98 L86 118 L60 118 Z" fill="#FFFFFF" opacity="0.12"></path>
+<line x1="44" y1="128" x2="44" y2="396" stroke="#1E8F3A" stroke-width="8" stroke-dasharray="20 20"></line>
+<line x1="156" y1="128" x2="156" y2="396" stroke="#1E8F3A" stroke-width="8" stroke-dasharray="20 20"></line>
+<rect x="50" y="128" width="100" height="264" rx="8" fill="#F4F3EE"></rect>
+<g stroke="#DAD8CF" stroke-width="2">
+<line x1="54" y1="236" x2="146" y2="236"></line>
+<line x1="54" y1="330" x2="146" y2="330"></line>
+</g>
+<rect x="56" y="132" width="88" height="16" rx="5" fill="#2A2F36"></rect>
+<rect x="59" y="135" width="34" height="10" rx="3" fill="{{beacon}}"></rect>
+<rect x="107" y="135" width="34" height="10" rx="3" fill="{{beacon}}"></rect>
+<circle cx="76" cy="140" r="24" fill="#3BA0FF" opacity="0" filter="url(#rzpBlur)"></circle>
+<circle cx="124" cy="140" r="24" fill="#3BA0FF" opacity="0" filter="url(#rzpBlur)"></circle>
+<g transform="translate(100 190)" fill="#1F5FBF">
+<rect x="-6" y="-24" width="12" height="48" rx="2"></rect>
+<rect x="-6" y="-24" width="12" height="48" rx="2" transform="rotate(60)"></rect>
+<rect x="-6" y="-24" width="12" height="48" rx="2" transform="rotate(120)"></rect>
+<line x1="0" y1="-16" x2="0" y2="16" stroke="#FFFFFF" stroke-width="2.5"></line>
+</g>
+<text x="100" y="284" transform="rotate(-90 100 284)" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="56" fill="#1E8F3A">RZP</text>
+<rect x="74" y="342" width="52" height="38" rx="4" fill="#C9CCD1"></rect>
+<g stroke="#A6AAB1" stroke-width="2">
+<line x1="80" y1="350" x2="120" y2="350"></line>
+<line x1="80" y1="358" x2="120" y2="358"></line>
+<line x1="80" y1="366" x2="120" y2="366"></line>
+<line x1="80" y1="374" x2="120" y2="374"></line>
+</g>
+<rect x="42" y="391" width="10" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="148" y="391" width="10" height="8" rx="2" fill="#D7261E"></rect>
+<line x1="100" y1="392" x2="100" y2="400" stroke="#2A2F36" stroke-width="2"></line>
+<rect x="46" y="398" width="108" height="6" rx="3" fill="#2A2F36"></rect>
+</svg>`,
+  RLP:`<svg width="200" height="440" viewBox="0 0 200 440" role="img" aria-label="Sanitka RLP z pohľadu zhora">
+<defs>
+<filter id="rlpBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"></feGaussianBlur></filter>
+</defs>
+<rect x="46" y="48" width="120" height="360" rx="18" fill="#000" opacity="0.28" filter="url(#rlpBlur)"></rect>
+<rect x="28" y="104" width="14" height="10" rx="3" fill="#2A2F36"></rect>
+<rect x="158" y="104" width="14" height="10" rx="3" fill="#2A2F36"></rect>
+<rect x="40" y="40" width="120" height="360" rx="16" fill="#F2D21B"></rect>
+<rect x="44" y="35" width="112" height="8" rx="4" fill="#2A2F36"></rect>
+<rect x="46" y="42" width="20" height="6" rx="2" fill="#FFF7D6"></rect>
+<rect x="134" y="42" width="20" height="6" rx="2" fill="#FFF7D6"></rect>
+<path d="M50 50 Q100 44 150 50 L148 92 L52 92 Z" fill="#E3C312"></path>
+<rect x="52" y="70" width="96" height="8" fill="#C8102E"></rect>
+<path d="M50 94 L150 94 L146 124 L54 124 Z" fill="#1C2733"></path>
+<path d="M58 98 L92 98 L86 118 L60 118 Z" fill="#FFFFFF" opacity="0.12"></path>
+<line x1="44" y1="128" x2="44" y2="396" stroke="#1E8F3A" stroke-width="8" stroke-dasharray="20 20"></line>
+<line x1="156" y1="128" x2="156" y2="396" stroke="#1E8F3A" stroke-width="8" stroke-dasharray="20 20"></line>
+<rect x="50" y="128" width="100" height="264" rx="8" fill="#F4F3EE"></rect>
+<g stroke="#DAD8CF" stroke-width="2">
+<line x1="54" y1="236" x2="146" y2="236"></line>
+<line x1="54" y1="330" x2="146" y2="330"></line>
+</g>
+<rect x="56" y="132" width="88" height="16" rx="5" fill="#2A2F36"></rect>
+<rect x="59" y="135" width="34" height="10" rx="3" fill="{{beacon}}"></rect>
+<rect x="107" y="135" width="34" height="10" rx="3" fill="{{beacon}}"></rect>
+<circle cx="76" cy="140" r="24" fill="#3BA0FF" opacity="0" filter="url(#rlpBlur)"></circle>
+<circle cx="124" cy="140" r="24" fill="#3BA0FF" opacity="0" filter="url(#rlpBlur)"></circle>
+<g transform="translate(100 190)" fill="#1F5FBF">
+<rect x="-6" y="-24" width="12" height="48" rx="2"></rect>
+<rect x="-6" y="-24" width="12" height="48" rx="2" transform="rotate(60)"></rect>
+<rect x="-6" y="-24" width="12" height="48" rx="2" transform="rotate(120)"></rect>
+<line x1="0" y1="-16" x2="0" y2="16" stroke="#FFFFFF" stroke-width="2.5"></line>
+</g>
+<text x="100" y="284" transform="rotate(-90 100 284)" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="56" fill="#C8102E">RLP</text>
+<rect x="74" y="342" width="52" height="38" rx="4" fill="#C9CCD1"></rect>
+<g stroke="#A6AAB1" stroke-width="2">
+<line x1="80" y1="350" x2="120" y2="350"></line>
+<line x1="80" y1="358" x2="120" y2="358"></line>
+<line x1="80" y1="366" x2="120" y2="366"></line>
+<line x1="80" y1="374" x2="120" y2="374"></line>
+</g>
+<rect x="42" y="391" width="10" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="148" y="391" width="10" height="8" rx="2" fill="#D7261E"></rect>
+<line x1="100" y1="392" x2="100" y2="400" stroke="#2A2F36" stroke-width="2"></line>
+<rect x="46" y="398" width="108" height="6" rx="3" fill="#2A2F36"></rect>
+</svg>`,
+  PZ:`<svg width="200" height="360" viewBox="0 0 200 360" role="img" aria-label="Policajné auto PZ z pohľadu zhora">
+<defs>
+<filter id="pzBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"></feGaussianBlur></filter>
+</defs>
+<rect x="56" y="38" width="96" height="300" rx="28" fill="#000" opacity="0.28" filter="url(#pzBlur)"></rect>
+<rect x="38" y="118" width="14" height="9" rx="3" fill="#2A2F36"></rect>
+<rect x="148" y="118" width="14" height="9" rx="3" fill="#2A2F36"></rect>
+<rect x="52" y="30" width="96" height="300" rx="26" fill="#F3F5F8"></rect>
+<rect x="60" y="26" width="80" height="7" rx="3" fill="#2A2F36"></rect>
+<rect x="58" y="34" width="18" height="6" rx="2" fill="#FFF7D6"></rect>
+<rect x="124" y="34" width="18" height="6" rx="2" fill="#FFF7D6"></rect>
+<path d="M60 44 Q100 36 140 44 L138 110 L62 110 Z" fill="#E7EBF0"></path>
+<rect x="62" y="58" width="76" height="34" rx="4" fill="#0B3D91"></rect>
+<text x="100" y="75" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="20" fill="#FFFFFF" letter-spacing="1">POLÍCIA</text>
+<path d="M60 112 L140 112 L136 142 L64 142 Z" fill="#1C2733"></path>
+<path d="M68 116 L96 116 L91 136 L70 136 Z" fill="#FFFFFF" opacity="0.12"></path>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#0B3D91" stroke-width="6"></line>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#0B3D91" stroke-width="6"></line>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#C6F01E" stroke-width="6" stroke-dasharray="14 14"></line>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#C6F01E" stroke-width="6" stroke-dasharray="14 14"></line>
+<rect x="62" y="144" width="76" height="98" rx="10" fill="#FFFFFF"></rect>
+<rect x="60" y="150" width="80" height="14" rx="5" fill="#2A2F36"></rect>
+<rect x="63" y="153" width="30" height="8" rx="3" fill="{{beacon}}"></rect>
+<rect x="107" y="153" width="30" height="8" rx="3" fill="{{beacon}}"></rect>
+<circle cx="78" cy="157" r="22" fill="#3BA0FF" opacity="0" filter="url(#pzBlur)"></circle>
+<circle cx="122" cy="157" r="22" fill="#3BA0FF" opacity="0" filter="url(#pzBlur)"></circle>
+<text x="100" y="206" transform="rotate(-90 100 206)" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="40" fill="#0B3D91">158</text>
+<path d="M64 244 L136 244 L140 268 L60 268 Z" fill="#1C2733"></path>
+<path d="M62 270 L138 270 L140 318 Q100 326 60 318 Z" fill="#E7EBF0"></path>
+<rect x="64" y="284" width="72" height="14" rx="3" fill="#0B3D91"></rect>
+<rect x="56" y="316" width="14" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="130" y="316" width="14" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="62" y="327" width="76" height="6" rx="3" fill="#2A2F36"></rect>
+</svg>`,
+  HAS:`<svg width="220" height="600" viewBox="0 0 220 600" role="img" aria-label="Hasičské vozidlo HaZZ z pohľadu zhora">
+<defs>
+<filter id="hzBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"></feGaussianBlur></filter>
+<pattern id="hzTread" width="10" height="10" patternUnits="userSpaceOnUse">
+<rect width="10" height="10" fill="#9AA1AA"></rect>
+<path d="M2 8 L8 2" stroke="#B5BBC3" stroke-width="2"></path>
+</pattern>
+<pattern id="hzRungs" x="0" y="176" width="74" height="18" patternUnits="userSpaceOnUse">
+<rect x="0" y="6" width="74" height="5" rx="1" fill="#D9DCE0"></rect>
+</pattern>
+</defs>
+<rect x="46" y="38" width="140" height="540" rx="14" fill="#000" opacity="0.3" filter="url(#hzBlur)"></rect>
+<rect x="22" y="70" width="18" height="12" rx="3" fill="#2A2F36"></rect>
+<rect x="180" y="70" width="18" height="12" rx="3" fill="#2A2F36"></rect>
+<rect x="40" y="30" width="140" height="122" rx="14" fill="#C8102E"></rect>
+<rect x="44" y="24" width="132" height="9" rx="4" fill="#2A2F36"></rect>
+<rect x="48" y="32" width="22" height="6" rx="2" fill="#FFF7D6"></rect>
+<rect x="150" y="32" width="22" height="6" rx="2" fill="#FFF7D6"></rect>
+<path d="M48 40 L172 40 L168 60 L52 60 Z" fill="#1C2733"></path>
+<path d="M56 43 L94 43 L90 57 L58 57 Z" fill="#FFFFFF" opacity="0.12"></path>
+<rect x="50" y="64" width="120" height="82" rx="8" fill="#F4F3EE"></rect>
+<rect x="54" y="68" width="112" height="16" rx="5" fill="#2A2F36"></rect>
+<rect x="57" y="71" width="44" height="10" rx="3" fill="{{beacon}}"></rect>
+<rect x="119" y="71" width="44" height="10" rx="3" fill="{{beacon}}"></rect>
+<circle cx="79" cy="76" r="28" fill="#3BA0FF" opacity="0" filter="url(#hzBlur)"></circle>
+<circle cx="141" cy="76" r="28" fill="#3BA0FF" opacity="0" filter="url(#hzBlur)"></circle>
+<text x="110" y="104" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="26" fill="#C8102E">HaZZ</text>
+<text x="110" y="130" text-anchor="middle" dominant-baseline="central" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="22" fill="#2A2F36">150</text>
+<rect x="44" y="150" width="132" height="8" fill="#2A2F36"></rect>
+<rect x="40" y="156" width="140" height="414" rx="8" fill="#C8102E"></rect>
+<line x1="43" y1="160" x2="43" y2="566" stroke="#F2D21B" stroke-width="5" stroke-dasharray="18 18"></line>
+<line x1="177" y1="160" x2="177" y2="566" stroke="#F2D21B" stroke-width="5" stroke-dasharray="18 18"></line>
+<rect x="48" y="164" width="124" height="398" rx="4" fill="url(#hzTread)"></rect>
+<rect x="52" y="180" width="20" height="60" rx="3" fill="#3A4048"></rect>
+<rect x="148" y="180" width="20" height="60" rx="3" fill="#3A4048"></rect>
+<rect x="52" y="250" width="20" height="40" rx="3" fill="#3A4048"></rect>
+<rect x="148" y="250" width="20" height="40" rx="3" fill="#3A4048"></rect>
+<rect x="73" y="176" width="74" height="372" fill="url(#hzRungs)"></rect>
+<rect x="73" y="176" width="7" height="372" rx="2" fill="#E6E8EB"></rect>
+<rect x="140" y="176" width="7" height="372" rx="2" fill="#E6E8EB"></rect>
+<circle cx="62" cy="500" r="13" fill="#2A2F36"></circle>
+<circle cx="62" cy="500" r="6" fill="#C8102E"></circle>
+<circle cx="158" cy="500" r="13" fill="#2A2F36"></circle>
+<circle cx="158" cy="500" r="6" fill="#C8102E"></circle>
+<rect x="44" y="562" width="12" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="164" y="562" width="12" height="8" rx="2" fill="#D7261E"></rect>
+<rect x="46" y="569" width="128" height="7" rx="3" fill="#2A2F36"></rect>
+</svg>`,
+  RV:`<svg width="200" height="360" viewBox="0 0 200 360">
+<rect x="38" y="118" width="14" height="9" rx="3" fill="#2A2F36"/><rect x="148" y="118" width="14" height="9" rx="3" fill="#2A2F36"/>
+<rect x="52" y="30" width="96" height="300" rx="26" fill="#F2D21B"/>
+<rect x="60" y="26" width="80" height="7" rx="3" fill="#2A2F36"/>
+<rect x="58" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/><rect x="124" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/>
+<path d="M60 44 Q100 36 140 44 L138 110 L62 110 Z" fill="#E3C312"/>
+<rect x="62" y="58" width="76" height="34" rx="4" fill="#1E8F3A"/>
+<text x="100" y="75" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="20" fill="#FFFFFF" letter-spacing="1">LEKÁR</text>
+<path d="M60 112 L140 112 L136 142 L64 142 Z" fill="#1C2733"/>
+<path d="M68 116 L96 116 L91 136 L70 136 Z" fill="#FFFFFF" opacity="0.12"/>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#1E8F3A" stroke-width="6" stroke-dasharray="14 14"/>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#1E8F3A" stroke-width="6" stroke-dasharray="14 14"/>
+<rect x="62" y="144" width="76" height="98" rx="10" fill="#F4F3EE"/>
+<rect x="60" y="150" width="80" height="14" rx="5" fill="#2A2F36"/>
+<rect x="63" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/><rect x="107" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/>
+<g transform="translate(100 204)" fill="#1F5FBF">
+<rect x="-5" y="-19" width="10" height="38" rx="2"/><rect x="-5" y="-19" width="10" height="38" rx="2" transform="rotate(60)"/><rect x="-5" y="-19" width="10" height="38" rx="2" transform="rotate(120)"/>
+<line x1="0" y1="-13" x2="0" y2="13" stroke="#FFFFFF" stroke-width="2"/>
+</g>
+<path d="M64 244 L136 244 L140 268 L60 268 Z" fill="#1C2733"/>
+<path d="M62 270 L138 270 L140 318 Q100 326 60 318 Z" fill="#E3C312"/>
+<text x="100" y="294" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="26" fill="#1E8F3A">RV</text>
+<rect x="56" y="316" width="14" height="8" rx="2" fill="#D7261E"/><rect x="130" y="316" width="14" height="8" rx="2" fill="#D7261E"/>
+<rect x="62" y="327" width="76" height="6" rx="3" fill="#2A2F36"/>
+</svg>`,
+  MSP:`<svg width="200" height="360" viewBox="0 0 200 360">
+<rect x="38" y="118" width="14" height="9" rx="3" fill="#2A2F36"/><rect x="148" y="118" width="14" height="9" rx="3" fill="#2A2F36"/>
+<rect x="52" y="30" width="96" height="300" rx="26" fill="#F3F5F8"/>
+<rect x="60" y="26" width="80" height="7" rx="3" fill="#2A2F36"/>
+<rect x="58" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/><rect x="124" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/>
+<path d="M60 44 Q100 36 140 44 L138 110 L62 110 Z" fill="#E7EBF0"/>
+<rect x="62" y="58" width="76" height="34" rx="4" fill="#0F766E"/>
+<text x="100" y="69" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="13" fill="#FFFFFF" letter-spacing="1">MESTSKÁ</text>
+<text x="100" y="83" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="13" fill="#FFFFFF" letter-spacing="1">POLÍCIA</text>
+<path d="M60 112 L140 112 L136 142 L64 142 Z" fill="#1C2733"/>
+<path d="M68 116 L96 116 L91 136 L70 136 Z" fill="#FFFFFF" opacity="0.12"/>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#0F766E" stroke-width="6"/>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#0F766E" stroke-width="6"/>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#F2D21B" stroke-width="6" stroke-dasharray="14 14"/>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#F2D21B" stroke-width="6" stroke-dasharray="14 14"/>
+<rect x="62" y="144" width="76" height="98" rx="10" fill="#FFFFFF"/>
+<rect x="60" y="150" width="80" height="14" rx="5" fill="#2A2F36"/>
+<rect x="63" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/><rect x="107" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/>
+<text x="100" y="206" transform="rotate(-90 100 206)" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="40" fill="#0F766E">MsP</text>
+<path d="M64 244 L136 244 L140 268 L60 268 Z" fill="#1C2733"/>
+<path d="M62 270 L138 270 L140 318 Q100 326 60 318 Z" fill="#E7EBF0"/>
+<rect x="64" y="284" width="72" height="14" rx="3" fill="#0F766E"/>
+<rect x="56" y="316" width="14" height="8" rx="2" fill="#D7261E"/><rect x="130" y="316" width="14" height="8" rx="2" fill="#D7261E"/>
+<rect x="62" y="327" width="76" height="6" rx="3" fill="#2A2F36"/>
+</svg>`,
+  HZS:`<svg width="200" height="360" viewBox="0 0 200 360">
+<rect x="38" y="118" width="14" height="9" rx="3" fill="#2A2F36"/><rect x="148" y="118" width="14" height="9" rx="3" fill="#2A2F36"/>
+<rect x="52" y="30" width="96" height="300" rx="22" fill="#C8102E"/>
+<rect x="60" y="26" width="80" height="7" rx="3" fill="#2A2F36"/>
+<rect x="58" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/><rect x="124" y="34" width="18" height="6" rx="2" fill="#FFF7D6"/>
+<path d="M60 44 Q100 36 140 44 L138 110 L62 110 Z" fill="#B00E28"/>
+<rect x="66" y="58" width="68" height="34" rx="4" fill="#FFFFFF"/>
+<text x="100" y="75" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="24" fill="#C8102E" letter-spacing="2">HZS</text>
+<path d="M60 112 L140 112 L136 142 L64 142 Z" fill="#1C2733"/>
+<path d="M68 116 L96 116 L91 136 L70 136 Z" fill="#FFFFFF" opacity="0.12"/>
+<line x1="55" y1="104" x2="55" y2="306" stroke="#FFFFFF" stroke-width="5" stroke-dasharray="14 14"/>
+<line x1="145" y1="104" x2="145" y2="306" stroke="#FFFFFF" stroke-width="5" stroke-dasharray="14 14"/>
+<rect x="62" y="144" width="76" height="112" rx="8" fill="#F4F3EE"/>
+<rect x="60" y="150" width="80" height="14" rx="5" fill="#2A2F36"/>
+<rect x="63" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/><rect x="107" y="153" width="30" height="8" rx="3" fill="{{beacon}}"/>
+<g fill="#C8102E"><rect x="92" y="180" width="16" height="52" rx="2"/><rect x="74" y="198" width="52" height="16" rx="2"/></g>
+<g stroke="#9AA1AA" stroke-width="3"><line x1="66" y1="246" x2="134" y2="246"/></g>
+<path d="M64 258 L136 258 L140 276 L60 276 Z" fill="#1C2733"/>
+<path d="M62 278 L138 278 L140 318 Q100 326 60 318 Z" fill="#B00E28"/>
+<rect x="56" y="316" width="14" height="8" rx="2" fill="#FFB020"/><rect x="130" y="316" width="14" height="8" rx="2" fill="#FFB020"/>
+<rect x="62" y="327" width="76" height="6" rx="3" fill="#2A2F36"/>
+</svg>`,
+  CBRN:`<svg width="220" height="520" viewBox="0 0 220 520">
+<rect x="22" y="70" width="18" height="12" rx="3" fill="#2A2F36"/><rect x="180" y="70" width="18" height="12" rx="3" fill="#2A2F36"/>
+<rect x="40" y="30" width="140" height="122" rx="14" fill="#C8102E"/>
+<rect x="44" y="24" width="132" height="9" rx="4" fill="#2A2F36"/>
+<rect x="48" y="32" width="22" height="6" rx="2" fill="#FFF7D6"/><rect x="150" y="32" width="22" height="6" rx="2" fill="#FFF7D6"/>
+<path d="M48 40 L172 40 L168 60 L52 60 Z" fill="#1C2733"/>
+<path d="M56 43 L94 43 L90 57 L58 57 Z" fill="#FFFFFF" opacity="0.12"/>
+<rect x="50" y="64" width="120" height="82" rx="8" fill="#F4F3EE"/>
+<rect x="54" y="68" width="112" height="16" rx="5" fill="#2A2F36"/>
+<rect x="57" y="71" width="44" height="10" rx="3" fill="{{beacon}}"/><rect x="119" y="71" width="44" height="10" rx="3" fill="{{beacon}}"/>
+<text x="110" y="104" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="26" fill="#C8102E">HaZZ</text>
+<text x="110" y="130" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="22" fill="#2A2F36">CHEM</text>
+<rect x="44" y="150" width="132" height="8" fill="#2A2F36"/>
+<rect x="40" y="156" width="140" height="334" rx="8" fill="#C8102E"/>
+<line x1="43" y1="160" x2="43" y2="486" stroke="#F2D21B" stroke-width="5" stroke-dasharray="18 18"/>
+<line x1="177" y1="160" x2="177" y2="486" stroke="#F2D21B" stroke-width="5" stroke-dasharray="18 18"/>
+<rect x="52" y="172" width="116" height="306" rx="6" fill="#EDEDE6"/>
+<circle cx="110" cy="262" r="44" fill="#F2D21B"/>
+<g fill="#1A1A1A"><circle cx="110" cy="240" r="13"/><circle cx="91" cy="273" r="13"/><circle cx="129" cy="273" r="13"/></g>
+<circle cx="110" cy="262" r="6" fill="#F2D21B"/>
+<text x="110" y="378" transform="rotate(-90 110 378)" text-anchor="middle" dominant-baseline="central" font-weight="800" font-size="46" fill="#C8102E">CBRN</text>
+<rect x="44" y="482" width="12" height="8" rx="2" fill="#D7261E"/><rect x="164" y="482" width="12" height="8" rx="2" fill="#D7261E"/>
+<rect x="46" y="489" width="128" height="7" rx="3" fill="#2A2F36"/>
+</svg>`,
+};
+/* výrez karosérie v súradniciach návrhu: x, y, šírka, dĺžka; poloha majáka od predku (podiel dĺžky) */
+const VCROP={RZP:[40,35,120,369,.285], RLP:[40,35,120,369,.285], PZ:[52,26,96,307,.43], HAS:[40,24,140,552,.094],
+  RV:[52,26,96,307,.43], MSP:[52,26,96,307,.43], HZS:[52,26,96,307,.43], CBRN:[40,24,140,472,.11]};
+const VBODY={RZP:0xF2D21B, RLP:0xF2D21B, RV:0xF2D21B, PZ:0xF3F5F8, MSP:0xF3F5F8, HAS:0xC8102E, CBRN:0xC8102E, HZS:0xC8102E};
+const VFONT="'Barlow Condensed','Arial Narrow','Roboto Condensed',sans-serif";
+const SPR={};   // druh → {canvas, tex, icon}
+let HERO='';
+/* malý kresliaci stroj pre podmnožinu SVG z návrhu (rect, path, line, circle, text, g, pattern) */
+function svgTransform(ctx, t){
+  if(!t) return;
+  for(const m of t.matchAll(/(translate|rotate|scale)\(([^)]*)\)/g)){
+    const a=m[2].split(/[\s,]+/).filter(Boolean).map(Number);
+    if(m[1]==='translate') ctx.translate(a[0], a[1]||0);
+    else if(m[1]==='scale') ctx.scale(a[0], a[1]??a[0]);
+    else { const r=a[0]*Math.PI/180; if(a.length>2){ ctx.translate(a[1],a[2]); ctx.rotate(r); ctx.translate(-a[1],-a[2]); } else ctx.rotate(r); }
+  }
+}
+function rrPath(x,y,w,h,r){ r=Math.min(r||0, w/2, h/2); const p=new Path2D(); p.moveTo(x+r,y); p.arcTo(x+w,y,x+w,y+h,r); p.arcTo(x+w,y+h,x,y+h,r); p.arcTo(x,y+h,x,y,r); p.arcTo(x,y,x+w,y,r); p.closePath(); return p; }
+function svgPaint(ctx, el, inh, defs, maxText){
+  for(const n of el.children){
+    const tag=n.tagName.toLowerCase();
+    if(tag==='defs' || tag==='filter' || tag==='pattern' || tag==='title') continue;
+    if(n.getAttribute('filter')) continue;                 // tiene a žiara – v hre ich robí 3D svetlo
+    const st={...inh};
+    for(const k of ['fill','stroke','stroke-width','stroke-dasharray','font-size','font-weight','text-anchor','dominant-baseline','letter-spacing']) if(n.hasAttribute(k)) st[k]=n.getAttribute(k);
+    ctx.save();
+    svgTransform(ctx, n.getAttribute('transform'));
+    if(n.hasAttribute('opacity')) ctx.globalAlpha*= +n.getAttribute('opacity');
+    if(tag==='g'){ svgPaint(ctx, n, st, defs, maxText); ctx.restore(); continue; }
+    const num=k=>+(n.getAttribute(k)||0);
+    let shape=null;
+    if(tag==='rect') shape=rrPath(num('x'), num('y'), num('width'), num('height'), num('rx'));
+    else if(tag==='path') shape=new Path2D(n.getAttribute('d'));
+    else if(tag==='circle'){ shape=new Path2D(); shape.arc(num('cx'), num('cy'), num('r'), 0, Math.PI*2); }
+    else if(tag==='line'){ shape=new Path2D(); shape.moveTo(num('x1'),num('y1')); shape.lineTo(num('x2'),num('y2')); }
+    const paint = v => {
+      if(!v || v==='none') return null;
+      const m=/^url\(#([^)]+)\)$/.exec(v);
+      if(!m) return v;
+      const pt=defs[m[1]]; if(!pt) return null;
+      const w=+pt.getAttribute('width'), h=+pt.getAttribute('height'), tile=document.createElement('canvas');
+      tile.width=Math.max(1,w*4); tile.height=Math.max(1,h*4);
+      const tc=tile.getContext('2d'); tc.scale(4,4); svgPaint(tc, pt, {fill:'#000'}, defs, maxText);
+      const pat=ctx.createPattern(tile,'repeat');
+      if(pat && pat.setTransform) pat.setTransform(new DOMMatrix().translate(+pt.getAttribute('x')||0, +pt.getAttribute('y')||0).scale(.25));
+      return pat;
+    };
+    const fill = tag==='line' ? null : paint(st.fill===undefined ? '#000' : st.fill), stroke=paint(st.stroke);
+    if(tag==='text'){
+      const fs=+(st['font-size']||16);
+      ctx.font=`${st['font-weight']||700} ${fs}px ${VFONT}`;
+      ctx.textAlign = st['text-anchor']==='middle' ? 'center' : st['text-anchor']==='end' ? 'right' : 'left';
+      ctx.textBaseline = st['dominant-baseline']==='central' ? 'middle' : 'alphabetic';
+      if('letterSpacing' in ctx) ctx.letterSpacing=(+(st['letter-spacing']||0))+'px';
+      ctx.fillStyle=fill||'#000';
+      const rot=/rotate/.test(n.getAttribute('transform')||'');
+      ctx.fillText(n.textContent.trim(), num('x'), num('y'), rot ? maxText[1] : maxText[0]);
+    } else if(shape){
+      if(fill){ ctx.fillStyle=fill; ctx.fill(shape); }
+      if(stroke){
+        ctx.strokeStyle=stroke; ctx.lineWidth=+(st['stroke-width']||1); ctx.lineCap='butt';
+        ctx.setLineDash(st['stroke-dasharray'] ? st['stroke-dasharray'].split(/[\s,]+/).map(Number) : []);
+        ctx.stroke(shape);
+      }
+    }
+    ctx.restore();
+  }
+}
+/* nakreslí vozidlo (výrez karosérie) do plátna; turn=true → predkom doprava */
+function drawVehicle(kind, scale, beacon, turn, cv){
+  const [cx,cy,cw,ch]=VCROP[kind];
+  const doc=new DOMParser().parseFromString(VSVG[kind].replaceAll('{{beacon}}', beacon), 'image/svg+xml'), root=doc.documentElement;
+  const defs={}; for(const pt of root.querySelectorAll('pattern')) defs[pt.getAttribute('id')]=pt;
+  cv=cv || document.createElement('canvas');
+  const W=Math.round((turn ? ch : cw)*scale), H=Math.round((turn ? cw : ch)*scale);
+  cv.width=W; cv.height=H;
+  const ctx=cv.getContext('2d'); ctx.clearRect(0,0,W,H);
+  if(turn){ ctx.translate(W,0); ctx.rotate(Math.PI/2); }
+  ctx.scale(scale,scale); ctx.translate(-cx,-cy);
+  svgPaint(ctx, root, {}, defs, [cw*.8, ch*.72]);
+  return cv;
+}
+function buildSprites(){
+  try{
+    for(const k of Object.keys(VSVG)){
+      const sp=SPR[k] || (SPR[k]={});
+      sp.canvas=drawVehicle(k, 2, '#1E3A6E', false, sp.canvas);
+      if(sp.tex) sp.tex.needsUpdate=true;
+      sp.icon=drawVehicle(k, 46/VCROP[k][2]*.5*(window.devicePixelRatio>1 ? 2 : 1), '#4DB0FF', true).toDataURL('image/png');
+    }
+    HERO=drawHero();
+  }catch(e){ HERO=''; }
+  dirty();
+}
+/* obrázok do menu: kolóna záchranných vozidiel na nočnej ceste */
+function drawHero(){
+  const W=1280, H=360, cv=document.createElement('canvas'); cv.width=W; cv.height=H;
+  const c=cv.getContext('2d');
+  const bg=c.createLinearGradient(0,0,0,H); bg.addColorStop(0,'#1d232c'); bg.addColorStop(1,'#161b22'); c.fillStyle=bg; c.fillRect(0,0,W,H);
+  c.fillStyle='#232a34'; for(let i=0;i<900;i++){ c.globalAlpha=Math.random()*.5; c.fillRect(Math.random()*W, Math.random()*H, 2, 2); } c.globalAlpha=1;
+  c.strokeStyle='#e9eef5'; c.lineWidth=4; c.setLineDash([]); c.beginPath(); c.moveTo(0,16); c.lineTo(W,16); c.moveTo(0,H-16); c.lineTo(W,H-16); c.stroke();
+  c.strokeStyle='#f2d21b'; c.lineWidth=5; c.setLineDash([46,34]); c.beginPath(); c.moveTo(0,H/2); c.lineTo(W,H/2); c.stroke(); c.setLineDash([]);
+  const lane=[[ ['HAS',36], ['PZ',600], ['MSP',920] ], [ ['RZP',150], ['RLP',540], ['RV',930] ]], k=.78;
+  lane.forEach((row,li)=>{
+    const cyLane = li===0 ? H*.27 : H*.73;
+    for(const [kind,x] of row){
+      const v=drawVehicle(kind, k, '#4DB0FF', true), y=cyLane-v.height/2;
+      c.save(); c.shadowColor='rgba(0,0,0,.55)'; c.shadowBlur=18; c.shadowOffsetY=6; c.drawImage(v, x, y); c.restore();
+      const bx=x+v.width*(1-VCROP[kind][4]), by=cyLane;
+      c.save(); c.globalCompositeOperation='lighter';
+      for(const dy of [-v.height*.23, v.height*.23]){
+        const g=c.createRadialGradient(bx, by+dy, 0, bx, by+dy, 30); g.addColorStop(0,'rgba(77,176,255,.55)'); g.addColorStop(1,'rgba(77,176,255,0)');
+        c.fillStyle=g; c.beginPath(); c.arc(bx, by+dy, 30, 0, Math.PI*2); c.fill();
+      }
+      const hx=x+v.width+60, hl=c.createRadialGradient(hx, cyLane, 0, hx, cyLane, 90); hl.addColorStop(0,'rgba(255,214,140,.3)'); hl.addColorStop(1,'rgba(255,214,140,0)');
+      c.fillStyle=hl; c.beginPath(); c.ellipse(hx, cyLane, 90, v.height*.7, 0, 0, Math.PI*2); c.fill();
+      c.restore();
+    }
+  });
+  return cv.toDataURL('image/jpeg', .86);
+}
+const vehImg = (kind, cls='vimg') => SPR[kind] && SPR[kind].icon ? `<img class="${cls}" src="${SPR[kind].icon}" alt="">` : ICON[kind];
 /* ---------- vozidlá ---------- */
 function box(w,h,l,color,em){ const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,l), new THREE.MeshStandardMaterial({color, roughness:.5, metalness:.2, emissive:em||0x000000})); m.castShadow=true; return m; }
 function vehicleModel(kind){
@@ -2053,29 +2456,26 @@ function vehicleModel(kind){
     rotor.position.y=.55; body.add(rotor); g.userData.rotor=rotor;
     const blade=box(2.1,.03,.08,0x111111); blade.position.y=.56; body.add(blade); g.userData.blade=blade;
   } else {
-    const car=kind==='PZ'||kind==='MSP'||kind==='RV'||kind==='HZS';
-    const len={HAS:1.25, CBRN:1.05, RZP:1, RLP:1, RV:.8, PZ:.8, MSP:.8, HZS:.85}[kind], wid=kind==='HAS'||kind==='CBRN' ? .48 : .42, hgt={HAS:.42,CBRN:.42,RZP:.42,RLP:.42}[kind]||.28;
-    const b=box(wid,hgt,len,K.color); b.position.y=hgt/2+.05; body.add(b);
-    if(kind==='RZP'||kind==='RLP'){ const s=box(wid+.01,.07,len*.75,0xe3263f); s.position.set(0,hgt*.55,-len*.08); body.add(s); }
-    if(kind==='RLP'){ const s=box(wid+.01,.05,len*.75,0xf4d35e); s.position.set(0,hgt*.3,-len*.08); body.add(s); }
-    if(kind==='RV'){ const s=box(wid+.01,.08,len*.6,0xe3263f); s.position.set(0,hgt*.55,0); body.add(s); const y=box(wid+.01,.05,len*.6,0xf4d35e); y.position.set(0,hgt*.25,0); body.add(y); }
-    if(kind==='PZ'){ const s=box(wid+.01,.08,len*.6,0x1f5ad8); s.position.set(0,hgt*.55,0); body.add(s); }
-    if(kind==='MSP'){ const s=box(wid+.01,.08,len*.6,0x2fb7ae); s.position.set(0,hgt*.55,0); body.add(s); }
-    if(kind==='HZS'){ const s=box(wid+.01,.06,len*.9,0xffffff); s.position.set(0,hgt*.6,0); body.add(s); }
-    if(kind==='CBRN'){ const s=box(wid+.01,.06,len*.9,0x1a1a1a); s.position.set(0,hgt*.55,0); body.add(s); }
-    if(car){ const c=box(wid*.86,.17,len*.5,glass); c.position.set(0,hgt+.13,-len*.05); body.add(c); }
-    else { const c=box(wid*.9,.12,.18,glass); c.position.set(0,hgt*.7,len*.42); body.add(c); }
-    if(kind==='HAS'){ for(const sx of [-.12,.12]){ const r=box(.04,.04,len*.85,0xb9c2d0); r.position.set(sx,hgt+.1,-.05); body.add(r); } }
-    const lb=[box(.12,.06,.1,0x330000,0x000000), box(.12,.06,.1,0x000033,0x000000)];
-    lb[0].position.set(-.1, (car ? hgt+.25 : hgt+.12), len*.2); lb[1].position.set(.1, lb[0].position.y, len*.2);
+    /* karoséria: strecha s grafikou z návrhu, boky vo farbe vozidla, predok sklo */
+    const [,,cw,ch,bf]=VCROP[kind], L={HAS:1.5, CBRN:1.3, RZP:1.2, RLP:1.2}[kind]||1.0, w=Math.max(.3, L*cw/ch*1.05), h={HAS:.46,CBRN:.46,RZP:.44,RLP:.44}[kind]||.3;
+    const sp=SPR[kind];
+    if(sp && sp.canvas && !sp.tex){ sp.tex=new THREE.CanvasTexture(sp.canvas); sp.tex.center.set(.5,.5); sp.tex.rotation=Math.PI; sp.tex.anisotropy=Math.min(8, R3.capabilities.getMaxAnisotropy()); }
+    const side=new THREE.MeshStandardMaterial({color:VBODY[kind], roughness:.55, metalness:.15});
+    const top=sp && sp.tex ? new THREE.MeshStandardMaterial({map:sp.tex, roughness:.5, metalness:.1}) : side;
+    const front=new THREE.MeshStandardMaterial({color:0x1c2733, roughness:.3, metalness:.4});
+    const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,L), [side, side, top, side, front, side]); b.position.y=h/2+.06; b.castShadow=true; body.add(b);
+    const wheel=new THREE.CylinderGeometry(.1,.1,.06,12), wm=new THREE.MeshStandardMaterial({color:0x15181d, roughness:.9});
+    for(const sx of [-1,1]) for(const sz of [-1,1]){ const wh=new THREE.Mesh(wheel, wm); wh.rotation.z=Math.PI/2; wh.position.set(sx*(w/2+.005), .1, sz*L*.32); body.add(wh); }
+    const bz=L/2-bf*L, lb=[box(w*.34,.05,L*.045,0x330000,0x000000), box(w*.34,.05,L*.045,0x000033,0x000000)];
+    lb[0].position.set(-w*.21, h+.085, bz); lb[1].position.set(w*.21, h+.085, bz);
     body.add(lb[0], lb[1]); g.userData.bar=lb;
   }
   body.scale.setScalar(S);
-  const ring=new THREE.Mesh(new THREE.RingGeometry(.8,1.05,28), new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:.75, blending:THREE.AdditiveBlending, depthWrite:false}));
+  const ring=new THREE.Mesh(new THREE.RingGeometry(1.15,1.45,32), new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:.75, blending:THREE.AdditiveBlending, depthWrite:false}));
   ring.rotation.x=-Math.PI/2; ring.position.y=.08; g.add(ring); g.userData.ring=ring;
   const ga=glowSprite(0xff2030, 2.2, 0), gb=glowSprite(0x2060ff, 2.2, 0); ga.position.set(-.3,1,0); gb.position.set(.3,1,0); g.add(ga, gb); g.userData.glow=[ga,gb];
   const head=glowSprite(0xffe2a8, 3, 0); head.position.set(0,.4,1.6); body.add(head); g.userData.head=head;
-  const hit=new THREE.Mesh(new THREE.SphereGeometry(1.4,8,6), new THREE.MeshBasicMaterial({visible:false})); hit.position.y=.6; g.add(hit);
+  const hit=new THREE.Mesh(new THREE.SphereGeometry(1.6,8,6), new THREE.MeshBasicMaterial({visible:false})); hit.position.y=.6; g.add(hit);
   pickables.push(hit);
   return {g, hit};
 }
@@ -2413,7 +2813,7 @@ function renderDispatch(){
   const rows=cands.slice(0,6).map(c=>{
     const other=c.u.inc ? incById(c.u.inc) : null;
     return `<div class="cand">
-      <span class="tag" style="--sc:${STATUS_CSS[c.u.status]}">${esc(c.u.cs)}</span>
+      <span class="tag" style="--sc:${STATUS_CSS[c.u.status]}">${esc(c.u.cs)}</span>${vehImg(c.u.kind)}
       <span class="ttl">${esc(c.u.name)}${other?` <span class="sub">· presmerovať z #${other.no}</span>`:''}${recIds.has(c.u.id)?' <span class="sub">· odporúčaná</span>':''}</span>
       <span class="eta">${fmtMin(c.eta)}</span>
       <button class="btn sm${recIds.has(c.u.id)?' go':''}" data-act="send" data-id="${inc.id}" data-unit="${c.u.id}">Vyslať</button>
@@ -2495,7 +2895,7 @@ function renderUnits(){
   if(su){
     const canPost=(su.status===1 || su.status===2) && AMB_KINDS.includes(su.kind) && !su.temp && !KINDS[su.kind].air;
     const tg=canPost ? standbyTargets(su) : [];
-    h+=`<div class="usel"><div class="row"><span class="veh">${ICON[su.kind]}</span><b class="grow">${esc(su.name)}</b><button class="btn sm ghost" data-act="unit" data-id="${su.id}" aria-label="Zrušiť výber">✕</button></div>
+    h+=`<div class="usel"><div class="row"><span class="veh">${vehImg(su.kind)}</span><b class="grow">${esc(su.name)}</b><button class="btn sm ghost" data-act="unit" data-id="${su.id}" aria-label="Zrušiť výber">✕</button></div>
       <div class="sub">${STATUS[su.status]} · ${esc(unitLine(su))}</div>
       ${canPost ? `<div class="k">Presunúť do zálohy (dojazd do obce teraz)</div><div class="acts">${tg.map(n=>`<button class="btn" data-act="post" data-unit="${su.id}" data-id="${n.id}">${esc(n.name)} · ${fmtMin(COV[n.id])}</button>`).join('') || '<span class="sub">Kraj je teraz dobre pokrytý.</span>'}${su.post ? `<button class="btn" data-act="post" data-unit="${su.id}" data-id="${su.home}">Späť na základňu</button>` : ''}</div>` : ''}
     </div>`;
@@ -2505,7 +2905,7 @@ function renderUnits(){
   for(const u of list){
     const can=sel && kinds.has(u.kind) && dispatchable(u, sel);
     h+=`<div class="unit${G.sel.unit===u.id?' sel':''}" style="--sc:${STATUS_CSS[u.status]}" data-act="unit" data-id="${u.id}">
-      <span class="veh">${ICON[u.kind]}</span>
+      <span class="veh">${vehImg(u.kind)}</span>
       <span class="nm">${esc(u.name)}</span>
       ${can ? '<span class="send">Vyslať</span>' : ''}
       <span class="what"><span class="st">${STATUS[u.status]}</span> · ${esc(unitLine(u))}</span>
@@ -2620,6 +3020,7 @@ function showMenu(tab){
   }
   ov.innerHTML=`<div class="sheet">
     <h1 class="title">Linka <b>112</b><small>Košický kraj</small></h1>
+    ${HERO ? `<img class="hero" src="${HERO}" alt="Záchranné vozidlá Košického kraja zhora: hasiči, polícia, mestská polícia, RZP, RLP a RV">` : ''}
     <p class="lead">Si dispečer integrovaného záchranného systému. Zdvíhaš tiesňové volania a riadiš posádky záchranky, hasičov, polície, mestskej polície a horskej služby po celom kraji.</p>
     <div class="prog"><div><div class="k">Tvoj postup</div><b>Úroveň ${PROG.level}</b></div><div class="grow"><div class="track"><i style="width:${PROG.xp/xpNeed(PROG.level)*100}%"></i></div><div class="k" style="margin-top:5px">${PROG.xp} / ${xpNeed(PROG.level)} XP · ${owned} odomknutých schopností · rekord ${PROG.best} b.</div></div>
       <button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button></div>
@@ -2852,8 +3253,13 @@ function frame(now){
 /* ---------- štart ---------- */
 $('#btnVoice').textContent=PROG.voice ? 'Hlas zap.' : 'Hlas';
 $('#legend').innerHTML=[1,2,3,4,5,6].map(s=>`<span style="--sc:var(--s${s})">${s} ${STATUS[s]}</span>`).join('');
+buildSprites();
 G=newGame('normal','demo');
 init3D();
+if(document.fonts && document.fonts.load){
+  Promise.race([Promise.all([document.fonts.load('800 40px "Barlow Condensed"'), document.fonts.load('700 20px "Barlow Condensed"')]), new Promise(r=>setTimeout(r,2500))])
+    .then(()=>{ buildSprites(); if(G && G.mode==='demo' && !$('#overlay').hidden && $('#overlay').classList.contains('menu')) showMenu(); }).catch(()=>{});
+}
 new ResizeObserver(()=>{ resize3D(); }).observe($('#mapbox'));
 showMenu();
 renderUI();
