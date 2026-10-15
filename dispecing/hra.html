@@ -222,24 +222,96 @@
   .sk .ok{font:700 11px var(--f-mono); color:var(--bc);}
 
   .mtabs{display:none; grid-area:tabs; gap:6px;}
-  .mtabs .btn{flex:1;}
+  .mtabs .btn{flex:1; gap:6px; padding-inline:6px;}
   .mtabs .btn.on{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium);}
+  .mtabs .btn .badge{background:var(--line); color:var(--text);}
+  .mtabs .btn .badge.hot{background:var(--bad); color:#fff;}
+  .mtabs .btn.on .badge{background:var(--on-sodium); color:var(--sodium);}
+  .mtabs .grip{flex:0 0 46px; font-size:18px;}
+  .ringbar{display:none;}
+  #btnPause .ico{display:none;} #btnPause .pi, #btnPause .pl{width:16px; height:16px;}
+  #btnSkills .m, .ctrl .more, .xpline{display:none;}
+
+  /* filtre posádok */
+  .uf{display:flex; gap:5px; flex-wrap:wrap;}
+  .uf .btn{min-height:28px; padding:3px 9px; font-size:12px; border-radius:999px;}
+  .uf .btn.on{background:var(--sodium); border-color:var(--sodium); color:var(--on-sodium);}
 
   @media (max-width:1180px){ .tree{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  /* ---------- telefón: mapa na celú plochu, dole vysúvací panel so záložkami ---------- */
   @media (max-width:860px){
-    .app{gap:8px; padding-block:8px; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(220px,46%) auto minmax(0,1fr); grid-template-areas:"bar" "map" "tabs" "rail";}
-    .rail-left, .rail-right{grid-area:rail;}
-    .app[data-tab="pult"] .rail-right, .app[data-tab="units"] .rail-left{display:none;}
-    .mtabs{display:flex;}
-    .bar{gap:6px 12px; padding:6px 10px;}
-    .brand{font-size:21px;} .brand small{display:none;}
-    .clock{font-size:22px;} .lvl{width:96px;} .lvl .v{font-size:15px;} .lvl .k{display:none;} .stat .v{font-size:22px;} .rep{width:84px;}
+    .app{gap:0; padding:0; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto auto;
+      grid-template-areas:"bar" "map" "rail" "tabs";}
+    .bar{position:relative; border-radius:0; border-width:0 0 1px; gap:6px 9px; flex-wrap:wrap;
+      padding:6px max(10px, env(safe-area-inset-right, 0px)) 8px max(10px, env(safe-area-inset-left, 0px));
+      padding-top:max(6px, env(safe-area-inset-top, 0px));}
+    .brand{font-size:23px;} .brand .t, .brand small{display:none;}
+    .svc .k, .lvl, .score .k{display:none;}
+    .clock{font-size:21px; gap:6px;}
+    .stat .v{font-size:19px;}
+    .rep{width:auto; flex:1 1 60px; min-width:54px; max-width:140px;}
+    .rep .k{letter-spacing:.06em;}
+    #btnSkills .t{display:none;} #btnSkills .m{display:inline;}
+    .spacer{display:none;}
+    .ctrl{gap:4px; margin-left:auto;}
     .ctrl .btn{padding:4px 8px;}
+    .ctrl .opt{display:none;} .ctrl .more{display:inline-flex; min-width:36px; font-size:18px;}
+    #btnPause{min-width:36px;} #btnPause .t{display:none;} #btnPause .pi{display:block;} #btnPause.paused .pi{display:none;} #btnPause.paused .pl{display:block;}
+    .rep .k{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .live{width:7px; height:7px;}
+    .app[data-more="1"] .ctrl{flex-basis:100%; justify-content:flex-end;}
+    .app[data-more="1"] .ctrl .opt{display:inline-flex;}
+    .xpline{display:block; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--line);}
+    .xpline i{display:block; height:100%; width:0; background:var(--sodium); transition:width .3s;}
+
+    .mapbox{border-radius:0; border:0;}
+    .rail{grid-area:rail; border-radius:16px 16px 0 0; border-width:1px 0 0; padding:12px max(12px, env(safe-area-inset-right, 0px)) 12px max(12px, env(safe-area-inset-left, 0px));
+      height:46vh; height:46dvh; box-shadow:0 -12px 30px rgba(0,0,0,.45); gap:12px;}
+    .app[data-sheet="full"] .rail{height:calc(100vh - 210px); height:calc(100dvh - 210px);}
+    .app[data-sheet="min"] .rail{display:none;}
+    .app[data-tab="units"] .rail-left, .app:not([data-tab="units"]) .rail-right{display:none;}
+    .app[data-tab="calls"] #dispatch, .app[data-tab="calls"] #incs, .app[data-tab="incs"] #calls{display:none;}
+    .mtabs{display:flex; background:var(--panel); border-top:1px solid var(--line);
+      padding:6px max(10px, env(safe-area-inset-right, 0px)) max(6px, env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px));}
+    .mtabs .btn{min-height:44px; font-size:14px;}
+
+    .ringbar{display:flex; position:absolute; z-index:4; top:8px; left:50%; transform:translateX(-50%); width:min(94%,460px);
+      align-items:center; gap:10px; padding:8px 8px 8px 12px; border-radius:14px; background:color-mix(in srgb, var(--panel) 96%, transparent);
+      border:1px solid var(--sodium); box-shadow:0 8px 24px rgba(0,0,0,.5);}
+    .ringbar[hidden]{display:none;}
+    .ringbar.ring{animation:ring 1s ease-in-out infinite;}
+    .ringbar .phone{color:var(--sodium); display:inline-flex;}
+    .ringbar.ring .phone{animation:wiggle .5s ease-in-out infinite;}
+    .ringbar .txt{flex:1; min-width:0; display:grid; line-height:1.2;}
+    .ringbar .txt b{font-size:14px;} .ringbar .txt span{font:500 12px var(--f-mono); color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .ringbar .btn{min-height:40px;}
+    .hints{top:66px;}
+    .ringbar[hidden] ~ .hints{top:10px;}
+    .hint{font-size:12px;}
+    .mapbtns{right:8px; bottom:8px;}
+    .mapbtns .btn{min-height:36px;}
+
+    .call{padding:10px;} .quote{font-size:15px;}
+    .cls .btn{min-height:44px;}
+    .cand{grid-template-columns:auto minmax(0,1fr) auto auto; gap:6px; font-size:13px;}
+    .cand .btn{min-height:36px;}
+    .unit{padding:7px 9px;}
     .diffs, .sumgrid{grid-template-columns:1fr;}
     .tree{grid-template-columns:1fr;}
     .sheet{padding:18px;}
     .legend{display:none;}
-    .l3.town{font-size:11px;} .l3.town.big{font-size:14px;} .l3.poi{display:none;}
+    .l3.town{font-size:10px;} .l3.town.big{font-size:13px;} .l3.poi{display:none;}
+    .l3.unit{font-size:9px; padding:2px 4px;}
+    .l3.inc{font-size:10px; padding:2px 5px;}
+  }
+  @media (max-width:430px){ .brand{display:none;} }
+  @media (max-width:370px){ .bar{gap:6px 7px;} .clock{font-size:19px;} }
+  @media (max-width:860px) and (orientation:landscape) and (max-height:520px){
+    .app{grid-template-columns:minmax(0,1fr) minmax(280px,42%); grid-template-rows:auto minmax(0,1fr) auto; grid-template-areas:"bar bar" "map rail" "map tabs";}
+    .rail, .app[data-sheet="full"] .rail{height:auto; border-radius:0; border-width:0 0 0 1px;}
+    .app[data-sheet="min"] .rail{display:flex;}
+    .mtabs .grip{display:none;}
+    .mtabs{border-left:1px solid var(--line);}
   }
   @media (prefers-reduced-motion: reduce){
     .call.ring, .call.ring .phone, .wave i, .live, .hint, .l3.fx{animation:none;} .track i, .diff{transition:none;}
@@ -249,21 +321,23 @@
 </head>
 <body>
 
-<div class="app" id="app" data-tab="pult" data-mode="demo">
+<div class="app" id="app" data-tab="calls" data-sheet="min" data-mode="demo">
   <header class="bar">
-    <div class="brand">Linka <b>112</b><small>Košický kraj</small></div>
-    <div><div class="k">Služba</div><div class="clock"><span class="live" title="Linka je v prevádzke"></span><span id="clock">0:00</span></div></div>
+    <div class="brand"><span class="t">Linka </span><b>112</b><small>Košický kraj</small></div>
+    <div class="svc"><div class="k">Služba</div><div class="clock"><span class="live" title="Linka je v prevádzke"></span><span id="clock">0:00</span></div></div>
     <div class="lvl"><div class="row"><span class="v" id="lvlTxt">Úroveň 1</span></div><div class="track"><i id="xpBar"></i></div><div class="k" id="xpTxt">0 / 100 XP</div></div>
-    <button class="btn sm" data-act="skills" id="btnSkills">Schopnosti <span class="badge" id="ptsBadge">1</span></button>
-    <div class="stat"><div class="k">Skóre</div><div class="v" id="score">0</div></div>
+    <button class="btn sm" data-act="skills" id="btnSkills"><span class="t">Schopnosti</span><span class="m" id="lvlMini">Úr. 1</span> <span class="badge" id="ptsBadge">1</span></button>
+    <div class="stat score"><div class="k">Skóre</div><div class="v" id="score">0</div></div>
     <div class="rep" id="repBox"><div class="k">Dôvera <span id="repTxt">100 %</span></div><div class="track"><i id="repBar"></i></div></div>
     <div class="spacer"></div>
     <div class="ctrl">
-      <button class="btn sm ghost" data-act="pause" id="btnPause">Pauza</button>
-      <button class="btn sm ghost" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
-      <button class="btn sm ghost" data-act="light" id="btnLight" title="Osvetlenie mapy">Večer</button>
-      <button class="btn sm ghost" data-act="mute" id="btnMute">Zvuk</button>
+      <button class="btn sm ghost" data-act="pause" id="btnPause" aria-label="Pauza"><svg class="ico pi" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="ico pl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg><span class="t">Pauza</span></button>
+      <button class="btn sm ghost opt" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
+      <button class="btn sm ghost opt" data-act="light" id="btnLight" title="Osvetlenie mapy">Večer</button>
+      <button class="btn sm ghost opt" data-act="mute" id="btnMute">Zvuk</button>
+      <button class="btn sm ghost more" data-act="more" id="btnMore" aria-label="Ďalšie nastavenia" aria-expanded="false">⋯</button>
     </div>
+    <div class="xpline"><i id="xpLine"></i></div>
   </header>
 
   <section class="rail rail-left" id="railL">
@@ -275,6 +349,7 @@
   <section class="mapbox" id="mapbox">
     <canvas id="map" aria-label="3D mapa Košického kraja s udalosťami a posádkami"></canvas>
     <div class="labels" id="labels"></div>
+    <div class="ringbar" id="ringBar" hidden></div>
     <div class="hints" id="hints"></div>
     <div class="mapbtns">
       <button class="btn" data-act="view" title="Zobraziť celý kraj">Celý kraj</button>
@@ -287,8 +362,10 @@
   </section>
 
   <nav class="mtabs" id="mtabs">
-    <button class="btn on" data-act="tab" data-tab="pult" id="tabPult">Hovory a udalosti</button>
+    <button class="btn" data-act="tab" data-tab="calls" id="tabCalls">Hovory</button>
+    <button class="btn" data-act="tab" data-tab="incs" id="tabIncs">Udalosti</button>
     <button class="btn" data-act="tab" data-tab="units" id="tabUnits">Posádky</button>
+    <button class="btn grip" data-act="grip" id="btnGrip" aria-label="Zväčšiť panel">▴</button>
   </nav>
 
   <div class="overlay" id="overlay"></div>
@@ -332,7 +409,8 @@ const ICON={
   mass:    svg('<path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/>'),
   phone:   svg('<path d="M6.5 3h3l2 5-2.2 1.4a11 11 0 0 0 5.3 5.3L16 12.5l5 2v3a2 2 0 0 1-2 2A16.5 16.5 0 0 1 4.5 5a2 2 0 0 1 2-2z"/>'),
   RZP:     svg('<path d="M2.5 7h11v9.5h-11zM13.5 10h4.2l3.3 3.5v3h-7.5z"/><circle cx="6.5" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/><path d="M8 9.5v4.5M5.8 11.75h4.4"/>'),
-  RLP:     svg('<path d="M3 16.5h18v-3l-2.2-.8-2.3-4H7.5l-2.3 4L3 13.5z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/><path d="M12 3v4M10 5h4"/>'),
+  RLP:     svg('<path d="M2.5 7h11v9.5h-11zM13.5 10h4.2l3.3 3.5v3h-7.5z"/><circle cx="6.5" cy="17.5" r="1.7"/><circle cx="17" cy="17.5" r="1.7"/><path d="M8 9.5v4.5M5.8 11.75h4.4"/><circle cx="19" cy="5" r="2.2" fill="currentColor" stroke="none"/>'),
+  RV:      svg('<path d="M3 16.5h18v-3l-2.2-.8-2.3-4H7.5l-2.3 4L3 13.5z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/><path d="M12 3v4M10 5h4"/>'),
   HAS:     svg('<path d="M2 10h13v6.5H2zM15 12h4l3 3v1.5h-7z"/><circle cx="6" cy="17.5" r="1.7"/><circle cx="18" cy="17.5" r="1.7"/><path d="M3 7.5l12-2M5 7.1v2.9M8.5 6.5v3.5M12 5.9V10"/>'),
   PZ:      svg('<path d="M3 16.5h18v-3l-2.2-.8-2.3-4H7.5l-2.3 4L3 13.5z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/><path d="M10 5h4M12 5v3.7"/>'),
   MSP:     svg('<path d="M3 16.5h18v-3l-2.2-.8-2.3-4H7.5l-2.3 4L3 13.5z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/><path d="M9.5 6.5V3.5l2.5 2.2 2.5-2.2v3"/>'),
@@ -381,6 +459,27 @@ const TOWNS=[
   ['pl','Plešivec',20.4006,48.5464,2300,'v Plešivci'],
   ['mg','Margecany',21.0060,48.8913,2000,'v Margecanoch'],
   ['dd','Dedinky',20.3900,48.8660,400,'v Dedinkách'],
+  ['sm','Smižany',20.5170,48.9570,8900,'v Smižanoch'],
+  ['ca','Čaňa',21.3300,48.6000,5800,'v Čani'],
+  ['sv','Spišské Vlachy',20.8020,48.9510,3700,'v Spišských Vlachoch'],
+  ['na','Nálepkovo',20.5900,48.8480,2500,'v Nálepkove'],
+  ['bi','Bidovce',21.4330,48.7410,1400,'v Bidovciach'],
+  ['sti','Štítnik',20.3600,48.6600,1400,'v Štítniku'],
+  ['ve','Veľaty',21.6700,48.5300,1300,'vo Veľatoch'],
+  ['bo','Borša',21.7080,48.3950,1100,'v Borši'],
+  ['pa','Palín',21.9800,48.6700,1100,'v Palíne'],
+  ['li','Lipovník',20.6200,48.6300,900,'v Lipovníku'],
+  ['chr','Chrastné',21.3500,48.8000,760,'v Chrastnom'],
+  ['vr','Veľké Raškovce',21.9200,48.5500,300,'vo Veľkých Raškovciach'],
+];
+/* stanice záchrannej služby v mestských častiach Košíc (vyhláška MZ SR 116/2025 Z. z.) */
+const STATIONS=[
+  ['ke_sm','Košice-Staré Mesto',21.2585,48.7215],
+  ['ke_ta','Košice-Sídlisko Ťahanovce',21.2650,48.7600],
+  ['ke_z','Košice-Západ',21.2350,48.7050],
+  ['ke_j','Košice-Juh',21.2620,48.7020],
+  ['ke_kr','Košice-Krásna',21.3320,48.6690],
+  ['ke_sa','Košice-Šaca',21.1650,48.6280],
 ];
 /* body na cestách (priesmyky, hraničné priechody) */
 const WAYPOINTS=[
@@ -410,13 +509,16 @@ const POIS=[
 /* cesty: [a, b, druh] – M hlavná, R cesta, T turistický chodník */
 const ROADS=[
   ['ke','w_sl','M'],['w_sl','se','M'],['se','mi','M'],['mi','so','M'],['so','w_vn','M'],
-  ['ke','mo','M'],['mo','tu','M'],['tu','rv','M'],['rv','pl','M'],['ke','w_ml','M'],['ke','w_ky','M'],
-  ['se','tv','R'],['tv','mi','R'],['tv','w_snm','R'],['w_snm','kc','R'],['kc','ct','R'],['kc','vk','R'],['vk','mi','R'],
-  ['mi','st','R'],['mi','l_si','R'],['l_si','so','R'],['w_ky','mg','R'],['mg','kr','R'],['kr','snv','R'],['mg','gl','R'],
-  ['gl','me','R'],['me','ja','R'],['ja','ke','R'],['rv','db','R'],['db','dd','R'],['dd','snv','R'],['snv','w_ci','R'],
+  ['ke','mo','M'],['mo','tu','M'],['tu','li','M'],['li','rv','M'],['rv','pl','M'],['ke','w_ml','M'],['ke','w_ky','M'],
+  ['se','tv','R'],['tv','mi','R'],['tv','ve','R'],['ve','w_snm','R'],['w_snm','kc','R'],['w_snm','bo','R'],['bo','kc','R'],['kc','ct','R'],['kc','vk','R'],['vk','mi','R'],
+  ['mi','st','R'],['mi','l_si','R'],['l_si','so','R'],['w_ky','mg','R'],['mg','kr','R'],['kr','sv','R'],['sv','snv','R'],['mg','gl','R'],
+  ['gl','me','R'],['me','ja','R'],['ja','ke','R'],['rv','db','R'],['db','dd','R'],['dd','snv','R'],['snv','sm','R'],['sm','w_ci','R'],
+  ['ke','ca','R'],['ca','w_ml','R'],['ke','bi','R'],['bi','se','R'],['ke','chr','R'],['chr','bi','R'],['gl','na','R'],['na','dd','R'],
+  ['mi','pa','R'],['pa','vk','R'],['vk','vr','R'],['vr','tv','R'],['rv','sti','R'],
+  ['ke','ke_sm','R'],['ke','ke_ta','R'],['ke','ke_z','R'],['ke','ke_j','R'],['ke','ke_kr','R'],['ke_kr','ca','R'],['ke','ke_sa','R'],['ke_sa','i_us','R'],
   ['i_us','ke','R'],['i_us','mo','R'],['i_ch','st','R'],['i_zs','ke','R'],['l_ru','mg','R'],['l_ru','w_ky','R'],
   ['p_sb','w_ci','T'],['p_kl','w_ci','T'],['p_kl','dd','T'],['p_vo','rv','T'],['p_kh','me','T'],['p_zd','tu','T'],
-  ['p_mo','so','T'],['p_oc','rv','T'],['p_dm','pl','T'],
+  ['p_mo','so','T'],['p_oc','sti','T'],['p_dm','pl','T'],
 ];
 const HOSPITALS=['ke','mi','snv','tv','rv','kc'];
 const RIVERS=[
@@ -469,6 +571,7 @@ function groundY(x,z){ return heightKm(x,z)*EXAG; }
 const NODES={};   // id → {id,name,x,z,y,type,loc,pop,poi}
 for(const [id,name,lo,la,pop,loc] of TOWNS){ const p=proj(lo,la); NODES[id]={id,name,...p,type:'town',pop,loc,r:clamp(.5+Math.sqrt(pop)/170,.6,3.4)}; }
 for(const [id,name,lo,la,loc,kind] of WAYPOINTS){ const p=proj(lo,la); NODES[id]={id,name,...p,type:'wp',loc,poi:kind}; }
+for(const [id,name,lo,la] of STATIONS){ const p=proj(lo,la); NODES[id]={id,name,...p,type:'st',loc:'v Košiciach'}; }
 for(const [id,name,lo,la,loc,kind] of POIS){ const p=proj(lo,la); NODES[id]={id,name,...p,type:'poi',loc,poi:kind}; }
 for(const n of Object.values(NODES)) n.y=groundY(n.x,n.z);
 const EDGES=ROADS.map(([a,b,t])=>{ const A=NODES[a], B=NODES[b]; return {a,b,t, len:Math.hypot(A.x-B.x,A.z-B.z)*(t==='T'?1.35:1.15)}; });
@@ -480,22 +583,39 @@ for(const e of EDGES){ ADJ[e.a].push([e.b,e]); ADJ[e.b].push([e.a,e]); }
    ============================================================ */
 /* rýchlosti v km/h (s majákom); trail = rýchlosť na turistickom chodníku */
 const KINDS={
-  RZP: {label:'Záchranka RZP',            short:'RZP',  tag:'Z',  speed:120, color:0xf2f5fa},
-  RLP: {label:'Lekár RLP',                short:'RLP',  tag:'L',  speed:130, color:0xf2f5fa},
+  RZP: {label:'Rýchla zdravotná pomoc',   short:'RZP',  tag:'Z',  speed:120, color:0xf2f5fa},
+  RLP: {label:'Rýchla lekárska pomoc',    short:'RLP',  tag:'L',  speed:120, doc:true, color:0xf2f5fa},
+  RV:  {label:'Lekár v stretávacom systéme', short:'RV', tag:'RV', speed:140, doc:true, color:0xf2f5fa},
   HAS: {label:'Hasiči HaZZ',              short:'HaZZ', tag:'H',  speed:95,  color:0xd0283a},
   PZ:  {label:'Polícia PZ',               short:'PZ',   tag:'PZ', speed:130, color:0xe9eef8},
   MSP: {label:'Mestská polícia',          short:'MsP',  tag:'MP', speed:100, color:0xe9eef8},
   HZS: {label:'Horská záchranná služba',  short:'HZS',  tag:'HS', speed:105, trail:24, color:0xc8102e},
   CBRN:{label:'Chemická jednotka HaZZ',   short:'CBRN', tag:'CH', speed:90,  color:0xc8d82a},
-  LZS: {label:'Letecká záchranná služba', short:'LZS',  tag:'V',  speed:240, air:true, color:0xd8262f},
+  LZS: {label:'Vrtuľník záchrannej služby', short:'LZS', tag:'V',  speed:240, air:true, doc:true, color:0xd8262f},
 };
 const STATUS={1:'Voľná',2:'Na základni',3:'Výjazd',4:'Na mieste',5:'Transport',6:'V nemocnici'};
 /* posádky: id, druh, základňa; skill = odomyká ju schopnosť */
+/* posádky: id, druh, základňa, schopnosť (ak ju treba odomknúť), názov.
+   Záchranná služba: sídla a typy ambulancií podľa vyhlášky MZ SR č. 116/2025 Z. z. (Košický kraj). */
 const UNITS_DEF=[
-  ['Z1','RZP','ke'],['Z2','RZP','ke'],['Z3','RZP','mi'],['Z4','RZP','snv'],['Z5','RZP','rv'],
+  ['L1','RLP','ke_sm','','RLP Košice-Staré Mesto 1'],['RV1','RV','ke_z','','RV Košice-Západ 2'],
+  ['Z1','RZP','ke_j','','RZP Košice-Juh 2'],['Z2','RZP','ke_z','','RZP Košice-Západ 3'],
+  ['L2','RLP','mi','','RLP Michalovce 2'],['Z3','RZP','snv','','RZP Spišská Nová Ves 2'],
+  ['L3','RLP','rv','','RLP Rožňava 2'],['L4','RLP','tv','','RLP Trebišov 1'],
   ['H1','HAS','ke'],['H2','HAS','snv'],['PZ1','PZ','ke'],['PZ2','PZ','mi'],['MP1','MSP','ke'],
-  ['Z6','RZP','tv','z_tv'],['Z7','RZP','kc','z_kc'],['Z8','RZP','so','z_so'],['Z9','RZP','gl','z_gl'],['Z10','RZP','mo','z_mo'],
-  ['L1','RLP','ke','z_rlp'],['V1','LZS','ke','z_lzs'],
+  ['Z4','RZP','ke_ta','z_ke','RZP Košice-Sídlisko Ťahanovce 1'],['Z5','RZP','ke_sa','z_ke','RZP Košice-Šaca 1'],['Z6','RZP','ke_kr','z_ke','RZP Košice-Krásna 1'],
+  ['L5','RLP','mo','z_ko','RLP Moldava nad Bodvou 1'],['Z7','RZP','ca','z_ko','RZP Čaňa 1'],['Z8','RZP','me','z_ko','RZP Medzev 1'],
+  ['Z9','RZP','bi','z_ko','RZP Bidovce 1'],['Z10','RZP','chr','z_ko','RZP Chrastné 1'],
+  ['Z11','RZP','mi','z_mi','RZP Michalovce 3'],['Z12','RZP','st','z_mi','RZP Strážske 1'],['Z13','RZP','pa','z_mi','RZP Palín 1'],
+  ['Z14','RZP','vk','z_mi','RZP Veľké Kapušany 1'],['Z15','RZP','vk','z_mi','RZP Veľké Kapušany 2'],['Z16','RZP','vr','z_mi','RZP Veľké Raškovce 1'],
+  ['L6','RLP','so','z_so','RLP Sobrance 1'],
+  ['Z17','RZP','tv','z_tv','RZP Trebišov 2'],['Z18','RZP','se','z_tv','RZP Sečovce 1'],['Z19','RZP','ve','z_tv','RZP Veľaty 1'],['Z20','RZP','bo','z_tv','RZP Borša 1'],
+  ['L7','RLP','kc','z_kc','RLP Kráľovský Chlmec 1'],['Z21','RZP','kc','z_kc','RZP Kráľovský Chlmec 2'],
+  ['L8','RLP','snv','z_spis','RLP Spišská Nová Ves 1'],['L9','RLP','kr','z_spis','RLP Krompachy 1'],['Z22','RZP','sm','z_spis','RZP Smižany 1'],['Z23','RZP','sv','z_spis','RZP Spišské Vlachy 1'],
+  ['Z24','RZP','gl','z_gl','RZP Gelnica 1'],['Z25','RZP','mg','z_gl','RZP Margecany 1'],['Z26','RZP','na','z_gl','RZP Nálepkovo 1'],
+  ['Z27','RZP','rv','z_gem','RZP Rožňava 3'],['Z28','RZP','db','z_gem','RZP Dobšiná 1'],['Z29','RZP','sti','z_gem','RZP Štítnik 1'],
+  ['Z30','RZP','pl','z_gem','RZP Plešivec 1'],['Z31','RZP','li','z_gem','RZP Lipovník 1'],
+  ['V1','LZS','ke','z_lzs','Vrtuľník Košice'],
   ['H3','HAS','mi','h_mi'],['H4','HAS','rv','h_rv'],['H5','HAS','tv','h_tv'],['CH1','CBRN','ke','h_cbrn'],
   ['PZ3','PZ','snv','p_snv'],['PZ4','PZ','rv','p_rv'],['PZ5','PZ','tv','p_tv'],['MP2','MSP','mi','m_mi'],['MP3','MSP','snv','m_snv'],
   ['HS1','HZS','w_ci','s_raj'],['HS2','HZS','rv','s_kras'],
@@ -508,13 +628,16 @@ const BRANCHES=[
   {id:'disp',name:'Dispečing', icon:'phone', color:'var(--sodium)'},
 ];
 const SKILLS=[
-  {id:'z_tv',  b:'zzs', cost:1, req:[], name:'RZP Trebišov', desc:'Nová záchranka na juhu kraja.'},
-  {id:'z_kc',  b:'zzs', cost:1, req:['z_tv'], name:'RZP Kráľovský Chlmec', desc:'Pokrytie Medzibodrožia až po Čiernu nad Tisou.'},
-  {id:'z_so',  b:'zzs', cost:1, req:[], name:'RZP Sobrance', desc:'Rýchlejšia pomoc pri ukrajinskej hranici.'},
-  {id:'z_gl',  b:'zzs', cost:1, req:[], name:'RZP Gelnica', desc:'Záchranka pre doliny Hnilca a Hornádu.'},
-  {id:'z_mo',  b:'zzs', cost:1, req:[], name:'RZP Moldava nad Bodvou', desc:'Pokrytie Abova a Turne.'},
-  {id:'z_rlp', b:'zzs', cost:2, req:[], name:'Lekár RLP Košice', desc:'Rýchla lekárska pomoc. Nahradí RZP a zásah P1 zvládne o 40 % rýchlejšie.'},
-  {id:'z_lzs', b:'zzs', cost:3, req:['z_rlp'], name:'Vrtuľník LZS Košice', desc:'Letí priamo vzduchom. Nahradí záchranku aj horskú službu.'},
+  {id:'z_ke',  b:'zzs', cost:1, req:[], name:'RZP Košice', desc:'Ďalšie tri záchranky v Košiciach: Ťahanovce, Šaca a Krásna.'},
+  {id:'z_ko',  b:'zzs', cost:2, req:['z_ke'], name:'Okres Košice-okolie', desc:'RLP Moldava nad Bodvou a RZP Čaňa, Medzev, Bidovce, Chrastné.'},
+  {id:'z_mi',  b:'zzs', cost:2, req:[], name:'Okres Michalovce', desc:'RZP Michalovce, Strážske, Palín, Veľké Raškovce a dve vo Veľkých Kapušanoch.'},
+  {id:'z_so',  b:'zzs', cost:1, req:['z_mi'], name:'RLP Sobrance', desc:'Lekár pri ukrajinskej hranici a pre Vihorlat.'},
+  {id:'z_tv',  b:'zzs', cost:1, req:[], name:'Okres Trebišov', desc:'RZP Trebišov, Sečovce, Veľaty a Borša.'},
+  {id:'z_kc',  b:'zzs', cost:1, req:['z_tv'], name:'Medzibodrožie', desc:'RLP a RZP Kráľovský Chlmec – pokrytie až po Čiernu nad Tisou.'},
+  {id:'z_spis',b:'zzs', cost:2, req:[], name:'Spiš', desc:'RLP Spišská Nová Ves a Krompachy, RZP Smižany a Spišské Vlachy.'},
+  {id:'z_gl',  b:'zzs', cost:1, req:[], name:'Okres Gelnica', desc:'RZP Gelnica, Margecany a Nálepkovo pre doliny Hnilca a Hornádu.'},
+  {id:'z_gem', b:'zzs', cost:2, req:[], name:'Gemer', desc:'RZP Rožňava, Dobšiná, Štítnik, Plešivec a Lipovník.'},
+  {id:'z_lzs', b:'zzs', cost:3, req:[], name:'Vrtuľník Košice', desc:'Letí priamo vzduchom, má lekára. Nahradí záchranku aj horskú službu.'},
   {id:'h_mi',  b:'has', cost:1, req:[], name:'HaZZ Michalovce', desc:'Hasičská stanica pre Zemplín.'},
   {id:'h_rv',  b:'has', cost:1, req:[], name:'HaZZ Rožňava', desc:'Hasiči pre Gemer a Slovenský kras.'},
   {id:'h_tv',  b:'has', cost:1, req:['h_mi'], name:'HaZZ Trebišov', desc:'Ďalšia stanica na juhovýchode.'},
@@ -550,16 +673,21 @@ const CATS={
   prank:   {label:'Zneužitie linky'},
 };
 const CAT_ORDER=['med','traffic','fire','tech','hazmat','police','msp','mountain','prank'];
+/* potreba lekára (RLP, RV alebo vrtuľník) a sanitky na prevoz */
+const DOC='RLP|RV|LZS', AMB='RZP|RLP|LZS';
 /* udalosti: druh, priorita, potrebné posádky (A|B = stačí jedna z nich), práca v min, transport, miesto, texty ({loc} = miesto) */
 const TPL=[
-  {cat:'med',prio:1,needs:['RZP|RLP|LZS'],work:10,tr:1,place:'town',w:7,title:'Zástava srdca',texts:['Manžel spadol na zem, nedýcha a nereaguje! Bývame {loc}.','Otec sa zrútil v záhrade a nemá pulz!']},
-  {cat:'med',prio:1,needs:['RZP|RLP|LZS'],work:9,tr:1,place:'town',w:4,title:'Anafylaxia',texts:['Dcéru štípla osa, opuchá jej tvár a ťažko dýcha!']},
-  {cat:'med',prio:1,needs:['RZP|RLP|LZS'],work:10,tr:1,place:'town',w:4,title:'Pád z lešenia',texts:['Robotník spadol z lešenia z tretieho poschodia a nehýbe sa.']},
+  {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:7,title:'Zástava srdca',texts:['Manžel spadol na zem, nedýcha a nereaguje! Bývame {loc}.','Otec sa zrútil v záhrade a nemá pulz!']},
+  {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:4,title:'Anafylaxia',texts:['Dcéru štípla osa, opuchá jej tvár a ťažko dýcha!']},
+  {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:4,title:'Pád z lešenia',texts:['Robotník spadol z lešenia z tretieho poschodia a nehýbe sa.']},
+  {cat:'med',prio:1,needs:[AMB],work:8,tr:1,place:'town',w:5,title:'Mozgová príhoda',texts:['Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!','Manžel nevie zdvihnúť pravú ruku a motá sa mu reč.']},
+  {cat:'med',prio:1,needs:[AMB,DOC],work:9,tr:1,place:'town',w:3,title:'Dusenie',texts:['Dedko sa dusí, je celý modrý a nevie sa nadýchnuť!']},
   {cat:'med',prio:2,needs:['RZP|RLP'],work:8,tr:1,place:'town',w:6,title:'Pôrod',texts:['Manželke praskla plodová voda a kontrakcie sú každé dve minúty!']},
   {cat:'med',prio:2,needs:['RZP|RLP'],work:8,tr:1,place:'town',w:6,title:'Otrava',texts:['Syn vypil čistič na odpad, vracia a plače.','Kamarát zjedol nejaké huby a teraz má kŕče.']},
   {cat:'med',prio:3,needs:['RZP|RLP'],work:6,tr:0,place:'town',w:8,title:'Pád seniora',texts:['Babka spadla v obývačke, je pri vedomí, ale nevie vstať.','Susedovi je zle, má vysoký tlak a točí sa mu hlava.']},
-  {cat:'traffic',prio:1,needs:['RZP|LZS','HAS','PZ'],work:14,tr:1,place:'road',w:4,title:'Zakliesnený vodič',texts:['Osobné auto narazilo do stromu {loc}, vodič je zakliesnený a krváca!']},
-  {cat:'traffic',prio:2,needs:['RZP','PZ'],work:10,tr:1,place:'town',w:6,title:'Zrazený chodec',texts:['Auto zrazilo chodkyňu na priechode, leží na ceste a je pri vedomí.']},
+  {cat:'traffic',prio:1,needs:[AMB,'HAS','PZ'],work:14,tr:1,place:'road',w:4,title:'Zakliesnený vodič',texts:['Osobné auto narazilo do stromu {loc}, vodič je zakliesnený a krváca!']},
+  {cat:'traffic',prio:1,needs:[AMB,'RZP|RLP',DOC,'HAS','PZ'],work:18,tr:1,place:'road',w:2,title:'Hromadná nehoda',texts:['Autobus sa zrazil s osobným autom {loc}, je tam veľa zranených!']},
+  {cat:'traffic',prio:2,needs:['RZP|RLP','PZ'],work:10,tr:1,place:'town',w:6,title:'Zrazený chodec',texts:['Auto zrazilo chodkyňu na priechode, leží na ceste a je pri vedomí.']},
   {cat:'traffic',prio:2,needs:['HAS','PZ'],work:12,tr:0,place:'road',w:4,title:'Prevrátený kamión',texts:['Kamión sa prevrátil do priekopy {loc}, vodič je v poriadku, ale vyteká nafta.']},
   {cat:'traffic',prio:3,needs:['PZ'],work:7,tr:0,place:'road',w:7,title:'Ťukanec',texts:['Ťukli sme do seba {loc}, nikto nie je zranený, ale blokujeme jeden pruh.']},
   {cat:'fire',prio:1,needs:['HAS','RZP|RLP'],work:14,tr:1,place:'town',w:4,title:'Požiar bytu',texts:['Horí byt na štvrtom poschodí a suseda je ešte vnútri!']},
@@ -599,7 +727,11 @@ const TEMPO={calm:{label:'Pokojné', k:1.35, note:'Menej hovorov, viac času na 
 
 /* ---------- postup hráča (uložený v prehliadači) ---------- */
 const PKEY='linka112-kraj';
-function loadProg(){ try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null'); if(p && p.v===1) return p; }catch(e){} return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0}; }
+const OLD_COST={z_rlp:2, z_mo:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
+function loadProg(){
+  try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null');
+    if(p && p.v===1){ for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
+  return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0}; }
 let PROG=loadProg();
 function saveProg(){ try{ localStorage.setItem(PKEY, JSON.stringify(PROG)); }catch(e){} }
 const has = id => PROG.skills.includes(id);
@@ -607,11 +739,11 @@ const xpNeed = lvl => Math.round(100 + 70*Math.pow(lvl-1, 1.3));
 
 /* ---------- stav služby ---------- */
 let G=null;
-function makeUnit([id,kind,home]){
+function makeUnit([id,kind,home,,title]){
   const n=NODES[home], K=KINDS[kind];
   const same=UNITS_DEF.filter(d=>d[1]===kind && d[2]===home);
   const num=same.length>1 ? ' '+(same.findIndex(d=>d[0]===id)+1) : '';
-  return {id, cs:id, kind, home, name:K.short+' '+n.name.replace(' – hraničný priechod','')+num, x:n.x, z:n.z, node:home, path:[], dest:null, off:false,
+  return {id, cs:id, kind, home, name:title || K.short+' '+n.name.replace(' – hraničný priechod','')+num, x:n.x, z:n.z, node:home, path:[], dest:null, off:false,
     moving:false, status:2, since:0, inc:null, waitUntil:0, hosp:null, ang:Math.random()*6.28};
 }
 function activeDefs(){ return UNITS_DEF.filter(d=>!d[3] || has(d[3])); }
@@ -703,8 +835,10 @@ function routeTo(u, node, dest){
   if(!u.moving) arrived(u);
 }
 function goHome(u){ u.inc=null; setStatus(u,1); routeTo(u, u.home); }
+const LAUNCH=4;   // vrtuľník potrebuje pár minút na štart
 function moveUnit(u, dt){
   const air=KINDS[u.kind].air;
+  if(air && u.launch && G.t<u.launch) return;
   let rem=dt;
   while(rem>1e-6){
     let tx, tz, sp;
@@ -734,7 +868,7 @@ function etaPath(u){
 }
 /* odhad dojazdu posádky k udalosti */
 function etaTo(u, inc, cache){
-  if(KINDS[u.kind].air) return Math.hypot(inc.x-u.x, inc.z-u.z)/speedOf(u);
+  if(KINDS[u.kind].air) return Math.hypot(inc.x-u.x, inc.z-u.z)/speedOf(u) + (u.status===2 ? LAUNCH : Math.max(0,(u.launch||0)-G.t));
   const key=u.kind;   // každý druh má inú rýchlosť
   if(!cache[key]) cache[key]=dijkstra(inc.node, u).d;
   const from=u.path.length ? u.path[0] : u.node, d=cache[key][from];
@@ -762,6 +896,7 @@ function dispatch(u, inc){
   if(!KINDS[u.kind].air && pathFor(u, u.path.length ? u.path[0] : u.node, inc.node)===null){ say(u.name+' sa tam nedostane – vedie tam len chodník pre horskú službu.','bad'); return; }
   if(u.inc){ const old=incById(u.inc); if(old) old.units=old.units.filter(x=>x!==u.id); }
   u.inc=inc.id; if(!inc.units.includes(u.id)) inc.units.push(u.id);
+  if(KINDS[u.kind].air && u.status===2) u.launch=G.t+LAUNCH;
   setStatus(u,3);
   routeTo(u, inc.node, {x:inc.x, z:inc.z});
   SND.blip();
@@ -771,13 +906,26 @@ function needInfo(inc){
   const assigned=inc.units.map(unitById).filter(u=>u && u.inc===inc.id && (u.status===3 || u.status===4));
   const order=inc.needs.map((n,i)=>[n,i]).sort((a,b)=>a[0].split('|').length-b[0].split('|').length);
   const used=new Set(), slots=new Array(inc.needs.length);
-  for(const st of [4,3]) for(const [need,i] of order){
-    if(slots[i]) continue;
-    const u=assigned.find(u=>u.status===st && !used.has(u.id) && fits(u,need));
-    if(u){ used.add(u.id); slots[i]={need, st: st===4 ? 'on' : 'way', u}; }
+  const shared=new Set();
+  for(const st of [4,3]){
+    for(const [need,i] of order){
+      if(slots[i]) continue;
+      const u=assigned.find(u=>u.status===st && !used.has(u.id) && fits(u,need));
+      if(u){ used.add(u.id); slots[i]={need, st: st===4 ? 'on' : 'way', u}; }
+    }
+    shareDoc(inc, slots, shared);
   }
   for(let i=0;i<slots.length;i++) if(!slots[i]) slots[i]={need:inc.needs[i], st:'miss'};
   return {slots, met:slots.every(s=>s.st==='on'), missing:slots.filter(s=>s.st==='miss').map(s=>s.need)};
+}
+/* RLP a vrtuľník majú lekára aj prepravu: jedna posádka pokryje potrebu lekára aj jednej sanitky */
+const BOTH=new Set(['RLP','LZS']);
+function shareDoc(inc, slots, shared){
+  for(let i=0;i<slots.length;i++) if(!slots[i]){
+    const need=inc.needs[i], doc=need===DOC;
+    const j=slots.findIndex((s,j)=>s && j!==i && BOTH.has(s.u.kind) && !shared.has(s.u.id) && (doc ? s.need!==DOC : s.need===DOC && fits(s.u, need)));
+    if(j>=0){ shared.add(slots[j].u.id); slots[i]={...slots[j], need}; }
+  }
 }
 function candidates(inc){
   const kinds=needKinds(inc), cache={};
@@ -786,9 +934,11 @@ function candidates(inc){
     .sort((a,b)=>(b.free-a.free) || a.eta-b.eta);
 }
 function recommended(inc){
-  const miss=needInfo(inc).missing.slice().sort((a,b)=>a.split('|').length-b.split('|').length), out=[], taken=new Set();
+  /* lekár ide na rad posledný: ak najbližšou sanitkou je RLP, lekára už netreba posielať zvlášť */
+  const miss=needInfo(inc).missing.slice().sort((a,b)=>(a===DOC)-(b===DOC) || a.split('|').length-b.split('|').length), out=[], taken=new Set(), shared=new Set();
   const cands=candidates(inc).filter(c=>c.free);
   for(const need of miss){
+    if(need===DOC){ const d=out.find(c=>BOTH.has(c.u.kind) && !shared.has(c.u.id)); if(d){ shared.add(d.u.id); continue; } }
     const c=cands.find(c=>!taken.has(c.u.id) && fits(c.u, need));
     if(c){ taken.add(c.u.id); out.push(c); }
   }
@@ -844,7 +994,6 @@ function spawnCall(){
   const text = prank ? pick(PRANKS) : pick(tpl.texts).replace('{loc}', n.loc || '');
   G.calls.push({id:'C'+(++G.cseq), tpl, prank, text, node, addr:addrOf(node), t0:G.t, state:'ring', talkAt:0});
   SND.ring(); G.lastRing=G.t;
-  if(!quiet() && window.innerWidth<=860) setTab('pult');
   dirty();
 }
 const patience = () => has('d_calm') ? 1.5 : 1;
@@ -854,6 +1003,7 @@ function answer(c){
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   c.state='talk'; c.talkAt=G.t;
   if(G.t-c.t0<5) G.score+=10;
+  if(!quiet()) openSheet('calls');
   dirty();
 }
 function dropCall(c){ G.calls=G.calls.filter(x=>x!==c); dirty(); }
@@ -905,7 +1055,7 @@ function createIncident(c, cat){
 }
 function select(id, auto){
   G.sel.inc=id; G.sel.unit=null;
-  if(window.innerWidth<=860) setTab('pult');
+  if(id && !quiet()) openSheet('incs');
   const inc=incById(id);
   if(inc && !quiet() && (!auto || offScreen(inc.x, inc.z))) focusOn(inc.x, inc.z);   // nová udalosť mimo obrazovky → kamera sa k nej presunie
   dirty();
@@ -925,7 +1075,7 @@ function nearestHospital(u){
 function workRate(inc){
   let k=1;
   const on=inc.units.map(unitById).filter(u=>u && u.inc===inc.id && u.status===4);
-  if(inc.cat==='med' && inc.prio===1 && on.some(u=>u.kind==='RLP')) k*=1/.6;
+  if(inc.cat==='med' && on.some(u=>KINDS[u.kind].doc)) k*=1/.75;   // lekár na mieste
   if((inc.cat==='traffic' || inc.cat==='tech') && has('h_tech')) k*=1/.7;
   if(inc.cat==='hazmat' && has('h_deko')) k*=1/.7;
   if(inc.cat==='mountain' && has('s_rope')) k*=1/.7;
@@ -1053,6 +1203,7 @@ function init3D(){
   buildTerrain(); buildWater(); buildBorder(); buildRoads(); buildTowns(); buildStaticLabels(); buildParticles();
   controls=new (THREE.MapControls || THREE.OrbitControls)(camera, cv);
   Object.assign(controls, {enableDamping:true, dampingFactor:.12, screenSpacePanning:false, minDistance:12, maxDistance:360, maxPolarAngle:1.25, zoomSpeed:1.2});
+  controls.addEventListener('start', ()=>{ camFree=true; });
   applyLight(); resize3D(); viewAll(true);
   cv.addEventListener('pointerdown', e=>{ cv._d={x:e.clientX, y:e.clientY}; });
   cv.addEventListener('pointerup', onMapTap);
@@ -1177,20 +1328,36 @@ function mkLabel(cls, html, x, y, z, act, maxD){
 }
 function buildStaticLabels(){
   for(const n of Object.values(NODES)){
-    if(n.type==='town') staticLabels.push(mkLabel('town'+(n.pop>30000?' big':''), esc(n.name), n.x, n.y+1.6, n.z, null, n.pop>=30000 ? 0 : n.pop>=6000 ? 300 : 190));
+    if(n.type==='town'){ const L=mkLabel('town'+(n.pop>30000?' big':''), esc(n.name), n.x, n.y+1.6, n.z, null, n.pop>=30000 ? 0 : n.pop>=6000 ? 300 : 190); L.pop=n.pop; staticLabels.push(L); }
     else if(n.type==='poi') staticLabels.push(mkLabel('poi '+n.poi, esc(n.name), n.x, n.y+.8, n.z, null, 165));
     else if(n.poi==='border') staticLabels.push(mkLabel('poi border', esc(n.name.replace(' – hraničný priechod','')), n.x, n.y+.8, n.z, null, 165));
   }
-  for(const h of HOSPITALS){ const n=NODES[h]; staticLabels.push(mkLabel('hosp','H', n.x+n.r*.7, n.y+2, n.z-n.r*.4, null, 230)); }
+  for(const h of HOSPITALS){ const n=NODES[h]; const L=mkLabel('hosp','H', n.x+n.r*.7, n.y+2, n.z-n.r*.4, null, 230); L.keep=true; staticLabels.push(L); }
+  /* dôležitejšie popisky (väčšie mestá) majú prednosť pri prekrytí */
+  const rank = L => L.keep ? 0 : L.el.classList.contains('town') ? 1+1/(1+(L.pop||0)) : 3;
+  staticLabels.sort((a,b)=>rank(a)-rank(b));
+}
+/* popisky, ktoré by sa prekrývali s dôležitejšími, sa skryjú */
+function declutter(){
+  const placed=[];
+  for(const L of staticLabels){
+    if(L.keep || L.el.style.display==='none') continue;
+    if(!L.w){ L.w=L.el.offsetWidth; L.h=L.el.offsetHeight; }
+    const r=[L.sx-L.w/2-4, L.sy-L.h-2, L.sx+L.w/2+4, L.sy+2];
+    const hide=placed.some(q=>r[0]<q[2] && r[2]>q[0] && r[1]<q[3] && r[3]>q[1]);
+    const v=hide ? 'hidden' : '';
+    if(L.el.style.visibility!==v) L.el.style.visibility=v;
+    if(!hide) placed.push(r);
+  }
 }
 const V3=window.THREE ? new THREE.Vector3() : null;
-let LW=1, LH=1, CD=0;   // rozmery vrstvy popiskov a vzdialenosť kamery – čítajú sa raz za snímok
+let LW=1, LH=1, CD=0, LODK=1;   // LODK: na malej obrazovke sa popisky skrývajú skôr   // rozmery vrstvy popiskov a vzdialenosť kamery – čítajú sa raz za snímok
 function placeLabel(L, extraY=0){
   V3.set(L.x, L.y+extraY, L.z).project(camera);
-  const vis = V3.z<1 && V3.x>-1.1 && V3.x<1.1 && V3.y>-1.1 && V3.y<1.1 && !(L.maxD && CD>L.maxD);
+  const vis = V3.z<1 && V3.x>-1.1 && V3.x<1.1 && V3.y>-1.1 && V3.y<1.1 && !(L.maxD && CD>L.maxD*LODK);
   if(!vis){ if(L.el.style.display!=='none') L.el.style.display='none'; return; }
   if(L.el.style.display==='none') L.el.style.display='';
-  const x=(V3.x+1)/2*LW, y=(1-V3.y)/2*LH;
+  const x=(V3.x+1)/2*LW, y=(1-V3.y)/2*LH; L.sx=x; L.sy=y;
   L.el.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-100%)`;
   L.el.style.zIndex=String(1000-Math.round(V3.z*1000));
 }
@@ -1209,18 +1376,21 @@ function vehicleModel(kind){
     rotor.position.y=.55; body.add(rotor); g.userData.rotor=rotor;
     const blade=box(2.1,.03,.08,0x111111); blade.position.y=.56; body.add(blade); g.userData.blade=blade;
   } else {
-    const len={HAS:1.25, CBRN:1.05, RZP:1, RLP:.8, PZ:.8, MSP:.8, HZS:.85}[kind], wid=kind==='HAS'||kind==='CBRN' ? .48 : .42, hgt={HAS:.42,CBRN:.42,RZP:.42}[kind]||.28;
+    const car=kind==='PZ'||kind==='MSP'||kind==='RV'||kind==='HZS';
+    const len={HAS:1.25, CBRN:1.05, RZP:1, RLP:1, RV:.8, PZ:.8, MSP:.8, HZS:.85}[kind], wid=kind==='HAS'||kind==='CBRN' ? .48 : .42, hgt={HAS:.42,CBRN:.42,RZP:.42,RLP:.42}[kind]||.28;
     const b=box(wid,hgt,len,K.color); b.position.y=hgt/2+.05; body.add(b);
     if(kind==='RZP'||kind==='RLP'){ const s=box(wid+.01,.07,len*.75,0xe3263f); s.position.set(0,hgt*.55,-len*.08); body.add(s); }
+    if(kind==='RLP'){ const s=box(wid+.01,.05,len*.75,0xf4d35e); s.position.set(0,hgt*.3,-len*.08); body.add(s); }
+    if(kind==='RV'){ const s=box(wid+.01,.08,len*.6,0xe3263f); s.position.set(0,hgt*.55,0); body.add(s); const y=box(wid+.01,.05,len*.6,0xf4d35e); y.position.set(0,hgt*.25,0); body.add(y); }
     if(kind==='PZ'){ const s=box(wid+.01,.08,len*.6,0x1f5ad8); s.position.set(0,hgt*.55,0); body.add(s); }
     if(kind==='MSP'){ const s=box(wid+.01,.08,len*.6,0x2fb7ae); s.position.set(0,hgt*.55,0); body.add(s); }
     if(kind==='HZS'){ const s=box(wid+.01,.06,len*.9,0xffffff); s.position.set(0,hgt*.6,0); body.add(s); }
     if(kind==='CBRN'){ const s=box(wid+.01,.06,len*.9,0x1a1a1a); s.position.set(0,hgt*.55,0); body.add(s); }
-    if(kind==='PZ'||kind==='MSP'||kind==='RLP'||kind==='HZS'){ const c=box(wid*.86,.17,len*.5,glass); c.position.set(0,hgt+.13,-len*.05); body.add(c); }
+    if(car){ const c=box(wid*.86,.17,len*.5,glass); c.position.set(0,hgt+.13,-len*.05); body.add(c); }
     else { const c=box(wid*.9,.12,.18,glass); c.position.set(0,hgt*.7,len*.42); body.add(c); }
     if(kind==='HAS'){ for(const sx of [-.12,.12]){ const r=box(.04,.04,len*.85,0xb9c2d0); r.position.set(sx,hgt+.1,-.05); body.add(r); } }
     const lb=[box(.12,.06,.1,0x330000,0x000000), box(.12,.06,.1,0x000033,0x000000)];
-    lb[0].position.set(-.1, (kind==='PZ'||kind==='MSP'||kind==='RLP'||kind==='HZS' ? hgt+.25 : hgt+.12), len*.2); lb[1].position.set(.1, lb[0].position.y, len*.2);
+    lb[0].position.set(-.1, (car ? hgt+.25 : hgt+.12), len*.2); lb[1].position.set(.1, lb[0].position.y, len*.2);
     body.add(lb[0], lb[1]); g.userData.bar=lb;
   }
   body.scale.setScalar(S);
@@ -1234,6 +1404,7 @@ function vehicleModel(kind){
 }
 const STATUS_COL={1:0x3ddc97,2:0x2aa198,3:0xff9a3c,4:0xff4d5e,5:0xb48cff,6:0x5aa9ff};
 const STATUS_CSS={1:'var(--s1)',2:'var(--s2)',3:'var(--s3)',4:'var(--s4)',5:'var(--s5)',6:'var(--s6)'};
+let CAND=new Set();   // posádky ponúknuté pri vybranej udalosti – ich popisky sú vidieť aj z diaľky
 function syncUnits(now){
   const seen=new Set(), night=LIGHTS[PROG.light].night;
   /* stojace posádky na tom istom mieste sa zoradia vedľa seba */
@@ -1263,6 +1434,8 @@ function syncUnits(now){
     let L=labelEls.get('u'+u.id);
     if(!L){ L=mkLabel('unit', esc(u.cs), x, y, z, {act:'unit', id:u.id}); labelEls.set('u'+u.id, L); }
     L.x=x; L.y=y+3.2; L.z=z;
+    /* posádky stojace na základni majú popisok len pri priblížení (alebo keď sú vhodné pre vybranú udalosť) */
+    L.maxD = u.status===2 && G.sel.unit!==u.id && !CAND.has(u.id) ? 95 : 0;
     L.el.style.setProperty('--sc', STATUS_CSS[u.status]);
     L.el.classList.toggle('sel', G.sel.unit===u.id);
     placeLabel(L);
@@ -1363,14 +1536,18 @@ const FX=[];
 function fx(x,z,text,kind){ if(quiet() || !R3) return; const L=mkLabel('fx '+kind, esc(text), x, groundY(x,z)+5, z); L.t0=performance.now(); FX.push(L); }
 /* ---------- kamera ---------- */
 let camAnim=null;
+let camFree=false;   // hráč pohol kamerou – po zmene veľkosti mapy sa prehľad už neprepočíta
 function viewAll(instant){
+  camFree=false;
   const asp=Math.max(.3, LBL.clientWidth/Math.max(1,LBL.clientHeight)), tv=Math.tan(THREE.MathUtils.degToRad(camera.fov/2));
-  const d=Math.max((166/2)/(tv*asp), (78/2)/tv)*1.04, pitch=THREE.MathUtils.degToRad(60);
+  const W = asp<.8 ? 150 : 166;   // na úzkej obrazovke sa okraje kraja mierne orežú
+  const d=Math.max((W/2)/(tv*asp), (78/2)/tv)*1.04, pitch=THREE.MathUtils.degToRad(60);
   const tgt=new THREE.Vector3(-1, 0, 2), pos=new THREE.Vector3(-1, d*Math.sin(pitch), 2+d*Math.cos(pitch));
   animateCam(tgt, pos, instant);
 }
 function focusOn(x,z){
   if(!controls) return;
+  camFree=true;
   const off=camera.position.clone().sub(controls.target);
   if(off.length()>110) off.setLength(110);
   const tgt=new THREE.Vector3(x, groundY(x,z), z);
@@ -1394,6 +1571,8 @@ function resize3D(){
   if(!R3) return;
   const r=cv.parentElement.getBoundingClientRect(); if(!r.width || !r.height) return;
   R3.setSize(r.width, r.height, false); camera.aspect=r.width/r.height; camera.updateProjectionMatrix();
+  LODK = r.width<520 ? .62 : r.width<900 ? .8 : 1;
+  if(!camFree && controls) viewAll(true);
   if(addP){ addP.pts.material.uniforms.scale.value=norP.pts.material.uniforms.scale.value=r.height*.9; }
 }
 function applyLight(){
@@ -1421,6 +1600,7 @@ function render3D(now){
   for(const id of [...incObj.keys()]) if(!incById(id)) dropIncMesh(id);
   stepParticles(addP, dt); stepParticles(norP, dt);
   for(const L of staticLabels) placeLabel(L);
+  declutter();
   for(let i=FX.length-1;i>=0;i--){ const L=FX[i]; if(now-L.t0>1600){ L.el.remove(); FX.splice(i,1); } else placeLabel(L); }
   R3.render(scene, camera);
 }
@@ -1428,7 +1608,10 @@ function render3D(now){
 /* ============================================================
    PANELY
    ============================================================ */
-const needChips = inc => needInfo(inc).slots.map(s=>`<span class="need ${s.st}">${s.need.split('|').map(k=>KINDS[k].short).join('/')}</span>`).join('');
+const needLabel = need => need===DOC ? 'Lekár' : need===AMB ? 'Sanitka' : need.split('|').map(k=>KINDS[k].short).join('/');
+const needChips = inc => needInfo(inc).slots.map(s=>`<span class="need ${s.st}" title="${s.need.split('|').map(k=>KINDS[k].short).join(' / ')}">${needLabel(s.need)}</span>`).join('');
+/* prepíše obsah len pri zmene – tlačidlá pod prstom tak nemiznú pri každom prekreslení */
+function setHTML(el, h){ if(el._h!==h){ el._h=h; el.innerHTML=h; } }
 const fmtMin = s => s===Infinity ? '—' : Math.max(0, Math.ceil(s))+' min';
 function renderCalls(){
   const talk=G.calls.find(c=>c.state==='talk'), ring=G.calls.filter(c=>c.state==='ring'), P=patience();
@@ -1451,12 +1634,13 @@ function renderCalls(){
     </div>`;
   }
   if(!G.calls.length) h+=`<p class="empty">Linka je tichá. Ďalší hovor môže prísť každú chvíľu.</p>`;
-  $('#calls').innerHTML=h;
+  setHTML($('#calls'), h);
 }
 function renderDispatch(){
   const box=$('#dispatch'), inc=incById(G.sel.inc);
-  if(!inc){ box.innerHTML=''; return; }
+  if(!inc){ CAND=new Set(); setHTML(box, ''); return; }
   const info=needInfo(inc), cands=candidates(inc), rec=recommended(inc), recIds=new Set(rec.map(c=>c.u.id));
+  CAND=new Set(cands.slice(0,6).map(c=>c.u.id));
   const rows=cands.slice(0,6).map(c=>{
     const other=c.u.inc ? incById(c.u.inc) : null;
     return `<div class="cand">
@@ -1466,7 +1650,7 @@ function renderDispatch(){
       <button class="btn sm${recIds.has(c.u.id)?' go':''}" data-act="send" data-id="${inc.id}" data-unit="${c.u.id}">Vyslať</button>
     </div>`;
   }).join('');
-  box.innerHTML=`<div class="disp" style="--pc:var(--p${inc.prio})">
+  setHTML(box, `<div class="disp" style="--pc:var(--p${inc.prio})">
     <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.cat]}<span class="ttl grow">#${inc.no} ${esc(inc.title)}</span>
       ${inc.metAt ? `<span class="timer">zásah</span>` : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}
       <button class="btn sm ghost" data-act="desel" aria-label="Zavrieť">✕</button></div>
@@ -1477,7 +1661,7 @@ function renderDispatch(){
     ${rows || `<p class="empty">${info.met ? 'Všetky potrebné posádky sú na mieste.' : 'Žiadna vhodná posádka nie je voľná.'}</p>`}
     ${rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>`
       : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú posádku. Posádku môžeš vyslať aj ťuknutím na vozidlo na mape.</p>` : ''}
-  </div>`;
+  </div>`);
 }
 function renderIncs(){
   const list=[...G.incs].sort((a,b)=>(a.metAt?1:0)-(b.metAt?1:0) || a.deadline-b.deadline);
@@ -1492,7 +1676,7 @@ function renderIncs(){
       ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : `<div class="tbar"><i data-from="${inc.created}" data-to="${inc.deadline}"></i></div>`}
     </div>`;
   }
-  $('#incs').innerHTML=h;
+  setHTML($('#incs'), h);
 }
 function unitWhat(u){
   const inc=u.inc ? incById(u.inc) : null;
@@ -1503,23 +1687,48 @@ function unitWhat(u){
   if(u.status===1) return `vracia sa na základňu · ${fmtMin(etaPath(u))}`;
   return 'základňa '+NODES[u.home].name;
 }
+const unitLine = u => u.status===2 ? NODES[u.home].name : unitWhat(u);
+/* filtre zoznamu posádok */
+const UFILTERS=[['all','Všetky'],['free','Voľné'],['zzs','Záchranka'],['has','Hasiči'],['pz','Polícia'],['hzs','Horská']];
+const UF_KINDS={zzs:['RZP','RLP','RV','LZS'], has:['HAS','CBRN'], pz:['PZ','MSP'], hzs:['HZS']};
+let UF='all';
+const ufMatch = u => UF==='all' || (UF==='free' ? u.status<=2 : UF_KINDS[UF].includes(u.kind));
 function renderUnits(){
   const sel=incById(G.sel.inc), kinds=sel ? needKinds(sel) : null;
-  let h=`<h2>Posádky <span class="count">${G.units.filter(u=>u.status<=2).length} voľné / ${G.units.length}</span></h2>`;
-  for(const u of G.units){
+  const avail=UFILTERS.filter(([k])=>k==='all' || k==='free' || G.units.some(u=>UF_KINDS[k].includes(u.kind)));
+  if(!avail.some(([k])=>k===UF)) UF='all';
+  let h=`<h2>Posádky <span class="count">${G.units.filter(u=>u.status<=2).length} voľné / ${G.units.length}</span></h2>
+    <div class="uf">${avail.map(([k,t])=>`<button class="btn${UF===k?' on':''}" data-act="uf" data-id="${k}">${t}</button>`).join('')}</div>`;
+  const list=G.units.filter(ufMatch);
+  if(!list.length) h+=`<p class="empty">Žiadna posádka v tomto filtri.</p>`;
+  for(const u of list){
     const can=sel && kinds.has(u.kind) && dispatchable(u, sel);
     h+=`<div class="unit${G.sel.unit===u.id?' sel':''}" style="--sc:${STATUS_CSS[u.status]}" data-act="unit" data-id="${u.id}">
       <span class="veh">${ICON[u.kind]}</span>
       <span class="nm">${esc(u.name)}</span>
-      ${can ? '<span class="send">Vyslať</span>' : `<span class="st">${u.status} ${STATUS[u.status]}</span>`}
-      <span class="what">${esc(unitWhat(u))}</span>
+      ${can ? '<span class="send">Vyslať</span>' : ''}
+      <span class="what"><span class="st">${STATUS[u.status]}</span> · ${esc(unitLine(u))}</span>
     </div>`;
   }
-  $('#units').innerHTML=h;
+  setHTML($('#units'), h);
+}
+function renderRingBar(){
+  const bar=$('#ringBar'), talk=G.calls.find(c=>c.state==='talk'), ring=G.calls.find(c=>c.state==='ring');
+  const app=$('#app'), callsOpen=app.dataset.tab==='calls' && app.dataset.sheet!=='min';
+  if(G.mode!=='play' || callsOpen || (!talk && !ring)){ bar.hidden=true; setHTML(bar, ''); return; }
+  bar.hidden=false; bar.classList.toggle('ring', !talk);
+  setHTML(bar, talk
+    ? `<span class="phone">${ICON.phone}</span><span class="txt"><b>Volajúci čaká na linke</b><span>${esc(talk.addr)}</span></span><button class="btn go" data-act="tab" data-tab="calls">Otvoriť</button>`
+    : `<span class="phone">${ICON.phone}</span><span class="txt"><b>Prichádzajúci hovor${G.calls.filter(c=>c.state==='ring').length>1 ? ' ('+G.calls.filter(c=>c.state==='ring').length+')' : ''}</b><span>${esc(NODES[ring.node].name)}</span></span><button class="btn go" data-act="answer" data-id="${ring.id}">Prijať</button>`);
 }
 function renderUI(){
-  renderCalls(); renderDispatch(); renderIncs(); renderUnits();
-  $('#tabPult').textContent=`Hovory ${G.calls.length} · Udalosti ${G.incs.length}`;
+  renderCalls(); renderDispatch(); renderIncs(); renderUnits(); renderRingBar();
+  const free=G.units.filter(u=>u.status<=2).length, urgent=G.incs.filter(i=>!i.metAt && needInfo(i).missing.length).length;
+  setHTML($('#tabCalls'), `Hovory${G.calls.length ? ` <span class="badge hot">${G.calls.length}</span>` : ''}`);
+  setHTML($('#tabIncs'), `Udalosti${G.incs.length ? ` <span class="badge${urgent?' hot':''}">${G.incs.length}</span>` : ''}`);
+  setHTML($('#tabUnits'), `Posádky <span class="badge">${free}</span>`);
+  $('#lvlMini').textContent='Úr. '+PROG.level;
+  $('#xpLine').style.width=(PROG.xp/xpNeed(PROG.level)*100)+'%';
   $('#app').dataset.mode=G.mode;
   $('#lvlTxt').textContent='Úroveň '+PROG.level;
   $('#xpTxt').textContent=PROG.xp+' / '+xpNeed(PROG.level)+' XP';
@@ -1552,6 +1761,7 @@ function showMenu(){
     <ol class="how">
       <li>Zdvihni hovor a podľa slov volajúceho urči druh udalosti. Zneužitie linky odmietni.</li>
       <li>Vyšli posádky, ktoré udalosť potrebuje. Na mape vidíš, kto je najbližšie a za koľko minút dorazí.</li>
+      <li>Pri ťažkých stavoch treba aj lekára: RLP príde so sanitkou, RV je lekár v osobnom aute (stretávací systém) a pacienta odvezie RZP.</li>
       <li>Za vyriešené zásahy získavaš skúsenosti. Na každej úrovni dostaneš bod a odomkneš novú posádku alebo schopnosť.</li>
       <li>Keď pomoc nepríde včas alebo volajúci zloží, klesá dôvera. Pri nule služba končí, postup ti ostáva.</li>
     </ol>
@@ -1560,11 +1770,11 @@ function showMenu(){
     <div class="diffs">${Object.entries(TEMPO).map(([k,t])=>`<button class="diff" data-act="start" data-tempo="${k}"><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>
     <p class="keys">Klávesy: <kbd>A</kbd> prijať hovor · <kbd>1</kbd>–<kbd>9</kbd> druh udalosti · <kbd>Enter</kbd> vyslať odporúčané · <kbd>Medzerník</kbd> pauza · <kbd>Esc</kbd> zrušiť výber. Mapu posúvaš ťahaním, otáčaš pravým tlačidlom alebo dvoma prstami.</p>
     <div class="acts"><button class="linkbtn" data-act="reset">Vymazať postup a začať od nuly</button></div>
-    <p class="credit">Hranica kraja: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek a pohorí sú zjednodušené. 3D: three.js.</p>
+    <p class="credit">Stanice záchrannej služby (RLP, RV, RZP): vyhláška MZ SR č. 116/2025 Z. z. Hranica kraja: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek a pohorí sú zjednodušené. 3D: three.js.</p>
   </div>`;
 }
 function showSkills(){
-  const wasPlay=G.mode==='play'; if(wasPlay){ G.mode='pause'; $('#btnPause').textContent='Pokračovať'; }
+  const wasPlay=G.mode==='play'; if(wasPlay){ G.mode='pause'; pauseBtn(true); }
   const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu'); ov.dataset.resume=wasPlay ? '1' : '';
   const draw=()=>{
     ov.innerHTML=`<div class="sheet wide">
@@ -1592,7 +1802,7 @@ function buySkill(id){
 }
 function closeSkills(){
   const ov=$('#overlay');
-  if(ov.dataset.resume){ ov.dataset.resume=''; G.mode='play'; $('#btnPause').textContent='Pauza'; ov.hidden=true; }
+  if(ov.dataset.resume){ ov.dataset.resume=''; G.mode='play'; pauseBtn(false); ov.hidden=true; }
   else if(G.mode==='demo') showMenu();
   else if(G.mode==='over') showSummary();
   else if(G.mode==='pause') showPause();
@@ -1638,17 +1848,34 @@ function start(tempo){
   audio(); clearWorld();
   G=newGame(tempo||'normal', 'play');
   $('#overlay').hidden=true; $('#overlay').innerHTML='';
-  $('#btnSpeed').textContent='×1'; $('#btnPause').textContent='Pauza';
+  $('#btnSpeed').textContent='×1'; pauseBtn(false);
   lastScore=lastRep=null; $('#hints').innerHTML='';
   say('Služba začína. Prvý hovor je na ceste.');
   dirty();
 }
+function pauseBtn(p){ const b=$('#btnPause'); b.querySelector('.t').textContent=p ? 'Pokračovať' : 'Pauza'; b.setAttribute('aria-label', p ? 'Pokračovať' : 'Pauza'); b.classList.toggle('paused', p); }
 function togglePause(){
-  if(G.mode==='play'){ G.mode='pause'; $('#btnPause').textContent='Pokračovať'; showPause(); }
-  else if(G.mode==='pause'){ G.mode='play'; $('#btnPause').textContent='Pauza'; $('#overlay').hidden=true; }
+  if(G.mode==='play'){ G.mode='pause'; pauseBtn(true); showPause(); }
+  else if(G.mode==='pause'){ G.mode='play'; pauseBtn(false); $('#overlay').hidden=true; }
   dirty();
 }
-function setTab(t){ $('#app').dataset.tab=t; $('#tabPult').classList.toggle('on', t==='pult'); $('#tabUnits').classList.toggle('on', t==='units'); }
+/* telefón: záložky dolného panelu; ťuknutie na otvorenú záložku panel zbalí */
+const isPhone = () => window.innerWidth<=860;
+const wideLandscape = () => isPhone() && window.innerHeight<=520 && window.innerWidth>window.innerHeight;
+function setTab(t){
+  const app=$('#app');
+  if(app.dataset.tab===t && app.dataset.sheet!=='min' && !wideLandscape()) app.dataset.sheet='min';
+  else { app.dataset.tab=t; if(app.dataset.sheet==='min') app.dataset.sheet='half'; }
+  syncTabs();
+}
+function openSheet(t){ if(!isPhone()) return; const app=$('#app'); app.dataset.tab=t; if(app.dataset.sheet==='min') app.dataset.sheet='half'; syncTabs(); }
+function syncTabs(){
+  const app=$('#app'), open=app.dataset.sheet!=='min' || wideLandscape();
+  for(const [id,t] of [['tabCalls','calls'],['tabIncs','incs'],['tabUnits','units']]) $('#'+id).classList.toggle('on', open && app.dataset.tab===t);
+  $('#btnGrip').textContent = app.dataset.sheet==='full' ? '▾' : '▴';
+  $('#btnGrip').setAttribute('aria-label', app.dataset.sheet==='full' ? 'Zmenšiť panel' : 'Zväčšiť panel');
+  dirty();
+}
 
 /* ---------- ovládanie ---------- */
 let resetArmed=0;
@@ -1657,6 +1884,9 @@ function act(el){
   if(a==='start') return start(el.dataset.tempo);
   if(a==='menu'){ restartDemo(); showMenu(); return dirty(); }
   if(a==='tab') return setTab(el.dataset.tab);
+  if(a==='grip'){ const app=$('#app'); app.dataset.sheet = app.dataset.sheet==='half' ? 'full' : 'half'; return syncTabs(); }
+  if(a==='more'){ const app=$('#app'), on=app.dataset.more!=='1'; app.dataset.more=on ? '1' : ''; el.setAttribute('aria-expanded', String(on)); return; }
+  if(a==='uf'){ UF=el.dataset.id; return dirty(); }
   if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; return; }
   if(a==='light'){ const ks=Object.keys(LIGHTS); PROG.light=ks[(ks.indexOf(PROG.light)+1)%ks.length]; saveProg(); return applyLight(); }
   if(a==='view') return viewAll();

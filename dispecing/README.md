@@ -35,8 +35,15 @@ dennú/nočnú zmenu – hrá sa, kým kraju neklesne dôvera.
   hlavnými cestami, riekami, Šíravou a Ružínom, Slovenským rajom, Volovskými vrchmi a Vihorlatom.
 - **Udalosti:** zdravotné, dopravné, požiare, technické, polícia, mestská polícia, chemické a biologické
   ohrozenie (únik amoniaku, podozrivý prášok, podozrenie na nákazu…), horské a jaskynné záchrany.
+- **Záchranná služba podľa skutočnosti:** stanice a typy posádok v Košickom kraji podľa
+  vyhlášky MZ SR č. 116/2025 Z. z. – 9× RLP (rýchla lekárska pomoc), 1× RV (lekár v osobnom aute,
+  stretávací systém, Košice-Západ) a 31× RZP. Pri ťažkých stavoch treba lekára: RLP príde so sanitkou,
+  RV prevoz nezvládne, pacienta odvezie RZP. Ambulancie špecializovanej prepravy (AŠP, ŠRZP) v hre nie sú.
 - **Progres:** za vyriešené udalosti získavaš XP a úrovne, body míňaš v strome schopností
-  (nové základne a posádky, vrtuľník, CBRN, horská služba, dispečerské vylepšenia). Postup sa ukladá v prehliadači.
+  (záchranky po okresoch, vrtuľník, hasiči, CBRN, polícia, horská služba, dispečerské vylepšenia).
+  Postup sa ukladá v prehliadači.
+- **Telefón:** mapa cez celú obrazovku, dole panel so záložkami Hovory / Udalosti / Posádky,
+  prichádzajúci hovor sa ukáže ako lišta nad mapou.
 
 Ovládanie: `A` prijať hovor, `1`–`9` druh udalosti, `Enter` vyslať odporúčané posádky, `Esc` zrušiť výber,
 medzerník pauza; mapu otáčaš a približuješ myšou alebo prstami. Potrebuje prehliadač s WebGL.
