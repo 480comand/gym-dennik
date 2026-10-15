@@ -51,6 +51,12 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
 - **Počasie** (dážď, hmla, poľadovica, búrka, horúčava) mení rýchlosť jázd, vrtuľník aj druhy udalostí;
   v Košiciach býva dopravná špička.
 
+**Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
+satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;
+`img/kosicky-kraj-satelit.jpg`). Pri otvorení súboru priamo z disku (file://) prehliadač satelitnú snímku
+nenačíta a ukáže sa kreslená mapa. Hra beží pokojným tempom: pri ×1 je sekunda pol minúty hry a hovory chodia
+zhruba každých 15 minút hry, neskôr každých 9; zrýchliť sa dá tlačidlom ×2/×4.
+
 **Ciele**
 - Voľná služba bez konca, 8 výziev s hviezdičkami (Dni mesta Košice, Leto na Šírave, Povodeň na Bodrogu…)
   a denná výzva s rovnakými hovormi pre všetkých v daný deň.
@@ -65,5 +71,6 @@ Ovládanie: `A` prijať hovor, `Q` `W` `E` `R` otázky, `T` tlmočník, `1`–`9
 Potrebuje prehliadač s WebGL.
 
 Knižnice a dáta: `vendor/three/` – three.js r147 (MIT), `vendor/amcharts-geodata/` – licencia amCharts
-geodát (linkware), z ktorých je zjednodušená hranica kraja. Polohy obcí, ciest, riek a pohorí aj špecializácie
+geodát (linkware), z ktorých je zjednodušená hranica kraja. Satelitná snímka obsahuje upravené dáta Copernicus
+Sentinel-2 (2022–2025); reliéf: Terrain Tiles (Mapzen/AWS; SRTM, EU-DEM – Copernicus). Polohy obcí, ciest, riek a pohorí aj špecializácie
 nemocníc sú zjednodušené.
