@@ -104,6 +104,56 @@
   .quote::before{content:"„";} .quote::after{content:"“";}
   .addr{font:500 12px var(--f-mono); color:var(--muted);}
   .call>.row>.lbl{flex:0 0 auto; white-space:nowrap;} .call>.row>.addr{flex:1 1 0; min-width:0; text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  /* rozhovor s volajúcim */
+  .log{display:grid; gap:6px; max-height:230px; overflow:auto; overscroll-behavior:contain;}
+  .m{margin:0; padding:7px 10px; border-radius:10px; font-size:15px; line-height:1.4; max-width:92%;}
+  .m.c{justify-self:start; background:color-mix(in srgb, var(--sodium) 9%, var(--ink)); border:1px solid color-mix(in srgb, var(--sodium) 28%, transparent);}
+  .m.op{justify-self:end; background:var(--line); color:#c7d1e3; font-size:13px;}
+  .m.sys{justify-self:center; padding:0; font:600 11px var(--f-mono); color:var(--muted);}
+  .m.typing{display:flex; gap:4px; align-items:center; padding:10px 12px;}
+  .m.typing i{width:6px; height:6px; border-radius:50%; background:var(--sodium); animation:dot 1s infinite;}
+  .m.typing i:nth-child(2){animation-delay:.15s;} .m.typing i:nth-child(3){animation-delay:.3s;}
+  @keyframes dot{50%{opacity:.25; transform:translateY(-2px);}}
+  .qs{display:flex; flex-wrap:wrap; gap:6px;}
+  .qs .btn{font-size:13px; font-weight:600; padding:6px 9px; min-height:34px; border-style:dashed;}
+  .qs .btn kbd{margin-left:2px;}
+  .qs .btn:disabled{opacity:.35;}
+  .qs .btn.hint{border-color:var(--sodium); box-shadow:0 0 12px color-mix(in srgb, var(--sodium) 30%, transparent);}
+  .qs .btn.interp{border-style:solid; border-color:var(--s6); color:var(--s6);}
+  .chip{font:600 10px var(--f-mono); letter-spacing:.06em; text-transform:uppercase; padding:2px 7px; border-radius:999px; background:var(--s6); color:var(--ink); white-space:nowrap;}
+  .chip.warn{background:var(--p2);}
+  .locate{display:grid; gap:8px; padding:10px; border-radius:10px; border:1px dashed var(--sodium); background:color-mix(in srgb, var(--sodium) 7%, transparent);}
+  .locate p{margin:0;}
+  /* prevoz pacienta */
+  .trans{background:var(--card); border:1px solid var(--s5); border-left:5px solid var(--s5); border-radius:10px; padding:9px 10px; display:grid; gap:7px;}
+  .trans .hosps{display:grid; gap:5px;}
+  .trans .hosps .btn{justify-content:space-between; font-size:13px; padding:6px 9px; min-height:36px; text-align:left;}
+  .trans .hosps .btn .sub{font:600 11px var(--f-mono);}
+  .trans .hosps .btn.rec{border-color:var(--sodium); box-shadow:0 0 12px color-mix(in srgb, var(--sodium) 25%, transparent);}
+  /* vybraná posádka */
+  .usel{background:var(--card); border:1px solid var(--sodium); border-radius:12px; padding:10px; display:grid; gap:8px;}
+  .usel .acts .btn{font-size:12px; min-height:32px; padding:5px 9px;}
+  /* čipy na mape */
+  .mapchips{display:none; flex-wrap:wrap; gap:6px;}
+  .mchip{display:inline-flex; align-items:center; gap:6px; font:600 12px var(--f-mono); padding:5px 10px; border-radius:999px; border:1px solid var(--line);
+    background:color-mix(in srgb, var(--panel) 92%, transparent); color:var(--text); cursor:pointer;}
+  .mchip.on{border-color:var(--sodium); color:var(--sodium);}
+  .mchip.warn{border-color:var(--p2); color:var(--p2);} .mchip.bad{border-color:var(--bad); color:var(--bad);}
+  .mchip i{width:8px; height:8px; border-radius:50%; background:currentColor; display:inline-block;}
+  .mchip .ico{width:14px; height:14px;}
+  .major{background:color-mix(in srgb, var(--bad) 12%, var(--card)); border:1px solid var(--bad); border-radius:12px; padding:10px; display:grid; gap:8px;}
+  .major .grade{font-size:20px; color:var(--bad);}
+  .inc .chip.mu, .disp .chip.mu{background:var(--bad); color:#fff;}
+  .call.repeat{border-color:var(--p2);}
+  /* rádio */
+  .mapfoot{position:absolute; left:10px; bottom:44px; z-index:3; display:grid; gap:6px; justify-items:start; max-width:min(62%,520px); pointer-events:none;}
+  .mapfoot .mapchips{pointer-events:auto;}
+  .radio{display:grid; gap:4px;}
+  .barchips{display:flex; flex-wrap:wrap; gap:6px; max-width:420px;}
+  .rm{background:color-mix(in srgb, var(--panel) 92%, transparent); border:1px solid var(--line); border-left:3px solid var(--s6); border-radius:8px; padding:5px 9px; font-size:12px; animation:hin .2s ease-out;}
+  .rm b{font:700 11px var(--f-mono); color:var(--s6); margin-right:4px;}
+  .rm.bad{border-left-color:var(--bad);} .rm.bad b{color:var(--bad);}
+  .rm.good{border-left-color:var(--good);} .rm.good b{color:var(--good);}
   .cls{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
   .cls .btn{justify-content:flex-start; text-align:left; border-left:4px solid var(--tc); font-size:13px; padding:7px 8px; gap:6px;}
   .cls .btn .ico{color:var(--tc);}
@@ -163,6 +213,7 @@
   .l3.inc .ico{width:14px; height:14px; color:var(--pc);}
   .l3.inc.sel{outline:2px solid var(--sodium);}
   .l3.inc.met{border-color:var(--good);}
+  .l3.inc.lost{border-style:dashed; border-color:var(--sodium); box-shadow:0 0 14px color-mix(in srgb, var(--sodium) 45%, transparent);}
   .l3.fx{font:800 22px/1 var(--f-display); text-shadow:0 2px 6px #000; animation:rise 1.6s ease-out forwards;}
   .l3.fx.good{color:var(--good);} .l3.fx.bad{color:var(--bad);}
   @keyframes rise{to{margin-top:-46px; opacity:0;}}
@@ -178,12 +229,12 @@
   .nogl{position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:20px; color:var(--muted);}
 
   /* ---------- prekryvné okná ---------- */
-  .overlay{position:absolute; inset:0; z-index:20; display:grid; place-items:center; overflow:auto;
+  .overlay{position:absolute; inset:0; z-index:20; display:grid; justify-items:center; align-items:start; overflow:auto;
     background:radial-gradient(closest-side, color-mix(in srgb, var(--ink) 72%, transparent), color-mix(in srgb, var(--ink) 40%, transparent));
     padding-block:16px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));}
   .overlay.menu{background:linear-gradient(90deg, color-mix(in srgb, var(--ink) 84%, transparent), color-mix(in srgb, var(--ink) 40%, transparent) 60%, transparent);}
   @media (min-width:1100px){ .overlay.menu{justify-items:start; padding-left:max(48px, env(safe-area-inset-left, 0px));} .overlay.menu .sheet{max-width:600px;} }
-  .sheet{width:100%; max-width:660px; background:color-mix(in srgb, var(--panel) 95%, transparent); border:1px solid var(--line); border-radius:16px;
+  .sheet{margin-block:auto; width:100%; max-width:660px; background:color-mix(in srgb, var(--panel) 95%, transparent); border:1px solid var(--line); border-radius:16px;
     padding:24px; display:grid; gap:16px; box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px color-mix(in srgb, var(--sodium) 10%, transparent); backdrop-filter:blur(6px);}
   .sheet.wide{max-width:1180px;}
   .title{margin:0; font:800 clamp(52px, 10vw, 84px)/.88 var(--f-display); text-transform:uppercase; letter-spacing:.03em; text-wrap:balance;}
@@ -208,6 +259,29 @@
   .credit a{color:var(--muted);}
   .linkbtn{background:none; border:none; padding:0; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:12px;}
 
+  /* menu: záložky, výzvy, medaily */
+  .seg{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:4px;}
+  .seg .btn{border:none; background:transparent; min-height:38px;}
+  .seg .btn.on{background:var(--sodium); color:var(--on-sodium);}
+  .chals{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; max-height:46vh; overflow:auto; padding-right:2px;}
+  .chal{text-align:left; display:grid; gap:5px; align-content:start; padding:11px 12px; border-radius:12px; background:var(--card); border:1px solid var(--line); cursor:pointer; color:var(--text); font:inherit;}
+  .chal:hover:not(:disabled){border-color:var(--sodium);}
+  .chal.lock{opacity:.5; cursor:default;}
+  .chal b{font:800 18px/1.1 var(--f-display); letter-spacing:.04em; text-transform:uppercase;}
+  .chal .meta{display:flex; align-items:center; gap:6px; font:600 11px var(--f-mono); color:var(--muted);}
+  .chal .meta .ico{width:14px; height:14px;}
+  .chal .goals{font-size:12px; color:#c7d1e3; line-height:1.5;}
+  .chal.daily{cursor:default;}
+  .stars{display:inline-flex; gap:1px; font-size:16px; line-height:1;}
+  .stars i{font-style:normal; color:var(--line);} .stars i.on{color:var(--sodium); text-shadow:0 0 10px color-mix(in srgb, var(--sodium) 50%, transparent);}
+  .stars.big{font-size:40px; gap:6px;}
+  .medals{display:flex; flex-wrap:wrap; gap:6px;}
+  .medal{font:600 11px var(--f-mono); padding:3px 8px; border-radius:999px; border:1px dashed var(--line); color:var(--muted);}
+  .medal b{font-weight:600; margin-right:4px;}
+  .medal.got{border-style:solid; border-color:var(--sodium); color:var(--sodium);}
+  .medal.new{background:var(--sodium); color:var(--on-sodium); border-color:var(--sodium);}
+  .goallist{margin:0; padding:0; list-style:none; display:grid; gap:4px;}
+  .goallist li{display:flex; gap:8px; align-items:baseline;} .goallist li::before{content:"✗"; color:var(--bad); font-weight:700;} .goallist li.ok::before{content:"✓"; color:var(--good);}
   /* strom schopností */
   .tree{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px;}
   .branch{display:grid; gap:8px; align-content:start; min-width:0;}
@@ -231,6 +305,11 @@
   .ringbar{display:none;}
   #btnPause .ico{display:none;} #btnPause .pi, #btnPause .pl{width:16px; height:16px;}
   #btnSkills .m, .ctrl .more, .xpline{display:none;}
+  @media (min-width:861px) and (max-width:1680px){
+    .ctrl .opt{display:none;} .ctrl .more{display:inline-flex; min-width:36px; font-size:18px;}
+    .app[data-more="1"] .ctrl .opt{display:inline-flex;}
+    .lvl{width:120px;}
+  }
 
   /* filtre posádok */
   .uf{display:flex; gap:5px; flex-wrap:wrap;}
@@ -296,13 +375,23 @@
     .cand{grid-template-columns:auto minmax(0,1fr) auto auto; gap:6px; font-size:13px;}
     .cand .btn{min-height:36px;}
     .unit{padding:7px 9px;}
-    .diffs, .sumgrid{grid-template-columns:1fr;}
+    .diffs, .chals{grid-template-columns:1fr;}
+    .sumgrid{grid-template-columns:1fr 1fr;}
+    .chals{max-height:none;}
     .tree{grid-template-columns:1fr;}
     .sheet{padding:18px;}
     .legend{display:none;}
     .l3.town{font-size:10px;} .l3.town.big{font-size:13px;} .l3.poi{display:none;}
     .l3.unit{font-size:9px; padding:2px 4px;}
     .l3.inc{font-size:10px; padding:2px 5px;}
+    .mapfoot{left:8px; bottom:8px; max-width:calc(100% - 120px);}
+    .mapchips{display:flex;}
+    .barchips{display:none;}
+    .hints .hint:nth-child(n+3){display:none;}
+    .mchip{font-size:11px; padding:4px 8px;}
+    .radio .rm:nth-child(n+2){display:none;}
+    .log{max-height:none;}
+    .m{font-size:14px;}
   }
   @media (max-width:430px){ .brand{display:none;} }
   @media (max-width:370px){ .bar{gap:6px 7px;} .clock{font-size:19px;} }
@@ -328,6 +417,7 @@
     <div class="lvl"><div class="row"><span class="v" id="lvlTxt">Úroveň 1</span></div><div class="track"><i id="xpBar"></i></div><div class="k" id="xpTxt">0 / 100 XP</div></div>
     <button class="btn sm" data-act="skills" id="btnSkills"><span class="t">Schopnosti</span><span class="m" id="lvlMini">Úr. 1</span> <span class="badge" id="ptsBadge">1</span></button>
     <div class="stat score"><div class="k">Skóre</div><div class="v" id="score">0</div></div>
+    <div class="barchips" id="barchips"></div>
     <div class="rep" id="repBox"><div class="k">Dôvera <span id="repTxt">100 %</span></div><div class="track"><i id="repBar"></i></div></div>
     <div class="spacer"></div>
     <div class="ctrl">
@@ -335,6 +425,7 @@
       <button class="btn sm ghost opt" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
       <button class="btn sm ghost opt" data-act="light" id="btnLight" title="Osvetlenie mapy">Večer</button>
       <button class="btn sm ghost opt" data-act="mute" id="btnMute">Zvuk</button>
+      <button class="btn sm ghost opt" data-act="voice" id="btnVoice" title="Hlas volajúceho (syntéza reči, ak ju prehliadač má)">Hlas</button>
       <button class="btn sm ghost more" data-act="more" id="btnMore" aria-label="Ďalšie nastavenia" aria-expanded="false">⋯</button>
     </div>
     <div class="xpline"><i id="xpLine"></i></div>
@@ -354,6 +445,7 @@
     <div class="mapbtns">
       <button class="btn" data-act="view" title="Zobraziť celý kraj">Celý kraj</button>
     </div>
+    <div class="mapfoot"><div class="radio" id="radio" aria-live="polite"></div><div class="mapchips" id="mapchips"></div></div>
     <div class="legend" id="legend"></div>
   </section>
 
@@ -392,6 +484,11 @@ const rand = (a,b) => a+Math.random()*(b-a);
 const pick = a => a[Math.floor(Math.random()*a.length)];
 const pad = n => String(n).padStart(2,'0');
 const REDUCED = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+/* náhoda pre hovory a udalosti – v dennej výzve má pevné semienko, aby všetci dostali rovnaké hovory */
+let CR=Math.random, WR=Math.random;   // CR: hovory, WR: počasie a mimoriadne udalosti
+const cr=(a,b)=>a+CR()*(b-a), cpick=a=>a[Math.floor(CR()*a.length)];
+const wr=(a,b)=>a+WR()*(b-a), wpick=a=>a[Math.floor(WR()*a.length)];
+const hashStr = t => { let h=2166136261; for(let i=0;i<t.length;i++){ h^=t.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; };
 function rng(seed){ return () => { seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15, 1|seed); t=t+Math.imul(t^t>>>7, 61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 
 /* ---------- ikony ---------- */
@@ -489,6 +586,7 @@ const WAYPOINTS=[
   ['w_ml','Milhosť – hraničný priechod',21.2700,48.5300,'na hraničnom priechode Milhosť','border'],
   ['w_vn','Vyšné Nemecké – hraničný priechod',22.2600,48.6600,'na hraničnom priechode Vyšné Nemecké','border'],
   ['w_ci','Čingov',20.4700,48.9520,'na Čingove','road'],
+  ['w_po','smer Prešov',21.2400,48.9150,'pri hranici s Prešovským krajom','road'],
 ];
 /* miesta v teréne: hory, jaskyne, vodné plochy, priemysel */
 const POIS=[
@@ -509,7 +607,7 @@ const POIS=[
 /* cesty: [a, b, druh] – M hlavná, R cesta, T turistický chodník */
 const ROADS=[
   ['ke','w_sl','M'],['w_sl','se','M'],['se','mi','M'],['mi','so','M'],['so','w_vn','M'],
-  ['ke','mo','M'],['mo','tu','M'],['tu','li','M'],['li','rv','M'],['rv','pl','M'],['ke','w_ml','M'],['ke','w_ky','M'],
+  ['ke','mo','M'],['mo','tu','M'],['tu','li','M'],['li','rv','M'],['rv','pl','M'],['ke','w_ml','M'],['ke','w_ky','M'],['w_ky','w_po','M'],
   ['se','tv','R'],['tv','mi','R'],['tv','ve','R'],['ve','w_snm','R'],['w_snm','kc','R'],['w_snm','bo','R'],['bo','kc','R'],['kc','ct','R'],['kc','vk','R'],['vk','mi','R'],
   ['mi','st','R'],['mi','l_si','R'],['l_si','so','R'],['w_ky','mg','R'],['mg','kr','R'],['kr','sv','R'],['sv','snv','R'],['mg','gl','R'],
   ['gl','me','R'],['me','ja','R'],['ja','ke','R'],['rv','db','R'],['db','dd','R'],['dd','snv','R'],['snv','sm','R'],['sm','w_ci','R'],
@@ -520,7 +618,23 @@ const ROADS=[
   ['p_sb','w_ci','T'],['p_kl','w_ci','T'],['p_kl','dd','T'],['p_vo','rv','T'],['p_kh','me','T'],['p_zd','tu','T'],
   ['p_mo','so','T'],['p_oc','sti','T'],['p_dm','pl','T'],
 ];
-const HOSPITALS=['ke','mi','snv','tv','rv','kc'];
+/* nemocnice: špecializácie (zjednodušené) a počet voľných miest na urgentnom príjme */
+const HOSP=[
+  {id:'unlp',  node:'ke',  name:'UNLP Košice',            spec:['trauma','neuro','inf','gen'], cap:6},
+  {id:'vusch', node:'ke',  name:'VÚSCH Košice',           spec:['cardio'], cap:3},
+  {id:'dfn',   node:'ke',  name:'Detská FN Košice',       spec:['child'], cap:3},
+  {id:'h_mi',  node:'mi',  name:'Nemocnica Michalovce',   spec:['gen'], cap:4},
+  {id:'h_snv', node:'snv', name:'Nemocnica Spišská Nová Ves', spec:['gen'], cap:4},
+  {id:'h_tv',  node:'tv',  name:'Nemocnica Trebišov',     spec:['gen'], cap:3},
+  {id:'h_rv',  node:'rv',  name:'Nemocnica Rožňava',      spec:['gen'], cap:3},
+  {id:'h_kc',  node:'kc',  name:'Nemocnica Kráľovský Chlmec', spec:['gen'], cap:2},
+  {id:'h_kr',  node:'kr',  name:'Nemocnica Krompachy',    spec:['gen'], cap:2},
+];
+const HOSPITALS=[...new Set(HOSP.map(h=>h.node))];
+const SPEC_L={cardio:'kardiocentrum', trauma:'traumacentrum', neuro:'iktové centrum', child:'detská', inf:'infekčná klinika', gen:'všeobecná'};
+const PT_L={cardio:'srdce', trauma:'ťažký úraz', neuro:'mozgová príhoda', child:'dieťa', inf:'infekcia', gen:'bežný príjem'};
+const PT={'Zástava srdca':'cardio','Bolesť na hrudi':'cardio','Kolaps na túre':'cardio','Mozgová príhoda':'neuro','Pád z lešenia':'trauma','Zakliesnený vodič':'trauma',
+  'Hromadná nehoda':'trauma','Zrazený chodec':'trauma','Bodnutie':'trauma','Zranený turista':'trauma','Anafylaxia':'child','Podozrenie na nákazu':'inf'};
 const RIVERS=[
   ['Hornád',[[20.30,48.98],[20.45,48.965],[20.56,48.95],[20.70,48.93],[20.87,48.915],[21.0,48.89],[21.06,48.866],[21.12,48.86],[21.20,48.85],[21.24,48.80],[21.27,48.74],[21.28,48.68],[21.28,48.60],[21.30,48.50]]],
   ['Hnilec',[[20.25,48.87],[20.39,48.865],[20.55,48.86],[20.70,48.85],[20.85,48.855],[20.94,48.86],[21.0,48.89]]],
@@ -602,7 +716,7 @@ const UNITS_DEF=[
   ['Z1','RZP','ke_j','','RZP Košice-Juh 2'],['Z2','RZP','ke_z','','RZP Košice-Západ 3'],
   ['L2','RLP','mi','','RLP Michalovce 2'],['Z3','RZP','snv','','RZP Spišská Nová Ves 2'],
   ['L3','RLP','rv','','RLP Rožňava 2'],['L4','RLP','tv','','RLP Trebišov 1'],
-  ['H1','HAS','ke'],['H2','HAS','snv'],['PZ1','PZ','ke'],['PZ2','PZ','mi'],['MP1','MSP','ke'],
+  ['H1','HAS','ke'],['H2','HAS','snv'],['H3','HAS','mi'],['PZ1','PZ','ke'],['PZ2','PZ','mi'],['MP1','MSP','ke'],
   ['Z4','RZP','ke_ta','z_ke','RZP Košice-Sídlisko Ťahanovce 1'],['Z5','RZP','ke_sa','z_ke','RZP Košice-Šaca 1'],['Z6','RZP','ke_kr','z_ke','RZP Košice-Krásna 1'],
   ['L5','RLP','mo','z_ko','RLP Moldava nad Bodvou 1'],['Z7','RZP','ca','z_ko','RZP Čaňa 1'],['Z8','RZP','me','z_ko','RZP Medzev 1'],
   ['Z9','RZP','bi','z_ko','RZP Bidovce 1'],['Z10','RZP','chr','z_ko','RZP Chrastné 1'],
@@ -616,7 +730,7 @@ const UNITS_DEF=[
   ['Z27','RZP','rv','z_gem','RZP Rožňava 3'],['Z28','RZP','db','z_gem','RZP Dobšiná 1'],['Z29','RZP','sti','z_gem','RZP Štítnik 1'],
   ['Z30','RZP','pl','z_gem','RZP Plešivec 1'],['Z31','RZP','li','z_gem','RZP Lipovník 1'],
   ['V1','LZS','ke','z_lzs','Vrtuľník Košice'],
-  ['H3','HAS','mi','h_mi'],['H4','HAS','rv','h_rv'],['H5','HAS','tv','h_tv'],['CH1','CBRN','ke','h_cbrn'],
+  ['H4','HAS','rv','h_rv'],['H5','HAS','tv','h_tv'],['CH1','CBRN','ke','h_cbrn'],
   ['PZ3','PZ','snv','p_snv'],['PZ4','PZ','rv','p_rv'],['PZ5','PZ','tv','p_tv'],['MP2','MSP','mi','m_mi'],['MP3','MSP','snv','m_snv'],
   ['HS1','HZS','w_ci','s_raj'],['HS2','HZS','rv','s_kras'],
 ];
@@ -638,9 +752,8 @@ const SKILLS=[
   {id:'z_gl',  b:'zzs', cost:1, req:[], name:'Okres Gelnica', desc:'RZP Gelnica, Margecany a Nálepkovo pre doliny Hnilca a Hornádu.'},
   {id:'z_gem', b:'zzs', cost:2, req:[], name:'Gemer', desc:'RZP Rožňava, Dobšiná, Štítnik, Plešivec a Lipovník.'},
   {id:'z_lzs', b:'zzs', cost:3, req:[], name:'Vrtuľník Košice', desc:'Letí priamo vzduchom, má lekára. Nahradí záchranku aj horskú službu.'},
-  {id:'h_mi',  b:'has', cost:1, req:[], name:'HaZZ Michalovce', desc:'Hasičská stanica pre Zemplín.'},
   {id:'h_rv',  b:'has', cost:1, req:[], name:'HaZZ Rožňava', desc:'Hasiči pre Gemer a Slovenský kras.'},
-  {id:'h_tv',  b:'has', cost:1, req:['h_mi'], name:'HaZZ Trebišov', desc:'Ďalšia stanica na juhovýchode.'},
+  {id:'h_tv',  b:'has', cost:1, req:[], name:'HaZZ Trebišov', desc:'Ďalšia stanica na juhovýchode.'},
   {id:'h_tech',b:'has', cost:2, req:[], name:'Vyslobodzovacia technika', desc:'Nehody a technické zásahy o 30 % rýchlejšie.'},
   {id:'h_cbrn',b:'has', cost:2, req:[], name:'Chemická jednotka', desc:'Odomkne udalosti s nebezpečnými látkami a biohazardom.'},
   {id:'h_deko',b:'has', cost:1, req:['h_cbrn'], name:'Dekontaminačný stan', desc:'Zásahy s nebezpečnými látkami o 30 % rýchlejšie.'},
@@ -658,7 +771,8 @@ const SKILLS=[
   {id:'d_hint',b:'disp',cost:1, req:['d_calm'], name:'Rýchla triáž', desc:'Pri hovore sa zvýrazní správny druh udalosti.'},
   {id:'d_green',b:'disp',cost:2, req:[], name:'Zelená vlna', desc:'Všetky posádky jazdia o 15 % rýchlejšie.'},
   {id:'d_rep', b:'disp',cost:1, req:[], name:'Dôvera verejnosti', desc:'Pri chybách klesá dôvera o 30 % menej.'},
-  {id:'d_auto',b:'disp',cost:2, req:['d_hint'], name:'Automatické P3', desc:'K udalostiam P3 sa odporúčané posádky vyšlú samé.'},
+  {id:'d_rec', b:'disp',cost:2, req:[], name:'Asistent vysielania', desc:'Navrhne najlepšie posádky aj nemocnicu a vyšle ich jedným ťuknutím (Enter).'},
+  {id:'d_auto',b:'disp',cost:2, req:['d_rec'], name:'Automatické P3', desc:'K udalostiam P3 sa odporúčané posádky vyšlú samé.'},
 ];
 /* druhy hovorov pri triáži */
 const CATS={
@@ -680,6 +794,7 @@ const TPL=[
   {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:7,title:'Zástava srdca',texts:['Manžel spadol na zem, nedýcha a nereaguje! Bývame {loc}.','Otec sa zrútil v záhrade a nemá pulz!']},
   {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:4,title:'Anafylaxia',texts:['Dcéru štípla osa, opuchá jej tvár a ťažko dýcha!']},
   {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:4,title:'Pád z lešenia',texts:['Robotník spadol z lešenia z tretieho poschodia a nehýbe sa.']},
+  {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:5,title:'Bolesť na hrudi',texts:['Otca strašne páli na hrudi, je bledý a spotený.','Manželka sa sťažuje na tlak na hrudi, ide jej to do ľavej ruky.']},
   {cat:'med',prio:1,needs:[AMB],work:8,tr:1,place:'town',w:5,title:'Mozgová príhoda',texts:['Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!','Manžel nevie zdvihnúť pravú ruku a motá sa mu reč.']},
   {cat:'med',prio:1,needs:[AMB,DOC],work:9,tr:1,place:'town',w:3,title:'Dusenie',texts:['Dedko sa dusí, je celý modrý a nevie sa nadýchnuť!']},
   {cat:'med',prio:2,needs:['RZP|RLP'],work:8,tr:1,place:'town',w:6,title:'Pôrod',texts:['Manželke praskla plodová voda a kontrakcie sú každé dve minúty!']},
@@ -719,15 +834,212 @@ const TPL=[
   {cat:'mountain',prio:2,needs:['HZS','HAS'],work:16,tr:0,place:'cave',w:2,title:'Uviaznutý jaskyniar',texts:['Jaskyniar uviazol {loc} v úzkej chodbe a nevie sa dostať von.']},
   {cat:'mountain',prio:3,needs:['HZS'],work:8,tr:0,place:'mountain',w:4,title:'Vyčerpaný turista',texts:['Sme na túre {loc}, manželka už nevládze ísť ďalej a stmieva sa.']},
 ];
+/* otázky, ktoré dispečer kladie volajúcemu */
+const QS={what:'Čo sa stalo?', where:'Kde presne ste?', hurt:'Je niekto zranený? Dýcha?', danger:'Hrozí ešte niečo? Oheň, plyn, zbraň?'};
+const QS_SILENT={sp:'Potrebujete políciu? Ťuknite raz.', sm:'Potrebujete aj záchranku?', sd:'Je ten človek stále pri vás?', where:'Zapínam lokalizáciu vášho mobilu.'};
+const QKEYS={what:'Q', where:'W', hurt:'E', danger:'R', sp:'Q', sm:'W', sd:'E'};
+const ASK_T=2, INTERP_T=4;   // odpoveď volajúceho a pripojenie tlmočníka (minúty hry)
+const OPEN=['Prosím, rýchlo, potrebujem pomoc!','Haló? Haló, počujete ma? Stalo sa niečo hrozné…','Dobrý deň… ja neviem, či volám správne…','Pomôžte, prosím! Rýchlo!','Haló, záchranka? Polícia? Neviem, koho potrebujem…'];
+const DEF_ANS={
+  med:{hurt:'Je pri vedomí, ale je mu veľmi zle.', danger:'Nie, len prosím príďte rýchlo.'},
+  traffic:{hurt:'Nikto ďalší, myslím. Všetci sú v šoku.', danger:'Nie, len autá stoja cez cestu.'},
+  fire:{hurt:'Zatiaľ nikto, všetci sú vonku.', danger:'Dym je čoraz hustejší, ale inak nie.'},
+  tech:{hurt:'Nie, nikto nie je zranený.', danger:'Zatiaľ nie, ale treba to rýchlo vyriešiť.'},
+  hazmat:{hurt:'Ľudia kašlú, ale sú pri vedomí.', danger:'Nevieme, čo to je, bojíme sa ísť bližšie.'},
+  police:{hurt:'Nie, nikto nie je zranený.', danger:'Neviem, nevidím ho.'},
+  msp:{hurt:'Nie, nikto.', danger:'Nie, len je to otravné.'},
+  mountain:{hurt:'Je pri vedomí, ale nemôže ísť ďalej.', danger:'Stmieva sa a ochladzuje.'},
+};
+const ANS={
+  'Zástava srdca':{hurt:'Nedýcha! Vôbec nereaguje!'}, 'Dusenie':{hurt:'Ledva dýcha, je celý modrý!'},
+  'Kolaps na túre':{hurt:'Je pri vedomí, ale strašne ho páli na hrudi.'}, 'Topiaci sa':{hurt:'Neviem, nevidím ho! Je pod vodou!'},
+  'Bodnutie':{hurt:'Krváca z brucha, ale je pri vedomí.'}, 'Hromadná nehoda':{hurt:'Je tu veľa zranených, niektorí kričia.'},
+  'Zakliesnený vodič':{hurt:'Vodič je pri vedomí, ale krváca a nevie sa dostať von.'}, 'Pád seniora':{hurt:'Je pri vedomí, len ju bolí bok.'},
+  'Nezvestné dieťa':{hurt:'Neviem, nedvíha telefón!', danger:'Na ceste do školy je les a rieka…'},
+  'Zablúdený hubár':{hurt:'Neviem, nedvíha. Je diabetik.', danger:'Stmieva sa a v lese je zima.'},
+  'Únik amoniaku':{danger:'Smrdí to v celej hale, štípu nás oči!'}, 'Únik chemikálií':{danger:'Žltý oblak sa ťahá smerom k mestu!'},
+  'Požiar bytu':{hurt:'Suseda je ešte vnútri, nevieme, či je v poriadku!'}, 'Prevrátený kamión':{hurt:'Vodič je v poriadku, vyliezol sám.'},
+  'Ťukanec':{hurt:'Nie, nikto nie je zranený.'}, 'Bolesť na hrudi':{hurt:'Je pri vedomí, ale je bledý a celý spotený.'},
+};
+/* skryté komplikácie: objavíš ich otázkou, inak ich nahlási až posádka na mieste */
+const CX={
+  'Anafylaxia':[{q:'hurt',p:.45,need:DOC,yes:'Prestáva dýchať, pery má modré!',rep:'Pacientka má ťažkú dýchavicu, potrebujeme lekára!'}],
+  'Mozgová príhoda':[{q:'hurt',p:.3,need:DOC,yes:'Už nereaguje a chrčí!',rep:'Pacient upadol do bezvedomia, potrebujeme lekára.'}],
+  'Pôrod':[{q:'hurt',p:.3,need:DOC,yes:'Krváca a dieťa ide nožičkami napred!',rep:'Komplikovaný pôrod, potrebujeme lekára.'}],
+  'Otrava':[{q:'hurt',p:.35,need:DOC,yes:'Stráca vedomie a má kŕče!',rep:'Pacient kŕčuje, potrebujeme lekára.'}],
+  'Bolesť na hrudi':[{q:'hurt',p:.4,need:DOC,yes:'Teraz mi odpadol! Nereaguje!',rep:'Pacient skolaboval, je to infarkt, potrebujeme lekára.'}],
+  'Zakliesnený vodič':[{q:'hurt',p:.4,need:AMB,yes:'Spolujazdkyňa tiež krváca z hlavy!',rep:'V aute je ešte spolujazdkyňa so zranením hlavy, potrebujeme ďalšiu sanitku.'},{q:'danger',p:.3,need:'HAS',yes:'Z motora sa dymí a tečie benzín!',rep:'Z vozidla uniká benzín, potrebujeme ďalších hasičov.'}],
+  'Hromadná nehoda':[{q:'hurt',p:.5,need:AMB,yes:'Je tu aspoň šesť zranených, dvaja nehybne ležia!',rep:'Zranených je viac, ako sme čakali. Potrebujeme ďalšiu sanitku.'}],
+  'Zrazený chodec':[{q:'hurt',p:.35,need:DOC,yes:'Krváca z hlavy a prestáva reagovať!',rep:'Chodkyňa má ťažké poranenie hlavy, potrebujeme lekára.'}],
+  'Prevrátený kamión':[{q:'hurt',p:.3,need:AMB,yes:'Teraz sa drží za hrudník a ťažko dýcha!',rep:'Vodič kamiónu má poranený hrudník, potrebujeme sanitku.'}],
+  'Ťukanec':[{q:'hurt',p:.25,need:'RZP|RLP',yes:'Vodička z druhého auta sa sťažuje na krk.',rep:'Vodička má bolesti krčnej chrbtice, potrebujeme záchranku.'}],
+  'Požiar bytu':[{q:'danger',p:.4,need:'HAS',yes:'Oheň sa šíri na chodbu, v byte sú plynové fľaše!',rep:'Požiar sa šíri na chodbu, potrebujeme ďalšiu jednotku.'}],
+  'Požiar domu':[{q:'hurt',p:.3,need:'RZP|RLP',yes:'Sused sa nadýchal dymu, kašle a je mu zle.',rep:'Jeden človek sa nadýchal dymu, potrebujeme záchranku.'}],
+  'Lesný požiar':[{q:'danger',p:.4,need:'HAS',yes:'Vietor ho ženie k domom na kraji dediny!',rep:'Oheň sa blíži k domom, potrebujeme ďalšiu jednotku.'}],
+  'Požiar kontajnera':[{q:'danger',p:.25,need:'PZ',yes:'Pri kontajneri sa motá partia, asi ho niekto podpálil.',rep:'Pravdepodobne úmyselné podpálenie, potrebujeme políciu.'}],
+  'Strom na ceste':[{q:'hurt',p:.25,need:'RZP|RLP',yes:'Strom spadol na auto, vodič je v ňom a krváca!',rep:'Pod stromom je auto so zraneným vodičom, potrebujeme záchranku.'}],
+  'Uviaznutý výťah':[{q:'hurt',p:.3,need:'RZP|RLP',yes:'Pani vo výťahu omdlieva, je diabetička.',rep:'Žena vo výťahu je v hypoglykémii, potrebujeme záchranku.'}],
+  'Záplavy':[{q:'danger',p:.35,need:'HAS',yes:'Voda stúpa, susedia sú na streche!',rep:'Voda stále stúpa, potrebujeme ďalších hasičov.'}],
+  'Únik amoniaku':[{q:'hurt',p:.4,need:AMB,yes:'Niekoľko ľudí leží pri vchode a lapá po dychu!',rep:'Viacero zasiahnutých osôb, potrebujeme ďalšiu sanitku.'}],
+  'Únik chemikálií':[{q:'hurt',p:.35,need:AMB,yes:'Dvaja robotníci sa zrútili pri cisterne!',rep:'Dvaja zasiahnutí pracovníci, potrebujeme sanitku.'}],
+  'Podozrivý prášok':[{q:'hurt',p:.25,need:'RZP|RLP',yes:'Úradníčka, čo otvorila obálku, má vyrážky a dusí sa.',rep:'Úradníčka má alergickú reakciu, potrebujeme záchranku.'}],
+  'Otrava CO':[{q:'hurt',p:.35,need:DOC,yes:'Dcéra nereaguje, nevieme ju prebrať!',rep:'Dieťa je v bezvedomí, potrebujeme lekára.'}],
+  'Bodnutie':[{q:'danger',p:.4,need:'PZ',yes:'Útočník má stále nôž a vyhráža sa ďalším!',rep:'Útočník je stále v okolí a je ozbrojený, potrebujeme ďalšiu hliadku.'},{q:'hurt',p:.3,need:DOC,yes:'Strašne krváca a bledne!',rep:'Masívne krvácanie, potrebujeme lekára.'}],
+  'Vlámanie':[{q:'danger',p:.3,need:'PZ',yes:'Sú tam dvaja a jeden má v ruke páčidlo.',rep:'Páchatelia sú dvaja, potrebujeme ďalšiu hliadku.'}],
+  'Domáce násilie':[{q:'hurt',p:.4,need:'RZP|RLP',yes:'Žena krváca z hlavy, leží na chodbe.',rep:'Žena má zranenie hlavy, potrebujeme záchranku.'}],
+  'Opitý na zastávke':[{q:'hurt',p:.3,need:'RZP|RLP',yes:'Má rozbitú hlavu a nereaguje poriadne.',rep:'Muž má poranenie hlavy, potrebujeme záchranku.'}],
+  'Výtržnosť':[{q:'hurt',p:.35,need:'RZP|RLP',yes:'Jeden chlap leží na zemi a krváca.',rep:'Jeden zranený na zemi, potrebujeme záchranku.'}],
+  'Uviaznutý jaskyniar':[{q:'hurt',p:.35,need:'RZP|RLP',yes:'Má asi zlomenú ruku a je podchladený.',rep:'Jaskyniar je zranený a podchladený, potrebujeme záchranku.'}],
+};
+/* hovory v cudzom jazyku (pri hraniciach a v Košiciach) */
+const FTX={
+  'Zástava srdca':{hu:'A férjem összeesett, nem lélegzik és nem reagál!', uk:'Мій чоловік упав, не дихає і не реагує!', en:"My husband collapsed, he's not breathing and not responding!"},
+  'Zakliesnený vodič':{hu:'Egy autó fának ütközött, a sofőr beszorult és vérzik!', uk:'Машина врізалася в дерево, водій затиснутий і кровоточить!', en:'A car hit a tree, the driver is trapped and bleeding!'},
+  'Požiar domu':{hu:'Ég a családi ház teteje, és a tűz átterjed a garázsra!', uk:'Горить дах будинку, і вогонь перекидається на гараж!', en:"The roof of a house is on fire and it's spreading to the garage!"},
+  'Zrazený chodec':{hu:'Egy autó elütött egy nőt a zebrán, az úton fekszik, de eszméleténél van.', uk:'Машина збила жінку на переході, вона лежить на дорозі, але при свідомості.', en:"A car hit a woman on the crossing, she's lying on the road but conscious."},
+  'Krádež':{hu:'Ellopták a pénztárcámat a boltban, a tolvaj biciklivel elmenekült.', uk:'У магазині вкрали гаманець, злодій утік на велосипеді.', en:'Someone stole my wallet in the shop and rode off on a bike.'},
+  'Pôrod':{hu:'Elfolyt a feleségem magzatvize, kétpercenként vannak a fájások!', uk:'У дружини відійшли води, перейми кожні дві хвилини!', en:"My wife's water broke, contractions are every two minutes!"},
+  'Podozrenie na nákazu':{hu:'Az egyik utasnak magas láza és kiütései vannak, külföldről jött.', uk:'У пасажира висока температура і висип, він приїхав з-за кордону.', en:'A passenger has a high fever and a rash, he came from abroad.'},
+  'Zranený turista':{hu:'A barátom megcsúszott, és nem tud ráállni a lábára.', uk:'Мій друг посковзнувся і не може стати на ногу.', en:"My friend slipped and can't put weight on his leg."},
+  'Ťukanec':{hu:'Összeütköztünk, senki sem sérült meg, de elzárjuk az egyik sávot.', uk:'Ми зіткнулися, ніхто не постраждав, але блокуємо одну смугу.', en:"We had a small crash, nobody's hurt, but we're blocking a lane."},
+  'Bolesť na hrudi':{hu:'Apámnak nagyon fáj a mellkasa, sápadt és izzad!', uk:'У батька сильно болить у грудях, він блідий і пітніє!', en:'My father has terrible chest pain, he is pale and sweating!'},
+};
+const LANGS={hu:'maďarčina', uk:'ukrajinčina', en:'angličtina'};
+const FOPEN={hu:'Halló! Segítség, kérem! Nem beszélek szlovákul…', uk:'Алло! Допоможіть, будь ласка! Я не розмовляю словацькою…', en:"Hello? Do you speak English? Please, I need help!"};
+const FANS={
+  hu:{where:'Nem tudom pontosan… {n} mellett vagyunk.', yes:'Igen! Nagyon rossz a helyzet!', no:'Nem, azt hiszem, nem.'},
+  uk:{where:'Не знаю точно… ми біля {n}.', yes:'Так! Дуже погано!', no:'Ні, здається, ні.'},
+  en:{where:"I'm not sure… we're near {n}.", yes:"Yes! It's really bad!", no:"No, I don't think so."},
+};
+const SILENT=['Domáce násilie','Vlámanie'];
+const PRANK_ANS={what:'Nič, hehe… len sa nudím.', where:'Na Mesiaci! Hahaha.', hurt:'Hehe, nie, všetci sú v pohode.', danger:'Jedine, že mi vychladne pizza.'};
 const PRANKS=['Haló, je tam záchranka? Hehe… máte veľmi pekný hlas.','Dobrý deň, chcel by som si objednať pizzu so šunkou.','Len skúšam, či to funguje. Ahoj!','Je tam polícia? Môj kocúr mi zjedol večeru!','Koľko je hodín? Nemám baterku v mobile.'];
+for(const t of TPL){ t.cx=CX[t.title]||[]; t.fx=FTX[t.title]||null; }
 const STREETS=['Hlavná','Školská','Mierová','Družstevná','Záhradná','Štúrova','Komenského','Sládkovičova','Nová','Jarná','Lesná','Poštová'];
 const KE_STREETS=['Hlavná','Južná trieda','Moyzesova','Trieda SNP','Popradská','Hlinkova','Komenského','Watsonova','Bauerova','Tr. arm. gen. L. Svobodu'];
-const BASE_PTS={1:300,2:200,3:120}, REP_OK={1:4,2:3,3:2}, REP_FAIL={1:20,2:14,3:8}, DL_BASE={1:22,2:32,3:46};
+const BASE_PTS={1:300,2:200,3:120}, REP_OK={1:4,2:3,3:2}, REP_FAIL={1:16,2:12,3:7}, DL_BASE={1:22,2:32,3:46};
 const TEMPO={calm:{label:'Pokojné', k:1.35, note:'Menej hovorov, viac času na rozmýšľanie.'}, normal:{label:'Bežné', k:1, note:'Bežný deň na linke 112.'}, busy:{label:'Rušné', k:.72, note:'Hovory jeden za druhým.'}};
+
+/* počasie: rýchlosť pozemných posádok, vrtuľník, častejšie druhy udalostí */
+const WEATHER={
+  clear:{label:'Jasno',       speed:1,   heli:true,  w:{},                          note:''},
+  rain: {label:'Dážď',        speed:.9,  heli:true,  w:{traffic:1.4},               note:'Mokré cesty – posádky jazdia pomalšie.'},
+  fog:  {label:'Hmla',        speed:.85, heli:false, w:{traffic:1.3},               note:'Vrtuľník nemôže letieť.'},
+  ice:  {label:'Poľadovica',  speed:.72, heli:true,  w:{traffic:1.8, med:1.2},      note:'Šmykľavo – viac nehôd a pádov, pomalšie jazdy.'},
+  storm:{label:'Búrka',       speed:.85, heli:false, w:{tech:2.5, fire:1.3},        note:'Padajú stromy, vrtuľník neletí.'},
+  heat: {label:'Horúčava',    speed:1,   heli:true,  w:{mountain:1.6, med:1.3, fire:1.4}, note:'Viac kolapsov, lesných požiarov a turistov v horách.'},
+};
+const WX_ROLL=[['clear',.34],['rain',.2],['fog',.14],['ice',.1],['storm',.1],['heat',.12]];
+/* zhoršenie udalosti, keď pomoc nepríde včas (opakovaný hovor) */
+const ESC_DEF={
+  med:{p:.45, need:DOC, prio:1, text:'Je mu horšie, prestáva reagovať!'},
+  fire:{p:.5, need:'HAS', prio:1, text:'Oheň preskočil na susedný dom!'},
+  traffic:{p:.35, need:'RZP|RLP', text:'Do kolóny narazilo ďalšie auto, je tu ďalší zranený!'},
+  police:{p:.35, need:'PZ', text:'Ten človek sa vrátil a vyhráža sa susedom!'},
+  tech:{p:.3, need:'HAS', text:'Je to čoraz horšie, potrebujeme viac ľudí!'},
+  hazmat:{p:.4, need:AMB, text:'Ďalší ľudia majú problémy s dýchaním!'},
+  mountain:{p:.4, prio:1, text:'Je podchladený a prestáva reagovať!'},
+  msp:{p:.3, need:'PZ', text:'Situácia sa vymkla, začali sa biť!'},
+};
+const ESC_T={'Zástava srdca':null,'Dusenie':null,'Krádež':null,'Nezvestné dieťa':{p:.3, prio:1, text:'Už je tma a stále o ňom nevieme!'},
+  'Ťukanec':{p:.25, need:'RZP|RLP', text:'Jednej vodičke je zle, točí sa jej hlava.'}, 'Strom na ceste':{p:.25, need:'PZ', text:'Vytvorila sa kolóna a vodiči sa hádajú.'},
+  'Záplavy':{p:.35, need:'HAS', text:'Voda stúpa a zaplavuje ďalšie domy!'}, 'Uviaznutý výťah':{p:.2, need:'RZP|RLP', text:'Dieťa vo výťahu začalo hyperventilovať!'}};
+const ARRIVE={med:'Sme na mieste, preberáme pacienta.', fire:'Na mieste, začíname hasiť.', police:'Hliadka na mieste, preverujeme.', traffic:'Na mieste nehody, zabezpečujeme miesto.',
+  tech:'Na mieste, pustili sme sa do toho.', hazmat:'Na mieste, meriame koncentrácie.', mountain:'Sme pri turistovi.', msp:'Hliadka MsP na mieste.'};
+const HALF={med:'Pacient stabilizovaný.', fire:'Požiar lokalizovaný.', police:'Situácia pod kontrolou.', traffic:'Zranení ošetrení, odstraňujeme vozidlá.',
+  tech:'Ešte chvíľu a je hotovo.', hazmat:'Únik zastavený, dekontaminujeme.', mountain:'Pacient zabalený, začíname transport.', msp:'Vec vyriešená na mieste.'};
+/* mimoriadne udalosti vo fázach */
+const MAJORS={
+  bus:{name:'Hromadná nehoda autobusu', phases:[[{node:'w_ky', title:'Prevrátený autobus', cat:'traffic', needs:[AMB,AMB,'RZP|RLP',DOC,'HAS','HAS','PZ'], work:24, tr:1, text:'Autobus s výletníkmi sa prevrátil pri Kysaku, je tam veľa zranených!'}]]},
+  gas:{name:'Výbuch plynu v Košiciach', phases:[[{node:'ke', title:'Výbuch plynu v bytovke', cat:'fire', needs:['HAS','HAS',AMB,AMB,DOC,'PZ'], work:22, tr:1, text:'V bytovke vybuchol plyn, časť domu sa zrútila!'}],
+    [{node:'ke', title:'Evakuácia bytovky', cat:'tech', needs:['HAS','PZ','MSP|PZ'], work:14, tr:0, text:'Statik nariadil evakuáciu celého vchodu.'}]]},
+  flood:{name:'Povodeň na Bodrogu', weather:'rain', phases:[
+    [{node:'kc', title:'Zaplavené domy', cat:'tech', needs:['HAS','PZ'], work:14, text:'Bodrog sa vylial, voda je v domoch.'},
+     {node:'ct', title:'Zaplavená ulica', cat:'tech', needs:['HAS'], work:12, text:'Voda zatopila ulicu pri železnici.'},
+     {node:'bo', title:'Pretrhnutá hrádza', cat:'tech', needs:['HAS','PZ'], work:16, text:'Pri Borši sa pretrhla hrádza!'}],
+    [{node:'vk', title:'Evakuácia obce', cat:'tech', needs:['HAS','PZ','RZP|RLP'], work:16, text:'Treba evakuovať celú štvrť vrátane domova seniorov.'},
+     {node:'ct', title:'Ľudia na strechách', cat:'tech', needs:['HAS|LZS','RZP|LZS'], work:14, tr:1, text:'Rodina s deťmi čaká na streche, voda stále stúpa!'}]]},
+  chem:{name:'Požiar chemického podniku', skill:'h_cbrn', phases:[
+    [{node:'i_ch', title:'Požiar chemického skladu', cat:'hazmat', needs:['HAS','HAS','HAS','CBRN',AMB], work:24, tr:1, text:'V chemickom podniku v Strážskom horí sklad, nad mestom je čierny dym!'}],
+    [{node:'st', title:'Evakuácia Strážskeho', cat:'police', needs:['PZ','PZ',AMB], work:14, tr:0, text:'Treba evakuovať obyvateľov v smere vetra.'}]]},
+  storm:{name:'Víchrica nad krajom', weather:'storm', phases:[
+    [{node:'snv', title:'Strhnutá strecha', cat:'tech', needs:['HAS'], work:12, text:'Vietor strhol strechu školy.'},
+     {node:'mi', title:'Strom na aute', cat:'tech', needs:['HAS','RZP|RLP'], work:12, tr:1, text:'Strom spadol na auto, vodič je zaseknutý.'},
+     {node:'rv', title:'Spadnuté vedenie', cat:'tech', needs:['HAS','PZ'], work:12, text:'Na ceste leží vedenie vysokého napätia.'},
+     {node:'ke', title:'Strhnutá strecha', cat:'tech', needs:['HAS'], work:12, text:'Na sídlisku vietor strhol plechovú strechu.'},
+     {node:'tv', title:'Strom na ceste', cat:'tech', needs:['HAS'], work:10, text:'Cez cestu spadlo niekoľko stromov.'}]]},
+};
+const AID_U={RZP:['RZP','RZP Prešov (výpomoc)'], RLP:['RLP','RLP Prešov (výpomoc)'], HAS:['HAS','HaZZ Prešov (výpomoc)'], HAS2:['HAS','HaZZ Vranov (výpomoc)'], RZP2:['RZP','RZP Vranov (výpomoc)']};
+const AID_BY={bus:['RZP','RLP','RZP2'], gas:['RLP','HAS','RZP'], flood:['HAS','HAS2','RZP'], chem:['HAS','HAS2','RZP'], storm:['HAS','HAS2','RZP']};
+
+/* výzvy: pevné počasie, oblasť a mimoriadne udalosti; každý splnený cieľ = hviezdička */
+const CHALLENGES=[
+  {id:'c_start',  name:'Prvá služba', desc:'Pokojná hodina na rozbeh. Nauč sa pýtať volajúcich.', dur:60, rate:8, tempo:'calm', weather:'clear', goals:[['res',5],['fail',0],['triage',0]]},
+  {id:'c_kosice', name:'Dni mesta Košice', desc:'Mestom prúdia davy. Veľa práce pre mestskú políciu a záchranky.', dur:75, rate:5, tempo:'busy', weather:'clear', focus:['ke'], cats:{msp:2, police:1.5, med:1.2}, goals:[['res',10],['fail',1],['pranks',1]]},
+  {id:'c_sirava', name:'Leto na Šírave', desc:'Horúčava, turisti v horách a plno ľudí pri vode.', dur:90, rate:7, tempo:'normal', weather:'heat', focus:['l_si','mi','so','p_mo','vk'], cats:{mountain:1.5, tech:1.3}, goals:[['res',9],['p1',16],['hosp',2]]},
+  {id:'c_gemer',  name:'Poľadovica na Gemeri', desc:'Zamrznuté cesty, nehody a pády. Posádky jazdia pomaly.', dur:90, rate:7, tempo:'normal', weather:'ice', focus:['rv','db','pl','sti','li','tu'], goals:[['res',8],['fail',1],['cov',80]]},
+  {id:'c_zemplin',name:'Hmla nad Zemplínom', desc:'Vrtuľník neletí, všetko musí ísť po zemi.', dur:90, rate:7, tempo:'normal', weather:'fog', focus:['tv','se','kc','vk','ve','bo'], goals:[['res',9],['precise',5],['fail',1]]},
+  {id:'c_flood',  name:'Povodeň na Bodrogu', desc:'Dážď a stúpajúca voda v Medzibodroží.', dur:100, rate:8, tempo:'normal', weather:'rain', majors:[{id:'flood', at:12}], focus:['kc','ct','bo','vk'], goals:[['major',1],['res',10],['fail',2]]},
+  {id:'c_storm',  name:'Veľká búrka', desc:'Víchrica láme stromy po celom kraji.', dur:90, rate:8, tempo:'normal', weather:'storm', majors:[{id:'storm', at:15}], goals:[['major',1],['res',9],['hung',0]]},
+  {id:'c_black',  name:'Čierny piatok', desc:'Dve mimoriadne udalosti za jednu službu.', dur:120, rate:6, tempo:'busy', weather:'clear', majors:[{id:'bus', at:20},{id:'gas', at:70}], goals:[['major',2],['res',14],['fail',3]]},
+];
+const GOAL_TXT={res:n=>'Vyrieš aspoň '+n+' udalostí', fail:n=>n ? 'Najviac '+n+' udalost'+(n===1?'i':'í')+' bez pomoci' : 'Nikto neostane bez pomoci', triage:()=>'Žiadny zle určený hovor',
+  pranks:n=>'Odhaľ aspoň '+n+' zneužitia linky', p1:n=>'Príchod k P1 v priemere do '+n+' min', hosp:n=>'Aspoň '+n+' pacienti do správneho centra',
+  cov:n=>'Priemerné pokrytie kraja aspoň '+n+' %', precise:n=>'Aspoň '+n+' presných vyslaní', major:n=>n>1 ? 'Zvládni '+n+' mimoriadne udalosti bez zlyhania' : 'Zvládni mimoriadnu udalosť bez zlyhania', hung:()=>'Žiadny zmeškaný hovor'};
+const avg = a => a && a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
+function goalOk([k,n]){
+  const s=G.stats;
+  switch(k){
+    case 'res': return s.resolved>=n;
+    case 'fail': return s.failed+s.hung<=n;
+    case 'triage': return s.wrong<=n;
+    case 'pranks': return s.pranks>=n;
+    case 'p1': { const a=avg(s.respP1); return a!=null && a<=n; }
+    case 'hosp': return (s.goodHosp||0)>=n;
+    case 'cov': return s.covN && s.covSum/s.covN>=n;
+    case 'precise': return (s.precise||0)>=n;
+    case 'major': return (s.majorOk||0)>=n;
+    case 'hung': return s.hung<=n;
+  }
+  return false;
+}
+const todayKey = () => { const d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); };
+function dailyChallenge(day){
+  const r=rng(hashStr(day)+77), pk=a=>a[Math.floor(r()*a.length)];
+  const majors = r()<.6 ? [{id:pk(['bus','gas','storm','flood']), at:Math.round(22+r()*14)}] : [];
+  return {id:'daily', day, name:'Denná výzva', desc:'Rovnaké hovory pre všetkých počas celého dňa.', dur:60, rate:7, tempo:'normal', weather:pk(['clear','clear','rain','fog','ice','heat']), majors,
+    goals:[['res',6],['fail',1],['precise',3]]};
+}
+const MEDALS=[
+  ['quick','Rýchla ruka','Hovory zdvíhaš v priemere do 3 minút (aspoň 8 hovorov).'],
+  ['triage','Presný triážnik','Žiadny zle určený hovor (aspoň 8 hovorov).'],
+  ['golden','Zlatá hodina','K P1 prídeš v priemere do 12 minút (aspoň 3 udalosti).'],
+  ['nohang','Nikto nezložil','Žiadny zmeškaný hovor (aspoň 10 hovorov).'],
+  ['combo','Majster série','Séria aspoň 10 úspechov za sebou.'],
+  ['detective','Detektív','Nájdi na mape aspoň 3 volajúcich.'],
+  ['polyglot','Polyglot','Vybav aspoň 2 hovory v cudzom jazyku.'],
+  ['hosp','Správna nemocnica','Aspoň 3 pacienti do správneho centra a žiadny zle.'],
+  ['major','Krízový manažér','Zvládni mimoriadnu udalosť bez zlyhania.'],
+  ['precise','Ostrostrelec','Aspoň 10 presných vyslaní.'],
+];
+function earnedMedals(){
+  const s=G.stats, a=avg(s.ans), p1=avg(s.respP1), out=[];
+  if(s.ans.length>=8 && a<=3) out.push('quick');
+  if((s.cls||0)>=8 && !s.wrong) out.push('triage');
+  if(s.respP1.length>=3 && p1<=12) out.push('golden');
+  if((s.calls||0)>=10 && !s.hung) out.push('nohang');
+  if((G.comboMax||0)>=10) out.push('combo');
+  if((s.found||0)>=3) out.push('detective');
+  if((s.foreign||0)>=2) out.push('polyglot');
+  if((s.goodHosp||0)>=3 && !s.badHosp) out.push('hosp');
+  if((s.majorOk||0)>=1) out.push('major');
+  if((s.precise||0)>=10) out.push('precise');
+  return out;
+}
 
 /* ---------- postup hráča (uložený v prehliadači) ---------- */
 const PKEY='linka112-kraj';
-const OLD_COST={z_rlp:2, z_mo:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
+const OLD_COST={z_rlp:2, z_mo:1, h_mi:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
 function loadProg(){
   try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null');
     if(p && p.v===1){ for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
@@ -748,10 +1060,13 @@ function makeUnit([id,kind,home,,title]){
 }
 function activeDefs(){ return UNITS_DEF.filter(d=>!d[3] || has(d[3])); }
 /* mode: 'play' | 'pause' | 'over' | 'demo' (ukážka v pozadí úvodnej obrazovky) */
-function newGame(tempo, mode){
-  return {mode, tempo, t:0, speed:1, score:0, rep:100, xp0:PROG.xp, lvl0:PROG.level, seq:0, cseq:0, calls:[], incs:[], units:activeDefs().map(makeUnit),
+function newGame(tempo, mode, ch){
+  const mq = ch ? (ch.majors||[]).map(m=>({...m})) : null;
+  return {mode, tempo, ch:ch||null, majorQueue:mq, t:0, speed:1, score:0, rep:100, xp0:PROG.xp, lvl0:PROG.level, seq:0, cseq:0, calls:[], incs:[], units:activeDefs().map(makeUnit),
+    weather:(ch && ch.weather) || 'clear', nextWeather:ch && ch.weather ? 1e9 : wr(30,50), rush:0, nextRush:wr(50,90), major:null,
+    nextMajor: mq ? (mq.length ? mq[0].at : 1e9) : PROG.level>=3 && mode==='play' ? wr(50,80) : 1e9, radio:[], combo:0, comboMax:0,
     nextCall:mode==='demo' ? 1 : 3, lastRing:-9, sel:{inc:null, unit:null}, bot:0,
-    stats:{resolved:0, failed:0, hung:0, pranks:0, wrong:0, rejected:0, wasted:0, resp:[], xp:0}};
+    stats:{resolved:0, failed:0, hung:0, pranks:0, wrong:0, rejected:0, wasted:0, resp:[], respP1:[], ans:[], calls:0, cls:0, covSum:0, covN:0, xp:0}};
 }
 const running = () => G.mode==='play' || G.mode==='demo';
 const quiet = () => G && G.mode==='demo';
@@ -784,7 +1099,39 @@ const SND={
   bad(){ tone(190,.32,'sawtooth',.07); tone(140,.4,'sawtooth',.06,.14); },
   blip(){ tone(980,.06,'square',.04); },
   level(){ [523,659,784,1046].forEach((f,i)=>tone(f,.18,'triangle',.1,i*.11)); },
+  squelch(){ noise(.09,.05,2400); tone(1250,.05,'square',.025,.1); },
+  alarm(){ for(let i=0;i<3;i++){ tone(880,.16,'sawtooth',.05,i*.36); tone(660,.16,'sawtooth',.05,i*.36+.18); } },
+  thunder(){ noise(1.4,.22,90); noise(.5,.12,300,.05); },
+  siren(){ for(let i=0;i<2;i++){ tone(960,.3,'triangle',.035,i*.62); tone(770,.3,'triangle',.035,i*.62+.31); } },
 };
+/* hlas volajúceho cez syntézu reči prehliadača (ak je zapnutý a hlas existuje) */
+const VOICE_LANG={sk:'sk', hu:'hu', uk:'uk', en:'en'};
+function speak(c, text){
+  if(!PROG.voice || quiet() || muted || !window.speechSynthesis || !text || /^\(/.test(text)) return;
+  try{
+    const lang=c.interp ? 'sk' : (c.lang||'sk'), voices=speechSynthesis.getVoices(), v=voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(VOICE_LANG[lang]));
+    if(!v) return;
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text); u.voice=v; u.lang=v.lang; u.rate=1.08; u.pitch=1+Math.random()*.3-.15; speechSynthesis.speak(u);
+  }catch(e){}
+}
+/* šum (rádio, hrom) */
+function noise(dur, vol, freq, when=0){
+  if(muted || !AC || quiet()) return;
+  try{
+    const len=Math.max(1,Math.floor(AC.sampleRate*dur)), buf=AC.createBuffer(1,len,AC.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    const src=AC.createBufferSource(), f=AC.createBiquadFilter(), g=AC.createGain(), t=AC.currentTime+when;
+    src.buffer=buf; f.type='bandpass'; f.frequency.value=freq; g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    src.connect(f); f.connect(g); g.connect(AC.destination); src.start(t);
+  }catch(e){}
+}
+/* rádiové hlásenia posádok */
+function radio(u, text, kind){
+  if(quiet()) return;
+  G.radio=(G.radio||[]); G.radio.unshift({who:u ? u.cs : 'KOS', text, kind:kind||'', t:G.t}); G.radio.length=Math.min(G.radio.length, 30);
+  SND.squelch(); dirty();
+}
 function say(text, kind){
   if(quiet()) return;
   const box=$('#hints'), el=document.createElement('div');
@@ -797,15 +1144,19 @@ function say(text, kind){
 /* ============================================================
    HERNÁ LOGIKA
    ============================================================ */
-const speedOf = u => KINDS[u.kind].speed/60 * (has('d_green') ? 1.15 : 1);          // km za minútu hry
+const wxSpeed = u => G && G.weather && !KINDS[u.kind].air ? WEATHER[G.weather].speed : 1;
+const speedOf = u => KINDS[u.kind].speed/60 * (has('d_green') ? 1.15 : 1) * wxSpeed(u);          // km za minútu hry
+/* dopravná špička v Košiciach spomalí cesty v okolí mesta */
+const KE_EDGES=new Set(EDGES.filter(e=>[e.a,e.b].every(id=>Math.hypot(NODES[id].x-NODES.ke.x, NODES[id].z-NODES.ke.z)<11)));
+const rushOn = () => G && G.rush && G.t<G.rush;
 const trailSpeed = u => (KINDS[u.kind].trail||8)/60 * (has('s_quad') ? 1.5 : 1);
-function edgeSpeed(u, e){ return e.t==='T' ? trailSpeed(u) : speedOf(u)*(e.t==='M' ? 1.15 : 1); }
+function edgeSpeed(u, e){ return e.t==='T' ? trailSpeed(u) : speedOf(u)*(e.t==='M' ? 1.15 : 1)*(rushOn() && KE_EDGES.has(e) ? .6 : 1); }
 const canUse = (u, e) => e.t!=='T' || u.kind==='HZS';
 /* najrýchlejšie cesty pre daný druh posádky (čas v minútach hry) */
-function dijkstra(src, u){
+function dijkstra(src, u){ return dijkstraFrom({[src]:0}, u); }
+function dijkstraFrom(init, u){
   const d={}, prev={}, done=new Set();
-  for(const id in NODES) d[id]=Infinity;
-  d[src]=0;
+  for(const id in NODES) d[id]=init[id]===undefined ? Infinity : init[id];
   for(;;){
     let best=null, bv=Infinity;
     for(const id in d) if(!done.has(id) && d[id]<bv){ bv=d[id]; best=id; }
@@ -834,8 +1185,39 @@ function routeTo(u, node, dest){
   u.moving = u.path.length>0 || !!u.dest;
   if(!u.moving) arrived(u);
 }
-function goHome(u){ u.inc=null; setStatus(u,1); routeTo(u, u.home); }
-const LAUNCH=4;   // vrtuľník potrebuje pár minút na štart
+function goHome(u){ u.inc=null; setStatus(u,1); routeTo(u, u.post || u.home); }
+/* pokrytie: za koľko minút dorazí najbližšia voľná záchranka do každej obce */
+const COV={}; let COVPCT=100, covAt=-9, covShow=false;
+const AMB_KINDS=['RZP','RLP','LZS'];
+function computeCoverage(){
+  const free=G.units.filter(u=>AMB_KINDS.includes(u.kind) && (u.status===1 || u.status===2) && !u.temp);
+  const init={}, ground=free.filter(u=>!KINDS[u.kind].air);
+  for(const u of ground){ const from=u.path.length ? u.path[0] : u.node, t=Math.hypot(NODES[from].x-u.x, NODES[from].z-u.z)/speedOf(u); if(init[from]===undefined || t<init[from]) init[from]=t; }
+  const d=ground.length ? dijkstraFrom(init, ground[0]).d : {};
+  const air=free.filter(u=>KINDS[u.kind].air && heliOK());
+  let all=0, ok=0;
+  for(const n of Object.values(NODES)) if(n.type==='town'){
+    let t=d[n.id]===undefined ? Infinity : d[n.id];
+    for(const u of air) t=Math.min(t, Math.hypot(n.x-u.x, n.z-u.z)/speedOf(u)+LAUNCH);
+    COV[n.id]=t; all+=n.pop; if(t<=15) ok+=n.pop;
+  }
+  COVPCT=Math.round(ok/all*100); covAt=G.t;
+  if(G.mode==='play'){ G.stats.covSum+=COVPCT; G.stats.covN++; }
+}
+/* najhoršie pokryté obce – návrhy na presun posádky do zálohy */
+function standbyTargets(u){
+  return Object.values(NODES).filter(n=>n.type==='town' && n.id!==u.node && n.id!==u.post && COV[n.id]>11)
+    .sort((a,b)=>(COV[b.id]-10)*Math.sqrt(b.pop)-(COV[a.id]-10)*Math.sqrt(a.pop)).slice(0,3);
+}
+function postUnit(u, node){
+  if(!u || !(u.status===1 || u.status===2) || u.temp) return;
+  u.post = node===u.home ? null : node;
+  setStatus(u,1); routeTo(u, node);
+  say(u.post ? u.name+' sa presúva do zálohy: '+NODES[node].name+'.' : u.name+' sa vracia na základňu.');
+  computeCoverage(); dirty();
+}
+const LAUNCH=4;
+const heliOK = () => !G || !G.weather || WEATHER[G.weather].heli;   // vrtuľník potrebuje pár minút na štart
 function moveUnit(u, dt){
   const air=KINDS[u.kind].air;
   if(air && u.launch && G.t<u.launch) return;
@@ -882,8 +1264,19 @@ function arrived(u){
     if(!inc){ goHome(u); return; }
     setStatus(u,4);
     if(inc.prank){ wasted(inc); return; }
+    if(inc.hidden && inc.hidden.length){
+      for(const x of inc.hidden){ inc.needs.push(x.need); radio(u, 'Sme na mieste. '+x.rep, 'bad'); }
+      inc.hidden=[]; inc.deadline=Math.max(inc.deadline, G.t+14); G.score-=20; G.stats.missed=(G.stats.missed||0)+1;
+      say('#'+inc.no+': posádka hlási viac, ako si zistil pri hovore. Pošli ďalšiu pomoc. −20', 'bad');
+    } else if(!inc.saidArrive && !quiet() && Math.random()<.5){ radio(u, ARRIVE[inc.cat]||'Sme na mieste.'); }
+    inc.saidArrive=true;
     SND.blip();
-  } else if(u.status===5){ setStatus(u,6); u.waitUntil=G.t+4; }
+  } else if(u.status===5){
+    if(!u.hospId) return;
+    const H=HOSP.find(h=>h.id===u.hospId); if(H){ H.pat=(H.pat||[]).filter(t=>t>G.t); H.pat.push(G.t+50); }
+    setStatus(u,6); u.waitUntil=G.t+4;
+    if(!quiet()) radio(u, 'Pacient odovzdaný – '+u.hosp+'.', 'good');
+  }
   else if(u.status===1){ setStatus(u,2); }
 }
 /* zodpovedá posádka danej potrebe? (napr. 'RZP|LZS') */
@@ -892,16 +1285,29 @@ const needKinds = inc => new Set(inc.needs.flatMap(n=>n.split('|')));
 const dispatchable = (u, inc) => (u.status===1 || u.status===2 || u.status===3) && u.inc!==inc.id;
 function dispatch(u, inc){
   if(!u || !inc || !running()) return;
+  if(inc.lost){ say('Najprv urči, kde volajúci je – ťukni na mapu v žltom kruhu.'); return; }
   if(!dispatchable(u, inc)){ say(u.inc===inc.id ? u.name+' už ide na túto udalosť.' : u.name+' je teraz obsadená ('+STATUS[u.status].toLowerCase()+').'); return; }
+  if(KINDS[u.kind].air && u.status===2 && !heliOK()){ say('Vrtuľník pre počasie ('+WEATHER[G.weather].label.toLowerCase()+') nemôže vzlietnuť.', 'bad'); return; }
   if(!KINDS[u.kind].air && pathFor(u, u.path.length ? u.path[0] : u.node, inc.node)===null){ say(u.name+' sa tam nedostane – vedie tam len chodník pre horskú službu.','bad'); return; }
+  judgeDispatch(u, inc);
   if(u.inc){ const old=incById(u.inc); if(old) old.units=old.units.filter(x=>x!==u.id); }
   u.inc=inc.id; if(!inc.units.includes(u.id)) inc.units.push(u.id);
   if(KINDS[u.kind].air && u.status===2) u.launch=G.t+LAUNCH;
   setStatus(u,3);
   routeTo(u, inc.node, {x:inc.x, z:inc.z});
-  SND.blip();
+  if(inc.prio===1 && G.t-(G.lastSiren||-9)>3){ G.lastSiren=G.t; SND.siren(); } else SND.blip();
 }
-/* priradenie posádok k potrebám (hľadá sa najlepšie pokrytie) */
+/* hodnotenie vyslania: posádka navyše, ďalšia ako najbližšia vhodná, lekár na drobnosť */
+function judgeDispatch(u, inc){
+  if(quiet() || inc.prank) return;
+  const miss=needInfo(inc).missing, fit=miss.filter(n=>fits(u,n));
+  if(!fit.length){ inc.extra=(inc.extra||0)+1; G.score-=15; say(u.name+' je navyše – udalosť ju nepotrebuje. −15', 'bad'); return; }
+  const cache={}, mine=etaTo(u, inc, cache);
+  let best=null;
+  for(const c of candidates(inc)) if(c.free && c.u!==u && fit.some(n=>fits(c.u,n)) && (!best || c.eta<best.eta)) best=c;
+  if(best && mine>best.eta+3){ inc.precise=false; if(mine>best.eta+5) say('Tip: bližšie bola '+best.u.name+' ('+fmtMin(best.eta)+' namiesto '+fmtMin(mine)+').'); }
+  if(KINDS[u.kind].doc && inc.prio===3 && !inc.needs.includes(DOC) && candidates(inc).some(c=>c.free && c.u.kind==='RZP' && c.eta<=mine+5)){ G.score-=10; say('Lekára šetri na vážne prípady – RZP bola blízko. −10', 'bad'); }
+}
 function needInfo(inc){
   const assigned=inc.units.map(unitById).filter(u=>u && u.inc===inc.id && (u.status===3 || u.status===4));
   const order=inc.needs.map((n,i)=>[n,i]).sort((a,b)=>a[0].split('|').length-b[0].split('|').length);
@@ -929,7 +1335,7 @@ function shareDoc(inc, slots, shared){
 }
 function candidates(inc){
   const kinds=needKinds(inc), cache={};
-  return G.units.filter(u=>kinds.has(u.kind) && dispatchable(u, inc))
+  return G.units.filter(u=>kinds.has(u.kind) && dispatchable(u, inc) && !(KINDS[u.kind].air && u.status===2 && !heliOK()))
     .map(u=>({u, eta:etaTo(u, inc, cache), free:u.status!==3})).filter(c=>c.eta<Infinity)
     .sort((a,b)=>(b.free-a.free) || a.eta-b.eta);
 }
@@ -939,12 +1345,15 @@ function recommended(inc){
   const cands=candidates(inc).filter(c=>c.free);
   for(const need of miss){
     if(need===DOC){ const d=out.find(c=>BOTH.has(c.u.kind) && !shared.has(c.u.id)); if(d){ shared.add(d.u.id); continue; } }
-    const c=cands.find(c=>!taken.has(c.u.id) && fits(c.u, need));
+    /* k drobnostiam (P3) radšej RZP než lekára, ak je RZP len o chvíľu ďalej */
+    const cost = c => c.eta + (inc.prio===3 && need!==DOC && KINDS[c.u.kind].doc ? 6 : 0);
+    let c=null; for(const x of cands) if(!taken.has(x.u.id) && fits(x.u, need) && (!c || cost(x)<cost(c))) c=x;
     if(c){ taken.add(c.u.id); out.push(c); }
   }
   return out;
 }
 function sendRecommended(inc){
+  if(inc.lost){ say('Najprv urči, kde volajúci je – ťukni na mapu v žltom kruhu.'); return; }
   const rec=recommended(inc);
   if(!rec.length){ say(needInfo(inc).missing.length ? 'Žiadna vhodná voľná posádka. Presmeruj inú alebo počkaj.' : 'Všetky potrebné posádky sú už na ceste.'); return; }
   for(const c of rec) dispatch(c.u, inc);
@@ -957,51 +1366,142 @@ function placeFor(tpl){
   const busy=new Set(G.incs.filter(i=>NODES[i.node].type!=='town').map(i=>i.node));
   const free = ids => { const f=ids.filter(id=>!busy.has(id)); return f.length ? f : ids; };
   const towns=Object.values(NODES).filter(n=>n.type==='town');
-  const weightedTown = list => { let s=0; for(const n of list) s+=Math.sqrt(n.pop); let r=Math.random()*s; for(const n of list){ r-=Math.sqrt(n.pop); if(r<=0) return n.id; } return list[0].id; };
+  const weightedTown = list => { let s=0; for(const n of list) s+=Math.sqrt(n.pop); let r=CR()*s; for(const n of list){ r-=Math.sqrt(n.pop); if(r<=0) return n.id; } return list[0].id; };
+  if(G.ch && G.ch.focus && CR()<.65){
+    const ok = id => tpl.place==='town' ? NODES[id].type==='town' : tpl.place==='msp' ? mspTowns().includes(id) : tpl.place==='lake' ? NODES[id].poi==='lake' : tpl.place==='mountain' ? NODES[id].poi==='mountain' : tpl.place==='river' ? NODES[id].type==='town' : false;
+    const f=G.ch.focus.filter(ok); if(f.length) return cpick(f);
+  }
   switch(tpl.place){
     case 'town': return weightedTown(towns);
-    case 'msp': return pick(mspTowns());
-    case 'road': return pick(free(['w_sl','w_ky','w_snm','w_ml','mo','tu','se','mg','me','ja','so','st']).concat(['ke','mi']));
-    case 'forest': return pick(free(['db','dd','gl','me','pl','tu','p_kh','p_vo','kr','so']));
-    case 'river': return pick(free(['vk','kc','mi','tv','mg','kr','rv','ct']));
-    case 'lake': return pick(free(['l_si','l_ru']));
-    case 'border': return pick(['w_ml','w_vn']);
-    case 'mountain': return pick(free(['p_sb','p_kl','p_vo','p_kh','p_zd','p_mo']));
-    case 'cave': return pick(free(['p_oc','p_dm']));
+    case 'msp': return cpick(mspTowns());
+    case 'road': return cpick(free(['w_sl','w_ky','w_snm','w_ml','mo','tu','se','mg','me','ja','so','st']).concat(['ke','mi']));
+    case 'forest': return cpick(free(['db','dd','gl','me','pl','tu','p_kh','p_vo','kr','so']));
+    case 'river': return cpick(free(['vk','kc','mi','tv','mg','kr','rv','ct']));
+    case 'lake': return cpick(free(['l_si','l_ru']));
+    case 'border': return cpick(['w_ml','w_vn']);
+    case 'mountain': return cpick(free(['p_sb','p_kl','p_vo','p_kh','p_zd','p_mo']));
+    case 'cave': return cpick(free(['p_oc','p_dm']));
     default: return tpl.place;
   }
 }
 function addrOf(node){
   const n=NODES[node];
   if(n.type!=='town') return n.name;
-  const st = node==='ke' ? pick(KE_STREETS) : pick(STREETS);
-  return st+' '+Math.floor(rand(1,90))+', '+n.name;
+  const st = node==='ke' ? cpick(KE_STREETS) : cpick(STREETS);
+  return st+' '+Math.floor(cr(1,90))+', '+n.name;
 }
+const tplW = t => t.w * ((G.weather && WEATHER[G.weather].w[t.cat]) || 1) * (G.weather==='storm' && t.title==='Strom na ceste' ? 2 : 1) * ((G.ch && G.ch.cats && G.ch.cats[t.cat]) || 1);
 function weightedTpl(list){
-  let sum=0; for(const t of list) sum+=t.w;
-  let r=Math.random()*sum;
-  for(const t of list){ r-=t.w; if(r<=0) return t; }
+  let sum=0; for(const t of list) sum+=tplW(t);
+  let r=CR()*sum;
+  for(const t of list){ r-=tplW(t); if(r<=0) return t; }
   return list[list.length-1];
 }
 function availableTpl(){
   return TPL.filter(t=>catOpen(t.cat) && t.needs.every(n=>n.split('|').some(k=>G.units.some(u=>u.kind===k))) && (t.place!=='msp' || mspTowns().length));
 }
+const needAvail = need => need.split('|').some(k=>G.units.some(u=>u.kind===k));
+/* ďalšia potreba len vtedy, keď na ňu v kraji vôbec je dosť posádok */
+function canAdd(needs, need){
+  const ks=need.split('|'), have=G.units.filter(u=>ks.includes(u.kind) && !u.temp).length;
+  const used=needs.filter(n=>n.split('|').some(k=>ks.includes(k))).length;
+  return have>used;
+}
+const BORDERISH=new Set(['w_ml','w_vn','kc','ct','bo','vk','so','ca','ke','l_si','p_mo','p_sb','p_kl','p_dm']);
 function spawnCall(){
-  let prank=Math.random()<.09, tpl=null, node;
+  let prank=CR()<.09, tpl=null, node;
   if(!prank){ tpl=weightedTpl(availableTpl()); node=placeFor(tpl); }
   else node=placeFor({place:'town'});
   const n=NODES[node];
-  const text = prank ? pick(PRANKS) : pick(tpl.texts).replace('{loc}', n.loc || '');
-  G.calls.push({id:'C'+(++G.cseq), tpl, prank, text, node, addr:addrOf(node), t0:G.t, state:'ring', talkAt:0});
+  const text = prank ? cpick(PRANKS) : cpick(tpl.texts).replace('{loc}', n.loc || '');
+  const c={id:'C'+(++G.cseq), tpl, prank, text, node, addr:addrOf(node), t0:G.t, state:'ring', talkAt:0,
+    log:[], asked:[], pend:null, lang:'sk', interp:false, silent:false, lost:null, cx:[]};
+  if(!prank){
+    const base=tpl.needs.slice(); c.cx=[];
+    for(const x of tpl.cx) if(CR()<x.p && canAdd(base, x.need)){ c.cx.push(x); base.push(x.need); }
+    if(tpl.fx && BORDERISH.has(node) && CR()<.3) c.lang=cpick(['hu','uk','en']);
+    else if(SILENT.includes(tpl.title) && CR()<.35) c.silent=true;
+    if(c.silent || (n.type!=='town' && CR()<.45)) c.lost=makeLost(node);
+  }
+  /* úvodná veta: zhovorčivý volajúci povie hneď, čo sa stalo; inak sa musíš pýtať */
+  if(prank) c.log.push({who:'c', text:text});
+  else if(c.silent) c.log.push({who:'c', text:'(Ticho… počuť len vzrušený dych a vzdialený krik.)'});
+  else if(c.lang!=='sk') c.log.push({who:'c', text:FOPEN[c.lang]});
+  else if(CR()<.4){ c.log.push({who:'c', text:text}); c.asked.push('what'); }
+  else c.log.push({who:'c', text:cpick(OPEN)});
+  G.calls.push(c); G.stats.calls++;
   SND.ring(); G.lastRing=G.t;
   dirty();
 }
+/* volajúci nevie, kde je: mobil hlási polohu len v kruhu */
+const DIRS=['východne','severovýchodne','severne','severozápadne','západne','juhozápadne','južne','juhovýchodne'];
+function makeLost(node){
+  const n=NODES[node], r=cr(3.5,6), a=cr(0,6.28), d=cr(0,.55)*r;
+  let best=null, bd=1e9;
+  for(const t of Object.values(NODES)) if(t.type==='town' && t.id!==node){ const dd=Math.hypot(t.x-n.x,t.z-n.z); if(dd<bd){ bd=dd; best=t; } }
+  const ang=Math.atan2(-(n.z-best.z), n.x-best.x), dir=DIRS[((Math.round(ang/(Math.PI/4))%8)+8)%8];
+  const lead = n.poi==='mountain' ? 'Sme niekde v horách, dole v doline vidno' : n.poi==='cave' ? 'Sme pri vchode do jaskyne, najbližšia dedina je' : n.poi==='lake' ? 'Sme pri vode, na brehu oproti vidno' : n.poi==='border' ? 'Stojíme pred hraničným priechodom, posledná obec bola' : n.type==='town' ? 'Som v' : 'Idem po ceste, pred chvíľou som prešiel cez';
+  const clue = n.type==='town' ? `${lead} ${n.name}, ale neviem adresu…` : `Neviem presne… ${lead} ${best.name}, sme asi ${Math.max(1,Math.round(bd))} km ${dir}.`;
+  return {x:n.x+Math.cos(a)*d, z:n.z+Math.sin(a)*d, r, clue, tries:0, auto:0};
+}
+/* otázka volajúcemu */
+function qList(c){ return c.silent ? ['sp','sm','sd','where'] : ['what','where','hurt','danger']; }
+function ask(c, q){
+  if(!c || c.state!=='talk' || c.pend || c.asked.includes(q) || !running()) return;
+  c.asked.push(q); c.log.push({who:'op', text:(c.silent ? QS_SILENT : QS)[q]});
+  c.pend={q, at:G.t+ASK_T}; dirty();
+}
+function interp(c){
+  if(!c || c.state!=='talk' || c.pend || c.lang==='sk' || c.interp || !running()) return;
+  c.log.push({who:'op', text:'Prepájam tlmočníka ('+LANGS[c.lang]+')…'});
+  c.pend={q:'interp', at:G.t+INTERP_T}; dirty();
+}
+const cxOf = (c, q) => c.cx.filter(x=>x.q===q);
+function answerFor(c, q){
+  const tpl=c.tpl, n=NODES[c.node];
+  if(c.prank) return PRANK_ANS[q];
+  if(c.silent){
+    if(q==='sp') return tpl.cat==='police' ? '(ťuk)' : '(ticho)';
+    if(q==='sm') return cxOf(c,'hurt').length ? '(ťuk… ťuk, ťuk)' : '(ticho)';
+    if(q==='sd') return cxOf(c,'danger').length || tpl.title==='Vlámanie' ? '(ťuk)' : '(ticho)';
+    return c.lost ? `(Mobil hlási polohu s presnosťou asi ${Math.round(c.lost.r)} km.)` : '(Poloha z mobilu: '+c.addr+')';
+  }
+  const foreign = c.lang!=='sk' && !c.interp;
+  if(q==='what') return foreign ? tpl.fx[c.lang] : c.text;
+  if(q==='where'){
+    if(foreign) return FANS[c.lang].where.replace('{n}', c.lost ? NODES[nearTown(c.node)].name : n.name);
+    return c.lost ? c.lost.clue : n.type==='town' ? 'Sme na adrese '+c.addr+'.' : 'Sme '+n.loc+'.';
+  }
+  const hits=cxOf(c, q);
+  if(foreign) return hits.length ? FANS[c.lang].yes : FANS[c.lang].no;
+  if(hits.length) return hits.map(x=>x.yes).join(' ');
+  return (ANS[tpl.title]||{})[q] || DEF_ANS[tpl.cat][q];
+}
+function nearTown(node){ const n=NODES[node]; let best=null, bd=1e9; for(const t of Object.values(NODES)) if(t.type==='town' && t.id!==node){ const d=Math.hypot(t.x-n.x,t.z-n.z); if(d<bd){ bd=d; best=t.id; } } return best; }
+function stepCall(c){
+  if(!c.pend || G.t<c.pend.at) return;
+  const q=c.pend.q; c.pend=null;
+  if(q==='interp'){
+    c.interp=true;
+    c.log.push({who:'sys', text:'Tlmočník je na linke.'});
+    if(c.asked.includes('what')) c.log.push({who:'c', text:c.text, t:performance.now()});
+  } else { const a=answerFor(c,q); c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a); }
+  dirty();
+}
+/* otázky, ktoré odhalili komplikáciu (pri tichom hovore ťuknutím) */
+function revealedCx(c){
+  const asked=new Set(c.asked);
+  if(c.silent){ if(asked.has('sm')) asked.add('hurt'); if(asked.has('sd')) asked.add('danger'); }
+  return c.cx.filter(x=>asked.has(x.q));
+}
 const patience = () => has('d_calm') ? 1.5 : 1;
-const RING=16, TALK=30;
+const RING=16, TALK=40;
 function answer(c){
   if(!c || c.state!=='ring' || !running()) return;
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   c.state='talk'; c.talkAt=G.t;
+  if(c.log[0]){ c.log[0].t=performance.now(); speak(c, c.log[0].text); }
+  if(c.kind!=='repeat') G.stats.ans.push(G.t-c.t0);
   if(G.t-c.t0<5) G.score+=10;
   if(!quiet()) openSheet('calls');
   dirty();
@@ -1015,13 +1515,21 @@ function classify(c, cat){
     else { createIncident(c, cat); dropCall(c); }
     return;
   }
-  if(cat===c.tpl.cat){ G.score+=25; gainXP(2); createIncident(c, cat); dropCall(c); return; }
+  if(c.kind==='repeat') return;
+  G.stats.cls++;
+  if(cat===c.tpl.cat){
+    const rv=revealedCx(c);
+    G.score+=Math.round((25+15*rv.length)*comboK()); gainXP(2); comboAdd();
+    if(rv.length) say('Dobre si sa pýtal – posádky pôjdu hneď v správnom zložení. +'+(15*rv.length), 'good');
+    if(c.lang!=='sk') G.stats.foreign=(G.stats.foreign||0)+1;
+    createIncident(c, cat); dropCall(c); return;
+  }
   if(cat==='prank'){
-    G.rep-=repLoss(15); G.stats.rejected++; SND.bad();
+    G.rep-=repLoss(15); G.stats.rejected++; SND.bad(); comboBreak();
     say('Bol to skutočný hovor! Volajúci ostal bez pomoci. −15 dôvery', 'bad');
     dropCall(c); checkRep(); return;
   }
-  G.score-=20; G.rep-=repLoss(3); G.stats.wrong++;
+  G.score-=20; G.rep-=repLoss(3); G.stats.wrong++; comboBreak();
   say('Nesedí to – vypočuj si volajúceho ešte raz. −20', 'bad');
   const el=document.querySelector('.call.talk');
   if(el){ el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); }
@@ -1029,14 +1537,18 @@ function classify(c, cat){
 }
 const PRANK_UNIT={med:'RZP',traffic:'PZ',fire:'HAS',tech:'HAS',hazmat:'CBRN',police:'PZ',msp:'MSP',mountain:'HZS'};
 function createIncident(c, cat){
+  c.cx=c.cx||[]; c.asked=c.asked||[]; c.lang=c.lang||'sk';
   const tpl=c.tpl, prank=c.prank, prio=prank ? 3 : tpl.prio, n=NODES[c.node];
   let needs = prank ? [PRANK_UNIT[cat]] : tpl.needs.slice();
   if(prank && !G.units.some(u=>u.kind===needs[0])) needs=['PZ'];
+  const rv = prank ? [] : revealedCx(c);
+  for(const x of rv) needs.push(x.need);
   const jr = n.type==='town' ? n.r*.55 : 0, ja=Math.random()*6.28, jd=Math.sqrt(Math.random())*jr;
   const inc={id:'I'+(++G.seq), no:G.seq, cat, title: prank ? CATS[cat].label : tpl.title, prio, needs, prank,
     work: prank ? 5 : tpl.work, tr: !prank && !!tpl.tr, search: !prank && !!tpl.search,
-    node:c.node, x:n.x+Math.cos(ja)*jd, z:n.z+Math.sin(ja)*jd, addr:c.addr, text:c.text,
-    created:G.t, deadline:0, progress:0, metAt:0, frac:0, units:[]};
+    node:c.node, x:n.x+Math.cos(ja)*jd, z:n.z+Math.sin(ja)*jd, addr:c.addr, text:c.lang!=='sk' && !c.interp && c.asked.includes('what') ? tpl.fx[c.lang] : c.text,
+    created:G.t, deadline:0, progress:0, metAt:0, frac:0, units:[], tpl,
+    hidden: prank ? [] : c.cx.filter(x=>!rv.includes(x)), lost: c.lost ? {...c.lost, clueKnown:c.asked.includes('where') && (c.lang==='sk' || c.interp)} : null};
   /* limit = základ podľa priority + dojazd najbližšej vhodnej posádky z jej základne */
   let worst=0;
   for(const need of needs){
@@ -1047,17 +1559,135 @@ function createIncident(c, cat){
     }
     if(best<Infinity) worst=Math.max(worst, best);
   }
-  inc.deadline = G.t + DL_BASE[prio] + 1.3*worst + 4*(needs.length-1);
+  inc.deadline = G.t + DL_BASE[prio] + 1.3*worst + 4*(needs.length-1) + (inc.lost ? 8 : 0);
+  if(!prank){
+    const e = tpl.title in ESC_T ? ESC_T[tpl.title] : ESC_DEF[cat];
+    if(e && (!e.need || canAdd(needs.concat(inc.hidden.map(x=>x.need)), e.need)) && !(e.need===DOC && needs.includes(DOC)) && Math.random()<e.p) inc.esc={...e, at:G.t+.45*(inc.deadline-G.t)};
+  }
   G.incs.push(inc);
   if(!quiet()) select(inc.id, true);
   if(!quiet() && !prank && prio===3 && has('d_auto')) sendRecommended(inc);
   SND.blip();
 }
+/* počasie, dopravná špička a mimoriadne udalosti */
+function setWeather(w, quietly){
+  if(G.weather===w) return;
+  G.weather=w; applyWeatherFx();
+  if(!quietly && !quiet()){ const W=WEATHER[w]; say('SHMÚ: '+W.label+(W.note ? '. '+W.note : '.'), w==='clear' ? 'good' : 'bad'); radio(null, 'Zmena počasia: '+W.label.toLowerCase()+'.'); }
+  dirty();
+}
+function stepWorld(){
+  if(G.t>=G.nextWeather){
+    const fixed=G.ch && G.ch.weather;
+    if(fixed){ setWeather(fixed, true); G.nextWeather=1e9; }
+    else {
+      let r=WR(), w='clear'; for(const [k,p] of WX_ROLL){ r-=p; if(r<=0){ w=k; break; } }
+      if(w===G.weather) w='clear';
+      setWeather(w); G.nextWeather=G.t+wr(35,60);
+    }
+  }
+  if(G.t>=G.nextRush){ G.rush=G.t+25; G.nextRush=G.t+wr(90,140); say('Dopravná špička v Košiciach – v meste a okolí sa jazdí pomalšie.'); dirty(); }
+  if(G.rush && G.t>=G.rush && !G.rushEnd){ G.rushEnd=true; }
+  if(G.rush && G.t<G.rush) G.rushEnd=false;
+  if(!G.major && G.t>=G.nextMajor) startMajor(G.majorQueue ? (G.majorQueue.shift()||{}).id || 'none' : null);
+  if(G.ch && G.mode==='play' && G.t>=G.ch.dur){ G.done=true; endGame(); }
+  for(const u of [...G.units]) if(u.temp && !G.major && u.status===2){ G.units=G.units.filter(x=>x!==u); dirty(); }
+}
+function nextMajorAt(){ return G.majorQueue ? (G.majorQueue.length ? Math.max(G.t+10, G.majorQueue[0].at) : 1e9) : G.t+rand(80,120); }
+function startMajor(id){
+  const pool=Object.keys(MAJORS).filter(k=>!MAJORS[k].skill || has(MAJORS[k].skill));
+  if(!id) id=wpick(pool);
+  if(!id || !MAJORS[id] || (MAJORS[id].skill && !has(MAJORS[id].skill))){ G.nextMajor=nextMajorAt(); return; }
+  const M=MAJORS[id];
+  G.major={id, name:M.name, phase:0, phases:M.phases.length, incs:[], ok:0, fail:0, aid:false, t0:G.t};
+  if(M.weather) setWeather(M.weather);
+  SND.alarm(); say('MIMORIADNA UDALOSŤ: '+M.name+'!', 'bad'); radio(null, 'Vyhlasujem mimoriadnu udalosť: '+M.name+'.', 'bad');
+  spawnPhase();
+}
+function spawnPhase(){
+  const M=MAJORS[G.major.id], hasN=G.units.filter(u=>u.kind==='HAS').length;
+  /* pri málo hasičoch je menej súčasných zásahov */
+  const defs=M.phases[G.major.phase].slice(0, Math.max(2, hasN+1));
+  let first=null;
+  for(const d of defs){
+    const n=NODES[d.node], needs=d.needs.filter(needAvail);
+    const jr=n.type==='town' ? n.r*.6 : .6, ja=Math.random()*6.28, jd=Math.sqrt(Math.random())*jr;
+    const inc={id:'I'+(++G.seq), no:G.seq, cat:d.cat, title:d.title, prio:1, needs, prank:false, major:true,
+      work:d.work, tr:!!d.tr, search:false, node:d.node, x:n.x+Math.cos(ja)*jd, z:n.z+Math.sin(ja)*jd, addr:n.name, text:d.text||M.name,
+      created:G.t, deadline:0, progress:0, metAt:0, frac:0, units:[], hidden:[], lost:null};
+    let worst=0;
+    for(const need of needs){ let best=Infinity; for(const u of G.units) if(fits(u,need)){ const ghost={...u, x:NODES[u.home].x, z:NODES[u.home].z, node:u.home, path:[], status:2}; best=Math.min(best, etaTo(ghost, inc, {})); } if(best<Infinity) worst=Math.max(worst,best); }
+    inc.deadline=G.t+42+1.6*worst+4*needs.length;
+    G.incs.push(inc); G.major.incs.push(inc.id); if(!first) first=inc;
+  }
+  if(first && !quiet()) select(first.id, true);
+  dirty();
+}
+function majorDone(inc, ok){
+  if(!G.major || !inc.major) return;
+  ok ? G.major.ok++ : G.major.fail++;
+  if(G.incs.some(i=>i.major && i!==inc)) return;
+  G.major.phase++;
+  if(G.major.phase<G.major.phases){ say('Mimoriadna udalosť pokračuje – fáza '+(G.major.phase+1)+'/'+G.major.phases+'.', 'bad'); spawnPhase(); return; }
+  const m=G.major, total=m.ok+m.fail, bonus=Math.round(450*m.ok/Math.max(1,total));
+  G.score+=bonus;
+  if(!m.fail){ G.rep=Math.min(100, G.rep+8); G.stats.majorOk=(G.stats.majorOk||0)+1; }
+  say('Mimoriadna udalosť „'+m.name+'“ ukončená: '+m.ok+'/'+total+' zásahov úspešných. +'+bonus, m.fail ? 'bad' : 'good');
+  radio(null, 'Odvolávam mimoriadnu udalosť. Ďakujem všetkým posádkam.', 'good');
+  G.major=null; G.nextMajor=nextMajorAt();
+  for(const u of G.units) if(u.temp && (u.status===1 || u.status===2) && !u.inc) goHome(u);
+  if(G.ch && G.ch.weather) setWeather(G.ch.weather, true);
+  dirty();
+}
+function callAid(){
+  if(!G.major || G.major.aid) return;
+  G.major.aid=true; G.score-=50;
+  const list=AID_BY[G.major.id]||['RZP','RLP','HAS'];
+  list.forEach((k,i)=>{ const [kind,name]=AID_U[k]; const u=makeUnit(['PO'+(G.seq+i+1),kind,'w_po','',name]); u.cs='PO'+(i+1); u.temp=true; G.units.push(u); });
+  say('Prešovský kraj posiela výpomoc: '+list.map(k=>KINDS[AID_U[k][0]].short).join(', ')+'. −50', 'good'); radio(null, 'Výpomoc z Prešovského kraja je na ceste k hranici kraja.');
+  dirty();
+}
+/* séria úspechov: násobí body */
+const comboK = () => 1 + .1*Math.min(G.combo||0, 10);
+function comboAdd(n=1){ if(quiet()) return; G.combo=(G.combo||0)+n; G.comboMax=Math.max(G.comboMax||0, G.combo); if(G.combo>0 && G.combo%5===0) say('Séria '+G.combo+'! Body ×'+comboK().toFixed(1), 'good'); dirty(); }
+function comboBreak(){ if(quiet()) return; if((G.combo||0)>=3) say('Séria prerušená.', 'bad'); G.combo=0; dirty(); }
+/* udalosť sa zhoršila – volajúci volá znova */
+function escalate(inc){
+  const e=inc.esc; inc.esc=null; inc.escalated=true;
+  if(e.need) inc.needs.push(e.need);
+  if(e.prio) inc.prio=Math.min(inc.prio, e.prio);
+  inc.deadline+=8;
+  if(quiet()) return;
+  G.calls.push({id:'C'+(++G.cseq), kind:'repeat', incId:inc.id, inc:inc.no, tpl:inc.tpl, prank:false, node:inc.node, addr:inc.addr, text:e.text, t0:G.t, state:'ring', talkAt:0,
+    log:[{who:'c', text:'Haló, to som zase ja, volal som kvôli udalosti #'+inc.no+'! '+e.text}], asked:[], pend:null, lang:'sk', cx:[]});
+  fx(inc.x, inc.z, 'Zhoršenie!', 'bad'); SND.alarm();
+  say('#'+inc.no+' '+inc.title+': situácia sa zhoršila'+(e.need ? ' – treba aj '+needLabel(e.need).toLowerCase() : '')+'.', 'bad');
+  G.stats.esc=(G.stats.esc||0)+1; comboBreak(); dirty();
+}
+function calmCaller(c){
+  if(!c || c.state!=='talk' || c.kind!=='repeat') return;
+  G.score+=10; G.rep=Math.min(100, G.rep+1); say('Volajúceho si upokojil. +10', 'good'); dropCall(c);
+}
+/* hľadanie volajúceho na mape */
+function tryLocate(inc, x, z){
+  if(!inc || !inc.lost) return false;
+  const d=Math.hypot(x-inc.x, z-inc.z), tol=Math.max(2.5, inc.lost.r*.45);
+  if(d<=tol){
+    inc.lost=null; G.score+=40; G.stats.found=(G.stats.found||0)+1;
+    say('Volajúci nájdený! Teraz môžeš vyslať posádky. +40', 'good'); fx(inc.x, inc.z, 'Tu je!', 'good'); SND.ok();
+    focusOn(inc.x, inc.z); dirty(); return true;
+  }
+  inc.lost.tries++; G.score-=10;
+  if(inc.lost.tries>=3){ located(inc, 'Operátor mobilnej siete spresnil polohu.'); return true; }
+  say('Tam volajúci nie je – skús inde v kruhu. −10', 'bad'); SND.bad(); dirty(); return false;
+}
+function located(inc, msg){ if(!inc.lost) return; inc.lost=null; say(msg); focusOn(inc.x, inc.z); dirty(); }
 function select(id, auto){
   G.sel.inc=id; G.sel.unit=null;
   if(id && !quiet()) openSheet('incs');
   const inc=incById(id);
-  if(inc && !quiet() && (!auto || offScreen(inc.x, inc.z))) focusOn(inc.x, inc.z);   // nová udalosť mimo obrazovky → kamera sa k nej presunie
+  if(inc && inc.lost && !quiet()) focusAt(inc.lost.x, inc.lost.z, inc.lost.r*7);
+  else if(inc && !quiet() && (!auto || offScreen(inc.x, inc.z))) focusOn(inc.x, inc.z);   // nová udalosť mimo obrazovky → kamera sa k nej presunie
   dirty();
 }
 function offScreen(x,z){
@@ -1068,9 +1698,34 @@ function offScreen(x,z){
 /* ---------- výsledky zásahov ---------- */
 function removeInc(inc){ G.incs=G.incs.filter(x=>x!==inc); if(G.sel.inc===inc.id) G.sel.inc=null; dropIncMesh(inc.id); dirty(); }
 function releaseUnits(inc, keep){ for(const id of inc.units){ const u=unitById(id); if(u && u!==keep && u.inc===inc.id) goHome(u); } }
-function nearestHospital(u){
-  const {d}=dijkstra(u.node, u);
-  return HOSPITALS.reduce((a,h)=>d[h]<d[a] ? h : a);
+const hospFull = H => (H.pat||[]).filter(t=>t>G.t).length>=H.cap;
+const hospMatch = (H, pt) => H.spec.includes(pt) || (pt==='gen' && H.spec.includes('gen'));
+/* nemocnice pre prevoz: vhodné aj najbližšie, s dojazdom */
+function hospOptions(u){
+  const air=KINDS[u.kind].air, d = air ? null : dijkstra(u.node, u).d;
+  const eta = H => air ? Math.hypot(NODES[H.node].x-u.x, NODES[H.node].z-u.z)/speedOf(u) : d[H.node]+Math.hypot(NODES[u.node].x-u.x, NODES[u.node].z-u.z)/speedOf(u);
+  const all=HOSP.map(H=>({H, eta:eta(H), match:hospMatch(H,u.pt), full:hospFull(H)})).filter(o=>o.eta<Infinity).sort((a,b)=>a.eta-b.eta);
+  const pickd=[...all.filter(o=>o.match && u.pt!=='gen').slice(0,2), ...all.filter(o=>o.H.spec.includes('gen')).slice(0,2)];
+  return [...new Set(pickd)].sort((a,b)=>a.eta-b.eta);
+}
+function bestHosp(u){
+  const o=hospOptions(u).filter(o=>!o.full);
+  return (o.find(o=>o.match) || o[0] || hospOptions(u)[0]).H;
+}
+function nearestFree(u){ const o=hospOptions(u); return (o.find(o=>!o.full) || o[0]).H; }
+function chooseHosp(u, hid, auto){
+  if(!u || u.status!==5 || u.hospId) return;
+  const H=HOSP.find(h=>h.id===hid); if(!H) return;
+  if(hospFull(H) && !auto){ say(H.name+' hlási plnú kapacitu príjmu. Vyber inú nemocnicu.', 'bad'); return; }
+  u.hosp=H.name; u.hospId=H.id; routeTo(u, H.node);
+  if(!quiet()){
+    radio(u, 'Ideme do '+H.name+'.');
+    if(u.pt!=='gen'){
+      if(H.spec.includes(u.pt)){ G.score+=50; G.rep=Math.min(100,G.rep+1); G.stats.goodHosp=(G.stats.goodHosp||0)+1; say('Správna nemocnica pre pacienta ('+PT_L[u.pt]+'). +50', 'good'); }
+      else { G.rep-=repLoss(3); G.stats.badHosp=(G.stats.badHosp||0)+1; say('Pacienta ('+PT_L[u.pt]+') bude treba previezť do špecializovaného centra. −3 dôvery', 'bad'); checkRep(); }
+    }
+  }
+  dirty();
 }
 function workRate(inc){
   let k=1;
@@ -1092,27 +1747,35 @@ function gainXP(x){
   saveProg(); dirty();
 }
 function resolve(inc){
-  const pts=Math.round(BASE_PTS[inc.prio]*(.5+.5*inc.frac));
+  let pts=Math.round(BASE_PTS[inc.prio]*(.5+.5*inc.frac));
+  if(inc.precise!==false && !inc.extra && !inc.prank){ pts+=40; G.stats.precise=(G.stats.precise||0)+1; inc.wasPrecise=true; comboAdd(); }
+  pts=Math.round(pts*comboK());
   G.score+=pts; G.rep=Math.min(100, G.rep+REP_OK[inc.prio]);
-  G.stats.resolved++; G.stats.resp.push(inc.metAt-inc.created);
+  G.stats.resolved++; G.stats.resp.push(inc.metAt-inc.created); if(inc.prio===1 && !inc.major) G.stats.respP1.push(inc.metAt-inc.created);
   gainXP(pts/8);
   fx(inc.x, inc.z, '+'+pts, 'good'); burst(inc.x, inc.z, 0x3ddc97);
   let tr=null;
   if(inc.tr) tr=inc.units.map(unitById).find(u=>u && u.inc===inc.id && u.status===4 && ['RZP','RLP','LZS','HZS'].includes(u.kind)) || null;
   releaseUnits(inc, tr);
-  if(tr){ const h=nearestHospital(tr); tr.inc=null; tr.hosp=NODES[h].name; setStatus(tr,5); routeTo(tr, h); }
+  if(tr){
+    tr.inc=null; tr.pt=PT[inc.title]||'gen'; tr.trNo=inc.no; tr.trTitle=inc.title; tr.hosp=null; tr.hospId=null; tr.chooseUntil=G.t+3;
+    tr.path=[]; tr.dest=null; tr.moving=false; setStatus(tr,5);
+    if(!quiet()) radio(tr, 'Pacient naložený ('+PT_L[tr.pt]+'). Kam ho vezieme?');
+  }
   removeInc(inc); SND.ok();
+  majorDone(inc, true);
 }
 function fail(inc){
   if(inc.prank){ say('#'+inc.no+': ukázalo sa, že hovor bol zneužitie linky.'); releaseUnits(inc); removeInc(inc); return; }
-  const loss=repLoss(REP_FAIL[inc.prio]);
-  G.rep-=loss; G.stats.failed++;
+  const loss=repLoss(inc.major ? 10 : REP_FAIL[inc.prio]);
+  G.rep-=loss; G.stats.failed++; comboBreak();
   fx(inc.x, inc.z, 'Neskoro', 'bad'); burst(inc.x, inc.z, 0xff4d5e);
   say('#'+inc.no+' '+inc.title+': pomoc neprišla včas. −'+Math.round(loss)+' dôvery', 'bad');
   releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
+  majorDone(inc, false);
 }
 function wasted(inc){
-  G.score-=40; G.rep-=repLoss(5); G.stats.wasted++;
+  G.score-=40; G.rep-=repLoss(5); G.stats.wasted++; comboBreak();
   fx(inc.x, inc.z, 'Planý výjazd', 'bad');
   say('Na mieste nikto nie je – hovor bol zneužitie linky. −40', 'bad');
   releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
@@ -1124,41 +1787,55 @@ function demoBot(){
   if(G.t<G.bot) return;
   G.bot=G.t+.9;
   const talk=G.calls.find(c=>c.state==='talk');
-  if(talk){ if(G.t-talk.talkAt>1.2) classify(talk, talk.prank ? 'prank' : talk.tpl.cat); }
+  if(talk && talk.kind==='repeat'){ calmCaller(talk); }
+  else if(talk){ if(!talk.prank && !talk.asked.includes('hurt') && !talk.pend && !talk.silent) ask(talk,'hurt'); else if(!talk.pend && G.t-talk.talkAt>1.2) classify(talk, talk.prank ? 'prank' : talk.tpl.cat); }
   else { const r=G.calls.find(c=>c.state==='ring' && G.t-c.t0>1.5); if(r) answer(r); }
-  for(const inc of G.incs) for(const c of recommended(inc)) dispatch(c.u, inc);
+  for(const inc of G.incs){ if(inc.lost) inc.lost=null; for(const c of recommended(inc)) dispatch(c.u, inc); }
 }
 function step(dt){
   G.t+=dt;
   if(G.t>=G.nextCall){
     spawnCall();
-    const base=lerp(13, 6.5, clamp(G.t/900,0,1)) * TEMPO[G.tempo].k * (G.calls.length>=3 ? 1.6 : 1);
-    G.nextCall=G.t + base*(.7+Math.random()*.6);
+    const base=(G.ch && G.ch.rate ? G.ch.rate : lerp(11, 6.5, clamp(G.t/700,0,1)) * TEMPO[G.tempo].k) * (G.calls.length>=3 ? 1.6 : 1);
+    G.nextCall=G.t + base*(.7+CR()*.6);
   }
   const P=patience();
   for(const c of [...G.calls]){
     if(c.state==='ring' && G.t-c.t0>RING*P){
       dropCall(c);
-      if(!c.prank){ G.rep-=repLoss(8); G.stats.hung++; say('Volajúci zložil – nikto nezdvihol. −8 dôvery', 'bad'); SND.bad(); checkRep(); }
+      if(c.kind==='repeat'){ G.rep-=repLoss(3); say('#'+c.inc+': volajúci znova volal a nikto nezdvihol. −3 dôvery', 'bad'); checkRep(); }
+      else if(!c.prank){ G.rep-=repLoss(8); G.stats.hung++; comboBreak(); say('Volajúci zložil – nikto nezdvihol. −8 dôvery', 'bad'); SND.bad(); checkRep(); }
     } else if(c.state==='talk' && G.t-c.talkAt>TALK*P){
       dropCall(c);
-      if(!c.prank){ G.rep-=repLoss(5); G.stats.hung++; say('Volajúci to vzdal – hovor trval príliš dlho. −5 dôvery', 'bad'); checkRep(); }
+      if(!c.prank && c.kind!=='repeat'){ G.rep-=repLoss(5); G.stats.hung++; say('Volajúci to vzdal – hovor trval príliš dlho. −5 dôvery', 'bad'); checkRep(); }
     }
   }
   if(!running()) return;
+  for(const c of G.calls) stepCall(c);
+  if(G.mode==='play') stepWorld();
+  if(G.t-covAt>=1) computeCoverage();
+  if(G.mode==='play' && G.t>=(G.covCheck||30)){
+    G.covCheck=G.t+30;
+    if(COVPCT>=90){ G.score+=50; G.rep=Math.min(100,G.rep+2); say('Kraj je dobre pokrytý záchrankami ('+COVPCT+' %). +50', 'good'); }
+    else if(COVPCT<65){ G.rep-=repLoss(3); say('Veľká časť kraja nemá záchranku do 15 minút ('+COVPCT+' %). Presuň posádky do zálohy. −3 dôvery', 'bad'); checkRep(); }
+  }
+  for(const inc of G.incs) if(inc.lost && inc.lost.auto && G.t>=inc.lost.auto) located(inc, '#'+inc.no+': operátor mobilnej siete spresnil polohu.');
   if(G.mode==='demo') demoBot();
   if(G.calls.some(c=>c.state==='ring') && G.t-G.lastRing>3){ SND.ring(); G.lastRing=G.t; }
   for(const u of G.units){
     if(u.moving) moveUnit(u, dt);
-    if(u.status===6 && G.t>=u.waitUntil){ u.hosp=null; goHome(u); }
+    if(u.status===6 && G.t>=u.waitUntil){ u.hosp=null; u.hospId=null; goHome(u); }
+    if(u.status===5 && !u.hospId && G.t>=u.chooseUntil) chooseHosp(u, (has('d_rec') || quiet() ? bestHosp(u) : nearestFree(u)).id, true);
   }
   for(const inc of [...G.incs]){
     const info=needInfo(inc);
     if(info.met){
       if(!inc.metAt){ inc.metAt=G.t; inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); dirty(); }
       inc.progress+=dt*workRate(inc);
+      if(!inc.saidHalf && inc.progress>=inc.work/2){ inc.saidHalf=true; const lead=inc.units.map(unitById).find(u=>u && u.status===4 && u.inc===inc.id); if(lead && !quiet() && Math.random()<.6) radio(lead, HALF[inc.cat]||'Pokračujeme.', 'good'); }
       if(inc.progress>=inc.work) resolve(inc);
     } else if(!inc.metAt && G.t>inc.deadline) fail(inc);
+    else if(inc.esc && !inc.metAt && G.t>=inc.esc.at) escalate(inc);
     if(!running()) return;
   }
 }
@@ -1200,7 +1877,7 @@ function init3D(){
   sun.shadow.mapSize.set(sm,sm); Object.assign(sun.shadow.camera, {left:-120, right:120, top:80, bottom:-80, near:1, far:500});
   sun.shadow.bias=-.0008; scene.add(sun); scene.add(sun.target);
   scene.fog=new THREE.Fog(0x000000, 320, 820);
-  buildTerrain(); buildWater(); buildBorder(); buildRoads(); buildTowns(); buildStaticLabels(); buildParticles();
+  buildTerrain(); buildWater(); buildBorder(); buildRoads(); buildTowns(); buildStaticLabels(); buildParticles(); buildCoverage(); buildPrecip();
   controls=new (THREE.MapControls || THREE.OrbitControls)(camera, cv);
   Object.assign(controls, {enableDamping:true, dampingFactor:.12, screenSpacePanning:false, minDistance:12, maxDistance:360, maxPolarAngle:1.25, zoomSpeed:1.2});
   controls.addEventListener('start', ()=>{ camFree=true; });
@@ -1470,13 +2147,25 @@ function syncIncidents(now){
       g.add(ring, disc, beam, glow, hit); scene.add(g); pickables.push(hit);
       o={g, ring, beam, glow, hit}; incObj.set(inc.id, o);
     }
+    /* neznáma poloha: namiesto značky sa ukáže kruh z mobilu */
+    const lost=!!inc.lost;
+    if(lost && !o.aml){
+      const a=new THREE.Group(), r=inc.lost.r;
+      const edge=new THREE.Mesh(new THREE.RingGeometry(r-.22, r, 72), new THREE.MeshBasicMaterial({color:0xf2b33d, transparent:true, opacity:.95, depthTest:false, side:THREE.DoubleSide}));
+      const fill=new THREE.Mesh(new THREE.CircleGeometry(r, 72), new THREE.MeshBasicMaterial({color:0xf2b33d, transparent:true, opacity:.12, depthTest:false, depthWrite:false, side:THREE.DoubleSide}));
+      edge.rotation.x=fill.rotation.x=-Math.PI/2; edge.renderOrder=fill.renderOrder=5;
+      a.add(fill, edge); a.position.set(inc.lost.x, groundY(inc.lost.x, inc.lost.z)+1.2, inc.lost.z); scene.add(a); o.aml=a;
+    }
+    if(o.aml){ o.aml.visible=lost; if(!lost){ scene.remove(o.aml); o.aml=null; } }
+    for(const m of [o.ring, o.beam, o.glow]) m.visible=!lost;
+    o.hit.userData.off=lost;
     const s=1+pulse*1.4; o.ring.scale.set(s,s,1); o.ring.material.opacity=.9*(1-pulse);
     const camD=camera.position.distanceTo(o.g.position), near=clamp((camD-10)/45,.08,1);
     o.beam.material.opacity = (inc.metAt ? .35 : .6+.25*Math.sin(now/250))*near;
-    o.glow.visible = camD>14;
+    o.glow.visible = camD>14 && !lost;
     o.beam.material.color.setHex(inc.metAt ? 0x3ddc97 : PRIO_COL[inc.prio]);
     o.beam.scale.setScalar(G.sel.inc===inc.id ? 1.25 : 1);
-    if(!REDUCED){
+    if(!REDUCED && !lost){
       if(inc.cat==='fire' && !inc.prank){ for(let k=0;k<3;k++) emit(addP, inc.x+rand(-.8,.8), y+.3, inc.z+rand(-.8,.8), rand(-.3,.3), rand(1.8,3.2), rand(-.3,.3), rand(.6,1.1), rand(1.4,2.6), 1, rand(.55,.85), .15); if(Math.random()<.35) emit(norP, inc.x+rand(-.6,.6), y+2.2, inc.z+rand(-.6,.6), rand(.2,.8), rand(.8,1.4), rand(-.2,.2), rand(2.2,3.4), rand(2,3.4), .32,.34,.38); o.glow.material.color.setHex(0xff8a3d); o.glow.material.opacity=.6+.25*Math.sin(now/90); }
       if(inc.cat==='hazmat' && !inc.prank && Math.random()<.5) emit(addP, inc.x+rand(-1.5,1.5), y+.4, inc.z+rand(-1.5,1.5), rand(-.4,.4), rand(.2,.6), rand(-.4,.4), rand(1.4,2.4), rand(2,3.2), .45,.9,.15);
       if((inc.cat==='police' || inc.cat==='msp') && !inc.prank) o.glow.material.color.setHex(Math.floor(now/160)%2 ? 0x2060ff : 0xff2030);
@@ -1484,15 +2173,16 @@ function syncIncidents(now){
     let L=labelEls.get('i'+inc.id);
     if(!L){ L=mkLabel('inc', '', inc.x, y+3.2, inc.z, {act:'inc', id:inc.id}); labelEls.set('i'+inc.id, L); }
     const tleft=Math.max(0,Math.ceil(inc.deadline-G.t));
-    const html=`${ICON[inc.cat]||ICON.mass}<span>#${inc.no}</span><span>${inc.metAt ? 'zásah '+Math.round(clamp(inc.progress/inc.work,0,1)*100)+' %' : tleft+' min'}</span>`;
+    const html=`${ICON[inc.cat]||ICON.mass}<span>#${inc.no}</span><span>${lost ? 'kde?' : inc.metAt ? 'zásah '+Math.round(clamp(inc.progress/inc.work,0,1)*100)+' %' : tleft+' min'}</span>`;
     if(L.html!==html){ L.el.innerHTML=html; L.html=html; }
     L.el.style.setProperty('--pc', `var(--p${inc.prio})`);
-    L.el.classList.toggle('sel', G.sel.inc===inc.id); L.el.classList.toggle('met', !!inc.metAt);
-    L.y=y+5; placeLabel(L);
+    L.el.classList.toggle('sel', G.sel.inc===inc.id); L.el.classList.toggle('met', !!inc.metAt); L.el.classList.toggle('lost', lost);
+    if(lost){ L.x=inc.lost.x; L.z=inc.lost.z; L.y=groundY(inc.lost.x, inc.lost.z)+3; } else { L.x=inc.x; L.z=inc.z; L.y=y+5; }
+    placeLabel(L);
   }
 }
 function dropIncMesh(id){
-  const o=incObj.get(id); if(o){ scene && scene.remove(o.g); pickables=pickables.filter(p=>p!==o.hit); incObj.delete(id); }
+  const o=incObj.get(id); if(o){ scene && scene.remove(o.g); if(o.aml) scene.remove(o.aml); pickables=pickables.filter(p=>p!==o.hit); incObj.delete(id); }
   const L=labelEls.get('i'+id); if(L){ L.el.remove(); labelEls.delete('i'+id); }
 }
 /* ---------- častice ---------- */
@@ -1553,6 +2243,13 @@ function focusOn(x,z){
   const tgt=new THREE.Vector3(x, groundY(x,z), z);
   animateCam(tgt, tgt.clone().add(off));
 }
+function focusAt(x,z,dist){
+  if(!controls) return;
+  camFree=true;
+  const off=camera.position.clone().sub(controls.target).setLength(clamp(dist, 25, 200));
+  const tgt=new THREE.Vector3(x, groundY(x,z), z);
+  animateCam(tgt, tgt.clone().add(off));
+}
 function animateCam(tgt, pos, instant){
   if(!controls) return;
   if(instant || REDUCED){ controls.target.copy(tgt); camera.position.copy(pos); controls.update(); return; }
@@ -1563,8 +2260,10 @@ function onMapTap(e){
   if(!d || Math.hypot(e.clientX-d.x, e.clientY-d.y)>6 || !G || G.mode!=='play') return;
   const r=cv.getBoundingClientRect(), ray=new THREE.Raycaster();
   ray.setFromCamera({x:(e.clientX-r.left)/r.width*2-1, y:-(e.clientY-r.top)/r.height*2+1}, camera);
-  const hit=ray.intersectObjects(pickables, false)[0];
+  const hit=ray.intersectObjects(pickables, false).find(h=>!h.object.userData.off);
   if(hit){ const {kind,id}=hit.object.userData; if(kind==='unit') return unitClick(unitById(id)); if(kind==='inc') return select(id); }
+  const lostInc=incById(G.sel.inc);
+  if(lostInc && lostInc.lost){ const th=ray.intersectObject(terrain, false)[0]; if(th) tryLocate(lostInc, th.point.x, th.point.z); return; }
   G.sel.inc=null; G.sel.unit=null; dirty();
 }
 function resize3D(){
@@ -1575,6 +2274,40 @@ function resize3D(){
   if(!camFree && controls) viewAll(true);
   if(addP){ addP.pts.material.uniforms.scale.value=norP.pts.material.uniforms.scale.value=r.height*.9; }
 }
+/* počasie na mape: hmla, dážď/sneh, blesky */
+let precip=null, flashUntil=0, nextBolt=0;
+const WXFOG={clear:[320,820], rain:[170,600], fog:[35,240], ice:[230,720], storm:[120,480], heat:[360,900]};
+function buildPrecip(){
+  const N=1800, pos=new Float32Array(N*6);
+  const geo=new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  precip=new THREE.LineSegments(geo, new THREE.LineBasicMaterial({color:0xbcd4f0, transparent:true, opacity:.45, depthWrite:false}));
+  precip.frustumCulled=false; precip.visible=false; precip.userData.v=new Float32Array(N); scene.add(precip);
+  for(let i=0;i<N;i++) resetDrop(i, true);
+}
+function resetDrop(i, any){
+  const P=precip.geometry.attributes.position.array, t=controls ? controls.target : {x:0,y:0,z:0}, k=i*6;
+  const x=t.x+rand(-70,70), z=t.z+rand(-70,70), y=t.y+(any ? rand(0,60) : rand(45,60));
+  P[k]=x; P[k+1]=y; P[k+2]=z; P[k+3]=x; P[k+4]=y; P[k+5]=z;
+  precip.userData.v[i]=rand(.8,1.2);
+}
+function stepPrecip(dt){
+  if(!precip) return;
+  const w=G && (G.mode==='play' || G.mode==='pause') ? G.weather : 'clear', on=w==='rain' || w==='storm' || w==='ice';
+  precip.visible=on && !REDUCED; if(!precip.visible) return;
+  const snow=w==='ice', P=precip.geometry.attributes.position.array, V=precip.userData.v, t=controls.target, N=V.length;
+  const sp=(snow ? 9 : 70)*dt, len=snow ? .35 : 2.6, drift=(snow ? 2 : 6)*dt;
+  precip.material.color.setHex(snow ? 0xffffff : 0xbcd4f0); precip.material.opacity=snow ? .8 : .42;
+  for(let i=0;i<N;i++){
+    const k=i*6; P[k+1]-=sp*V[i]; P[k]+=drift; P[k+3]=P[k]-drift*.4; P[k+4]=P[k+1]+len; P[k+5]=P[k+2];
+    if(P[k+1]<t.y-6 || Math.abs(P[k]-t.x)>80 || Math.abs(P[k+2]-t.z)>80) resetDrop(i);
+  }
+  precip.geometry.attributes.position.needsUpdate=true;
+}
+function applyWeatherFx(){
+  if(!R3) return;
+  const w=G && (G.mode==='play' || G.mode==='pause') ? G.weather : 'clear', f=WXFOG[w]||WXFOG.clear;
+  scene.fog.near=f[0]; scene.fog.far=f[1];
+}
 function applyLight(){
   if(!R3) return;
   const L=LIGHTS[PROG.light];
@@ -1584,10 +2317,31 @@ function applyLight(){
   buildingsMat.emissiveIntensity=L.night*.22;
   for(const g of townGlows) g.material.opacity=g.userData.base*L.night;
   $('#btnLight').textContent=L.label;
+  applyWeatherFx();
 }
 let lastNow=0;
+/* kruhy pokrytia pri obciach (zapnú sa čipom „Pokrytie“) */
+const covDiscs=[];
+function buildCoverage(){
+  for(const n of Object.values(NODES)) if(n.type==='town'){
+    const m=new THREE.Mesh(new THREE.CircleGeometry(n.r*1.15+2.2, 40), new THREE.MeshBasicMaterial({color:0x3ddc97, transparent:true, opacity:.34, depthTest:false, depthWrite:false}));
+    m.rotation.x=-Math.PI/2; m.position.set(n.x, n.y+.4, n.z); m.renderOrder=2; m.visible=false; m.userData.id=n.id; scene.add(m); covDiscs.push(m);
+  }
+}
+function syncCoverage(){
+  const on=covShow && G && (G.mode==='play' || G.mode==='pause');
+  for(const m of covDiscs){ m.visible=on; if(on){ const t=COV[m.userData.id]; m.material.color.setHex(t<=10 ? 0x3ddc97 : t<=15 ? 0xf4d35e : 0xff4d5e); } }
+}
 function render3D(now){
   if(!R3) return;
+  syncCoverage();
+  stepPrecip(Math.min(.05,(now-(lastNow||now))/1000));
+  /* blesk pri búrke */
+  const baseHemi=LIGHTS[PROG.light].hemi;
+  if(G && G.mode==='play' && G.weather==='storm' && !REDUCED){
+    if(now>nextBolt){ nextBolt=now+rand(4000,9000); flashUntil=now+140; SND.thunder(); }
+    hemi.intensity = now<flashUntil ? baseHemi+1.6 : baseHemi;
+  } else if(hemi.intensity!==baseHemi) hemi.intensity=baseHemi;
   const dt=Math.min(.05,(now-(lastNow||now))/1000); lastNow=now;
   if(camAnim){
     const k=clamp((now-camAnim.t0)/650,0,1), e=k<.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
@@ -1613,22 +2367,37 @@ const needChips = inc => needInfo(inc).slots.map(s=>`<span class="need ${s.st}" 
 /* prepíše obsah len pri zmene – tlačidlá pod prstom tak nemiznú pri každom prekreslení */
 function setHTML(el, h){ if(el._h!==h){ el._h=h; el.innerHTML=h; } }
 const fmtMin = s => s===Infinity ? '—' : Math.max(0, Math.ceil(s))+' min';
+/* správa v rozhovore; čerstvá odpoveď sa vypisuje postupne */
+function logLine(m){
+  const fresh=m.t && performance.now()-m.t<Math.min(4000, m.text.length*24+300);
+  return fresh ? `<p class="m ${m.who}" data-full="${esc(m.text)}" data-t0="${m.t}"></p>` : `<p class="m ${m.who}">${esc(m.text)}</p>`;
+}
 function renderCalls(){
   const talk=G.calls.find(c=>c.state==='talk'), ring=G.calls.filter(c=>c.state==='ring'), P=patience();
   let h=`<h2>Hovory na 112 <span class="count">${G.calls.length}</span></h2>`;
-  if(talk){
+  if(talk && talk.kind==='repeat'){
+    h+=`<div class="call talk repeat">
+      <div class="row"><span class="lbl grow"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span>Opakovaný hovor · #${talk.inc}</span><span class="timer" data-to="${talk.talkAt+TALK*P}" data-txt="1"></span></div>
+      <div class="log">${talk.log.map(logLine).join('')}</div>
+      <p class="keys">Udalosť sa zhoršila – v zozname udalostí pribudla potreba. Upokoj volajúceho a pošli pomoc.</p>
+      <button class="btn go" data-act="calm" data-id="${talk.id}">Pomoc je na ceste, vydržte <kbd>Q</kbd></button>
+    </div>`;
+  } else if(talk){
     const hint=has('d_hint') && !talk.prank ? talk.tpl.cat : has('d_hint') ? 'prank' : null;
-    const cats=CAT_ORDER.filter(catOpen);
+    const hq=new Set(has('d_hint') ? talk.cx.map(x=>talk.silent ? (x.q==='hurt' ? 'sm' : 'sd') : x.q) : []);
+    const cats=CAT_ORDER.filter(catOpen), qs=qList(talk), QT=talk.silent ? QS_SILENT : QS;
     h+=`<div class="call talk">
-      <div class="row"><span class="lbl grow"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span>Na linke</span><span class="timer" data-to="${talk.talkAt+TALK*P}" data-txt="1"></span></div>
-      <p class="quote">${esc(talk.text)}</p>
-      <div class="addr">Miesto: ${esc(talk.addr)}</div>
+      <div class="row"><span class="lbl grow"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span>Na linke</span>${talk.lang!=='sk' ? `<span class="chip">${LANGS[talk.lang]}</span>` : ''}${talk.silent ? '<span class="chip warn">tichý hovor</span>' : ''}<span class="timer" data-to="${talk.talkAt+TALK*P}" data-txt="1"></span></div>
+      <div class="log">${talk.log.map(logLine).join('')}${talk.pend ? '<p class="m c typing"><i></i><i></i><i></i></p>' : ''}</div>
+      <div class="qs">${qs.map(q=>`<button class="btn${hq.has(q)?' hint':''}" data-act="ask" data-id="${talk.id}" data-type="${q}" ${talk.asked.includes(q) || talk.pend ? 'disabled' : ''}>${QT[q]}<kbd>${QKEYS[q]}</kbd></button>`).join('')}${talk.lang!=='sk' && !talk.interp ? `<button class="btn interp" data-act="interp" data-id="${talk.id}" ${talk.pend?'disabled':''}>Tlmočník (${INTERP_T} min)<kbd>T</kbd></button>` : ''}</div>
+      <div class="addr">${talk.lost ? 'Poloha: mobil hlási kruh s polomerom asi '+Math.round(talk.lost.r)+' km' : 'Miesto: '+esc(talk.addr)}</div>
+      <div class="k">Druh udalosti</div>
       <div class="cls">${cats.map((c,i)=>`<button class="btn${hint===c?' hint':''}" data-act="cls" data-id="${talk.id}" data-type="${c}" style="--tc:var(--t-${c})">${ICON[c]}${CATS[c].label}<kbd>${i+1}</kbd></button>`).join('')}</div>
     </div>`;
   }
   for(const c of ring){
-    h+=`<div class="call ring">
-      <div class="row"><span class="lbl grow"><span class="phone">${ICON.phone}</span>Prichádzajúci hovor</span><span class="addr">${esc(NODES[c.node].name)}</span></div>
+    h+=`<div class="call ring${c.kind==='repeat'?' repeat':''}">
+      <div class="row"><span class="lbl grow"><span class="phone">${ICON.phone}</span>${c.kind==='repeat' ? 'Opakovaný hovor · #'+c.inc : 'Prichádzajúci hovor'}</span><span class="addr">${esc(NODES[c.node].name)}</span></div>
       <div class="tbar"><i data-from="${c.t0}" data-to="${c.t0+RING*P}"></i></div>
       <button class="btn go" data-act="answer" data-id="${c.id}" ${talk?'disabled':''}>${talk?'Čaká na linke':'Prijať hovor'} <kbd>A</kbd></button>
     </div>`;
@@ -1639,7 +2408,7 @@ function renderCalls(){
 function renderDispatch(){
   const box=$('#dispatch'), inc=incById(G.sel.inc);
   if(!inc){ CAND=new Set(); setHTML(box, ''); return; }
-  const info=needInfo(inc), cands=candidates(inc), rec=recommended(inc), recIds=new Set(rec.map(c=>c.u.id));
+  const info=needInfo(inc), cands=candidates(inc), rec=inc.lost || !has('d_rec') ? [] : recommended(inc), recIds=new Set(rec.map(c=>c.u.id));
   CAND=new Set(cands.slice(0,6).map(c=>c.u.id));
   const rows=cands.slice(0,6).map(c=>{
     const other=c.u.inc ? incById(c.u.inc) : null;
@@ -1654,24 +2423,47 @@ function renderDispatch(){
     <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.cat]}<span class="ttl grow">#${inc.no} ${esc(inc.title)}</span>
       ${inc.metAt ? `<span class="timer">zásah</span>` : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}
       <button class="btn sm ghost" data-act="desel" aria-label="Zavrieť">✕</button></div>
-    <div class="addr">${esc(inc.addr)}</div>
+    <div class="addr">${inc.lost ? 'Poloha neznáma' : esc(inc.addr)}</div>
     <p class="quote">${esc(inc.text)}</p>
     <div class="row"><span class="k">Potrebné</span><div class="needs">${needChips(inc)}</div></div>
     ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : ''}
-    ${rows || `<p class="empty">${info.met ? 'Všetky potrebné posádky sú na mieste.' : 'Žiadna vhodná posádka nie je voľná.'}</p>`}
+    ${inc.lost ? `<div class="locate"><b>Kde je volajúci?</b>
+        <p>${inc.lost.clueKnown ? '„'+esc(inc.lost.clue)+'“' : 'Na polohu si sa nepýtal – máš len kruh z mobilu.'}</p>
+        <p class="keys">Ťukni na mapu tam, kde si myslíš, že volajúci je (v žltom kruhu). Po troch chybách polohu spresní operátor.</p>
+        <div class="acts"><button class="btn sm" data-act="zoomlost" data-id="${inc.id}">Ukázať kruh</button><button class="btn sm" data-act="autoloc" data-id="${inc.id}" ${inc.lost.auto?'disabled':''}>${inc.lost.auto ? 'Operátor hľadá…' : 'Požiadať operátora (4 min)'}</button></div></div>`
+      : rows || `<p class="empty">${info.met ? 'Všetky potrebné posádky sú na mieste.' : 'Žiadna vhodná posádka nie je voľná.'}</p>`}
     ${rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>`
-      : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú posádku. Posádku môžeš vyslať aj ťuknutím na vozidlo na mape.</p>` : ''}
+      : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú posádku. Posádku môžeš vyslať aj ťuknutím na vozidlo na mape.</p>`
+      : !inc.lost && !has('d_rec') && info.missing.length ? `<p class="keys">Vyber posádky sám – ku každej potrebe tú s najkratším dojazdom. Za presné vyslanie je bonus. Asistenta vysielania odomkneš v schopnostiach.</p>` : ''}
   </div>`);
 }
+function renderTransports(){
+  const waiting=G.units.filter(u=>u.status===5 && !u.hospId);
+  if(!waiting.length) return '';
+  return `<h2>Prevoz pacienta <span class="count">${waiting.length}</span></h2>`+waiting.map(u=>{
+    const opts=hospOptions(u), rec=has('d_rec') ? bestHosp(u) : null;
+    return `<div class="trans">
+      <div class="row"><span class="tag" style="--sc:var(--s5)">${esc(u.cs)}</span><b class="ttl grow">#${u.trNo} ${esc(u.trTitle)}</b><span class="chip">${PT_L[u.pt]}</span><span class="timer" data-to="${u.chooseUntil}" data-txt="1"></span></div>
+      <div class="hosps">${opts.map(o=>`<button class="btn${rec===o.H?' rec':''}" data-act="hosp" data-unit="${u.id}" data-id="${o.H.id}" ${o.full?'disabled':''}><span>${esc(o.H.name)}<span class="sub"> · ${o.H.spec.filter(x=>x!=='gen').map(x=>SPEC_L[x]).join(', ') || 'všeobecná'}</span></span><span class="sub">${o.full ? 'plno' : fmtMin(o.eta)}</span></button>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+function renderMajor(){
+  const m=G.major; if(!m) return '';
+  const left=G.incs.filter(i=>i.major).length;
+  return `<div class="major"><div class="k">Mimoriadna udalosť · fáza ${m.phase+1}/${m.phases}</div><h3 class="grade" style="margin:0">${esc(m.name)}</h3>
+    <p class="keys">Otvorených zásahov: ${left}. Vybavené: ${m.ok}${m.fail ? ', zlyhalo: '+m.fail : ''}. ${m.aid ? 'Výpomoc z Prešovského kraja je na ceste.' : 'Ak ti nestačia posádky, požiadaj o výpomoc susedný kraj.'}</p>
+    ${m.aid ? '' : `<div class="acts"><button class="btn" data-act="aid">Vyžiadať výpomoc z Prešovského kraja (−50)</button></div>`}</div>`;
+}
 function renderIncs(){
-  const list=[...G.incs].sort((a,b)=>(a.metAt?1:0)-(b.metAt?1:0) || a.deadline-b.deadline);
-  let h=`<h2>Udalosti <span class="count">${list.length}</span></h2>`;
+  const list=[...G.incs].sort((a,b)=>(b.major?1:0)-(a.major?1:0) || (a.metAt?1:0)-(b.metAt?1:0) || a.deadline-b.deadline);
+  let h=renderMajor()+renderTransports()+`<h2>Udalosti <span class="count">${list.length}</span></h2>`;
   if(!list.length) h+=`<p class="empty">Žiadna otvorená udalosť. Udalosť vznikne, keď správne určíš druh hovoru.</p>`;
   for(const inc of list){
     h+=`<div class="inc${G.sel.inc===inc.id?' sel':''}" style="--pc:var(--p${inc.prio})" data-act="inc" data-id="${inc.id}">
-      <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.cat]}<span class="ttl grow">#${inc.no} ${esc(inc.title)}</span>
+      <div class="row"><span class="prio">P${inc.prio}</span>${ICON[inc.cat]}<span class="ttl grow">#${inc.no} ${esc(inc.title)}</span>${inc.major ? '<span class="chip mu">MU</span>' : ''}${inc.escalated ? '<span class="chip warn">horšie</span>' : ''}
         ${inc.metAt ? '<span class="timer">zásah</span>' : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}</div>
-      <div class="addr">${esc(inc.addr)}</div>
+      <div class="addr">${inc.lost ? 'Poloha neznáma – nájdi volajúceho' : esc(inc.addr)}</div>
       <div class="needs">${needChips(inc)}</div>
       ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : `<div class="tbar"><i data-from="${inc.created}" data-to="${inc.deadline}"></i></div>`}
     </div>`;
@@ -1682,12 +2474,12 @@ function unitWhat(u){
   const inc=u.inc ? incById(u.inc) : null;
   if(u.status===3 && inc) return `→ #${inc.no} ${inc.title} · ${fmtMin(etaPath(u))}`;
   if(u.status===4 && inc) return `zasahuje na #${inc.no}, ${inc.addr}`;
-  if(u.status===5) return `vezie pacienta: ${u.hosp} · ${fmtMin(etaPath(u))}`;
+  if(u.status===5) return u.hospId ? `vezie pacienta: ${u.hosp} · ${fmtMin(etaPath(u))}` : 'pacient naložený – vyber nemocnicu';
   if(u.status===6) return `odovzdáva pacienta: ${u.hosp}`;
-  if(u.status===1) return `vracia sa na základňu · ${fmtMin(etaPath(u))}`;
+  if(u.status===1) return `${u.post ? 'ide do zálohy' : 'vracia sa na základňu'} · ${fmtMin(etaPath(u))}`;
   return 'základňa '+NODES[u.home].name;
 }
-const unitLine = u => u.status===2 ? NODES[u.home].name : unitWhat(u);
+const unitLine = u => u.status===2 ? (u.post ? 'v zálohe: '+NODES[u.post].name : NODES[u.home].name) : u.status===5 && !u.hospId ? 'pacient naložený – vyber nemocnicu' : unitWhat(u);
 /* filtre zoznamu posádok */
 const UFILTERS=[['all','Všetky'],['free','Voľné'],['zzs','Záchranka'],['has','Hasiči'],['pz','Polícia'],['hzs','Horská']];
 const UF_KINDS={zzs:['RZP','RLP','RV','LZS'], has:['HAS','CBRN'], pz:['PZ','MSP'], hzs:['HZS']};
@@ -1699,6 +2491,15 @@ function renderUnits(){
   if(!avail.some(([k])=>k===UF)) UF='all';
   let h=`<h2>Posádky <span class="count">${G.units.filter(u=>u.status<=2).length} voľné / ${G.units.length}</span></h2>
     <div class="uf">${avail.map(([k,t])=>`<button class="btn${UF===k?' on':''}" data-act="uf" data-id="${k}">${t}</button>`).join('')}</div>`;
+  const su=unitById(G.sel.unit);
+  if(su){
+    const canPost=(su.status===1 || su.status===2) && AMB_KINDS.includes(su.kind) && !su.temp && !KINDS[su.kind].air;
+    const tg=canPost ? standbyTargets(su) : [];
+    h+=`<div class="usel"><div class="row"><span class="veh">${ICON[su.kind]}</span><b class="grow">${esc(su.name)}</b><button class="btn sm ghost" data-act="unit" data-id="${su.id}" aria-label="Zrušiť výber">✕</button></div>
+      <div class="sub">${STATUS[su.status]} · ${esc(unitLine(su))}</div>
+      ${canPost ? `<div class="k">Presunúť do zálohy (dojazd do obce teraz)</div><div class="acts">${tg.map(n=>`<button class="btn" data-act="post" data-unit="${su.id}" data-id="${n.id}">${esc(n.name)} · ${fmtMin(COV[n.id])}</button>`).join('') || '<span class="sub">Kraj je teraz dobre pokrytý.</span>'}${su.post ? `<button class="btn" data-act="post" data-unit="${su.id}" data-id="${su.home}">Späť na základňu</button>` : ''}</div>` : ''}
+    </div>`;
+  }
   const list=G.units.filter(ufMatch);
   if(!list.length) h+=`<p class="empty">Žiadna posádka v tomto filtri.</p>`;
   for(const u of list){
@@ -1718,12 +2519,41 @@ function renderRingBar(){
   if(G.mode!=='play' || callsOpen || (!talk && !ring)){ bar.hidden=true; setHTML(bar, ''); return; }
   bar.hidden=false; bar.classList.toggle('ring', !talk);
   setHTML(bar, talk
-    ? `<span class="phone">${ICON.phone}</span><span class="txt"><b>Volajúci čaká na linke</b><span>${esc(talk.addr)}</span></span><button class="btn go" data-act="tab" data-tab="calls">Otvoriť</button>`
-    : `<span class="phone">${ICON.phone}</span><span class="txt"><b>Prichádzajúci hovor${G.calls.filter(c=>c.state==='ring').length>1 ? ' ('+G.calls.filter(c=>c.state==='ring').length+')' : ''}</b><span>${esc(NODES[ring.node].name)}</span></span><button class="btn go" data-act="answer" data-id="${ring.id}">Prijať</button>`);
+    ? `<span class="phone">${ICON.phone}</span><span class="txt"><b>${talk.kind==='repeat' ? 'Opakovaný hovor #'+talk.inc : 'Volajúci čaká na linke'}</b><span>${esc(talk.addr)}</span></span><button class="btn go" data-act="tab" data-tab="calls">Otvoriť</button>`
+    : `<span class="phone">${ICON.phone}</span><span class="txt"><b>${ring.kind==='repeat' ? 'Opakovaný hovor #'+ring.inc : 'Prichádzajúci hovor'}${G.calls.filter(c=>c.state==='ring').length>1 ? ' ('+G.calls.filter(c=>c.state==='ring').length+')' : ''}</b><span>${esc(NODES[ring.node].name)}</span></span><button class="btn go" data-act="answer" data-id="${ring.id}">Prijať</button>`);
+}
+function renderRadio(){
+  const list=(G.radio||[]).filter(m=>G.t-m.t<20).slice(0,3);
+  setHTML($('#radio'), G.mode==='play' ? list.map(m=>`<div class="rm ${m.kind}"><b>${esc(m.who)}</b>${esc(m.text)}</div>`).join('') : '');
+}
+const WX_ICO={
+  clear:svg('<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.2 5.2l1.8 1.8M17 17l1.8 1.8M5.2 18.8L7 17M17 7l1.8-1.8"/>'),
+  rain:svg('<path d="M6.5 15.5a4.5 4.5 0 1 1 1.3-8.8 5.5 5.5 0 0 1 10.4 2.3 3.3 3.3 0 0 1-.7 6.5z"/><path d="M8 18.5l-1 2.5M12 18.5l-1 2.5M16 18.5l-1 2.5"/>'),
+  fog:svg('<path d="M3 8h14M6 12h15M3 16h14M7 20h10"/>'),
+  ice:svg('<path d="M12 2.5v19M3.8 7.2l16.4 9.6M3.8 16.8l16.4-9.6M9.5 4l2.5 2.5L14.5 4M9.5 20l2.5-2.5 2.5 2.5"/>'),
+  storm:svg('<path d="M6.5 14a4.5 4.5 0 1 1 1.3-8.8 5.5 5.5 0 0 1 10.4 2.3A3.3 3.3 0 0 1 17.5 14"/><path d="M12.5 11l-3 5h4l-2.5 5"/>'),
+  heat:svg('<path d="M14 14.5V5a2 2 0 0 0-4 0v9.5a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>'),
+};
+function weatherChips(){
+  const W=WEATHER[G.weather||'clear'];
+  let h=`<span class="mchip${G.weather!=='clear' && G.weather!=='heat' ? ' warn' : ''}" title="${esc(W.note||'Bez obmedzení')}">${WX_ICO[G.weather||'clear']}${W.label}${W.heli ? '' : ' · bez vrtuľníka'}</span>`;
+  if(rushOn()) h+=`<span class="mchip warn">Špička v Košiciach</span>`;
+  if(G.major) h+=`<button class="mchip bad" data-act="tab" data-tab="incs">MU: ${esc(G.major.name)} ${G.major.phase+1}/${G.major.phases}</button>`;
+  if((G.combo||0)>=2) h+=`<span class="mchip on">Séria ${G.combo} · ×${comboK().toFixed(1)}</span>`;
+  if(G.ch) h+=`<span class="mchip on" title="${esc(G.ch.goals.map(g=>GOAL_TXT[g[0]](g[1])).join(' · '))}">${esc(G.ch.name)} · zostáva ${Math.max(0,Math.ceil(G.ch.dur-G.t))} min</span>`;
+  return h;
+}
+function renderChips(){
+  if(G.mode!=='play' && G.mode!=='pause'){ setHTML($('#mapchips'), ''); setHTML($('#barchips'), ''); return; }
+  const cv=COVPCT>=90 ? '' : COVPCT>=70 ? ' warn' : ' bad';
+  let h=`<button class="mchip${covShow?' on':''}${cv}" data-act="cov" title="Podiel obyvateľov, ku ktorým dorazí záchranka do 15 minút">Pokrytie ${COVPCT} %</button>`;
+  h+=weatherChips();
+  setHTML($('#mapchips'), h); setHTML($('#barchips'), h);
 }
 function renderUI(){
-  renderCalls(); renderDispatch(); renderIncs(); renderUnits(); renderRingBar();
-  const free=G.units.filter(u=>u.status<=2).length, urgent=G.incs.filter(i=>!i.metAt && needInfo(i).missing.length).length;
+  renderChips();
+  renderCalls(); renderDispatch(); renderIncs(); renderUnits(); renderRingBar(); renderRadio();
+  const free=G.units.filter(u=>u.status<=2).length, urgent=G.incs.filter(i=>!i.metAt && needInfo(i).missing.length).length + G.units.filter(u=>u.status===5 && !u.hospId).length;
   setHTML($('#tabCalls'), `Hovory${G.calls.length ? ` <span class="badge hot">${G.calls.length}</span>` : ''}`);
   setHTML($('#tabIncs'), `Udalosti${G.incs.length ? ` <span class="badge${urgent?' hot':''}">${G.incs.length}</span>` : ''}`);
   setHTML($('#tabUnits'), `Posádky <span class="badge">${free}</span>`);
@@ -1748,29 +2578,57 @@ function updateTimers(){
     if(el.dataset.txt) el.textContent=fmtMin(to-G.t);
     else { const from=+el.dataset.from; el.style.width=(clamp((to-G.t)/(to-from),0,1)*100)+'%'; }
   }
+  for(const el of document.querySelectorAll('[data-full]')){
+    const full=el.dataset.full, n=Math.floor((performance.now()-(+el.dataset.t0))/24);
+    if(n>=full.length){ el.textContent=full; delete el.dataset.full; } else el.textContent=full.slice(0, Math.max(0,n))+'▍';
+  }
   for(const el of document.querySelectorAll('[data-work]')){ const inc=incById(el.dataset.work); if(inc) el.style.width=(clamp(inc.progress/inc.work,0,1)*100)+'%'; }
 }
 
 /* ---------- prekryvné okná ---------- */
-function showMenu(){
+let MENU_TAB='free';
+const STAR = n => '<span class="stars" aria-label="'+n+' z 3 hviezdičiek">'+[0,1,2].map(i=>`<i class="${i<n?'on':''}">★</i>`).join('')+'</span>';
+function showMenu(tab){
+  if(tab) MENU_TAB=tab;
   const ov=$('#overlay'); ov.hidden=false; ov.classList.add('menu');
-  const owned=PROG.skills.length;
+  const owned=PROG.skills.length, stars=PROG.stars||{}, day=todayKey(), daily=dailyChallenge(day), dbest=PROG.daily && PROG.daily.day===day ? PROG.daily.best : null;
+  const medals=PROG.medals||{};
+  let body='';
+  if(MENU_TAB==='free'){
+    body=`<ol class="how">
+      <li>Zdvihni hovor a <b>pýtaj sa</b>: čo sa stalo, kde ste, či je niekto zranený, či hrozí ešte niečo. Odpovede prezradia, koho treba poslať.</li>
+      <li>Urči druh udalosti a vyšli posádky. Pri ťažkých stavoch treba lekára: RLP príde so sanitkou, RV je lekár v osobnom aute a pacienta odvezie RZP.</li>
+      <li>Ak volajúci nevie, kde je, nájdi ho na mape v kruhu z mobilu. Pacienta pošli do správnej nemocnice a drž kraj pokrytý záchrankami.</li>
+      <li>Keď pomoc mešká, udalosť sa zhorší. Pri mimoriadnej udalosti si vypýtaj výpomoc. Počasie mení cesty aj vrtuľník.</li>
+    </ol>
+    <div class="diffs">${Object.entries(TEMPO).map(([k,t])=>`<button class="diff" data-act="start" data-tempo="${k}"><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>`;
+  } else if(MENU_TAB==='ch'){
+    body=`<div class="chals">${CHALLENGES.map((c,i)=>{
+      const open=i===0 || (stars[CHALLENGES[i-1].id]||0)>=1, st=stars[c.id]||0;
+      return `<button class="chal${open?'':' lock'}" data-act="chal" data-id="${c.id}" ${open?'':'disabled'}>
+        <span class="row"><b class="grow">${i+1}. ${esc(c.name)}</b>${STAR(st)}</span>
+        <span class="sub">${esc(c.desc)}</span>
+        <span class="meta">${WX_ICO[c.weather||'clear']} ${WEATHER[c.weather||'clear'].label} · ${c.dur} min${c.majors && c.majors.length ? ' · mimoriadna udalosť' : ''}</span>
+        ${open ? `<span class="goals">${c.goals.map(g=>'· '+GOAL_TXT[g[0]](g[1])).join('<br>')}</span>` : '<span class="sub">Odomkne sa po získaní hviezdičky v predchádzajúcej výzve.</span>'}
+      </button>`; }).join('')}</div>`;
+  } else {
+    body=`<div class="chal daily"><span class="row"><b class="grow">Denná výzva · ${day.split('-').reverse().join('. ')}</b>${dbest!=null ? '<span class="sub">tvoj dnešný rekord: '+dbest+' b.</span>' : ''}</span>
+        <span class="sub">${esc(daily.desc)} 60 minút, ${WEATHER[daily.weather].label.toLowerCase()}${daily.majors.length ? ', počas služby príde mimoriadna udalosť' : ''}. Porovnaj skóre s kamarátmi – dnes dostanú rovnaké hovory.</span>
+        <span class="goals">${daily.goals.map(g=>'· '+GOAL_TXT[g[0]](g[1])).join('<br>')}</span>
+      </div>
+      <div class="acts"><button class="btn go" data-act="daily">Hrať dennú výzvu</button></div>`;
+  }
   ov.innerHTML=`<div class="sheet">
     <h1 class="title">Linka <b>112</b><small>Košický kraj</small></h1>
     <p class="lead">Si dispečer integrovaného záchranného systému. Zdvíhaš tiesňové volania a riadiš posádky záchranky, hasičov, polície, mestskej polície a horskej služby po celom kraji.</p>
-    <ol class="how">
-      <li>Zdvihni hovor a podľa slov volajúceho urči druh udalosti. Zneužitie linky odmietni.</li>
-      <li>Vyšli posádky, ktoré udalosť potrebuje. Na mape vidíš, kto je najbližšie a za koľko minút dorazí.</li>
-      <li>Pri ťažkých stavoch treba aj lekára: RLP príde so sanitkou, RV je lekár v osobnom aute (stretávací systém) a pacienta odvezie RZP.</li>
-      <li>Za vyriešené zásahy získavaš skúsenosti. Na každej úrovni dostaneš bod a odomkneš novú posádku alebo schopnosť.</li>
-      <li>Keď pomoc nepríde včas alebo volajúci zloží, klesá dôvera. Pri nule služba končí, postup ti ostáva.</li>
-    </ol>
     <div class="prog"><div><div class="k">Tvoj postup</div><b>Úroveň ${PROG.level}</b></div><div class="grow"><div class="track"><i style="width:${PROG.xp/xpNeed(PROG.level)*100}%"></i></div><div class="k" style="margin-top:5px">${PROG.xp} / ${xpNeed(PROG.level)} XP · ${owned} odomknutých schopností · rekord ${PROG.best} b.</div></div>
       <button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button></div>
-    <div class="diffs">${Object.entries(TEMPO).map(([k,t])=>`<button class="diff" data-act="start" data-tempo="${k}"><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>
-    <p class="keys">Klávesy: <kbd>A</kbd> prijať hovor · <kbd>1</kbd>–<kbd>9</kbd> druh udalosti · <kbd>Enter</kbd> vyslať odporúčané · <kbd>Medzerník</kbd> pauza · <kbd>Esc</kbd> zrušiť výber. Mapu posúvaš ťahaním, otáčaš pravým tlačidlom alebo dvoma prstami.</p>
+    <div class="seg" role="tablist">${[['free','Voľná služba'],['ch','Výzvy'],['day','Denná výzva']].map(([k,t])=>`<button class="btn${MENU_TAB===k?' on':''}" role="tab" aria-selected="${MENU_TAB===k}" data-act="mtab" data-id="${k}">${t}</button>`).join('')}</div>
+    ${body}
+    <div class="medals">${MEDALS.map(([id,name,desc])=>`<span class="medal${medals[id]?' got':''}" title="${esc(name+': '+desc)}"><b>${esc(name)}</b>${medals[id] ? '×'+medals[id] : ''}</span>`).join('')}</div>
+    <p class="keys">Klávesy: <kbd>A</kbd> prijať hovor · <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> otázky · <kbd>T</kbd> tlmočník · <kbd>1</kbd>–<kbd>9</kbd> druh udalosti · <kbd>Enter</kbd> vyslať odporúčané · <kbd>Medzerník</kbd> pauza · <kbd>Esc</kbd> zrušiť výber.</p>
     <div class="acts"><button class="linkbtn" data-act="reset">Vymazať postup a začať od nuly</button></div>
-    <p class="credit">Stanice záchrannej služby (RLP, RV, RZP): vyhláška MZ SR č. 116/2025 Z. z. Hranica kraja: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek a pohorí sú zjednodušené. 3D: three.js.</p>
+    <p class="credit">Stanice záchrannej služby (RLP, RV, RZP): vyhláška MZ SR č. 116/2025 Z. z. Hranica kraja: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek, pohorí a špecializácie nemocníc sú zjednodušené. 3D: three.js.</p>
   </div>`;
 }
 function showSkills(){
@@ -1822,14 +2680,22 @@ function endGame(){
   if(G.mode==='demo'){ restartDemo(); return; }
   G.mode='over'; PROG.sessions++;
   if(G.score>PROG.best){ PROG.best=G.score; G.newBest=true; }
+  G.newMedals=earnedMedals(); PROG.medals=PROG.medals||{}; for(const m of G.newMedals) PROG.medals[m]=(PROG.medals[m]||0)+1;
+  if(G.ch){
+    G.goalRes=G.ch.goals.map(g=>({g, ok:goalOk(g)}));
+    G.stars = G.done && G.rep>0 ? G.goalRes.filter(r=>r.ok).length : 0;
+    if(G.ch.id==='daily'){ if(!PROG.daily || PROG.daily.day!==G.ch.day || G.score>PROG.daily.best){ PROG.daily={day:G.ch.day, best:G.score}; G.dailyBest=true; } }
+    else { PROG.stars=PROG.stars||{}; PROG.stars[G.ch.id]=Math.max(PROG.stars[G.ch.id]||0, G.stars); }
+  }
   saveProg(); showSummary(); (G.rep<=0 ? SND.bad : SND.ok)(); dirty();
 }
 function showSummary(){
   const s=G.stats, avg=s.resp.length ? Math.round(s.resp.reduce((a,b)=>a+b,0)/s.resp.length) : null;
   const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
   ov.innerHTML=`<div class="sheet">
-    <div><div class="k">Služba trvala ${clockOf(G.t)}</div><h2 class="grade" style="margin-top:6px">${G.rep<=0 ? 'Vedúci ťa vystriedal' : 'Služba ukončená'}</h2></div>
-    <p class="lead">${G.rep<=0 ? 'Dôvera klesla na nulu – príliš veľa ľudí nedostalo pomoc včas. Postup a schopnosti ti ostávajú.' : 'Dobrá práca. Skúsenosti sa pripísali k tvojmu postupu.'}</p>
+    <div><div class="k">${G.ch ? esc(G.ch.name)+' · ' : ''}Služba trvala ${clockOf(G.t)}</div><h2 class="grade" style="margin-top:6px">${G.rep<=0 ? 'Vedúci ťa vystriedal' : G.ch && !G.done ? 'Výzva nedokončená' : 'Služba ukončená'}</h2></div>
+    ${G.ch ? `<div class="row" style="gap:16px; flex-wrap:wrap">${STAR(G.stars)}<ul class="goallist">${G.goalRes.map(r=>`<li class="${r.ok?'ok':''}">${GOAL_TXT[r.g[0]](r.g[1])}</li>`).join('')}</ul></div>` : ''}
+    <p class="lead">${G.rep<=0 ? 'Dôvera klesla na nulu – príliš veľa ľudí nedostalo pomoc včas. Postup a schopnosti ti ostávajú.' : G.ch && !G.done ? 'Hviezdičky dostaneš, len keď výzvu dohráš do konca.' : 'Dobrá práca. Skúsenosti sa pripísali k tvojmu postupu.'}${G.dailyBest ? ' Nový dnešný rekord v dennej výzve!' : ''}</p>
     <div class="sumgrid">
       <div><b>${G.score}</b><span class="k">Skóre</span></div>
       <div><b>${s.resolved}</b><span class="k">Vyriešené</span></div>
@@ -1838,19 +2704,24 @@ function showSummary(){
       <div><b>+${s.xp}</b><span class="k">Skúsenosti</span></div>
       <div><b>${PROG.level}</b><span class="k">Úroveň</span></div>
     </div>
-    <p class="keys">${G.newBest ? 'Nový rekord!' : 'Rekord: '+PROG.best+' b.'}${s.wrong ? ' · Nesprávne určené hovory: '+s.wrong : ''}${s.wasted ? ' · Plané výjazdy: '+s.wasted : ''}${s.pranks ? ' · Odhalené zneužitia: '+s.pranks : ''}</p>
-    <div class="acts"><button class="btn go" data-act="start" data-tempo="${G.tempo}">Nová služba</button><button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button><button class="btn" data-act="menu">Hlavné menu</button></div>
+    <p class="keys">${G.newBest ? 'Nový rekord!' : 'Rekord: '+PROG.best+' b.'} · Najdlhšia séria: ${G.comboMax||0}${s.precise ? ' · Presné vyslania: '+s.precise : ''}${s.wrong ? ' · Nesprávne určené hovory: '+s.wrong : ''}${s.missed ? ' · Prehliadnuté komplikácie: '+s.missed : ''}${s.esc ? ' · Zhoršené udalosti: '+s.esc : ''}${s.wasted ? ' · Plané výjazdy: '+s.wasted : ''}${s.pranks ? ' · Odhalené zneužitia: '+s.pranks : ''}</p>
+    ${G.newMedals.length ? `<div><div class="k" style="margin-bottom:6px">Nové medaily</div><div class="medals">${G.newMedals.map(id=>{ const m=MEDALS.find(x=>x[0]===id); return `<span class="medal new" title="${esc(m[2])}"><b>${esc(m[1])}</b></span>`; }).join('')}</div></div>` : ''}
+    <div class="acts"><button class="btn go" data-act="again">${G.ch ? 'Hrať znova' : 'Nová služba'}</button><button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button><button class="btn" data-act="menu">Hlavné menu</button></div>
   </div>`;
 }
 function clearWorld(){ for(const id of [...incObj.keys()]) dropIncMesh(id); for(const L of FX) L.el.remove(); FX.length=0; if(addP){ addP.list.length=0; norP.list.length=0; } }
-function restartDemo(){ clearWorld(); G=newGame('normal','demo'); }
-function start(tempo){
+function restartDemo(){ clearWorld(); G=newGame('normal','demo'); applyWeatherFx(); }
+function start(tempo, mode){
   audio(); clearWorld();
-  G=newGame(tempo||'normal', 'play');
+  CR=Math.random; WR=Math.random;
+  let ch=null;
+  if(mode && mode.daily){ const day=todayKey(); CR=rng(hashStr(day)); WR=rng(hashStr(day)+1); ch=dailyChallenge(day); }
+  else if(mode && mode.ch){ ch=JSON.parse(JSON.stringify(CHALLENGES.find(c=>c.id===mode.ch))); }
+  G=newGame(ch ? ch.tempo : tempo||'normal', 'play', ch); G.modeOpt=mode||null; applyWeatherFx();
   $('#overlay').hidden=true; $('#overlay').innerHTML='';
   $('#btnSpeed').textContent='×1'; pauseBtn(false);
   lastScore=lastRep=null; $('#hints').innerHTML='';
-  say('Služba začína. Prvý hovor je na ceste.');
+  say(ch ? (ch.id==='daily' ? 'Denná výzva začína – rovnaké hovory dostanú dnes všetci.' : 'Výzva „'+ch.name+'“: '+ch.goals.map(g=>GOAL_TXT[g[0]](g[1])).join(' · ')) : 'Služba začína. Prvý hovor je na ceste.');
   dirty();
 }
 function pauseBtn(p){ const b=$('#btnPause'); b.querySelector('.t').textContent=p ? 'Pokračovať' : 'Pauza'; b.setAttribute('aria-label', p ? 'Pokračovať' : 'Pauza'); b.classList.toggle('paused', p); }
@@ -1882,6 +2753,11 @@ let resetArmed=0;
 function act(el){
   const a=el.dataset.act, id=el.dataset.id;
   if(a==='start') return start(el.dataset.tempo);
+  if(a==='again') return start(G.tempo, G.modeOpt);
+  if(a==='chal') return start('normal', {ch:id});
+  if(a==='daily') return start('normal', {daily:true});
+  if(a==='mtab') return showMenu(id);
+  if(a==='voice'){ PROG.voice=!PROG.voice; saveProg(); el.textContent=PROG.voice ? 'Hlas zap.' : 'Hlas'; if(!PROG.voice && window.speechSynthesis) speechSynthesis.cancel(); return; }
   if(a==='menu'){ restartDemo(); showMenu(); return dirty(); }
   if(a==='tab') return setTab(el.dataset.tab);
   if(a==='grip'){ const app=$('#app'); app.dataset.sheet = app.dataset.sheet==='half' ? 'full' : 'half'; return syncTabs(); }
@@ -1890,6 +2766,7 @@ function act(el){
   if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; return; }
   if(a==='light'){ const ks=Object.keys(LIGHTS); PROG.light=ks[(ks.indexOf(PROG.light)+1)%ks.length]; saveProg(); return applyLight(); }
   if(a==='view') return viewAll();
+  if(a==='cov'){ covShow=!covShow; return dirty(); }
   if(a==='skills') return showSkills();
   if(a==='closeSkills') return closeSkills();
   if(a==='buy') return buySkill(id);
@@ -1902,10 +2779,18 @@ function act(el){
   if(a==='speed'){ if(G.mode!=='play') return; G.speed = G.speed===1 ? 2 : G.speed===2 ? 4 : 1; el.textContent='×'+G.speed; return; }
   if(G.mode!=='play') return;
   if(a==='answer') answer(callById(id));
+  else if(a==='ask') ask(callById(id), el.dataset.type);
+  else if(a==='interp') interp(callById(id));
+  else if(a==='autoloc'){ const inc=incById(id); if(inc && inc.lost && !inc.lost.auto){ inc.lost.auto=G.t+4; dirty(); } }
+  else if(a==='zoomlost'){ const inc=incById(id); if(inc && inc.lost) focusAt(inc.lost.x, inc.lost.z, inc.lost.r*7); }
   else if(a==='cls') classify(callById(id), el.dataset.type);
   else if(a==='inc') select(G.sel.inc===id ? null : id);
   else if(a==='desel'){ G.sel.inc=null; dirty(); }
   else if(a==='send') dispatch(unitById(el.dataset.unit), incById(id));
+  else if(a==='hosp') chooseHosp(unitById(el.dataset.unit), id);
+  else if(a==='aid') callAid();
+  else if(a==='calm') calmCaller(callById(id));
+  else if(a==='post') postUnit(unitById(el.dataset.unit), id);
   else if(a==='sendall') sendRecommended(incById(id));
   else if(a==='unit') unitClick(unitById(id));
 }
@@ -1914,7 +2799,7 @@ function unitClick(u){
   const inc=incById(G.sel.inc);
   if(inc && dispatchable(u, inc)) return dispatch(u, inc);
   G.sel.unit = G.sel.unit===u.id ? null : u.id; dirty();
-  if(G.sel.unit) focusOn(u.x, u.z);
+  if(G.sel.unit){ focusOn(u.x, u.z); openSheet('units'); }
 }
 /* akcia sa vykoná pri pustení prsta/myši na tom istom prvku */
 let down=null;
@@ -1939,9 +2824,13 @@ document.addEventListener('keydown', e=>{
   if(e.key===' '){ if(onBtn) return; e.preventDefault(); if(G.mode==='play' || (G.mode==='pause' && !$('#overlay').dataset.resume)) togglePause(); return; }
   if(G.mode!=='play' || e.ctrlKey || e.metaKey || e.altKey) return;
   const k=e.key.toLowerCase();
+  const talk=G.calls.find(c=>c.state==='talk');
   if(k==='a'){ answer(G.calls.find(c=>c.state==='ring')); }
+  else if(talk && talk.kind==='repeat' && k==='q'){ calmCaller(talk); }
+  else if(talk && 'qwer'.includes(k) && k.length===1){ const q=qList(talk)['qwer'.indexOf(k)]; if(q) ask(talk, q); }
+  else if(talk && k==='t'){ interp(talk); }
   else if(k.length===1 && k>='1' && k<='9'){ const cats=CAT_ORDER.filter(catOpen); const c=cats[+k-1]; if(c) classify(G.calls.find(c=>c.state==='talk'), c); }
-  else if(k==='enter' && !onBtn){ const inc=incById(G.sel.inc); if(inc){ e.preventDefault(); sendRecommended(inc); } }
+  else if(k==='enter' && !onBtn && has('d_rec')){ const inc=incById(G.sel.inc); if(inc){ e.preventDefault(); sendRecommended(inc); } }
   else if(k==='escape'){ G.sel.inc=null; G.sel.unit=null; dirty(); }
 });
 document.addEventListener('visibilitychange', ()=>{ if(document.hidden && G && G.mode==='play') togglePause(); });
@@ -1961,6 +2850,7 @@ function frame(now){
 }
 
 /* ---------- štart ---------- */
+$('#btnVoice').textContent=PROG.voice ? 'Hlas zap.' : 'Hlas';
 $('#legend').innerHTML=[1,2,3,4,5,6].map(s=>`<span style="--sc:var(--s${s})">${s} ${STATUS[s]}</span>`).join('');
 G=newGame('normal','demo');
 init3D();

@@ -27,26 +27,43 @@ Na vyskúšanie: Nastavenia → **Načítať ukážkové dáta**.
 ## Hra Linka 112
 
 `hra.html` je samostatná 3D hra na dispečera integrovaného záchranného systému v **Košickom kraji**.
-Zdvíhaš hovory na 112, určuješ druh udalosti a po kraji vysielaš posádky: záchranky (RZP, RLP, vrtuľník LZS),
-hasičov, políciu, mestskú políciu, CBRN/biohazard tím a Horskú záchrannú službu. Služba nemá koniec ani
-dennú/nočnú zmenu – hrá sa, kým kraju neklesne dôvera.
+Zdvíhaš hovory na 112, vypytuješ sa volajúcich, určuješ druh udalosti a po kraji vysielaš posádky:
+záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CBRN tím a Horskú záchrannú službu.
 
-- **Mapa:** 3D terén kraja s hranicou, mestami (Košice, Michalovce, Spišská Nová Ves, Trebišov, Rožňava…),
-  hlavnými cestami, riekami, Šíravou a Ružínom, Slovenským rajom, Volovskými vrchmi a Vihorlatom.
-- **Udalosti:** zdravotné, dopravné, požiare, technické, polícia, mestská polícia, chemické a biologické
-  ohrozenie (únik amoniaku, podozrivý prášok, podozrenie na nákazu…), horské a jaskynné záchrany.
-- **Záchranná služba podľa skutočnosti:** stanice a typy posádok v Košickom kraji podľa
-  vyhlášky MZ SR č. 116/2025 Z. z. – 9× RLP (rýchla lekárska pomoc), 1× RV (lekár v osobnom aute,
-  stretávací systém, Košice-Západ) a 31× RZP. Pri ťažkých stavoch treba lekára: RLP príde so sanitkou,
-  RV prevoz nezvládne, pacienta odvezie RZP. Ambulancie špecializovanej prepravy (AŠP, ŠRZP) v hre nie sú.
-- **Progres:** za vyriešené udalosti získavaš XP a úrovne, body míňaš v strome schopností
-  (záchranky po okresoch, vrtuľník, hasiči, CBRN, polícia, horská služba, dispečerské vylepšenia).
-  Postup sa ukladá v prehliadači.
-- **Telefón:** mapa cez celú obrazovku, dole panel so záložkami Hovory / Udalosti / Posádky,
-  prichádzajúci hovor sa ukáže ako lišta nad mapou.
+**Hovory**
+- **Vypytovanie:** otázky „Čo sa stalo?“, „Kde ste?“, „Je niekto zranený?“, „Hrozí ešte niečo?“. Odpovede odhalia
+  skryté komplikácie (ďalší zranený, šíriaci sa oheň, ozbrojený útočník). Čo nezistíš, nahlási až posádka z miesta.
+- **Neznáma poloha:** volajúci nevie, kde je – mobil hlási len kruh. Podľa jeho opisu ho nájdeš ťuknutím na mapu.
+- **Cudzí jazyk a tiché hovory:** maďarčina, ukrajinčina a angličtina pri hraniciach (s tlmočníkom),
+  tichý hovor, keď volajúci nemôže hovoriť a odpovedá ťuknutím.
 
-Ovládanie: `A` prijať hovor, `1`–`9` druh udalosti, `Enter` vyslať odporúčané posádky, `Esc` zrušiť výber,
-medzerník pauza; mapu otáčaš a približuješ myšou alebo prstami. Potrebuje prehliadač s WebGL.
+**Vysielanie**
+- Posádky vyberáš sám, za presné vyslanie je bonus, posádka navyše alebo lekár k drobnosti stojí body.
+  Asistenta vysielania (tlačidlo „Vyslať odporúčané“) odomkneš v schopnostiach.
+- **Pokrytie kraja:** podiel obyvateľov, ku ktorým dorazí záchranka do 15 minút; voľné posádky môžeš presunúť do zálohy.
+- **Nemocnice:** pacienta pošleš do správneho centra – kardiocentrum VÚSCH, traumacentrum UNLP, Detská FN
+  alebo najbližšia nemocnica; príjem má obmedzenú kapacitu.
+
+**Živý kraj**
+- Udalosti, ku ktorým pomoc mešká, sa zhoršia a volajúci zavolá znova. Posádky podávajú hlásenia rádiom.
+- **Mimoriadne udalosti** vo fázach (povodeň na Bodrogu, víchrica, hromadná nehoda autobusu, výbuch plynu,
+  požiar chemického podniku) s výpomocou z Prešovského kraja.
+- **Počasie** (dážď, hmla, poľadovica, búrka, horúčava) mení rýchlosť jázd, vrtuľník aj druhy udalostí;
+  v Košiciach býva dopravná špička.
+
+**Ciele**
+- Voľná služba bez konca, 8 výziev s hviezdičkami (Dni mesta Košice, Leto na Šírave, Povodeň na Bodrogu…)
+  a denná výzva s rovnakými hovormi pre všetkých v daný deň.
+- Séria úspechov násobí body, na konci služby sú medaily. Postup, schopnosti, hviezdičky a medaily sa ukladajú v prehliadači.
+- Rádiové zvuky, siréna, typované odpovede volajúcich a voliteľný hlas volajúceho (syntéza reči prehliadača).
+
+**Záchranná služba podľa skutočnosti:** stanice a typy posádok podľa vyhlášky MZ SR č. 116/2025 Z. z. –
+9× RLP, 1× RV (Košice-Západ, stretávací systém) a 31× RZP. RLP pokryje lekára aj prevoz, RV prevoz nezvládne.
+
+Ovládanie: `A` prijať hovor, `Q` `W` `E` `R` otázky, `T` tlmočník, `1`–`9` druh udalosti, `Enter` vyslať odporúčané
+(so schopnosťou), `Esc` zrušiť výber, medzerník pauza. Na telefóne je mapa cez celú obrazovku a dole panel so záložkami.
+Potrebuje prehliadač s WebGL.
 
 Knižnice a dáta: `vendor/three/` – three.js r147 (MIT), `vendor/amcharts-geodata/` – licencia amCharts
-geodát (linkware), z ktorých je zjednodušená hranica kraja. Polohy obcí, ciest, riek a pohorí sú približné.
+geodát (linkware), z ktorých je zjednodušená hranica kraja. Polohy obcí, ciest, riek a pohorí aj špecializácie
+nemocníc sú zjednodušené.
