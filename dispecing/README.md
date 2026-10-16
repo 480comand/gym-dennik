@@ -56,6 +56,16 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
   - Pacient v nemocnici bez potrebného centra musí ísť ďalej, takže posádka je 12 minút dlhšie mimo prevádzky.
   - Súhrn služby obsahuje rozbor vysielania (koľkokrát a akú chybu si urobil). Za službu bez chyby
     dostaneš medailu Čistý štít.
+- **Prvá pomoc po telefóne (voliteľná):** kým príde posádka, môžeš v karte udalosti zaškrtnúť, čo má volajúci
+  urobiť. Rady sú pri 23 druhoch udalostí (zástava srdca, dusenie, anafylaxia, pôrod, otrava, požiar, topiaci sa,
+  únik amoniaku, úraz v horách a ďalšie) a medzi nimi sú správne aj chybné.
+  - Dobrá rada: +15 bodov, pár minút času navyše, lepší stav. Dve dobré rady zabránia zhoršeniu
+    a za všetky dobré rady bez chyby je bonus.
+  - Zlá rada (napríklad voda človeku v bezvedomí alebo vyťahovanie zakliesneného vodiča) ublíži:
+    −30 bodov, −2 dôvery a horší stav. Volajúci povie, čo sa stalo, a hra vysvetlí, prečo bola rada zlá.
+  - Ďalšiu radu môžeš dať, až keď volajúci dokončí predošlú. Keď posádka dorazí, ohodnotí, čo volajúci urobil.
+  - Volajúcemu, ktorý nemôže hovoriť alebo nerozumie po slovensky a nemá tlmočníka, rady dať nemôžeš.
+  - Medaila Anjel na linke: aspoň 6 dobrých rád a žiadna zlá.
 
 **Živý kraj**
 - Udalosti, ku ktorým pomoc mešká, sa zhoršia a volajúci zavolá znova. Posádky podávajú hlásenia rádiom.

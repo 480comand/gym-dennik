@@ -125,7 +125,18 @@
   .harm{display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:8px; font-size:13px;}
   .harm .hm{height:6px; background:var(--line); border-radius:3px; overflow:hidden;} .harm .hm i{display:block; height:100%; background:var(--muted);}
   .harm.t1 .hm i{background:var(--p2);} .harm.t2 .hm i, .harm.t3 .hm i{background:var(--bad);} .harm.t2 b, .harm.t3 b{color:var(--bad);}
-  .notes{margin:0;} .sub.warnt{color:var(--bad); font-weight:600;}
+  .notes{margin:0;}
+  .fa{display:grid; gap:6px; border-top:1px solid var(--line); padding-top:8px;}
+  .fahead{display:flex; align-items:center; gap:8px; background:none; border:0; padding:2px 0; cursor:pointer; text-align:left;}
+  .fahead .k{flex:1; color:var(--sodium);} .fahead .chev{color:var(--muted); font-size:12px;}
+  .faopts{display:grid; gap:5px;}
+  .faopt{display:grid; grid-template-columns:18px minmax(0,1fr); gap:8px; align-items:start; text-align:left; background:var(--card); border:1px solid var(--line); border-radius:8px; padding:7px 9px; color:var(--text); font-size:13px; line-height:1.35; cursor:pointer;}
+  .faopt:hover:not(:disabled){border-color:var(--muted);}
+  .faopt i{width:16px; height:16px; border:1.5px solid var(--muted); border-radius:4px; display:grid; place-items:center; font-style:normal; font-size:11px; font-weight:800; margin-top:1px;}
+  .faopt.ok{border-color:color-mix(in srgb, var(--good) 55%, transparent);} .faopt.ok i{background:var(--good); border-color:var(--good); color:#06281a;}
+  .faopt.bad{border-color:color-mix(in srgb, var(--bad) 55%, transparent);} .faopt.bad i{background:var(--bad); border-color:var(--bad); color:#fff;}
+  .faopt:disabled{cursor:default;} .faopt:disabled:not(.ok):not(.bad){opacity:.5;}
+  .fareply{font-size:13px;} .fareply.bad{border-color:color-mix(in srgb, var(--bad) 50%, transparent);} .sub.warnt{color:var(--bad); font-weight:600;}
   .declist{margin:0; padding:0; list-style:none; display:grid; gap:4px; font-size:14px;} .declist b{color:var(--bad); font-variant-numeric:tabular-nums; margin-right:4px;}
   .locate{display:grid; gap:8px; padding:10px; border-radius:10px; border:1px dashed var(--sodium); background:color-mix(in srgb, var(--sodium) 7%, transparent);}
   .locate p{margin:0;}
@@ -950,10 +961,142 @@ const OUTCOME={
   msp:['Výtržníci odišli skôr, než prišla hliadka.','Vec sa vyhrotila, sú zranení.','Vec sa vyhrotila, sú zranení.'],
   mountain:['Turista je podchladený.','Turista má ťažké omrzliny.','Turistu sa nepodarilo zachrániť.'],
 };
+/* telefonická prvá pomoc: [rada volajúcemu, správna?, odpoveď volajúceho, prečo je zlá] */
+const FA={
+  'Zástava srdca':[
+    ['Položte ho na chrbát na tvrdú podložku.',1,'Dobre, leží na zemi na chrbte.'],
+    ['Stláčajte hrudník v strede, rýchlo a hlboko – 100 až 120-krát za minútu.',1,'Stláčam… raz, dva, tri, štyri… ťažké to je, ale idem ďalej.'],
+    ['Pošlite niekoho po defibrilátor (AED), ak je nablízku.',1,'Sused beží po AED do lekárne oproti.'],
+    ['Skúste mu dať napiť vody.',0,'Nalial som mu do úst vodu… teraz mu bublá v hrdle!','človek v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
+    ['Posaďte ho a opierajte, nech sa preberie.',0,'Posadil som ho… hlava mu padá, stále nedýcha.','pri zástave srdca treba hneď stláčať hrudník na tvrdej podložke, sedenie stráca drahé minúty.'],
+    ['Najprv mu aspoň minútu hľadajte pulz.',0,'Hľadám pulz… nič necítim, čo mám robiť?','keď nedýcha normálne, stláčanie musí začať hneď – každá minúta bez neho znižuje šancu na prežitie.']],
+  'Anafylaxia':[
+    ['Ak má adrenalínové pero, pichnite ho do vonkajšej strany stehna.',1,'Mala ho v taške, pichol som ho… trochu sa jej uľavilo.'],
+    ['Nech sedí, keď sa jej ťažko dýcha. Ak omdlieva, nech si ľahne s nohami hore.',1,'Sedí opretá, dýcha o niečo pokojnejšie.'],
+    ['Ak prestane dýchať, hneď mi to povedzte, začneme oživovať.',1,'Dýcha, nespúšťam ju z očí.'],
+    ['Nech sa poprechádza na čerstvom vzduchu.',0,'Postavila sa a… zatočila sa jej hlava, skoro spadla!','pri anafylaxii môže postavenie a chôdza spôsobiť náhly kolaps – nech sedí alebo leží.'],
+    ['Dajte jej vypiť mlieko, to zmierni opuch.',0,'Napila sa a zakuckala, dýcha sa jej ešte horšie!','opuchnuté hrdlo nezvládne prehĺtanie a mlieko pri alergii nepomáha.']],
+  'Pád z lešenia':[
+    ['Nehýbte s ním, ak mu nehrozí ďalšie nebezpečenstvo.',1,'Nechávame ho tak, ako leží.'],
+    ['Ak silno krváca, zatlačte na ranu čistou látkou.',1,'Tlačím mu tričko na ranu na hlave, krvácanie slabne.'],
+    ['Sledujte, či dýcha, a keby prestal, hneď mi to povedzte.',1,'Dýcha, hruď sa mu dvíha.'],
+    ['Skúste ho posadiť a dať mu napiť.',0,'Zdvihli sme ho do sedu… zakričal od bolesti a nehýbe nohami!','po páde z výšky môže mať poranenú chrbticu a pohyb ho môže ochrnúť.'],
+    ['Preneste ho do tieňa alebo dnu.',0,'Niesli sme ho… stratil vedomie!','zraneného po páde sa presúva iba vtedy, keď mu hrozí bezprostredné nebezpečenstvo.']],
+  'Bolesť na hrudi':[
+    ['Nech sedí v pohodlnej polohe a vôbec sa nenamáha.',1,'Sedí v kresle a nehýbe sa.'],
+    ['Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.',1,'Rozhrýzol acylpyrín, alergie nemá.'],
+    ['Pripravte jeho lieky a odomknite dvere pre záchranku.',1,'Lieky mám v ruke, dvere sú otvorené.'],
+    ['Nech sa prejde, možno to rozchodí.',0,'Prešiel pár krokov a oprel sa o stenu, je celý sivý!','námaha pri infarkte zväčšuje poškodenie srdca – nech sedí v pokoji.'],
+    ['Odvezte ho radšej sami autom do nemocnice.',0,'Viedli sme ho do auta… v aute skolaboval!','srdce môže kedykoľvek zlyhať a v aute mu nikto nepomôže – nech čaká na záchranku.']],
+  'Mozgová príhoda':[
+    ['Zapamätajte si, kedy presne sa to začalo.',1,'Bolo to presne o desiatej, pri správach.'],
+    ['Nedávajte jej nič jesť ani piť.',1,'Dobre, nič jej nedávam.'],
+    ['Nech leží s hlavou trochu podloženou a nehýbe sa.',1,'Leží na gauči s vankúšom pod hlavou.'],
+    ['Dajte jej aspirín, rozriedi krv.',0,'Dal som jej tabletku… zakuckala sa, nevie dobre prehĺtať!','pri porážke nesmie dostať nič ústami, a ak krváca do mozgu, aspirín to zhorší.'],
+    ['Nechajte ju vyspať, ráno to bude lepšie.',0,'Zaspala… a ťažko ju prebúdzam!','pri mozgovej príhode rozhoduje čas – liečba musí začať čo najskôr.']],
+  'Dusenie':[
+    ['Ak nevie kašľať, predkloňte ho a 5-krát ho udrite medzi lopatky.',1,'Udieram ho… niečo sa pohlo, ale stále chrčí!'],
+    ['Keď to nepomôže, 5-krát mu stlačte brucho pod rebrami dnu a hore.',1,'Stláčam… vyletelo to von, kašle!'],
+    ['Keby stratil vedomie, položte ho na zem a začnite stláčať hrudník.',1,'Je pri vedomí, kašle a dýcha.'],
+    ['Dajte mu napiť vody, nech to spláchne.',0,'Nalial som mu vodu… dusí sa ešte viac!','tekutina upchatými dýchacími cestami neprejde a upchá ich ešte viac.'],
+    ['Strčte mu prsty hlboko do krku a vytiahnite to.',0,'Snažím sa… zatlačil som to ešte hlbšie!','vyberanie naslepo zatlačí predmet hlbšie – pomáhajú údery medzi lopatky a stláčanie brucha.']],
+  'Pôrod':[
+    ['Pripravte čisté uteráky a teplú deku.',1,'Mám uteráky aj deku.'],
+    ['Keď sa dieťa narodí, osušte ho, položte mame na hruď a prikryte oboch.',1,'Je tu! Kričí… leží mame na hrudi pod dekou.'],
+    ['Pupočník neprestrihujte, to urobí záchranka.',1,'Dobre, nechávam to tak.'],
+    ['Nech mama drží nohy pri sebe, kým nepríde záchranka.',0,'Snaží sa… kričí, že to nevydrží!','pôrod sa nedá zastaviť a zadržiavanie môže ublížiť dieťaťu aj mame.'],
+    ['Keď uvidíte hlavičku, potiahnite dieťa von.',0,'Potiahol som… mama kričí od bolesti a krváca!','dieťa sa rodí samo – ťahanie poraní dieťa aj mamu, hlavičku treba len jemne podopierať.']],
+  'Otrava':[
+    ['Odložte obal alebo zvyšky, nech ich lekári vidia.',1,'Mám to v ruke, dám to záchranárom.'],
+    ['Ak zvracia, nech je predklonený alebo na boku, aby sa nezadusil.',1,'Držím ho predkloneného.'],
+    ['Nech zvyšky vypľuje a vypláchne si ústa, ale nič nepije.',1,'Vypľul to a vypláchol si ústa.'],
+    ['Vyvolajte zvracanie prstom v krku.',0,'Zvracal… a teraz ho páli v hrdle ešte viac!','žieravina pri zvracaní poleptá pažerák druhýkrát a zvratky môžu vdýchnuť – zvracanie sa nevyvoláva.'],
+    ['Dajte mu vypiť mlieko alebo olej, zneutralizuje to.',0,'Vypil mlieko a hneď to vyvrátil!','mlieko ani olej jed nezneutralizujú, iba vyvolajú zvracanie.']],
+  'Pád seniora':[
+    ['Nech zostane ležať alebo sedieť, nezdvíhajte ho nasilu.',1,'Dobre, nechávam ju ležať na koberci.'],
+    ['Prikryte ho dekou, nech neprechladne.',1,'Prikryla som ju.'],
+    ['Postavte ho na nohy, nech to rozchodí.',0,'Postavili sme ju… zakričala od bolesti a zviezla sa na zem!','po páde môže mať zlomený krčok – na nohu sa nesmie postaviť.'],
+    ['Dajte mu niečo zo svojich liekov na tlak alebo na bolesť.',0,'Dala som jej svoju tabletku… teraz je celá ospalá.','cudzie lieky môžu spôsobiť pád tlaku alebo sa pobiť s jeho liekmi.']],
+  'Zakliesnený vodič':[
+    ['Zapnite výstražné svetlá a postavte trojuholník.',1,'Svetlá blikajú, trojuholník stojí pred zákrutou.'],
+    ['S vodičom nehýbte, iba sa s ním rozprávajte a upokojujte ho.',1,'Hovorím s ním, je pri vedomí.'],
+    ['Krvácajúcu ranu stlačte čistou látkou.',1,'Tlačím mu šatku na rameno, krvi je menej.'],
+    ['Vytiahnite ho z auta, kým nepríde pomoc.',0,'Ťaháme ho… zakričal a necíti nohy!','zakliesneného vodiča môže vyťahovanie ochrnúť – vyslobodia ho hasiči so zdravotníkmi, von len pri požiari.'],
+    ['Dajte mu napiť, nech sa upokojí.',0,'Napil sa a začal zvracať…','ťažko zranený pôjde možno na operáciu – nesmie piť.']],
+  'Hromadná nehoda':[
+    ['Zapnite výstražné svetlá a zastavte autá za nehodou.',1,'Autá za nami stoja, svetlá blikajú.'],
+    ['Ľudí, ktorí môžu chodiť, odveďte mimo cestu za zvodidlá.',1,'Odviedli sme ich na lúku vedľa cesty.'],
+    ['Krvácajúce rany stlačte čistou látkou.',1,'Tlačíme obväzy z lekárničiek.'],
+    ['Všetkých zranených povyťahujte z áut a uložte vedľa cesty.',0,'Ťaháme ich… jedna žena prestala cítiť ruky!','vyťahovanie bez dôvodu môže zhoršiť poranenie chrbtice – von iba pri požiari alebo inom priamom nebezpečenstve.'],
+    ['Choďte doprostred cesty a mávajte na autá.',0,'Skoro ma zrazilo auto, narazilo do kolóny!','na ceste ohrozujete seba aj ostatných – zostaňte za zvodidlami a použite výstražné svetlá a trojuholník.']],
+  'Zrazený chodec':[
+    ['Nehýbte s ňou a prikryte ju, nech neprechladne.',1,'Prikryl som ju bundou, leží.'],
+    ['Zabezpečte miesto výstražnými svetlami, nech do nej nikto nenarazí.',1,'Auto stojí pred ňou s výstražnými svetlami.'],
+    ['Zdvihnite ju a posaďte na lavičku.',0,'Zdvihli sme ju… omdlela nám v rukách!','po zrazení autom môže mať poranenú chrbticu alebo vnútorné krvácanie – nehýbte s ňou.'],
+    ['Dajte jej napiť a niečo proti bolesti.',0,'Zapila tabletku… teraz je jej na vracanie.','zranená nesmie nič piť ani brať lieky – môže ísť na operáciu.']],
+  'Požiar bytu':[
+    ['Odíďte von, zatvorte za sebou dvere a nepoužívajte výťah.',1,'Sme vonku pred domom, šli sme schodmi.'],
+    ['Ak je na chodbe dym, držte sa pri zemi a zakryte si ústa látkou.',1,'Prešli sme dole pri zemi, kašleme, ale sme vonku.'],
+    ['Počkajte na hasičov pred domom a povedzte im, kde je suseda.',1,'Čakám pri vchode, ukážem im jej okno.'],
+    ['Vráťte sa po susedu do bytu.',0,'Bol som vnútri… nič som nevidel, ledva som sa dostal von!','v dyme stačí pár nádychov na stratu vedomia – záchranu nechajte na hasičov s dýchacími prístrojmi.'],
+    ['Choďte dole výťahom, je to rýchlejšie.',0,'Výťah zastal medzi poschodiami a ide doň dym!','pri požiari môže výťah zlyhať a šachta sa plní dymom – vždy schodmi.']],
+  'Požiar domu':[
+    ['Všetci von z domu a späť sa nevracajte.',1,'Všetci sme na ulici.'],
+    ['Otvorte hasičom bránu a uvoľnite príjazd.',1,'Brána je otvorená, auto som odparkoval.'],
+    ['Skúste vyniesť cennosti, kým to nezhorí.',0,'Manžel sa vrátil po doklady… vyšiel celý začadený!','majetok nie je hodný života – v horiacom dome sa človek rýchlo otrávi dymom.'],
+    ['Vylezte na rebrík a polievajte strechu hadicou.',0,'Spadol som z rebríka, bolí ma noha!','lezenie k horiacej streche je životu nebezpečné – nechajte to na hasičov.']],
+  'Topiaci sa':[
+    ['Hoďte mu niečo, čo pláva – kruh, fľašu, lano.',1,'Hodili sme mu záchranný kruh z móla!'],
+    ['Neskáčte za ním, sledujte, kde sa naposledy objavil.',1,'Stojím na brehu a ukazujem to miesto.'],
+    ['Keď ho vytiahnete a nedýcha, začnite hneď oživovať.',1,'Dobre, sme pripravení.'],
+    ['Skočte za ním a plávajte k nemu.',0,'Skočil tam kamarát… teraz sa topia obaja!','topiaci sa v panike stiahne pod vodu aj záchrancu – hádžte mu niečo, čo pláva.'],
+    ['Keď ho vytiahnete, otočte ho hore nohami, nech vytečie voda.',0,'Dobre… ale nestratíme tým čas?','vylievanie vody stráca drahé minúty – keď nedýcha, treba hneď oživovať.']],
+  'Uviaznutý výťah':[
+    ['Nech ostanú pokojne v kabíne a stlačia tlačidlo núdzového volania.',1,'Stlačili sme ho, ozval sa dispečer výťahov.'],
+    ['Rozprávajte sa s dieťaťom a upokojujte ho, pomoc je na ceste.',1,'Spievame si, už neplače.'],
+    ['Vypáčte dvere a vyliezte von.',0,'Otec sa snažil vyliezť a kabína sa pohla!','vyliezanie z výťahu medzi poschodiami je životu nebezpečné – kabína sa môže pohnúť.']],
+  'Únik amoniaku':[
+    ['Nech ľudia odídu von a ďalej od budovy, proti vetru.',1,'Všetci sú na parkovisku, vietor fúka od nás.'],
+    ['Kto má podráždené oči alebo kožu, nech si ich vyplachuje veľkým množstvom vody.',1,'Vyplachujeme oči vodou z fliaš.'],
+    ['Choďte dnu pozrieť, odkiaľ to uniká.',0,'Správca išiel dnu… vypotácal sa von, kašle a nevidí!','amoniak poleptá oči a pľúca – do zamorenej haly smie len hasič v ochrannom obleku.'],
+    ['Polejte únik octom, zneutralizuje ho.',0,'Poliali sme to… zasyčalo to a výpary sú ešte silnejšie!','neutralizácia bez ochrany spustí prudkú reakciu a ďalšie výpary.']],
+  'Otrava CO':[
+    ['Všetci hneď von na čerstvý vzduch.',1,'Sme vonku pred domom.'],
+    ['Cestou von otvorte okná a dvere, ale nezdržujte sa.',1,'Otvoril som dvere a okno, sme vonku.'],
+    ['Ľahnite si a odpočívajte, hlava prejde.',0,'Dcéra zaspala a nevieme ju zobudiť!','oxid uhoľnatý nevidno ani necítiť – kto ostane dnu, môže stratiť vedomie a zomrieť.'],
+    ['Ostaňte doma a otvorte len okno v kúpeľni.',0,'Stále nás bolí hlava a mamu sa točí…','pri otrave CO treba všetkých hneď dostať von – jedno okno nestačí.']],
+  'Podozrenie na nákazu':[
+    ['Nech sedí oddelene od ostatných a zakryje si ústa a nos.',1,'Sedí vzadu sám, má rúško.'],
+    ['Ostatní cestujúci nech sa ho nedotýkajú a umyjú si ruky.',1,'Ľudia sa odsunuli dopredu.'],
+    ['Nech ho niekto hneď odvezie autom k lekárovi.',0,'Jeden pán ho už vezie na pohotovosť…','chorý s podozrením na nákazu môže nakaziť ďalších – prevezie ho záchranka s ochranou.']],
+  'Bodnutie':[
+    ['Silno zatlačte na ranu čistou látkou a nepúšťajte.',1,'Tlačím mu sveter na bok, krvácanie sa spomalilo.'],
+    ['Ak má nôž v rane, nevyťahujte ho.',1,'Nôž tu nie je, útočník ho zobral.'],
+    ['Nech leží a nehýbe sa.',1,'Leží na chodníku, prikryli sme ho.'],
+    ['Bežte za útočníkom a zadržte ho.',0,'Kamarát ho dobehol… útočník švihol nožom aj po ňom!','prenasledovať ozbrojeného útočníka je nebezpečné – zapamätajte si, kam utiekol, zvyšok urobí polícia.'],
+    ['Dajte mu napiť alkoholu na bolesť.',0,'Napil sa… a krvácanie zosilnelo.','alkohol zhoršuje krvácanie a zranený nesmie piť – môže ísť na operáciu.']],
+  'Kolaps na túre':[
+    ['Nech si sadne a nehýbe sa.',1,'Sedí na batohu opretý o strom.'],
+    ['Oblečte ho do suchého a prikryte, nech neprechladne.',1,'Má na sebe moju bundu a izolačnú fóliu.'],
+    ['Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.',1,'Mám acylpyrín v lekárničke, rozhrýzol ho.'],
+    ['Nech pomaly pokračuje k najbližšej chate.',0,'Šli sme pár metrov a zrútil sa!','námaha pri bolesti na hrudi môže spôsobiť zástavu srdca – nech čaká na mieste.'],
+    ['Dajte mu glg slivovice na zahriatie.',0,'Napil sa… teraz sa trasie ešte viac.','alkohol rozšíri cievy, telo rýchlejšie stráca teplo a srdce sa viac zaťaží.']],
+  'Zranený turista':[
+    ['Nohu nechajte tak, ako je, a podložte ju.',1,'Podložili sme ju batohom.'],
+    ['Izolujte ho od zeme a oblečte do suchého.',1,'Sedí na karimatke v teplej bunde.'],
+    ['Nech skúsi zísť dole aspoň k chate.',0,'Skúsil to… pošmykol sa a znova spadol!','chôdza na zlomenej nohe poškodí cievy a nervy a hrozí ďalší pád.'],
+    ['Skúste mu nohu narovnať.',0,'Ťahal som… od bolesti skoro omdlel!','narovnávanie zlomeniny je veľmi bolestivé a môže poškodiť cievy – nechajte to záchranárom.']],
+  'Vyčerpaný turista':[
+    ['Nech sa oblečie do suchého a zje niečo sladké.',1,'Prezliekla sa a zjedla čokoládu.'],
+    ['Zostaňte spolu na chodníku a svieťte baterkou, nech vás nájdu.',1,'Sedíme pri značke a svietime.'],
+    ['Skráťte si cestu dole lesom mimo chodníka.',0,'Zišli sme z chodníka… nevieme, kde sme!','mimo chodníka sa po tme ľahko zablúdi alebo spadne – zostaňte na značke.'],
+    ['Rozdeľte sa – vy bežte dole po pomoc, ona počká.',0,'Som sám dole v lese a ona hore neodpovedá…','vyčerpaný človek osamote rýchlo prechladne a ťažšie sa hľadá – zostaňte spolu.']],
+};
+const FA_HARM={1:.3, 2:.22, 3:.15}, FA_TIME={1:3, 2:2, 3:1};
 const BLAME_L={far:'poslal si ju z ďaleka', prio:'k menej vážnemu prípadu', overkill:'na drobnosť', gap:'bola posledná v okolí', wrong:'na zbytočnú jazdu'};
 const DEC_L=[['far','Posádka z ďaleka, hoci bližšia bola voľná'],['wrong','Nevhodná posádka – zbytočná jazda'],['extra','Posádka navyše'],
   ['pulled','Posádka stiahnutá z vážnejšieho prípadu'],['prio','Vážnejší prípad musel čakať'],['overkill','Lekár alebo vrtuľník na drobnosť'],
-  ['gap','Okolie ostalo bez záchranky'],['conseq','Dôsledok: pri vážnom prípade chýbala posádka'],['secondary','Zlá nemocnica – prevoz navyše']];
+  ['gap','Okolie ostalo bez záchranky'],['aid','Zlá rada prvej pomoci – ublížila'],['conseq','Dôsledok: pri vážnom prípade chýbala posádka'],['secondary','Zlá nemocnica – prevoz navyše']];
 const TEMPO={calm:{label:'Pokojné', k:1.35, note:'Menej hovorov, viac času na rozmýšľanie.'}, normal:{label:'Bežné', k:1, note:'Bežný deň na linke 112.'}, busy:{label:'Rušné', k:.72, note:'Hovory jeden za druhým.'}};
 
 /* počasie: rýchlosť pozemných posádok, vrtuľník, častejšie druhy udalostí */
@@ -1058,6 +1201,7 @@ const MEDALS=[
   ['major','Krízový manažér','Zvládni mimoriadnu udalosť bez zlyhania.'],
   ['precise','Ostrostrelec','Aspoň 10 presných vyslaní.'],
   ['clean','Čistý štít','Aspoň 10 vyriešených udalostí bez jediného chybného vyslania.'],
+  ['angel','Anjel na linke','Aspoň 6 dobrých rád prvej pomoci a žiadna zlá.'],
 ];
 function earnedMedals(){
   const s=G.stats, a=avg(s.ans), p1=avg(s.respP1), out=[];
@@ -1071,6 +1215,7 @@ function earnedMedals(){
   if((s.goodHosp||0)>=3 && !s.badHosp) out.push('hosp');
   if((s.majorOk||0)>=1) out.push('major');
   if((s.precise||0)>=10) out.push('precise');
+  if((s.faOk||0)>=6 && !(s.dec||{}).aid) out.push('angel');
   if(s.resolved>=10 && !Object.values(s.dec||{}).some(Boolean) && !s.harmed && !s.died) out.push('clean');
   return out;
 }
@@ -1436,6 +1581,32 @@ function consequences(inc, ghostBest){
     return;
   }
 }
+/* rada prvej pomoci volajúcemu: dobrá pomôže pacientovi aj získa čas, zlá mu ublíži */
+function giveAid(inc, i){
+  const f=inc && inc.fa, list=f && FA[inc.title], it=list && list[i];
+  if(!it || f.given.includes(i) || inc.metAt || G.t<f.busy || !running()) return;
+  f.given.push(i); f.busy=G.t+1; f.last=it[2]; f.lastBad=!it[1];
+  if(it[1]){
+    inc.harm=Math.max(-.2, (inc.harm||0)-.08); inc.deadline+=FA_TIME[inc.prio]; G.score+=15; G.stats.faOk=(G.stats.faOk||0)+1;
+    const got=f.given.filter(j=>list[j][1]).length;
+    let msg='Dobrá rada – kým príde pomoc, volajúci pomáha. +15';
+    if(inc.esc && got>=2){ inc.esc=null; msg='Prvá pomoc zabránila zhoršeniu stavu. +15'; }
+    if(got===list.filter(x=>x[1]).length && got===f.given.length){ G.score+=25; msg='Volajúci urobil všetko správne – výborná prvá pomoc. +40'; }
+    say('#'+inc.no+': '+msg, 'good'); SND.blip();
+  } else {
+    inc.harm=(inc.harm||0)+FA_HARM[inc.prio]; G.score-=30; G.rep-=repLoss(2); dec('aid'); comboBreak();
+    note(inc, 'zlá rada: '+it[0][0].toLowerCase()+it[0].slice(1).replace(/\.$/,''));
+    say('#'+inc.no+': zlá rada ublížila – '+it[3]+' −30, −2 dôvery', 'bad'); SND.bad(); checkRep();
+  }
+  dirty();
+}
+/* posádka na mieste zhodnotí, čo urobil volajúci podľa rád */
+function aidReport(inc){
+  const f=inc.fa; if(!f || !f.given.length || quiet()) return;
+  const lead=inc.units.map(unitById).find(u=>u && u.inc===inc.id && u.status===4); if(!lead) return;
+  const bad=f.given.some(j=>!FA[inc.title][j][1]);
+  radio(lead, bad ? 'Na mieste. To, čo volajúci urobil podľa pokynov z linky, situáciu zhoršilo.' : 'Na mieste. Volajúci postupoval podľa pokynov z linky, veľmi to pomohlo.', bad ? 'bad' : 'good');
+}
 /* stav udalosti: zdržania od posádok, ktoré k nej idú z ďaleka, sa prejavia pri príchode */
 function harmOf(inc){
   let h=inc.harm||0; const seen=new Set();
@@ -1717,6 +1888,11 @@ function createIncident(c, cat){
     const e = tpl.title in ESC_T ? ESC_T[tpl.title] : ESC_DEF[cat];
     if(e && (!e.need || canAdd(needs.concat(inc.hidden.map(x=>x.need)), e.need)) && !(e.need===DOC && needs.includes(DOC)) && Math.random()<e.p) inc.esc={...e, at:G.t+.45*(inc.deadline-G.t)};
   }
+  if(!prank && FA[inc.title]){
+    if(c.silent) inc.faNo='Volajúci nemôže hovoriť – rady prvej pomoci mu dať nemôžeš.';
+    else if(c.lang!=='sk' && !c.interp) inc.faNo='Volajúci nerozumie po slovensky a tlmočník nebol pripojený – rady prvej pomoci mu dať nemôžeš.';
+    else { const o=FA[inc.title].map((_,i)=>i); for(let i=o.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [o[i],o[j]]=[o[j],o[i]]; } inc.fa={order:o, given:[], busy:0, last:'', open:prio===1}; }
+  }
   G.incs.push(inc);
   consequences(inc, ghostBest);
   if(!quiet()) select(inc.id, true);
@@ -1996,9 +2172,10 @@ function step(dt){
     if(u.status===5 && !u.hospId && G.t>=u.chooseUntil) chooseHosp(u, (has('d_rec') || quiet() ? bestHosp(u) : nearestFree(u)).id, true);
   }
   for(const inc of [...G.incs]){
+    if(inc.fa && inc.fa.busy && G.t>=inc.fa.busy){ inc.fa.busy=0; dirty(); }
     const info=needInfo(inc);
     if(info.met){
-      if(!inc.metAt){ inc.metAt=G.t; inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); applyLate(inc, info); dirty(); }
+      if(!inc.metAt){ inc.metAt=G.t; inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); applyLate(inc, info); aidReport(inc); dirty(); }
       inc.progress+=dt*workRate(inc);
       if(!inc.saidHalf && inc.progress>=inc.work/2){ inc.saidHalf=true; const lead=inc.units.map(unitById).find(u=>u && u.status===4 && u.inc===inc.id); if(lead && !quiet() && Math.random()<.6) radio(lead, HALF[inc.cat]||'Pokračujeme.', 'good'); }
       if(inc.progress>=inc.work) resolve(inc);
@@ -2965,6 +3142,20 @@ function harmRow(inc){
   return `<div class="harm t${t}"><span class="k">Stav</span><span class="hm"><i style="width:${Math.round(Math.min(1,h)*100)}%"></i></span><b>${HARM_L[t]}</b></div>`+
     (notes.length ? `<p class="keys notes">${notes.map(esc).join(' · ')}</p>` : '');
 }
+function faBlock(inc){
+  const f=inc.fa;
+  if(!f) return inc.faNo && !inc.metAt ? `<p class="keys">${esc(inc.faNo)}</p>` : '';
+  const list=FA[inc.title], nOk=f.given.filter(i=>list[i][1]).length, nBad=f.given.length-nOk, done=!!inc.metAt, busy=G.t<f.busy;
+  let h=`<div class="fa"><button class="fahead" data-act="faopen" data-id="${inc.id}" aria-expanded="${f.open}"><span class="k">Prvá pomoc · rady volajúcemu</span>
+    <span class="sub">${f.given.length ? nOk+' dobré'+(nBad ? ' · '+nBad+' zlé' : '') : 'voliteľné'}</span><span class="chev">${f.open ? '▴' : '▾'}</span></button>`;
+  if(f.open){
+    h+=`<div class="faopts">${f.order.map(i=>{ const g=f.given.includes(i), ok=list[i][1];
+      return `<button class="faopt${g ? (ok ? ' ok' : ' bad') : ''}" data-act="fa" data-id="${inc.id}" data-type="${i}" ${g || done || busy ? 'disabled' : ''}><i>${g ? (ok ? '✓' : '✗') : ''}</i><span>${esc(list[i][0])}</span></button>`; }).join('')}</div>`;
+    if(f.last) h+=`<p class="m c fareply${f.lastBad ? ' bad' : ''}">${esc(f.last)}</p>`;
+    h+=`<p class="keys">${done ? 'Posádka je na mieste – volajúci už rady nepotrebuje.' : busy ? 'Volajúci robí, čo si mu povedal…' : 'Zaškrtni, čo má volajúci urobiť, kým príde pomoc. Dobrá rada pomôže, zlá ublíži.'}</p>`;
+  }
+  return h+'</div>';
+}
 const needChips = inc => needInfo(inc).slots.map(s=>`<span class="need ${s.st}" title="${s.need.split('|').map(k=>KINDS[k].short).join(' / ')}">${needLabel(s.need)}</span>`).join('');
 /* prepíše obsah len pri zmene – tlačidlá pod prstom tak nemiznú pri každom prekreslení */
 function setHTML(el, h){ if(el._h!==h){ el._h=h; el.innerHTML=h; } }
@@ -3029,6 +3220,7 @@ function renderDispatch(){
     <p class="quote">${esc(inc.text)}</p>
     <div class="row"><span class="k">Potrebné</span><div class="needs">${needChips(inc)}</div></div>
     ${harmRow(inc)}
+    ${faBlock(inc)}
     ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : ''}
     ${inc.lost ? `<div class="locate"><b>Kde je volajúci?</b>
         <p>${inc.lost.clueKnown ? '„'+esc(inc.lost.clue)+'“' : 'Na polohu si sa nepýtal – máš len kruh z mobilu.'}</p>
@@ -3201,7 +3393,7 @@ function showMenu(tab){
     body=`<ol class="how">
       <li>Zdvihni hovor a <b>pýtaj sa</b>: čo sa stalo, kde ste, či je niekto zranený, či hrozí ešte niečo. Odpovede prezradia, koho treba poslať.</li>
       <li>Urči druh udalosti a vyšli posádky. Pri ťažkých stavoch treba lekára: RLP príde so sanitkou, RV je lekár v osobnom aute a pacienta odvezie RZP.</li>
-      <li>Ak volajúci nevie, kde je, nájdi ho na mape v kruhu z mobilu. Pacienta pošli do správnej nemocnice a drž kraj pokrytý záchrankami.</li>
+      <li>Kým príde posádka, poraď volajúcemu <b>prvú pomoc</b> – zlá rada ublíži. Volajúceho bez polohy nájdi na mape, pacienta pošli do správnej nemocnice.</li>
       <li>Keď pomoc mešká, stav sa zhoršuje. <b>Zlé vyslanie má dopad</b>: posádka z ďaleka, nevhodná posádka či posledná záchranka z okolia ťa dobehnú.</li>
     </ol>
     <div class="diffs">${Object.entries(TEMPO).map(([k,t])=>`<button class="diff" data-act="start" data-tempo="${k}"><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>`;
@@ -3295,9 +3487,9 @@ function endGame(){
 }
 function decReport(){
   const s=G.stats, d=s.dec||{}, rows=DEC_L.filter(([k])=>d[k]);
-  if(!rows.length && !s.harmed && !s.died) return s.resolved ? `<p class="keys">Rozbor vysielania: žiadne chybné rozhodnutie – posádky išli vždy tam, kam mali.</p>` : '';
+  if(!rows.length && !s.harmed && !s.died) return s.resolved ? `<p class="keys">Rozbor vysielania: žiadne chybné rozhodnutie – posádky išli vždy tam, kam mali.${s.faOk ? ' Dobré rady prvej pomoci: '+s.faOk+'.' : ''}</p>` : '';
   return `<div><div class="k" style="margin-bottom:6px">Rozbor vysielania</div><ul class="declist">${rows.map(([k,l])=>`<li><b>${d[k]}×</b> ${l}</li>`).join('')}</ul>
-    <p class="keys">${s.lateMin ? 'Pomoc kvôli tomu prišla spolu o '+Math.round(s.lateMin)+' min neskôr. ' : ''}${s.harmed ? 'Udalosti s následkami: '+s.harmed+'. ' : ''}${s.died ? 'Nezachránení pre zdržanie: '+s.died+'.' : ''}</p></div>`;
+    <p class="keys">${s.faOk ? 'Dobré rady prvej pomoci: '+s.faOk+'. ' : ''}${s.lateMin ? 'Pomoc kvôli tomu prišla spolu o '+Math.round(s.lateMin)+' min neskôr. ' : ''}${s.harmed ? 'Udalosti s následkami: '+s.harmed+'. ' : ''}${s.died ? 'Nezachránení pre zdržanie: '+s.died+'.' : ''}</p></div>`;
 }
 function showSummary(){
   const s=G.stats, avg=s.resp.length ? Math.round(s.resp.reduce((a,b)=>a+b,0)/s.resp.length) : null;
@@ -3403,6 +3595,8 @@ function act(el){
   else if(a==='calm') calmCaller(callById(id));
   else if(a==='post') postUnit(unitById(el.dataset.unit), id);
   else if(a==='sendall') sendRecommended(incById(id));
+  else if(a==='fa') giveAid(incById(id), +el.dataset.type);
+  else if(a==='faopen'){ const inc=incById(id); if(inc && inc.fa){ inc.fa.open=!inc.fa.open; dirty(); } }
   else if(a==='unit') unitClick(unitById(id));
 }
 function unitClick(u){
