@@ -1417,8 +1417,12 @@ const dirty = () => { uiDirty=true; };
 /* ---------- zvuk ---------- */
 let AC=null, muted=false;
 function audio(){
-  if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } }
-  if(AC && AC.state==='suspended') AC.resume().catch(()=>{});
+  if(!AC){
+    try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){}   // iPhone: zvuk aj v tichom režime
+    try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; }
+    if(AC) try{ const b=AC.createBuffer(1,1,22050), x=AC.createBufferSource(); x.buffer=b; x.connect(AC.destination); x.start(0); }catch(e){}   // odomknutie zvuku pri prvom ťuknutí
+  }
+  if(AC && AC.state!=='running') try{ AC.resume().catch(()=>{}); }catch(e){}
   return AC;
 }
 function tone(freq, dur, type='sine', vol=.1, when=0){
@@ -1504,7 +1508,9 @@ function clipBuf(key, voice){
   const f=clipFile(key, voice); if(!f) return null;
   const b=CLIPS.get(f); if(b && typeof b==='object') return b; if(b) return null;
   CLIPS.set(f, 'loading');
-  fetch(CLIP_DIR+f).then(r=>r.arrayBuffer()).then(x=>AC.decodeAudioData(x)).then(buf=>CLIPS.set(f, buf)).catch(()=>CLIPS.set(f, 'bad'));
+  fetch(CLIP_DIR+f).then(r=>{ if(!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+    .then(x=>new Promise((res, rej)=>{ const p=AC.decodeAudioData(x, res, rej); if(p && p.then) p.then(res, rej); }))   // aj staršie Safari
+    .then(buf=>CLIPS.set(f, buf)).catch(()=>CLIPS.set(f, 'bad'));
   return null;
 }
 /* jeden volajúci = jeden hlas počas celého hovoru (podľa nahrávky jeho prvej vety) */
@@ -1635,7 +1641,8 @@ function emoText(text, emo){
 const VOICE_LANG={sk:'sk', hu:'hu', uk:'uk', en:'en'};
 function tts(c, text, emo){
   if(!window.speechSynthesis) return;
-  const lang=c.interp ? 'sk' : (c.lang||'sk'), vs=speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith(VOICE_LANG[lang]));
+  const lang=c.interp ? 'sk' : (c.lang||'sk'), all=speechSynthesis.getVoices(), by=l=>all.filter(v=>v.lang && v.lang.toLowerCase().startsWith(l));
+  const vs=by(VOICE_LANG[lang]).length ? by(VOICE_LANG[lang]) : lang==='sk' ? by('cs') : [];   // bez slovenského hlasu poslúži český
   if(!vs.length) return;
   const E=EMO[emo]||EMO.pokoj, u=new SpeechSynthesisUtterance(emoText(text, emo));
   u.voice=vs[(c.vi||0)%vs.length]; u.lang=u.voice.lang;
@@ -1663,6 +1670,7 @@ function speak(c, text, key, emo){
 let SPEAK_SEQ=0;
 function playClip(buf){
   if(!AC || muted) return;
+  if(AC.state!=='running') try{ AC.resume(); }catch(e){}
   const s=AC.createBufferSource(), g=AC.createGain(); s.buffer=buf; g.gain.value=1.2; s.connect(g); g.connect(phoneBus());
   s.onended=()=>{ if(VOICE===s){ VOICE=null; duck(false); } }; duck(true); s.start(); VOICE=s;
 }
@@ -2267,6 +2275,7 @@ function answer(c){
   if(!c || c.state!=='ring' || !running()) return;
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   c.state='talk'; c.talkAt=G.t;
+  syncCallAudio();   // zvuky z miesta hneď po zdvihnutí
   if(c.log[0]){ c.log[0].t=performance.now(); speak(c, c.log[0].text, c.log[0].key, c.log[0].emo); }
   if(c.kind!=='repeat') G.stats.ans.push(G.t-c.t0);
   if(G.t-c.t0<5) G.score+=10;
