@@ -43,6 +43,19 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
 - **Pokrytie kraja:** podiel obyvateľov, ku ktorým dorazí záchranka do 15 minút; voľné posádky môžeš presunúť do zálohy.
 - **Nemocnice:** pacienta pošleš do správneho centra – kardiocentrum VÚSCH, traumacentrum UNLP, Detská FN
   alebo najbližšia nemocnica; príjem má obmedzenú kapacitu.
+- **Následky zlých rozhodnutí:** každá udalosť má stav (v poriadku → zhoršuje sa → kritický).
+  - Posádka z ďaleka, keď bližšia bola voľná, zdrží pomoc a stav sa zhorší. Pacient môže mať komplikácie
+    alebo trvalé následky, čo znamená menej bodov aj dôvery. Pri P1 ho pre veľké zdržanie nemusíš zachrániť.
+    Ak dodatočne pošleš bližšiu posádku, zdržanie sa nezaráta.
+  - Nevhodná posádka (polícia k zástave srdca, RV bez sanitky, vrtuľník k drobnosti) stojí body aj dôveru
+    a na mieste sa otočí naprázdno.
+  - Za stiahnutie posádky z cesty k vážnejšiemu prípadu dostaneš trest a pôvodná udalosť sa zhorší.
+    Trest dostaneš aj vtedy, keď pošleš k menej vážnemu prípadu posádku, ktorú potreboval čakajúci P1.
+  - Keď z okolia odíde k drobnosti posledná voľná záchranka, hra ťa varuje. Ak tam potom príde vážny prípad,
+    hra ukáže dôsledok tvojho rozhodnutia a pomoc pôjde z ďaleka.
+  - Pacient v nemocnici bez potrebného centra musí ísť ďalej, takže posádka je 12 minút dlhšie mimo prevádzky.
+  - Súhrn služby obsahuje rozbor vysielania (koľkokrát a akú chybu si urobil). Za službu bez chyby
+    dostaneš medailu Čistý štít.
 
 **Živý kraj**
 - Udalosti, ku ktorým pomoc mešká, sa zhoršia a volajúci zavolá znova. Posádky podávajú hlásenia rádiom.
