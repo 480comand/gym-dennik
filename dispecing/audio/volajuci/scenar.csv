@@ -1,0 +1,438 @@
+﻿subor;emocia;ako_zahrat;udalost;situacia;text;hovori;hlas
+v1t3rarm.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Úvod hovoru;prvá veta po zdvihnutí;Prosím, rýchlo, potrebujem pomoc!;*;
+v155krf5.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Úvod hovoru;prvá veta po zdvihnutí;Haló? Haló, počujete ma? Stalo sa niečo hrozné…;*;
+v1ey09ip.mp3;zmätenosť;zmätený, neistý, hľadá slová;Úvod hovoru;prvá veta po zdvihnutí;Dobrý deň… ja neviem, či volám správne…;*;
+v1gdwa69.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Úvod hovoru;prvá veta po zdvihnutí;Pomôžte, prosím! Rýchlo!;*;
+vp5q8n1.mp3;zmätenosť;zmätený, neistý, hľadá slová;Úvod hovoru;prvá veta po zdvihnutí;Haló, záchranka? Polícia? Neviem, koho potrebujem…;*;
+v2vmang.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca (P1);čo sa stalo;Manžel spadol na zem, nedýcha a nereaguje!;Zástava srdca;žena
+v5hzmvg.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca (P1);čo sa stalo;Otec sa zrútil v záhrade a nemá pulz!;Zástava srdca;žena
+vhh750n.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca (P1);odpoveď: je niekto zranený?;Nedýcha! Vôbec nereaguje!;Zástava srdca;žena
+vne7est.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zástava srdca (P1);doplňujúca otázka: „Dýcha normálne, alebo len občas zalapá po dychu?“;Len občas zalapá, inak nedýcha!;Zástava srdca;žena
+vizxdqd.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zástava srdca (P1);doplňujúca otázka: „Ako dlho je v bezvedomí?“;Asi tri minúty, spadol pri obede.;Zástava srdca;žena
+v1hs6ta8.mp3;úľava;s úľavou, ale ešte zadýchaný;Zástava srdca (P1);po dobrej rade: „Položte ho na chrbát na tvrdú podložku.“;Dobre, leží na zemi na chrbte.;*;
+v177k7p2.mp3;úľava;s úľavou, ale ešte zadýchaný;Zástava srdca (P1);po dobrej rade: „Stláčajte hrudník v strede, rýchlo a hlboko – 100 až 120-krát za minútu.“;Stláčam… raz, dva, tri, štyri… ťažké to je, ale idem ďalej.;*;
+v1kseuw4.mp3;úľava;s úľavou, ale ešte zadýchaný;Zástava srdca (P1);po dobrej rade: „Pošlite niekoho po defibrilátor (AED), ak je nablízku.“;Sused beží po AED do lekárne oproti.;*;
+v1v0198w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zástava srdca (P1);po zlej rade: „Skúste mu dať napiť vody.“;Naliali sme mu do úst vodu… teraz mu bublá v hrdle!;*;
+vhj6zgb.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zástava srdca (P1);po zlej rade: „Posaďte ho a opierajte, nech sa preberie.“;Posadili sme ho… hlava mu padá, stále nedýcha.;*;
+v159l80p.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zástava srdca (P1);po zlej rade: „Najprv mu aspoň minútu hľadajte pulz.“;Hľadám pulz… nič necítim, čo mám robiť?;*;
+v1ezrtpn.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Anafylaxia (P1);čo sa stalo;Dcéru štípla osa, opuchá jej tvár a ťažko dýcha!;Anafylaxia;muž
+v1rtwobt.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Anafylaxia (P1);skrytá komplikácia;Prestáva dýchať, pery má modré!;Anafylaxia;muž
+v17yfecs.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Anafylaxia (P1);doplňujúca otázka: „Je alergická a má adrenalínové pero?“;Je alergická na osy, pero má v taške!;Anafylaxia;muž
+v1u71czn.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Anafylaxia (P1);doplňujúca otázka: „Vie povedať celú vetu?“;Len pár slov, lapá po dychu.;Anafylaxia;muž
+vagai5i.mp3;úľava;s úľavou, ale ešte zadýchaný;Anafylaxia (P1);po dobrej rade: „Ak má adrenalínové pero, pichnite ho do vonkajšej strany stehna.“;Mala ho v taške, pichol som ho… trochu sa jej uľavilo.;Anafylaxia;muž
+vctguzk.mp3;úľava;s úľavou, ale ešte zadýchaný;Anafylaxia (P1);po dobrej rade: „Nech sedí, keď sa jej ťažko dýcha. Ak omdlieva, nech si ľahne s nohami hore.“;Sedí opretá, dýcha o niečo pokojnejšie.;Anafylaxia;muž
+vbi2kni.mp3;úľava;s úľavou, ale ešte zadýchaný;Anafylaxia (P1);po dobrej rade: „Ak prestane dýchať, hneď mi to povedzte, začneme oživovať.“;Dýcha, nespúšťam ju z očí.;Anafylaxia;muž
+v8w4t.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Anafylaxia (P1);po zlej rade: „Nech sa poprechádza na čerstvom vzduchu.“;Postavila sa a… zatočila sa jej hlava, skoro spadla!;Anafylaxia;muž
+v69rcty.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Anafylaxia (P1);po zlej rade: „Dajte jej vypiť mlieko, to zmierni opuch.“;Napila sa a zakuckala, dýcha sa jej ešte horšie!;Anafylaxia;muž
+v12dq29o.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Anafylaxia (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je mu horšie, prestáva reagovať!;*;
+vvma0wn.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pád z lešenia (P1);čo sa stalo;Robotník spadol z lešenia z tretieho poschodia a nehýbe sa.;Pád z lešenia;
+v1t42i6o.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Pád z lešenia (P1);doplňujúca otázka: „Je pri vedomí a hýbe rukami aj nohami?“;Je pri vedomí, ale nohami nehýbe.;Pád z lešenia;
+vnoeq5z.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Pád z lešenia (P1);doplňujúca otázka: „Z akej výšky spadol?“;Z tretieho poschodia, aspoň osem metrov.;Pád z lešenia;
+vvgbsvj.mp3;úľava;s úľavou, ale ešte zadýchaný;Pád z lešenia (P1);po dobrej rade: „Nehýbte s ním, ak mu nehrozí ďalšie nebezpečenstvo.“;Nechávame ho tak, ako leží.;Pád z lešenia;
+vl2ons6.mp3;úľava;s úľavou, ale ešte zadýchaný;Pád z lešenia (P1);po dobrej rade: „Ak silno krváca, zatlačte na ranu čistou látkou.“;Tlačím mu tričko na ranu na hlave, krvácanie slabne.;Pád z lešenia;
+v2cytpk.mp3;úľava;s úľavou, ale ešte zadýchaný;Pád z lešenia (P1);po dobrej rade: „Sledujte, či dýcha, a keby prestal, hneď mi to povedzte.“;Dýcha, hruď sa mu dvíha.;Pád z lešenia;
+v14bqea.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pád z lešenia (P1);po zlej rade: „Skúste ho posadiť a dať mu napiť.“;Zdvihli sme ho do sedu… zakričal od bolesti a nehýbe nohami!;Pád z lešenia;
+v1a4i2w2.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pád z lešenia (P1);po zlej rade: „Preneste ho do tieňa alebo dnu.“;Niesli sme ho… stratil vedomie!;Pád z lešenia;
+v1xouwmb.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bolesť na hrudi (P1);čo sa stalo;Otca strašne páli na hrudi, je bledý a spotený.;Bolesť na hrudi;žena
+v1higzum.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bolesť na hrudi (P1);čo sa stalo;Manžel sa sťažuje na tlak na hrudi, ide mu to do ľavej ruky.;Bolesť na hrudi;žena
+v1293kxs.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bolesť na hrudi (P1);odpoveď: je niekto zranený?;Je pri vedomí, ale je bledý a celý spotený.;Bolesť na hrudi;žena
+v9zfpto.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bolesť na hrudi (P1);skrytá komplikácia;Teraz mi odpadol! Nereaguje!;Bolesť na hrudi;žena
+vxftbca.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bolesť na hrudi (P1);doplňujúca otázka: „Ako dlho bolesť trvá?“;Asi pol hodiny a neprechádza.;Bolesť na hrudi;žena
+vlxhp1g.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bolesť na hrudi (P1);doplňujúca otázka: „Mal už niekedy problémy so srdcom?“;Pred dvoma rokmi mu dávali stent.;Bolesť na hrudi;žena
+v1rt47uu.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (P1);po dobrej rade: „Nech sedí v pohodlnej polohe a vôbec sa nenamáha.“;Sedí v kresle a nehýbe sa.;Bolesť na hrudi;žena
+v1a8k271.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (P1);po dobrej rade: „Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.“;Rozhrýzol acylpyrín, alergie nemá.;Bolesť na hrudi;žena
+vinflqw.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (P1);po dobrej rade: „Pripravte jeho lieky a odomknite dvere pre záchranku.“;Lieky mám v ruke, dvere sú otvorené.;Bolesť na hrudi;žena
+v1phm0q3.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť na hrudi (P1);po zlej rade: „Nech sa prejde, možno to rozchodí.“;Prešiel pár krokov a oprel sa o stenu, je celý sivý!;Bolesť na hrudi;žena
+vvelx3w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť na hrudi (P1);po zlej rade: „Odvezte ho radšej sami autom do nemocnice.“;Viedli sme ho do auta… v aute skolaboval!;Bolesť na hrudi;žena
+viy8noo.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Mozgová príhoda (P1);čo sa stalo;Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!;Mozgová príhoda;muž
+vzjc9j2.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Mozgová príhoda (P1);čo sa stalo;Manželka nevie zdvihnúť pravú ruku a motá sa jej reč.;Mozgová príhoda;muž
+v1ss63p5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Mozgová príhoda (P1);skrytá komplikácia;Už nereaguje a chrčí!;Mozgová príhoda;muž
+v1o4ntik.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Mozgová príhoda (P1);doplňujúca otázka: „Kedy presne sa to začalo?“;Pred dvadsiatimi minútami, pri obede bola ešte v poriadku.;Mozgová príhoda;muž
+v1u98yt0.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Mozgová príhoda (P1);doplňujúca otázka: „Berie lieky na riedenie krvi?“;Áno, berie Warfarin.;Mozgová príhoda;muž
+v10wzf5q.mp3;úľava;s úľavou, ale ešte zadýchaný;Mozgová príhoda (P1);po dobrej rade: „Zapamätajte si, kedy presne sa to začalo.“;Bolo to presne o desiatej, pri správach.;Mozgová príhoda;muž
+vq2dw68.mp3;úľava;s úľavou, ale ešte zadýchaný;Mozgová príhoda (P1);po dobrej rade: „Nedávajte jej nič jesť ani piť.“;Dobre, nič jej nedávam.;Mozgová príhoda;muž
+v172empn.mp3;úľava;s úľavou, ale ešte zadýchaný;Mozgová príhoda (P1);po dobrej rade: „Nech leží s hlavou trochu podloženou a nehýbe sa.“;Leží na gauči s vankúšom pod hlavou.;Mozgová príhoda;muž
+vuuejno.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Mozgová príhoda (P1);po zlej rade: „Dajte jej aspirín, rozriedi krv.“;Dal som jej tabletku… zakuckala sa, nevie dobre prehĺtať!;Mozgová príhoda;muž
+v1ddt74z.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Mozgová príhoda (P1);po zlej rade: „Nechajte ju vyspať, ráno to bude lepšie.“;Zaspala… a ťažko ju prebúdzam!;Mozgová príhoda;muž
+v185h72i.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dusenie (P1);čo sa stalo;Dedko sa dusí, je celý modrý a nevie sa nadýchnuť!;Dusenie;muž
+v1vo4pno.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dusenie (P1);odpoveď: je niekto zranený?;Ledva dýcha, je celý modrý!;Dusenie;muž
+v172wgv7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dusenie (P1);doplňujúca otázka: „Vie kašľať alebo hovoriť?“;Nie, len chrčí a drží sa za krk!;Dusenie;muž
+vyxgin5.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dusenie (P1);doplňujúca otázka: „Čo prehltol?“;Kus mäsa pri obede.;Dusenie;muž
+v1x2mdq8.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (P1);po dobrej rade: „Ak nevie kašľať, predkloňte ho a 5-krát ho udrite medzi lopatky.“;Udieram ho… niečo sa pohlo, ale stále chrčí!;Dusenie;muž
+v1ezfc85.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (P1);po dobrej rade: „Keď to nepomôže, 5-krát mu stlačte brucho pod rebrami dnu a hore.“;Stláčam… vyletelo to von, kašle!;Dusenie;muž
+vgqyenr.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (P1);po dobrej rade: „Keby stratil vedomie, položte ho na zem a začnite stláčať hrudník.“;Je pri vedomí, kašle a dýcha.;Dusenie;muž
+v1a73f51.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Dusenie (P1);po zlej rade: „Dajte mu napiť vody, nech to spláchne.“;Nalial som mu vodu… dusí sa ešte viac!;Dusenie;muž
+v17yv2tu.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Dusenie (P1);po zlej rade: „Strčte mu prsty hlboko do krku a vytiahnite to.“;Snažím sa… zatlačil som to ešte hlbšie!;Dusenie;muž
+v14erqnk.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Pôrod (P2);čo sa stalo;Manželke praskla plodová voda a kontrakcie sú každé dve minúty!;Pôrod;muž
+v1umamq8.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pôrod (P2);skrytá komplikácia;Krváca a dieťa ide nožičkami napred!;Pôrod;muž
+v16iq2vz.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (P2);doplňujúca otázka: „Koľké dieťa to je a v ktorom je týždni?“;Tretie, je v 39. týždni.;Pôrod;muž
+v1fk34rf.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (P2);doplňujúca otázka: „Má nutkanie tlačiť?“;Hovorí, že už musí tlačiť!;Pôrod;muž
+vh15w5h.mp3;úľava;s úľavou, ale ešte zadýchaný;Pôrod (P2);po dobrej rade: „Pripravte čisté uteráky a teplú deku.“;Mám uteráky aj deku.;Pôrod;muž
+v1gidph2.mp3;úľava;s úľavou, ale ešte zadýchaný;Pôrod (P2);po dobrej rade: „Keď sa dieťa narodí, osušte ho, položte mame na hruď a prikryte oboch.“;Je tu! Kričí… leží mame na hrudi pod dekou.;Pôrod;muž
+v13dy1jl.mp3;úľava;s úľavou, ale ešte zadýchaný;Pôrod (P2);po dobrej rade: „Pupočník neprestrihujte, to urobí záchranka.“;Dobre, nechávam to tak.;Pôrod;muž
+v1jd89gy.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pôrod (P2);po zlej rade: „Nech mama drží nohy pri sebe, kým nepríde záchranka.“;Snaží sa… kričí, že to nevydrží!;Pôrod;muž
+vwg98mh.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pôrod (P2);po zlej rade: „Keď uvidíte hlavičku, potiahnite dieťa von.“;Potiahol som… mama kričí od bolesti a krváca!;Pôrod;muž
+v1bjmo6.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pôrod (P2);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Dieťa je na svete, ale mama strašne krváca!;Pôrod;muž
+v5u1nlb.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otrava (P2);čo sa stalo;Syn vypil čistič na odpad, vracia a plače.;Otrava;
+v13yr9s1.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otrava (P2);čo sa stalo;Kamarát zjedol nejaké huby a teraz má kŕče.;Otrava;
+v1f5o36g.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Otrava (P2);skrytá komplikácia;Stráca vedomie a má kŕče!;Otrava;
+vdmn4v0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otrava (P2);doplňujúca otázka: „Máte obal alebo zvyšky toho, čo požil?“;Áno, mám to tu pri sebe.;Otrava;
+v1fa469m.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otrava (P2);doplňujúca otázka: „Kedy sa to stalo?“;Asi pred pol hodinou.;Otrava;
+v1r6k2fd.mp3;úľava;s úľavou, ale ešte zadýchaný;Otrava (P2);po dobrej rade: „Odložte obal alebo zvyšky, nech ich lekári vidia.“;Mám to v ruke, dám to záchranárom.;Otrava;
+v1jxx5x0.mp3;úľava;s úľavou, ale ešte zadýchaný;Otrava (P2);po dobrej rade: „Ak zvracia, nech je predklonený alebo na boku, aby sa nezadusil.“;Držím ho predkloneného.;Otrava;
+v15flpb.mp3;úľava;s úľavou, ale ešte zadýchaný;Otrava (P2);po dobrej rade: „Nech zvyšky vypľuje a vypláchne si ústa, ale nič nepije.“;Vypľul to a vypláchol si ústa.;Otrava;
+v1n86e7e.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otrava (P2);po zlej rade: „Vyvolajte zvracanie prstom v krku.“;Zvracal… a teraz ho páli v hrdle ešte viac!;Otrava;
+voqd7ye.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otrava (P2);po zlej rade: „Dajte mu vypiť mlieko alebo olej, zneutralizuje to.“;Vypil mlieko a hneď to vyvrátil!;Otrava;
+v1rjrclh.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pád seniora (P3);čo sa stalo;Babka spadla v obývačke, je pri vedomí, ale nevie vstať.;Pád seniora;žena
+v2e5quu.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pád seniora (P3);čo sa stalo;Susede je zle, má vysoký tlak a točí sa jej hlava.;Pád seniora;žena
+vv6qjfz.mp3;pokoj;pokojnejší, vecný;Pád seniora (P3);odpoveď: je niekto zranený?;Je pri vedomí, len ju bolí bok.;Pád seniora;žena
+v1law86c.mp3;pokoj;pokojnejší, vecný;Pád seniora (P3);doplňujúca otázka: „Je pri vedomí a rozpráva normálne?“;Je pri vedomí, rozpráva, len je trochu zmätená.;Pád seniora;žena
+v1o48x1z.mp3;pokoj;pokojnejší, vecný;Pád seniora (P3);doplňujúca otázka: „Berie nejaké lieky?“;Na tlak a na riedenie krvi.;Pád seniora;žena
+v1bxh1g0.mp3;úľava;s úľavou, ale ešte zadýchaný;Pád seniora (P3);po dobrej rade: „Nech zostane ležať alebo sedieť, nezdvíhajte ju nasilu.“;Dobre, nechávam ju ležať na koberci.;Pád seniora;žena
+v9w2ryp.mp3;úľava;s úľavou, ale ešte zadýchaný;Pád seniora (P3);po dobrej rade: „Prikryte ju dekou, nech neprechladne.“;Prikryla som ju.;Pád seniora;žena
+v1d7lvdb.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pád seniora (P3);po zlej rade: „Postavte ju na nohy, nech to rozchodí.“;Postavili sme ju… zakričala od bolesti a zviezla sa na zem!;Pád seniora;žena
+v1l64bug.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pád seniora (P3);po zlej rade: „Dajte jej niečo zo svojich liekov na tlak alebo na bolesť.“;Dala som jej svoju tabletku… teraz je celá ospalá.;Pád seniora;žena
+vuacu2m.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (P1);čo sa stalo;Osobné auto narazilo do stromu, vodič je zakliesnený a krváca!;Zakliesnený vodič;
+v1okvxt.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (P1);odpoveď: je niekto zranený?;Vodič je pri vedomí, ale krváca a nevie sa dostať von.;Zakliesnený vodič;
+v1rwwdwv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (P1);skrytá komplikácia;Spolujazdkyňa tiež krváca z hlavy!;Zakliesnený vodič;
+v1e88wyo.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (P1);skrytá komplikácia;Z motora sa dymí a tečie benzín!;Zakliesnený vodič;
+v1h9xldb.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zakliesnený vodič (P1);doplňujúca otázka: „Je vodič pri vedomí a dýcha?“;Je pri vedomí, stoná a krváca z nohy.;Zakliesnený vodič;
+v16muq4f.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zakliesnený vodič (P1);doplňujúca otázka: „Ako stojí auto – na kolesách, na boku?“;Na kolesách, prednou časťou v strome.;Zakliesnený vodič;
+v1fq4u9.mp3;úľava;s úľavou, ale ešte zadýchaný;Zakliesnený vodič (P1);po dobrej rade: „Zapnite výstražné svetlá a postavte trojuholník.“;Svetlá blikajú, trojuholník stojí pred zákrutou.;Zakliesnený vodič;
+v1sz5ojc.mp3;úľava;s úľavou, ale ešte zadýchaný;Zakliesnený vodič (P1);po dobrej rade: „S vodičom nehýbte, iba sa s ním rozprávajte a upokojujte ho.“;Hovorím s ním, je pri vedomí.;Zakliesnený vodič;
+v12c25h4.mp3;úľava;s úľavou, ale ešte zadýchaný;Zakliesnený vodič (P1);po dobrej rade: „Krvácajúcu ranu stlačte čistou látkou.“;Tlačím mu šatku na rameno, krvi je menej.;Zakliesnený vodič;
+vptm26r.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zakliesnený vodič (P1);po zlej rade: „Vytiahnite ho z auta, kým nepríde pomoc.“;Ťaháme ho… zakričal a necíti nohy!;Zakliesnený vodič;
+vribqgl.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zakliesnený vodič (P1);po zlej rade: „Dajte mu napiť, nech sa upokojí.“;Napil sa a začal zvracať…;Zakliesnený vodič;
+vavin5b.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Do kolóny narazilo ďalšie auto, je tu ďalší zranený!;*;
+v11h1f5w.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Hromadná nehoda (P1);čo sa stalo;Autobus sa zrazil s osobným autom, je tam veľa zranených!;Hromadná nehoda;
+v6fmgot.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Hromadná nehoda (P1);odpoveď: je niekto zranený?;Je tu veľa zranených, niektorí kričia.;Hromadná nehoda;
+vs4gc1t.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Hromadná nehoda (P1);skrytá komplikácia;Je tu aspoň šesť zranených, dvaja nehybne ležia!;Hromadná nehoda;
+v1sr8plp.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Hromadná nehoda (P1);doplňujúca otázka: „Horí niektoré auto?“;Nie, nehorí, len sa z autobusu parí.;Hromadná nehoda;
+vs1fxwl.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Hromadná nehoda (P1);doplňujúca otázka: „Je niekto zakliesnený?“;V osobnom aute sú dvaja a nevedia vyliezť.;Hromadná nehoda;
+v1o8vwcb.mp3;úľava;s úľavou, ale ešte zadýchaný;Hromadná nehoda (P1);po dobrej rade: „Zapnite výstražné svetlá a zastavte autá za nehodou.“;Autá za nami stoja, svetlá blikajú.;Hromadná nehoda;
+vij0m7v.mp3;úľava;s úľavou, ale ešte zadýchaný;Hromadná nehoda (P1);po dobrej rade: „Ľudí, ktorí môžu chodiť, odveďte mimo cestu za zvodidlá.“;Odviedli sme ich na lúku vedľa cesty.;Hromadná nehoda;
+v1mkom9a.mp3;úľava;s úľavou, ale ešte zadýchaný;Hromadná nehoda (P1);po dobrej rade: „Krvácajúce rany stlačte čistou látkou.“;Tlačíme obväzy z lekárničiek.;Hromadná nehoda;
+v1t4ilkt.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Hromadná nehoda (P1);po zlej rade: „Všetkých zranených povyťahujte z áut a uložte vedľa cesty.“;Ťaháme ich… jedna žena prestala cítiť ruky!;Hromadná nehoda;
+vvm48ed.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Hromadná nehoda (P1);po zlej rade: „Choďte doprostred cesty a mávajte na autá.“;Skoro ma zrazilo auto, narazilo do kolóny!;Hromadná nehoda;
+vdnmuuk.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (P2);čo sa stalo;Auto zrazilo chodkyňu na priechode, leží na ceste a je pri vedomí.;Zrazený chodec;muž
+v147z9ev.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrazený chodec (P2);skrytá komplikácia;Krváca z hlavy a prestáva reagovať!;Zrazený chodec;muž
+v3efpxe.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (P2);doplňujúca otázka: „Kde presne leží – na priechode, v jazdnom pruhu?“;V jazdnom pruhu, autá ju obchádzajú.;Zrazený chodec;muž
+va6sold.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (P2);doplňujúca otázka: „Ostal vodič na mieste?“;Áno, stojí pri nej celý bledý.;Zrazený chodec;muž
+v1rnx0g1.mp3;úľava;s úľavou, ale ešte zadýchaný;Zrazený chodec (P2);po dobrej rade: „Nehýbte s ňou a prikryte ju, nech neprechladne.“;Prikryl som ju bundou, leží.;Zrazený chodec;muž
+vs5i89u.mp3;úľava;s úľavou, ale ešte zadýchaný;Zrazený chodec (P2);po dobrej rade: „Zabezpečte miesto výstražnými svetlami, nech do nej nikto nenarazí.“;Auto stojí pred ňou s výstražnými svetlami.;Zrazený chodec;muž
+vzt88vc.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zrazený chodec (P2);po zlej rade: „Zdvihnite ju a posaďte na lavičku.“;Zdvihli sme ju… omdlela nám v rukách!;Zrazený chodec;muž
+v1hzussi.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zrazený chodec (P2);po zlej rade: „Dajte jej napiť a niečo proti bolesti.“;Zapila tabletku… teraz je jej na vracanie.;Zrazený chodec;muž
+vduahxa.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Prevrátený kamión (P2);čo sa stalo;Kamión sa prevrátil do priekopy, vodič je v poriadku, ale vyteká nafta.;Prevrátený kamión;
+v1083pwp.mp3;pokoj;pokojnejší, vecný;Prevrátený kamión (P2);odpoveď: je niekto zranený?;Vodič je v poriadku, vyliezol sám.;Prevrátený kamión;
+vi4ea9f.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Prevrátený kamión (P2);skrytá komplikácia;Teraz sa drží za hrudník a ťažko dýcha!;Prevrátený kamión;
+v11vzoy5.mp3;pokoj;pokojnejší, vecný;Prevrátený kamión (P2);doplňujúca otázka: „Je na kamióne oranžová tabuľa s číslami?“;Áno, hore 30, dole 1202.;Prevrátený kamión;
+v6xhqhc.mp3;pokoj;pokojnejší, vecný;Prevrátený kamión (P2);doplňujúca otázka: „Tečie nafta do potoka alebo kanála?“;Do priekopy, kúsok od potoka.;Prevrátený kamión;
+v2558hx.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Ťukanec (P3);čo sa stalo;Ťukli sme do seba, nikto nie je zranený, ale blokujeme jeden pruh.;Ťukanec;
+v1wb5i7m.mp3;pokoj;pokojnejší, vecný;Ťukanec (P3);odpoveď: je niekto zranený?;Nie, nikto nie je zranený.;*;
+vifci4u.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Ťukanec (P3);skrytá komplikácia;Vodička z druhého auta sa sťažuje na krk.;Ťukanec;
+vujqthu.mp3;pokoj;pokojnejší, vecný;Ťukanec (P3);doplňujúca otázka: „Sú autá pojazdné?“;Áno, len majú rozbité svetlá.;Ťukanec;
+vk3zptd.mp3;pokoj;pokojnejší, vecný;Ťukanec (P3);doplňujúca otázka: „Vyteká z áut niečo?“;Nie, nič.;Ťukanec;
+v11p1y4d.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Ťukanec (P3);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Jednej vodičke je zle, točí sa jej hlava.;Ťukanec;
+vuag47d.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar bytu (P1);čo sa stalo;Horí byt na štvrtom poschodí a suseda je ešte vnútri!;Požiar bytu;muž
+v1ji7emh.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar bytu (P1);odpoveď: je niekto zranený?;Suseda je ešte vnútri, nevieme, či je v poriadku!;Požiar bytu;muž
+vky5dvy.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar bytu (P1);skrytá komplikácia;Oheň sa šíri na chodbu, v byte sú plynové fľaše!;Požiar bytu;muž
+v1mcsyrm.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Požiar bytu (P1);doplňujúca otázka: „Kde presne je suseda?“;Na štvrtom poschodí v spálni, okno je do dvora.;Požiar bytu;muž
+v1ja3qo4.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Požiar bytu (P1);doplňujúca otázka: „Sú ostatní z domu vonku?“;Väčšina áno, z piateho poschodia ešte nie.;Požiar bytu;muž
+vklfio.mp3;úľava;s úľavou, ale ešte zadýchaný;Požiar bytu (P1);po dobrej rade: „Odíďte von, zatvorte za sebou dvere a nepoužívajte výťah.“;Sme vonku pred domom, šli sme schodmi.;Požiar bytu;muž
+v8dyx1l.mp3;úľava;s úľavou, ale ešte zadýchaný;Požiar bytu (P1);po dobrej rade: „Ak je na chodbe dym, držte sa pri zemi a zakryte si ústa látkou.“;Prešli sme dole pri zemi, kašleme, ale sme vonku.;Požiar bytu;muž
+v6vo36q.mp3;úľava;s úľavou, ale ešte zadýchaný;Požiar bytu (P1);po dobrej rade: „Počkajte na hasičov pred domom a povedzte im, kde je suseda.“;Čakám pri vchode, ukážem im jej okno.;Požiar bytu;muž
+vl0jfu0.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Požiar bytu (P1);po zlej rade: „Vráťte sa po susedu do bytu.“;Bol som vnútri… nič som nevidel, ledva som sa dostal von!;Požiar bytu;muž
+v6ppf7d.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Požiar bytu (P1);po zlej rade: „Choďte dole výťahom, je to rýchlejšie.“;Výťah zastal medzi poschodiami a ide doň dym!;Požiar bytu;muž
+v1jkbhcv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar bytu (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Oheň preskočil na susedný dom!;*;
+v1wcztu4.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Požiar domu (P2);čo sa stalo;Horí strecha rodinného domu a oheň sa šíri na garáž.;Požiar domu;muž
+v1jlgysz.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar domu (P2);skrytá komplikácia;Sused sa nadýchal dymu, kašle a je mu zle.;Požiar domu;muž
+vmkmv47.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Požiar domu (P2);doplňujúca otázka: „Je ešte niekto v dome?“;Nie, všetci sme vonku.;Požiar domu;muž
+vun05zn.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Požiar domu (P2);doplňujúca otázka: „Sú v dome alebo garáži plynové fľaše?“;V garáži je propán-butánová fľaša!;Požiar domu;muž
+v10jmte7.mp3;úľava;s úľavou, ale ešte zadýchaný;Požiar domu (P2);po dobrej rade: „Všetci von z domu a späť sa nevracajte.“;Všetci sme na ulici.;Požiar domu;muž
+vj21ocb.mp3;úľava;s úľavou, ale ešte zadýchaný;Požiar domu (P2);po dobrej rade: „Otvorte hasičom bránu a uvoľnite príjazd.“;Brána je otvorená, auto som odparkoval.;Požiar domu;muž
+vevselg.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Požiar domu (P2);po zlej rade: „Skúste vyniesť cennosti, kým to nezhorí.“;Manžel sa vrátil po doklady… vyšiel celý začadený!;Požiar domu;muž
+v11w6z0k.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Požiar domu (P2);po zlej rade: „Vylezte na rebrík a polievajte strechu hadicou.“;Spadol som z rebríka, bolí ma noha!;Požiar domu;muž
+v1dqh7wl.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Lesný požiar (P2);čo sa stalo;Nad dedinou horí les, dym je vidieť z celej doliny.;Lesný požiar;
+v9pvq49.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Lesný požiar (P2);skrytá komplikácia;Vietor ho ženie k domom na kraji dediny!;Lesný požiar;
+v1976zho.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Lesný požiar (P2);doplňujúca otázka: „Aká veľká plocha horí?“;Asi ako futbalové ihrisko a rastie to.;Lesný požiar;
+v1fjr7of.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Lesný požiar (P2);doplňujúca otázka: „Dá sa k ohňu dostať autom?“;Lesnou cestou od kameňolomu.;Lesný požiar;
+v1tn3xlx.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Požiar kontajnera (P3);čo sa stalo;Na sídlisku horí kontajner a plamene sú blízko áut.;Požiar kontajnera;
+v1ix9wdu.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Požiar kontajnera (P3);skrytá komplikácia;Pri kontajneri sa motá partia, asi ho niekto podpálil.;Požiar kontajnera;
+v1pxynv8.mp3;pokoj;pokojnejší, vecný;Požiar kontajnera (P3);doplňujúca otázka: „Ako blízko sú autá a budovy?“;Dve autá stoja asi dva metre od neho.;Požiar kontajnera;
+vpr1zdo.mp3;pokoj;pokojnejší, vecný;Požiar kontajnera (P3);doplňujúca otázka: „Čo v ňom horí?“;Plasty a starý nábytok, ide čierny dym.;Požiar kontajnera;
+v19io90h.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Strom na ceste (P3);čo sa stalo;Cez cestu spadol veľký strom, autá nemôžu prejsť.;Strom na ceste;
+v1c81elf.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Strom na ceste (P3);skrytá komplikácia;Strom spadol na auto, vodič je v ňom a krváca!;Strom na ceste;
+v1cwxtun.mp3;pokoj;pokojnejší, vecný;Strom na ceste (P3);doplňujúca otázka: „Strhol strom aj elektrické drôty?“;Áno, drôty ležia na ceste!;Strom na ceste;
+vn039z4.mp3;pokoj;pokojnejší, vecný;Strom na ceste (P3);doplňujúca otázka: „Je pod stromom auto alebo človek?“;Nie, auto stihlo zastaviť.;Strom na ceste;
+v790rc7.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Strom na ceste (P3);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Vytvorila sa kolóna a vodiči sa hádajú.;Strom na ceste;
+v8t5kx.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Uviaznutý výťah (P3);čo sa stalo;Uviazli sme vo výťahu medzi poschodiami a je tu aj malé dieťa.;Uviaznutý výťah;
+v1e6b6mr.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Uviaznutý výťah (P3);skrytá komplikácia;Pani vo výťahu omdlieva, je diabetička.;Uviaznutý výťah;
+vgilaag.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Uviaznutý výťah (P3);doplňujúca otázka: „Koľko ľudí je vo výťahu a je niekomu zle?“;Ja a päťročný syn, zatiaľ sme v poriadku.;Uviaznutý výťah;
+vy4qcq7.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Uviaznutý výťah (P3);doplňujúca otázka: „Funguje vo výťahu svetlo a núdzové tlačidlo?“;Svetlo svieti, tlačidlo neodpovedá.;Uviaznutý výťah;
+v1ohzw4t.mp3;úľava;s úľavou, ale ešte zadýchaný;Uviaznutý výťah (P3);po dobrej rade: „Nech ostanú pokojne v kabíne a stlačia tlačidlo núdzového volania.“;Stlačili sme ho, ozval sa dispečer výťahov.;Uviaznutý výťah;
+v9ml7x6.mp3;úľava;s úľavou, ale ešte zadýchaný;Uviaznutý výťah (P3);po dobrej rade: „Rozprávajte sa s dieťaťom a upokojujte ho, pomoc je na ceste.“;Spievame si, už neplače.;Uviaznutý výťah;
+vmw84uh.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Uviaznutý výťah (P3);po zlej rade: „Vypáčte dvere a vyliezte von.“;Otec sa snažil vyliezť a kabína sa pohla!;Uviaznutý výťah;
+v18vc33p.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Uviaznutý výťah (P3);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Dieťa vo výťahu začalo hyperventilovať!;Uviaznutý výťah;
+vgxngxx.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Záplavy (P2);čo sa stalo;Potok sa vylial, voda nám tečie do domu a susedia sú odrezaní.;Záplavy;
+vdd9rhi.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Záplavy (P2);skrytá komplikácia;Voda stúpa, susedia sú na streche!;Záplavy;
+v10f56md.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Záplavy (P2);doplňujúca otázka: „Sú ľudia odrezaní v domoch?“;Susedia s deťmi sú na poschodí, prízemie je pod vodou.;Záplavy;
+v1rzrk4m.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Záplavy (P2);doplňujúca otázka: „Stúpa voda stále?“;Áno, za hodinu o pol metra.;Záplavy;
+v1n0qq4u.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Záplavy (P2);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Voda stúpa a zaplavuje ďalšie domy!;Záplavy;
+v1ia5c6t.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Topiaci sa (P1);čo sa stalo;Niekto sa topí, už ho nevidím nad hladinou!;Topiaci sa;
+vhenbdh.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Topiaci sa (P1);odpoveď: je niekto zranený?;Neviem, nevidím ho! Je pod vodou!;Topiaci sa;
+vbd83fa.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Topiaci sa (P1);doplňujúca otázka: „Kde presne ste ho videli naposledy?“;Pri bóji, asi tridsať metrov od móla.;Topiaci sa;
+vg7qp0e.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Topiaci sa (P1);doplňujúca otázka: „Je to dieťa alebo dospelý?“;Dospelý muž, plával sám.;Topiaci sa;
+vq8a4r7.mp3;úľava;s úľavou, ale ešte zadýchaný;Topiaci sa (P1);po dobrej rade: „Hoďte mu niečo, čo pláva – kruh, fľašu, lano.“;Hodili sme mu záchranný kruh z móla!;Topiaci sa;
+v7b9pmh.mp3;úľava;s úľavou, ale ešte zadýchaný;Topiaci sa (P1);po dobrej rade: „Neskáčte za ním, sledujte, kde sa naposledy objavil.“;Stojím na brehu a ukazujem to miesto.;Topiaci sa;
+vxx4wd6.mp3;úľava;s úľavou, ale ešte zadýchaný;Topiaci sa (P1);po dobrej rade: „Keď ho vytiahnete a nedýcha, začnite hneď oživovať.“;Dobre, sme pripravení.;Topiaci sa;
+v1w7kf2u.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Topiaci sa (P1);po zlej rade: „Skočte za ním a plávajte k nemu.“;Skočil tam kamarát… teraz sa topia obaja!;Topiaci sa;
+v1kzdepz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Topiaci sa (P1);po zlej rade: „Keď ho vytiahnete, otočte ho hore nohami, nech vytečie voda.“;Dobre… ale nestratíme tým čas?;Topiaci sa;
+vpzcbal.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Topiaci sa (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Vytiahli sme ho na breh, ale nedýcha!;Topiaci sa;
+v172n2vu.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Topiaci sa (P1);opakovaný hovor: čo sa zmenilo;Vytiahli sme ho na breh. Nedýcha, je celý modrý a nereaguje!;Topiaci sa;
+vo6iqk8.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik amoniaku (P1);čo sa stalo;Na zimnom štadióne unikol amoniak, ľudia kašlú a utekajú von!;Únik amoniaku;
+v193u3wf.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik amoniaku (P1);odpoveď: hrozí ešte niečo?;Smrdí to v celej hale, štípu nás oči!;Únik amoniaku;
+v59a42l.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik amoniaku (P1);skrytá komplikácia;Niekoľko ľudí leží pri vchode a lapá po dychu!;Únik amoniaku;
+v6sojkl.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Únik amoniaku (P1);doplňujúca otázka: „Koľko ľudí má ťažkosti?“;Asi desať ľudí kašle, dvaja zvracajú.;Únik amoniaku;
+v1u05ipt.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Únik amoniaku (P1);doplňujúca otázka: „Sú všetci von z haly?“;Väčšina áno, v strojovni bol ešte technik.;Únik amoniaku;
+v11anrma.mp3;úľava;s úľavou, ale ešte zadýchaný;Únik amoniaku (P1);po dobrej rade: „Nech ľudia odídu von a ďalej od budovy, proti vetru.“;Všetci sú na parkovisku, vietor fúka od nás.;Únik amoniaku;
+v1sgbl0j.mp3;úľava;s úľavou, ale ešte zadýchaný;Únik amoniaku (P1);po dobrej rade: „Kto má podráždené oči alebo kožu, nech si ich vyplachuje veľkým množstvom vody.“;Vyplachujeme oči vodou z fliaš.;Únik amoniaku;
+vhg3gv9.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Únik amoniaku (P1);po zlej rade: „Choďte dnu pozrieť, odkiaľ to uniká.“;Správca išiel dnu… vypotácal sa von, kašle a nevidí!;Únik amoniaku;
+vj35ei1.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Únik amoniaku (P1);po zlej rade: „Polejte únik octom, zneutralizuje ho.“;Poliali sme to… zasyčalo to a výpary sú ešte silnejšie!;Únik amoniaku;
+vmg7cnt.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik amoniaku (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Ďalší ľudia majú problémy s dýchaním!;*;
+v19u7ksa.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik chemikálií (P1);čo sa stalo;V chemickom podniku v Strážskom praskla cisterna, nad areálom je žltý oblak!;Únik chemikálií;
+v16o3ado.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik chemikálií (P1);odpoveď: hrozí ešte niečo?;Žltý oblak sa ťahá smerom k mestu!;Únik chemikálií;
+v14d04cp.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Únik chemikálií (P1);skrytá komplikácia;Dvaja robotníci sa zrútili pri cisterne!;Únik chemikálií;
+vdrpxyq.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Únik chemikálií (P1);doplňujúca otázka: „Ktorým smerom ide oblak?“;Na juh, k mestu.;Únik chemikálií;
+v18j1wqo.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Únik chemikálií (P1);doplňujúca otázka: „Je na cisterne oranžová tabuľa s číslami?“;Áno, hore 80, dole 1789.;Únik chemikálií;
+vcany8z.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Podozrivý prášok (P2);čo sa stalo;V obálke na úrade bol neznámy biely prášok, ľudia sa boja, či to nie je nákaza.;Podozrivý prášok;
+v97d6ve.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Podozrivý prášok (P2);skrytá komplikácia;Úradníčka, čo otvorila obálku, má vyrážky a dusí sa.;Podozrivý prášok;
+v1r8f2zz.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Podozrivý prášok (P2);doplňujúca otázka: „Dotkol sa niekto prášku?“;Úradníčka, ktorá otvorila obálku.;Podozrivý prášok;
+voslwp0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Podozrivý prášok (P2);doplňujúca otázka: „Sú ľudia mimo miestnosti a dvere zatvorené?“;Áno, zavreli sme to.;Podozrivý prášok;
+v1qo9s04.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Podozrenie na nákazu (P2);čo sa stalo;Cestujúci v autobuse má vysokú horúčku a vyrážky, prišiel z ciziny.;Podozrenie na nákazu;
+v1c0rzwf.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Podozrenie na nákazu (P2);doplňujúca otázka: „Odkiaľ a kedy pricestoval?“;Pred týždňom zo strednej Afriky.;Podozrenie na nákazu;
+v11bvkew.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Podozrenie na nákazu (P2);doplňujúca otázka: „Koľko ľudí je v autobuse?“;Asi dvadsať.;Podozrenie na nákazu;
+v1wfdl0w.mp3;úľava;s úľavou, ale ešte zadýchaný;Podozrenie na nákazu (P2);po dobrej rade: „Nech sedí oddelene od ostatných a zakryje si ústa a nos.“;Sedí vzadu sám, má rúško.;Podozrenie na nákazu;
+v70rrav.mp3;úľava;s úľavou, ale ešte zadýchaný;Podozrenie na nákazu (P2);po dobrej rade: „Ostatní cestujúci nech sa ho nedotýkajú a umyjú si ruky.“;Ľudia sa odsunuli dopredu.;Podozrenie na nákazu;
+v1sdlnl4.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Podozrenie na nákazu (P2);po zlej rade: „Nech ho niekto hneď odvezie autom k lekárovi.“;Jeden pán ho už vezie na pohotovosť…;Podozrenie na nákazu;
+v1ft6w6c.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otrava CO (P2);čo sa stalo;Celej rodine je zle a bolí ju hlava, v kúpeľni máme plynový kotol.;Otrava CO;muž
+ve1ac9c.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Otrava CO (P2);skrytá komplikácia;Dcéra nereaguje, nevieme ju prebrať!;Otrava CO;muž
+vk4zbc8.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otrava CO (P2);doplňujúca otázka: „Koľko ľudí je doma a sú všetci pri vedomí?“;Štyria, všetci pri vedomí, dcéra zvracia.;Otrava CO;muž
+v14meb2b.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otrava CO (P2);doplňujúca otázka: „Ste už vonku z domu?“;Ešte nie, sme v obývačke.;Otrava CO;muž
+v13edzv0.mp3;úľava;s úľavou, ale ešte zadýchaný;Otrava CO (P2);po dobrej rade: „Všetci hneď von na čerstvý vzduch.“;Sme vonku pred domom.;Otrava CO;muž
+v11weev1.mp3;úľava;s úľavou, ale ešte zadýchaný;Otrava CO (P2);po dobrej rade: „Cestou von otvorte okná a dvere, ale nezdržujte sa.“;Otvoril som dvere a okno, sme vonku.;Otrava CO;muž
+v15i9xge.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otrava CO (P2);po zlej rade: „Ľahnite si a odpočívajte, hlava prejde.“;Dcéra zaspala a nevieme ju zobudiť!;Otrava CO;muž
+v12gvfda.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otrava CO (P2);po zlej rade: „Ostaňte doma a otvorte len okno v kúpeľni.“;Stále nás bolí hlava a mamu sa točí…;Otrava CO;muž
+vgnea6h.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bodnutie (P1);čo sa stalo;Pred barom niekto bodol muža nožom a útočník uteká!;Bodnutie;
+vnphv82.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bodnutie (P1);odpoveď: je niekto zranený?;Krváca z brucha, ale je pri vedomí.;Bodnutie;
+v1rsutta.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bodnutie (P1);skrytá komplikácia;Útočník má stále nôž a vyhráža sa ďalším!;Bodnutie;
+vz79in7.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bodnutie (P1);skrytá komplikácia;Strašne krváca a bledne!;Bodnutie;
+v1js3nnh.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bodnutie (P1);doplňujúca otázka: „Kam útočník utiekol a ako vyzerá?“;Smerom k stanici, čierna bunda s kapucňou.;Bodnutie;
+vfk8scu.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bodnutie (P1);doplňujúca otázka: „Kde presne je rana?“;V bruchu, vľavo.;Bodnutie;
+v15ew9kl.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodnutie (P1);po dobrej rade: „Silno zatlačte na ranu čistou látkou a nepúšťajte.“;Tlačím mu sveter na bok, krvácanie sa spomalilo.;Bodnutie;
+v5mft86.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodnutie (P1);po dobrej rade: „Ak má nôž v rane, nevyťahujte ho.“;Nôž tu nie je, útočník ho zobral.;Bodnutie;
+v1n264p7.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodnutie (P1);po dobrej rade: „Nech leží a nehýbe sa.“;Leží na chodníku, prikryli sme ho.;Bodnutie;
+v1vs37h7.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bodnutie (P1);po zlej rade: „Bežte za útočníkom a zadržte ho.“;Kamarát ho dobehol… útočník švihol nožom aj po ňom!;Bodnutie;
+v1s9rmf5.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bodnutie (P1);po zlej rade: „Dajte mu napiť alkoholu na bolesť.“;Napil sa… a krvácanie zosilnelo.;Bodnutie;
+v1foh442.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bodnutie (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Ten človek sa vrátil a vyhráža sa susedom!;*;
+v1l10xta.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Vlámanie (P2);čo sa stalo;Niekto sa práve vlamuje do susedovho domu, svieti tam baterkou.;Vlámanie;muž
+vq5fc7g.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Vlámanie (P2);skrytá komplikácia;Sú tam dvaja a jeden má v ruke páčidlo.;Vlámanie;muž
+vh9g8z.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vlámanie (P2);doplňujúca otázka: „Koľko ich je a sú ešte vnútri?“;Videl som dvoch, sú stále vnútri.;Vlámanie;muž
+vg7m77m.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vlámanie (P2);doplňujúca otázka: „Majú pri dome auto?“;Pred domom stojí biela dodávka.;Vlámanie;muž
+v1d6rktt.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Domáce násilie (P2);čo sa stalo;Sused kričí na manželku a počuť rany. Prosím, príďte.;Domáce násilie;
+vyazzwg.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Domáce násilie (P2);skrytá komplikácia;Žena krváca z hlavy, leží na chodbe.;Domáce násilie;
+v1xsiof8.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Domáce násilie (P2);doplňujúca otázka: „Sú v byte deti?“;Áno, počuť aj plač dieťaťa.;Domáce násilie;
+v17te22e.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Domáce násilie (P2);doplňujúca otázka: „Má útočník zbraň?“;Neviem, ale niečo tam rozbíja.;Domáce násilie;
+v7b6tvc.mp3;plač;hovorí cez plač, vzlyká a robí prestávky;Nezvestné dieťa (P2);čo sa stalo;Syn sa nevrátil zo školy, nedvíha telefón a už sa stmieva.;Nezvestné dieťa;
+vumaypa.mp3;plač;hovorí cez plač, vzlyká a robí prestávky;Nezvestné dieťa (P2);odpoveď: je niekto zranený?;Neviem, nedvíha telefón!;Nezvestné dieťa;
+vlehh81.mp3;plač;hovorí cez plač, vzlyká a robí prestávky;Nezvestné dieťa (P2);odpoveď: hrozí ešte niečo?;Na ceste do školy je les a rieka…;Nezvestné dieťa;
+v2exh9z.mp3;plač;hovorí cez plač, vzlyká a robí prestávky;Nezvestné dieťa (P2);doplňujúca otázka: „Ako vyzerá a čo má oblečené?“;Malé, blond, červená bunda a modrý batoh.;Nezvestné dieťa;
+v4492ld.mp3;plač;hovorí cez plač, vzlyká a robí prestávky;Nezvestné dieťa (P2);doplňujúca otázka: „Kde a kedy ho videli naposledy?“;Pred hodinou pri škole.;Nezvestné dieťa;
+v138xgqr.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Nezvestné dieťa (P2);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Už je tma a stále o ňom nevieme!;Nezvestné dieťa;
+v1yjjica.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Krádež (P3);čo sa stalo;Z obchodu ukradli peňaženku a zlodej utiekol na bicykli.;Krádež;
+vsq6st3.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Krádež (P3);doplňujúca otázka: „Ako vyzerá zlodej a kam išiel?“;Vysoký, šedá mikina, na bicykli smerom k parku.;Krádež;
+vpfy61m.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Krádež (P3);doplňujúca otázka: „Kedy sa to stalo?“;Pred piatimi minútami.;Krádež;
+vwtscl5.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Rušenie pokoja (P3);čo sa stalo;Na sídlisku hrá hlasná hudba už tretiu hodinu a nikto neotvára.;Rušenie pokoja;
+v12p8oca.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Rušenie pokoja (P3);doplňujúca otázka: „Ktoré je to poschodie a byt?“;Tretie poschodie, byt číslo 12.;Rušenie pokoja;
+v2r5i24.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Rušenie pokoja (P3);doplňujúca otázka: „Hrozí tam niečo vážnejšie, bitka?“;Nie, len hudba a krik.;Rušenie pokoja;
+v17r3nr4.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Rušenie pokoja (P3);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Situácia sa vymkla, začali sa biť!;*;
+vl86uyd.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Túlavý pes (P3);čo sa stalo;Na detskom ihrisku pobehuje agresívny pes bez náhubku.;Túlavý pes;
+v34mjx.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Túlavý pes (P3);doplňujúca otázka: „Pohrýzol niekoho?“;Zatiaľ nie, ale vrčí na deti.;Túlavý pes;
+v19g9173.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Túlavý pes (P3);doplňujúca otázka: „Kde presne je teraz?“;Pri pieskovisku.;Túlavý pes;
+vgclue.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zle zaparkované auto (P3);čo sa stalo;Nejaké auto stojí vo vjazde do nemocnice a sanitky nemôžu prejsť.;Zle zaparkované auto;
+vxom5h3.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zle zaparkované auto (P3);doplňujúca otázka: „Aké je to auto a aké má číslo?“;Čierny Passat, KE 123 AB.;Zle zaparkované auto;
+vmhfep1.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zle zaparkované auto (P3);doplňujúca otázka: „Blokuje vjazd úplne?“;Áno, sanitka neprejde.;Zle zaparkované auto;
+vyblotf.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Opitý na zastávke (P3);čo sa stalo;Na zastávke leží opitý muž a obťažuje cestujúcich.;Opitý na zastávke;
+v1yqm3e.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Opitý na zastávke (P3);skrytá komplikácia;Má rozbitú hlavu a nereaguje poriadne.;Opitý na zastávke;
+v1fgbh5a.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Opitý na zastávke (P3);doplňujúca otázka: „Je pri vedomí a dýcha normálne?“;Je pri vedomí, nadáva ľuďom.;Opitý na zastávke;
+vhl6g1y.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Opitý na zastávke (P3);doplňujúca otázka: „Je zranený?“;Nevidím, že by bol.;Opitý na zastávke;
+v10yb3c3.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Výtržnosť (P2);čo sa stalo;Pred krčmou sa bije skupina mladých a rozbíjajú fľaše.;Výtržnosť;
+v102dnpa.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Výtržnosť (P2);skrytá komplikácia;Jeden chlap leží na zemi a krváca.;Výtržnosť;
+viwzq1w.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Výtržnosť (P2);doplňujúca otázka: „Koľko ich je a majú niečo v rukách?“;Asi šiesti, majú fľaše.;Výtržnosť;
+v1bbv541.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Výtržnosť (P2);doplňujúca otázka: „Kam sa presúvajú?“;Stále sú pred krčmou.;Výtržnosť;
+v28iz7c.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zranený turista (P2);čo sa stalo;Kamarát sa pošmykol a nemôže stúpiť na nohu.;Zranený turista;muž
+vak4uxa.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zranený turista (P2);doplňujúca otázka: „Môže na nohu stúpiť? Krváca?“;Nemôže, noha je čudne vytočená, nekrváca.;Zranený turista;muž
+v1gwfqon.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zranený turista (P2);doplňujúca otázka: „Máte teplé oblečenie a svetlo?“;Bundy máme, svetlo len v mobile.;Zranený turista;muž
+v7qrdrl.mp3;úľava;s úľavou, ale ešte zadýchaný;Zranený turista (P2);po dobrej rade: „Nohu nechajte tak, ako je, a podložte ju.“;Podložili sme ju batohom.;Zranený turista;muž
+v85x1as.mp3;úľava;s úľavou, ale ešte zadýchaný;Zranený turista (P2);po dobrej rade: „Izolujte ho od zeme a oblečte do suchého.“;Sedí na karimatke v teplej bunde.;Zranený turista;muž
+v1up5s07.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zranený turista (P2);po zlej rade: „Nech skúsi zísť dole aspoň k chate.“;Skúsil to… pošmykol sa a znova spadol!;Zranený turista;muž
+vg9h8px.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zranený turista (P2);po zlej rade: „Skúste mu nohu narovnať.“;Ťahal som… od bolesti skoro omdlel!;Zranený turista;muž
+v6hjm48.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zranený turista (P2);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je podchladený a prestáva reagovať!;*;
+vn0327o.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kolaps na túre (P1);čo sa stalo;Turista skolaboval a sťažuje sa na bolesť na hrudi!;Kolaps na túre;
+vxu2q23.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kolaps na túre (P1);odpoveď: je niekto zranený?;Je pri vedomí, ale strašne ho páli na hrudi.;Kolaps na túre;
+vkm7qol.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Kolaps na túre (P1);doplňujúca otázka: „Ako dlho ho páli na hrudi?“;Asi dvadsať minút, od stúpania.;Kolaps na túre;
+vlmvs0r.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Kolaps na túre (P1);doplňujúca otázka: „Ako ďaleko ste od chaty alebo cesty?“;Asi hodinu chôdze od chaty.;Kolaps na túre;
+v1ehdkkd.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (P1);po dobrej rade: „Nech si sadne a nehýbe sa.“;Sedí na batohu opretý o strom.;Kolaps na túre;
+v1t84hfm.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (P1);po dobrej rade: „Oblečte ho do suchého a prikryte, nech neprechladne.“;Má na sebe moju bundu a izolačnú fóliu.;Kolaps na túre;
+vh3pl98.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (P1);po dobrej rade: „Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.“;Mám acylpyrín v lekárničke, rozhrýzol ho.;Kolaps na túre;
+vc5idiy.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kolaps na túre (P1);po zlej rade: „Nech pomaly pokračuje k najbližšej chate.“;Šli sme pár metrov a zrútil sa!;Kolaps na túre;
+vo77a61.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kolaps na túre (P1);po zlej rade: „Dajte mu glg slivovice na zahriatie.“;Napil sa… teraz sa trasie ešte viac.;Kolaps na túre;
+v1n9xid2.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kolaps na túre (P1);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je mu horšie, zrútil sa na zem!;Kolaps na túre;
+vlk15ra.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zablúdený hubár (P2);čo sa stalo;Otec išiel na huby a od rána sa neozval.;Zablúdený hubár;
+v1tq1spi.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zablúdený hubár (P2);odpoveď: je niekto zranený?;Neviem, nedvíha. Je diabetik.;Zablúdený hubár;
+v9f3leg.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zablúdený hubár (P2);odpoveď: hrozí ešte niečo?;Stmieva sa a v lese je zima.;Zablúdený hubár;
+v1o2sdig.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zablúdený hubár (P2);doplňujúca otázka: „Kedy a kde ho videli naposledy?“;Ráno išiel do lesa nad dedinou.;Zablúdený hubár;
+v1dsx72k.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zablúdený hubár (P2);doplňujúca otázka: „Má so sebou lieky a jedlo?“;Inzulín áno, jedlo len trochu.;Zablúdený hubár;
+v18vymg1.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zablúdený hubár (P2);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Už je tma a stále sa neozýva!;Zablúdený hubár;
+v13l7pzh.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Uviaznutý jaskyniar (P2);čo sa stalo;Jaskyniar uviazol v úzkej chodbe a nevie sa dostať von.;Uviaznutý jaskyniar;
+v1txjaef.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Uviaznutý jaskyniar (P2);skrytá komplikácia;Má asi zlomenú ruku a je podchladený.;Uviaznutý jaskyniar;
+v1qscrlk.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Uviaznutý jaskyniar (P2);doplňujúca otázka: „Ako dlho tam je a je zranený?“;Tri hodiny, má odreté ruky a je mu zima.;Uviaznutý jaskyniar;
+v1w1xobo.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Uviaznutý jaskyniar (P2);doplňujúca otázka: „Ako ďaleko od vchodu je?“;Asi 200 metrov, za úzkou plazivkou.;Uviaznutý jaskyniar;
+v1cxrig9.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Vyčerpaný turista (P3);čo sa stalo;Sme na túre, manželka už nevládze ísť ďalej a stmieva sa.;Vyčerpaný turista;muž
+vsi0vks.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vyčerpaný turista (P3);doplňujúca otázka: „Máte čelovku a suché oblečenie?“;Čelovku áno, manželka je celá spotená.;Vyčerpaný turista;muž
+v5b84qc.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vyčerpaný turista (P3);doplňujúca otázka: „Ste na značenom chodníku?“;Áno, na červenej značke.;Vyčerpaný turista;muž
+v1syicqb.mp3;úľava;s úľavou, ale ešte zadýchaný;Vyčerpaný turista (P3);po dobrej rade: „Nech sa oblečie do suchého a zje niečo sladké.“;Prezliekla sa a zjedla čokoládu.;Vyčerpaný turista;muž
+v17iloxi.mp3;úľava;s úľavou, ale ešte zadýchaný;Vyčerpaný turista (P3);po dobrej rade: „Zostaňte spolu na chodníku a svieťte baterkou, nech vás nájdu.“;Sedíme pri značke a svietime.;Vyčerpaný turista;muž
+vcmynt9.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Vyčerpaný turista (P3);po zlej rade: „Skráťte si cestu dole lesom mimo chodníka.“;Zišli sme z chodníka… nevieme, kde sme!;Vyčerpaný turista;muž
+vu2oru.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Vyčerpaný turista (P3);po zlej rade: „Rozdeľte sa – vy bežte dole po pomoc, ona počká.“;Som sám dole v lese a ona hore neodpovedá…;Vyčerpaný turista;muž
+vvgmlna.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – zdravotná pomoc;je niekto zranený?;Je pri vedomí, ale je mu veľmi zle.;*;
+v16771ji.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – zdravotná pomoc;hrozí ešte niečo?;Nie, len prosím príďte rýchlo.;*;
+v1f2tkew.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – dopravná nehoda;je niekto zranený?;Nikto ďalší, myslím. Všetci sú v šoku.;*;
+v91z194.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – dopravná nehoda;hrozí ešte niečo?;Nie, len autá stoja cez cestu.;*;
+vxpl53v.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – požiar;je niekto zranený?;Zatiaľ nikto, všetci sú vonku.;*;
+vbyl0ur.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – požiar;hrozí ešte niečo?;Dym je čoraz hustejší, ale inak nie.;*;
+vb6y6si.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – technická pomoc;hrozí ešte niečo?;Zatiaľ nie, ale treba to rýchlo vyriešiť.;*;
+v1ptiku.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – nebezpečné látky;je niekto zranený?;Ľudia kašlú, ale sú pri vedomí.;*;
+vxkm1cl.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – nebezpečné látky;hrozí ešte niečo?;Nevieme, čo to je, bojíme sa ísť bližšie.;*;
+vhowf3m.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Všeobecné odpovede – polícia;hrozí ešte niečo?;Neviem, nevidím ho.;*;
+v138rwls.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Všeobecné odpovede – mestská polícia;je niekto zranený?;Nie, nikto.;*;
+vemiydh.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Všeobecné odpovede – mestská polícia;hrozí ešte niečo?;Nie, len je to otravné.;*;
+v18d9pne.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – horská záchrana;je niekto zranený?;Je pri vedomí, ale nemôže ísť ďalej.;*;
+vrgew3i.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – horská záchrana;hrozí ešte niečo?;Stmieva sa a ochladzuje.;*;
+v1hqssa0.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Zdravotná pomoc: „Ako sa volá obvodný lekár?“;To neviem… je to teraz dôležité?;*;
+vbrxpfo.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Dopravná nehoda: „Kto je vinníkom nehody?“;To neviem, všetko sa stalo strašne rýchlo…;*;
+v18owuxy.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Požiar: „Je dom poistený?“;Čo? To teraz neviem…;*;
+vzntuby.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Technická pomoc: „Kto bude platiť škody?“;To neviem, to nás teraz netrápi…;*;
+v12mb5hj.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Nebezpečné látky: „Kto za to môže?“;To neviem… prečo sa pýtate?;*;
+v1ejxy9c.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Polícia: „Volali ste už niekedy políciu?“;Nie, prvýkrát… prečo?;*;
+v1ihfmb7.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Mestská polícia: „Volali ste to už správcovi?“;Nie… mám?;*;
+v6ihzja.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Odpovede na zbytočné otázky;Horská záchrana: „Kam idete na túru zajtra?“;Ehm… to ešte nevieme.;*;
+vifu463.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – zástava srdca;opakovaný hovor: čo sa zmenilo;Odpadol na zem a nedýcha! Len občas zalapá po dychu…;*;
+vi1il5y.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – zástava srdca;otázka: „Reaguje, keď ním zatrasiete a hlasno ho oslovíte?“;Nie, vôbec nereaguje!;*;
+vwluoen.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – zástava srdca;otázka: „Aké lieky berie?“;Neviem… asi niečo na tlak.;*;
+v16cwala.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – bezvedomie;opakovaný hovor: čo sa zmenilo;Pred chvíľou prestal odpovedať. Dýcha, ale chrčí a leží na chrbte.;*;
+vhnu7ri.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – bezvedomie;otázka: „Dýcha pravidelne?“;Dýcha, ale chrčí, akoby mal niečo v krku.;*;
+v1dxlt3i.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – bezvedomie;otázka: „Kedy naposledy jedol?“;Neviem, asi ráno…;*;
+v1ius4vp.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bezvedomie;po dobrej rade: „Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.“;Otočili sme ho na bok… prestal chrčať, dýcha ľahšie.;*;
+v50ntko.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bezvedomie;po dobrej rade: „Ostaňte pri ňom a sledujte dych – keby prestal dýchať, hneď mi to povedzte.“;Som pri ňom, dýcha.;*;
+v5faymz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Dajte mu napiť, nech sa preberie.“;Naliali sme mu vodu… zakuckal sa a chrčí ešte viac!;*;
+v1d6rjzz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Podložte mu hlavu vysokým vankúšom.“;Dali sme mu dva vankúše… chrčí ešte viac!;*;
+v1v97df0.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – krvácanie po pôrode;opakovaný hovor: čo sa zmenilo;Dieťa sa narodilo a plače, ale mama veľmi krváca a krv sa nezastavuje.;*;
+v3b2565.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – krvácanie po pôrode;otázka: „Vyšla už placenta?“;Neviem… asi ešte nie.;*;
+vt01ztn.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – krvácanie po pôrode;otázka: „Ako sa bude dieťa volať?“;Ešte sme nevybrali…;*;
+vwey3rn.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – krvácanie po pôrode;po dobrej rade: „Priložte dieťa mame k prsníku.“;Dieťa saje… mama hovorí, že sa jej brucho sťahuje.;*;
+vsyqvsj.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – krvácanie po pôrode;po dobrej rade: „Masírujte jej silno brucho pod pupkom krúživými pohybmi.“;Masírujem… krvácanie sa trochu spomalilo.;*;
+v1u306xf.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – krvácanie po pôrode;po zlej rade: „Ťahajte za pupočník, nech vyjde placenta.“;Potiahli sme… krvácanie je ešte silnejšie!;*;
+v14s21po.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – krvácanie po pôrode;po zlej rade: „Nech sa mama postaví a ide sa umyť.“;Postavila sa… a omdlela!;*;
+v6dh2qt.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – ďalší zranený;opakovaný hovor: čo sa zmenilo;Do kolóny narazilo ďalšie auto. Vodička z neho silno krváca z ruky a je v šoku.;*;
+v1mylpld.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – ďalší zranený;otázka: „Je pri vedomí a odkiaľ krváca?“;Je pri vedomí, krv jej strieka z predlaktia.;*;
+vg383m2.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – ďalší zranený;otázka: „Akej značky sú tie autá?“;Škodovka a nejaká biela dodávka…;*;
+v9ctltb.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – ďalší zranený;po dobrej rade: „Na krvácajúcu ranu silno zatlačte čistou látkou a držte.“;Tlačím jej šatku na ruku, už to tak netečie.;*;
+v1c630v0.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – ďalší zranený;po dobrej rade: „Zapnite výstražné svetlá a choďte všetci za zvodidlá.“;Svetlá blikajú, stojíme za zvodidlami.;*;
+vufufxe.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – ďalší zranený;po zlej rade: „Ranu poriadne vymyte vodou z fľaše.“;Polievam ranu… krv tečie ešte viac!;*;
+v13u2u25.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – ďalší zranený;po zlej rade: „Vytiahnite ju z auta a uložte na cestu.“;Ťahali sme ju… kričí, že ju bolí krk!;*;
+v1b0n3o5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – oheň sa šíri;opakovaný hovor: čo sa zmenilo;Oheň preskočil na susedný dom a na poschodí je pri okne starší pán!;*;
+voj57f.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – oheň sa šíri;otázka: „Vie ten pán zísť po schodoch?“;Na schodoch je dym, nevie zísť!;*;
+v16bs3ws.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – oheň sa šíri;otázka: „Je ten dom poistený?“;To neviem…;*;
+v1x4rv5u.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – oheň sa šíri;po dobrej rade: „Nech zatvorí dvere do izby a zostane pri otvorenom okne.“;Kričím na neho… zatvoril dvere a stojí pri okne.;*;
+vll290f.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – oheň sa šíri;po dobrej rade: „Nech zapchá škáru pod dverami mokrým uterákom.“;Hovorí, že dal mokrý uterák pod dvere.;*;
+v9j6utn.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – oheň sa šíri;po zlej rade: „Nech zbehne dole cez zadymené schody.“;Skúsil to… vrátil sa, kašle a skoro odpadol!;*;
+v1gffoh3.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – oheň sa šíri;po zlej rade: „Nech skočí z okna, chytíme ho.“;Skočil… leží pod oknom a nehýbe nohou!;*;
+v1o1ej0k.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – zhoršenie na mieste;opakovaný hovor: čo sa zmenilo;Je to horšie, ľudia to riešia sami a jeden sa porezal na ruke.;*;
+v153lp9.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – zhoršenie na mieste;otázka: „Je niekto v priamom ohrození?“;Teraz už nie, ale ten porezaný krváca.;*;
+v1secsuv.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – zhoršenie na mieste;otázka: „Komu patrí ten pozemok?“;Neviem, nejakému susedovi…;*;
+v15n3lhy.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – zhoršenie na mieste;po dobrej rade: „Nech všetci ustúpia do bezpečia a nič sami nerobia.“;Odišli sme bokom, čakáme.;*;
+v12jrg9i.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – zhoršenie na mieste;po dobrej rade: „Porezanému zatlačte na ranu čistou látkou.“;Tlačím mu vreckovku, krvácanie slabne.;*;
+vh0n7d7.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – zhoršenie na mieste;po zlej rade: „Nech to skúsia dokončiť sami, kým prídu hasiči.“;Skúšali to… ďalší chlap si privalil nohu!;*;
+v125dcoc.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – voda stúpa;opakovaný hovor: čo sa zmenilo;Voda stále stúpa, prízemie je zatopené a susedia s deťmi sú na streche garáže.;*;
+v1d0izx7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – voda stúpa;otázka: „Sú všetci mimo vody a v suchu?“;My sme na poschodí, susedia na garáži.;*;
+vszl60t.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – voda stúpa;otázka: „Koľko stálo auto v garáži?“;To je teraz jedno…;*;
+v316seu.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – voda stúpa;po dobrej rade: „Choďte na poschodie a vezmite si teplé oblečenie a telefón.“;Sme hore, máme deky aj telefóny.;*;
+v5rt6oe.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – voda stúpa;po dobrej rade: „Ak sa dá bezpečne, vypnite elektrinu hlavným ističom.“;Istič sme vypli, bol ešte v suchu.;*;
+v1yc60qc.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – voda stúpa;po zlej rade: „Zíďte do pivnice zachrániť veci.“;Manžel išiel dole… voda ho strhla, ledva vyliezol!;*;
+v1unc3rj.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – voda stúpa;po zlej rade: „Prejdite cez vodu autom k susedom.“;Auto zostalo stáť vo vode a voda tečie dnu!;*;
+v10v13oo.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – panika vo výťahu;opakovaný hovor: čo sa zmenilo;Dieťa rýchlo dýcha, plače a hovorí, že sa dusí.;*;
+vb7q4sp.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – panika vo výťahu;otázka: „Má dieťa astmu alebo inú chorobu?“;Nie, je zdravé, len sa strašne bojí.;*;
+vbhrgg2.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – panika vo výťahu;otázka: „Ktorá firma servisuje výťah?“;Netuším…;*;
+vrc0qy6.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – panika vo výťahu;po dobrej rade: „Rozprávajte sa s ním pokojne a dýchajte spolu pomaly – nádych nosom, výdych ústami.“;Dýchame spolu… už je pokojnejšie.;*;
+vu7xlfo.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – panika vo výťahu;po dobrej rade: „Posaďte ho na zem a uvoľnite mu oblečenie.“;Sedí na zemi, rozopli sme mu bundu.;*;
+v19gvmyr.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – panika vo výťahu;po zlej rade: „Skúste vypáčiť dvere, nech má vzduch.“;Páčili sme dvere… výťah sa pohol a dieťa kričí!;*;
+v1vq003w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – panika vo výťahu;po zlej rade: „Nech dýcha do igelitového vrecka.“;Dýcha do vrecka… je ešte bledšie!;*;
+v1r9aw0v.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – hádka v kolóne;opakovaný hovor: čo sa zmenilo;Je tu kolóna, vodiči sa hádajú a jeden chce strom rezať sám motorovou pílou.;*;
+vuer0eq.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – hádka v kolóne;otázka: „Bijú sa alebo je niekto zranený?“;Zatiaľ len kričia.;*;
+vxwgw2n.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – hádka v kolóne;otázka: „Odkiaľ ste išli?“;Z nákupu v meste…;*;
+v11e5j3l.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – hádka v kolóne;po dobrej rade: „Nech všetci zostanú pri autách mimo stromu a počkajú na hasičov.“;Povedali sme im to, odstúpili.;*;
+vdhg2kq.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – hádka v kolóne;po dobrej rade: „Zapnite výstražné svetlá, nech do kolóny nikto nenarazí.“;Blikajú, autá spomaľujú.;*;
+v1k7y1rt.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – hádka v kolóne;po zlej rade: „Nech ten vodič pílu použije, pôjde to rýchlejšie.“;Píla sa zasekla a strom sa pohol… skoro ho privalil!;*;
+v1j0dypn.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – nevoľnosť po náraze;opakovaný hovor: čo sa zmenilo;Vodičke z druhého auta je zle, je bledá, točí sa jej hlava a chce odísť.;*;
+v11vhott.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – nevoľnosť po náraze;otázka: „Udrela sa pri náraze do hlavy?“;Hovorí, že sa udrela o volant.;*;
+vyjo3b7.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – nevoľnosť po náraze;otázka: „Má platné poistenie?“;Neviem, mám sa jej pýtať?;*;
+v2f0t25.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – nevoľnosť po náraze;po dobrej rade: „Nech si sadne alebo ľahne a nikam nejazdí.“;Sedí na obrubníku, kľúče mi dala.;*;
+v1vfjftw.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – nevoľnosť po náraze;po dobrej rade: „Sledujte, či je pri vedomí a rozpráva normálne.“;Rozpráva, je pri vedomí.;*;
+vb1izln.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – nevoľnosť po náraze;po zlej rade: „Nech sa sama odvezie na pohotovosť.“;Odišla… zastavila na krajnici a je jej ešte horšie!;*;
+va8ahvn.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – nevoľnosť po náraze;po zlej rade: „Dajte jej niečo na bolesť hlavy.“;Zapila tabletku… a začala vracať.;*;
+v1evm31n.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – ďalší ľudia s dýchaním;opakovaný hovor: čo sa zmenilo;Ďalší traja ľudia kašlú a ťažko dýchajú, jeden leží pri vchode a zvracia.;*;
+v1akmccc.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – ďalší ľudia s dýchaním;otázka: „Sú ľudia už mimo oblaku, na čerstvom vzduchu?“;Väčšina áno, ale ten pri vchode tam leží.;*;
+v1j08zko.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – ďalší ľudia s dýchaním;otázka: „Kto je zodpovedný za budovu?“;Asi správca, neviem.;*;
+v15gayjv.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – ďalší ľudia s dýchaním;po dobrej rade: „Kto môže, nech odíde proti vetru čo najďalej od budovy.“;Ľudia odchádzajú na kopec za parkoviskom.;*;
+v6rnpjt.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – ďalší ľudia s dýchaním;po dobrej rade: „Tých, čo kašlú, posaďte vzpriamene a nech sa nenamáhajú.“;Sedia, dýchajú trochu ľahšie.;*;
+v146duzx.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – ďalší ľudia s dýchaním;po zlej rade: „Vráťte sa k vchodu po toho, čo leží.“;Kolega išiel po neho… teraz kašle a padol aj on!;*;
+v2mn5fc.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – ďalší ľudia s dýchaním;po zlej rade: „Dajte im napiť mlieka, to pomáha pri otrave.“;Pijú mlieko… jeden ho hneď vyvrátil a dusí sa!;*;
+vtlhr8m.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – agresor sa vrátil;opakovaný hovor: čo sa zmenilo;Vrátil sa, búcha na dvere a kričí, že ich zabije. Má v ruke niečo kovové.;*;
+vu7ual4.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – agresor sa vrátil;otázka: „Vidíte, či má zbraň?“;Má v ruke niečo ako tyč alebo nôž.;*;
+v11f8ulo.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – agresor sa vrátil;otázka: „Ako sa ten človek volá?“;Neviem presne…;*;
+vkavurx.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – agresor sa vrátil;po dobrej rade: „Zamknite sa a zostaňte ďalej od okien a dverí.“;Zamkli sme sa v spálni.;*;
+vw7pidw.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – agresor sa vrátil;po dobrej rade: „Sledujte ho len z bezpečia a hovorte mi, kam ide.“;Vidím ho z okna, stojí pri bráne.;*;
+vwn2yvd.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – agresor sa vrátil;po zlej rade: „Choďte von a skúste ho upokojiť.“;Vyšli sme von… hodil po nás kameň, mám rozbité čelo!;*;
+vfzybqa.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – agresor sa vrátil;po zlej rade: „Vezmite si niečo na obranu a postavte sa mu.“;Manžel vyšiel s palicou… pobili sa, krváca!;*;
+vp7ttzh.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – bitka pokračuje;opakovaný hovor: čo sa zmenilo;Bijú sa ďalej, rozbíjajú fľaše a hádžu ich po autách.;*;
+vy9l5pn.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – bitka pokračuje;otázka: „Majú nože alebo iné zbrane?“;Nože nevidím, majú fľaše a palice.;*;
+v1lk1e9z.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – bitka pokračuje;otázka: „Poznáte niekoho z nich?“;Nie, asi nie sú odtiaľto.;*;
+v1ya8n4z.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bitka pokračuje;po dobrej rade: „Nepribližujte sa a sledujte ich z bezpečia.“;Som v obchode za sklom.;*;
+v1i3tv2y.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bitka pokračuje;po dobrej rade: „Zapamätajte si, ako vyzerajú a kam idú.“;Jeden má červenú mikinu, idú k parku.;*;
+v1y3mu2r.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bitka pokračuje;po zlej rade: „Choďte ich rozdeliť, nech prestanú.“;Kamarát ich išiel rozdeliť… dostal fľašou do hlavy!;*;
+v1ssbqsi.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – podchladenie;opakovaný hovor: čo sa zmenilo;Celý sa trasie, prestáva rozprávať a je mokrý. Fúka tu vietor.;*;
+vznvb8z.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – podchladenie;otázka: „Je pri vedomí a odpovedá vám?“;Odpovedá, ale pomaly a zmätene.;*;
+v1bid4rh.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – podchladenie;otázka: „Akú trasu ste chceli prejsť?“;Až na hrebeň…;*;
+v1nrmbux.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – podchladenie;po dobrej rade: „Prezlečte ho do suchého a zabaľte do fólie alebo spacáku, aj hlavu.“;Má suché tričko a je zabalený vo fólii.;*;
+v1r5w2fq.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – podchladenie;po dobrej rade: „Izolujte ho od zeme – karimatka, batoh, bundy.“;Leží na karimatke a batohoch.;*;
+v4dquy9.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – podchladenie;po zlej rade: „Dajte mu glg alkoholu na zahriatie.“;Napil sa… trasie sa ešte viac.;*;
+v1xfnuaz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – podchladenie;po zlej rade: „Rozhýbte ho – nech poskakuje a ide ďalej.“;Postavil sa… zatackal sa a spadol!;*;
+v1jawm58.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – stále sa neozval;opakovaný hovor: čo sa zmenilo;Už je tma a stále sa neozval. Mobil má vypnutý a susedia ho idú hľadať do lesa.;*;
+v15ogx26.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – stále sa neozval;otázka: „Má so sebou mobil, svetlo alebo lieky?“;Mobil má vybitý, lieky nemá.;*;
+v1xj6i37.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – stále sa neozval;otázka: „Kedy ste boli naposledy na dovolenke?“;Čo? To je teraz jedno…;*;
+vz4zhl7.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – stále sa neozval;po dobrej rade: „Zostaňte doma pri telefóne, keby sa ozval alebo vrátil.“;Som pri telefóne.;*;
+vr5esj5.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – stále sa neozval;po dobrej rade: „Pripravte fotku a opíšte, čo mal oblečené.“;Mám fotku z rána v mobile.;*;
+v1agxg9s.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – stále sa neozval;po zlej rade: „Nech ho susedia hľadajú po tme každý sám.“;Jeden sused sa v lese zranil a teraz nevieme ani o ňom!;*;
+vxm0de3.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;úvod;Haló, je tam záchranka? Hehe… máte veľmi pekný hlas.;*;
+v1fjqhr6.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;úvod;Dobrý deň, chcel by som si objednať pizzu so šunkou.;*;
+v9bkd3h.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;úvod;Len skúšam, či to funguje. Ahoj!;*;
+vyjykyj.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;úvod;Je tam polícia? Môj kocúr mi zjedol večeru!;*;
+v1s572zf.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;úvod;Koľko je hodín? Nemám baterku v mobile.;*;
+vacgqz9.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;odpoveď na „Čo sa stalo?“;Nič, hehe… len sa nudím.;*;
+v1qgkpaz.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;odpoveď na „Kde presne ste?“;Na Mesiaci! Hahaha.;*;
+v12fyqb9.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;odpoveď na „Je niekto zranený? Dýcha?“;Hehe, nie, všetci sú v pohode.;*;
+v1v05syz.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;odpoveď na „Hrozí ešte niečo? Oheň, plyn, zbraň?“;Jedine, že mi vychladne pizza.;*;
+v1nx620v.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;doplňujúca otázka;Hehe… to je jedno.;*;
+v1bjk5ip.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;doplňujúca otázka;Ehm… neviem. Haha.;*;
+v1en3lra.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;doplňujúca otázka;Čo? Aha… áno, asi.;*;
+vxpy6z2.mp3;posmech;chichotá sa a robí si žarty;Zneužitie linky;doplňujúca otázka;Hm… to vám nepoviem, hehe.;*;
