@@ -24,79 +24,68 @@ udalosti s prioritami, jednotky a ich stavy, mapa, denník a odovzdanie zmeny.
 
 Na vyskúšanie: Nastavenia → **Načítať ukážkové dáta**.
 
-## Hra Linka 112
+## Hra Linka 155
 
-`hra.html` je samostatná 3D hra na dispečera integrovaného záchranného systému v **Košickom kraji**.
-Zdvíhaš hovory na 112, vypytuješ sa volajúcich, určuješ druh udalosti a po kraji vysielaš posádky:
-záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CBRN tím a Horskú záchrannú službu.
+`hra.html` je samostatná 3D hra na operátora a dispečera záchrannej zdravotnej služby v **Košickom kraji**.
+Zdvíhaš hovory na linku 155, vedieš štruktúrovaný rozhovor, určuješ naliehavosť a vysielaš posádky ZZS:
+RZP, RLP, RV (lekár v stretávacom systéme), vrtuľník a Horskú záchrannú službu. Hasičov, políciu a mestskú
+políciu nevysielaš – len o ne požiadaš cez KS IZS (súčinnosť).
 
-**Hovory**
-- **Vypytovanie:** otázky „Čo sa stalo?“, „Kde ste?“, „Je niekto zranený?“, „Hrozí ešte niečo?“. Odpovede odhalia
-  skryté komplikácie (ďalší zranený, šíriaci sa oheň, ozbrojený útočník). Čo nezistíš, nahlási až posádka z miesta.
-- **Doplňujúce otázky k problému:** keď vieš, čo sa stalo, pribudnú pri každom zo 42 druhov udalostí tri otázky,
-  napríklad „Dýcha normálne, alebo len lapá po dychu?“ alebo „Je na kamióne oranžová tabuľa s číslami?“.
-  - Dve z nich sú dôležité: odpoveď dostane posádka do karty udalosti (+10 bodov) a na mieste je hotová rýchlejšie.
-  - Jedna je zbytočná (napríklad „Je dom poistený?“): stojí 5 bodov a zdržiava.
-  - Schopnosť s nápovedou zvýrazní dôležité otázky.
-- **Opakovaný hovor pri zhoršení:** volajúci znova zavolá a stav sa trochu zhorší.
-  - Zisti, čo presne sa zmenilo (napríklad bolesť na hrudi prešla do zástavy srdca alebo topiaceho sa vytiahli a nedýcha).
-  - Zmenu dostane posádka do karty udalosti. Potom vyber telefonickú prvú pomoc pre nový stav.
-  - Dobrá rada pomôže (+15 bodov a čas navyše). Za zlú radu: −30 bodov, −2 dôvery a horší stav.
-  - Zbytočná otázka stojí 5 bodov. Ak hovor ukončíš bez zistenia zmeny, body za upokojenie nedostaneš.
-- **Neznáma poloha:** volajúci nevie, kde je – mobil hlási len kruh. Podľa jeho opisu ho nájdeš ťuknutím na mapu.
-- **Cudzí jazyk a tiché hovory:** maďarčina, ukrajinčina a angličtina pri hraniciach (s tlmočníkom),
-  tichý hovor, keď volajúci nemôže hovoriť a odpovedá ťuknutím.
+Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti sú zjednodušené a napísané vlastnými slovami.
 
-**Vysielanie**
-- Posádky vyberáš sám, za presné vyslanie je bonus, posádka navyše alebo lekár k drobnosti stojí body.
-  Asistenta vysielania (tlačidlo „Vyslať odporúčané“) odomkneš v schopnostiach.
-- **Pokrytie kraja:** podiel obyvateľov, ku ktorým dorazí záchranka do 15 minút; voľné posádky môžeš presunúť do zálohy.
-- **Nemocnice:** pacienta pošleš do správneho centra – kardiocentrum VÚSCH, traumacentrum UNLP, Detská FN
-  alebo najbližšia nemocnica; príjem má obmedzenú kapacitu.
-- **Následky zlých rozhodnutí:** každá udalosť má stav (v poriadku → zhoršuje sa → kritický).
-  - Posádka z ďaleka, keď bližšia bola voľná, zdrží pomoc a stav sa zhorší. Pacient môže mať komplikácie
-    alebo trvalé následky, čo znamená menej bodov aj dôvery. Pri P1 ho pre veľké zdržanie nemusíš zachrániť.
-    Ak dodatočne pošleš bližšiu posádku, zdržanie sa nezaráta.
-  - Nevhodná posádka (polícia k zástave srdca, RV bez sanitky, vrtuľník k drobnosti) stojí body aj dôveru
-    a na mieste sa otočí naprázdno.
-  - Za stiahnutie posádky z cesty k vážnejšiemu prípadu dostaneš trest a pôvodná udalosť sa zhorší.
-    Trest dostaneš aj vtedy, keď pošleš k menej vážnemu prípadu posádku, ktorú potreboval čakajúci P1.
-  - Keď z okolia odíde k drobnosti posledná voľná záchranka, hra ťa varuje. Ak tam potom príde vážny prípad,
-    hra ukáže dôsledok tvojho rozhodnutia a pomoc pôjde z ďaleka.
-  - Pacient v nemocnici bez potrebného centra musí ísť ďalej, takže posádka je 12 minút dlhšie mimo prevádzky.
-  - Súhrn služby obsahuje rozbor vysielania (koľkokrát a akú chybu si urobil). Za službu bez chyby
-    dostaneš medailu Čistý štít.
-- **Prvá pomoc po telefóne (voliteľná):** kým príde posádka, môžeš v karte udalosti zaškrtnúť, čo má volajúci
-  urobiť. Rady sú pri 23 druhoch udalostí (zástava srdca, dusenie, anafylaxia, pôrod, otrava, požiar, topiaci sa,
-  únik amoniaku, úraz v horách a ďalšie) a medzi nimi sú správne aj chybné.
-  - Dobrá rada: +15 bodov, pár minút času navyše, lepší stav. Dve dobré rady zabránia zhoršeniu
-    a za všetky dobré rady bez chyby je bonus.
-  - Zlá rada (napríklad voda človeku v bezvedomí alebo vyťahovanie zakliesneného vodiča) ublíži:
-    −30 bodov, −2 dôvery a horší stav. Volajúci povie, čo sa stalo, a hra vysvetlí, prečo bola rada zlá.
-  - Ďalšiu radu môžeš dať, až keď volajúci dokončí predošlú. Keď posádka dorazí, ohodnotí, čo volajúci urobil.
-  - Volajúcemu, ktorý nemôže hovoriť alebo nerozumie po slovensky a nemá tlmočníka, rady dať nemôžeš.
-  - Medaila Anjel na linke: aspoň 6 dobrých rád a žiadna zlá.
+**Príjem hovoru – štruktúrovaný rozhovor**
+- Počas príjmu (rozhovor, vyslanie, TANR) beží čas takmer naozaj: 2 sekundy hry za sekundu. Hodiny hovoru
+  ukazujú čas od prijatia.
+- Otázky: adresa, čo sa stalo a päť základných vecí – vedomie, dýchanie, krvný obeh (farba kože), úraz,
+  krvácanie – a prístup na miesto. Pri každej udalosti sú aj doplňujúce otázky k problému (zbytočná stojí body).
+- Body dostaneš za každú zo základných otázok. Ak neoveríš adresu, vedomie alebo dýchanie, prídeš o body.
+- **Základný formulár:** vyberieš kategóriu (náhle zastavenie obehu, porucha vedomia, dýchanie, krvácanie,
+  bolesť, kardio, neurológia a kŕče, psychické ťažkosti, alergia, diabetes, dopravná nehoda, úrazy,
+  intoxikácie, ochorenia, gynekológia a pôrod, nepatrí na 155, zneužitie). Ukáže sa strom s kritériami.
+- **Naliehavosť:** K kritický, N naliehavý, M menej naliehavý, O odkladný. Pri K, N a M vznikne udalosť,
+  pri O hovor vybavíš bez výjazdu: rada, 116117, NTIC, linka psychologickej pomoci, prehliadka mŕtveho tela
+  alebo odovzdanie na KS IZS 112.
+- V katalógu je 77 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
 
-**Režim udalostí** (voľba v menu pri voľnej službe)
-- **Viac naraz:** hovory chodia priebežne a udalosti sa prekrývajú.
-- **Jedna po druhej:** riešiš vždy jeden prípad. Ďalší hovor príde, až keď je udalosť uzavretá a pacient má
-  pridelenú nemocnicu.
-  - Mimoriadne udalosti v tomto režime nie sú.
-  - Zhoršenie a opakovaný hovor prídu skôr a častejšie, aby bol čas na otázky a prvú pomoc.
+**Vysielanie posádok**
+- K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
+- N: RZP, RLP len vtedy, keď je bližšie. M: RZP bez majákov (jazdí o niečo pomalšie).
+- Ku K a N treba vyslať posádku **do 90 sekúnd** od prijatia hovoru (+20 bodov, inak trest a pri K horší stav).
+- **Vrtuľník:** neprístupný terén, ťažký úraz, šetrný a rýchly prevoz do centra (napríklad poranenie chrbtice
+  na neurochirurgiu do Košíc) alebo veľká vzdialenosť. Bez indikácie je to chyba.
+- **Nemocnice:** PCI – VÚSCH a Nemocnica Košice-Šaca; iktové centrá – UNLP, Šaca, Michalovce, Trebišov,
+  Rožňava; traumacentrum a neurochirurgia – UNLP (Rastislavova). Zlá nemocnica znamená prevoz navyše.
 
-**Živý kraj**
-- Udalosti, ku ktorým pomoc mešká, sa zhoršia a volajúci zavolá znova. Posádky podávajú hlásenia rádiom.
-- **Mimoriadne udalosti** vo fázach (povodeň na Bodrogu, víchrica, hromadná nehoda autobusu, výbuch plynu,
-  požiar chemického podniku) s výpomocou z Prešovského kraja.
-- **Počasie** (dážď, hmla, poľadovica, búrka, horúčava) mení rýchlosť jázd, vrtuľník aj druhy udalostí;
-  v Košiciach býva dopravná špička.
+**Posádka na mieste vyhodnotí príjem**
+- Až keď posádka dorazí, ukáže sa skutočný stav a rozbor: kategória a naliehavosť.
+- Podhodnotenie (napríklad K určené ako M): posádka ide bez lekára a bez majákov, lekára si vyžiada z miesta
+  a pacientovi sa priťaží. Nadhodnotenie: zbytočne viazaný lekár sa uvoľní a dostaneš menší trest.
+- Keď hovor vybavíš bez výjazdu (O), hoci pacient pomoc potreboval, volajúci zavolá znova a stav je horší
+  (−40, −4 dôvery).
+
+**Súčinnosť IZS** (tlačidlá v karte udalosti)
+- Hasiči: vyslobodenie z auta, otvorenie bytu, ťažký pacient, oheň, voda, plyn.
+- Polícia: agresia, nútený prevoz, opitý maloletý, kolaps či zástava na verejnosti, nehoda so zraneným.
+- Mestská polícia: preverenie, keď volajúci neostane na mieste.
+- Včas vyžiadaná zložka: +15. Zabudnutá zložka: posádka ju vyžiada z miesta a čaká (−20, horší stav).
+  Zbytočne vyžiadaná zložka: −10.
+
+**TANR – telefonicky asistovaná resuscitácia**
+- Pri zástave vyberieš tri správne pokyny (poloha, ruky na hrudník, stláčanie bez vdychov) a ťukaním udávaš
+  tempo stláčania. Hra meria tempo (100–120/min) a čas od prijatia hovoru po prvé stlačenie (do 60 s +40).
+- Výsledok zástavy závisí od času bez obehu, kvality TANR a príchodu posádky. Bez TANR pacient väčšinou neprežije.
+- Pri ďalších stavoch sú telefonické pokyny (stabilizovaná poloha, adrenalínové pero, zastavenie krvácania,
+  vedenie pôrodu a ďalšie). Dobrý pokyn pomôže, zlý ublíži.
+
+**Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka z ďaleka a dôsledky zlého vyslania,
+pokrytie kraja, neznáma poloha volajúceho, hovory v cudzom jazyku s tlmočníkom, zneužitie linky,
+mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov a políciu riadi KS IZS sama.
 
 **Hlasy volajúcich** (tlačidlo **Hlas**, predvolene vypnuté)
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
-- Hlas prehliadača a umelé zvuky z miesta (šum linky, dych, doprava, oheň…) sú zatiaľ vypnuté, lebo zneli strojovo.
-  Dajú sa vrátiť prepínačmi `USE_TTS` a `USE_AMBIENCE` v kóde hry.
-- Scenár všetkých 437 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
+- Scenár všetkých 760 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
 satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;
@@ -107,14 +96,17 @@ zhruba každých 15 minút hry, neskôr každých 9; zrýchliť sa dá tlačidlo
 **Ciele**
 - Voľná služba bez konca, 8 výziev s hviezdičkami (Dni mesta Košice, Leto na Šírave, Povodeň na Bodrogu…)
   a denná výzva s rovnakými hovormi pre všetkých v daný deň.
-- Séria úspechov násobí body, na konci služby sú medaily. Postup, schopnosti, hviezdičky a medaily sa ukladajú v prehliadači.
-- Rádiové zvuky, siréna, typované odpovede volajúcich a voliteľný hlas volajúceho (syntéza reči prehliadača).
+- Séria úspechov násobí body, na konci služby je rozbor príjmu (naliehavosť, čas do vyslania, TANR, súčinnosť)
+  a medaily (napríklad Stláčaj!, 90 sekúnd, Súčinnosť). Postup sa ukladá v prehliadači.
 
 **Záchranná služba podľa skutočnosti:** stanice a typy posádok podľa vyhlášky MZ SR č. 116/2025 Z. z. –
 9× RLP, 1× RV (Košice-Západ, stretávací systém) a 31× RZP. RLP pokryje lekára aj prevoz, RV prevoz nezvládne.
+Zdroje k nemocniciam: kardiocentrum AGEL Košice-Šaca (program STEMI), iktové jednotky s trombolýzou podľa
+prehľadu [SITA](https://sita.sk/vzdravotnictve/vo-svidniku-vlani-liecili-najviac-pacientov-s-mozgovou-prihodou-podanim-trombolyzy/);
+zjednodušené.
 
-Ovládanie: `A` prijať hovor, `Q` `W` `E` `R` otázky, `T` tlmočník, `1`–`9` druh udalosti, `Enter` vyslať odporúčané
-(so schopnosťou), `Esc` zrušiť výber, medzerník pauza. Na telefóne je mapa cez celú obrazovku a dole panel so záložkami.
+Ovládanie: `A` prijať hovor, `1`–`8` otázky rozhovoru, `Z` `X` `C` doplňujúce otázky, `K` `N` `M` `O` naliehavosť,
+`S` TANR a tempo stláčania, `T` tlmočník, `Enter` vyslať odporúčané (so schopnosťou), `Esc` zrušiť výber, medzerník pauza. Na telefóne je mapa cez celú obrazovku a dole panel so záložkami.
 Potrebuje prehliadač s WebGL.
 
 Knižnice a dáta: `vendor/three/` – three.js r147 (MIT), `vendor/amcharts-geodata/` – licencia amCharts

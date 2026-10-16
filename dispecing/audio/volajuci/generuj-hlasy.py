@@ -147,7 +147,7 @@ def cmd_voices():
 
 
 def main():
-    ap = argparse.ArgumentParser(description='Hlasy volajúcich pre hru Linka 112 cez ElevenLabs')
+    ap = argparse.ArgumentParser(description='Hlasy volajúcich pre hru Linka 155 cez ElevenLabs')
     ap.add_argument('--hlasy', action='store_true', help='vypíše hlasy z účtu a pripraví hlasy.json')
     ap.add_argument('--odhad', action='store_true', help='len spočíta znaky chýbajúcich viet')
     ap.add_argument('--len', metavar='TEXT', help='len udalosti, ktorých názov obsahuje TEXT')

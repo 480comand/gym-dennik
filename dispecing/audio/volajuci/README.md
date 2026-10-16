@@ -1,10 +1,10 @@
 # Hlasy volajúcich
 
-Sem patria nahrávky viet, ktoré hovoria volajúci na linke 112. Hra si ich prehrá cez telefónnu linku
+Sem patria nahrávky viet, ktoré hovoria volajúci na linke 155. Hra si ich prehrá cez telefónnu linku
 (orezaný zvuk ako v telefóne). Veta bez nahrávky ostane len ako text, lebo hlas prehliadača je zatiaľ vypnutý.
 Zatiaľ len po slovensky.
 
-`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 437 slovenských viet:
+`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 760 slovenských viet:
 
 | Stĺpec | Význam |
 |---|---|
@@ -29,7 +29,7 @@ Skript `generuj-hlasy.py` vytvorí všetky nahrávky naraz. Stačí Python 3, ni
    napríklad `"udalosti": {"Pôrod": "b"}`. Prirodzenejšie znejú hlasy so slovenským prízvukom z Voice Library –
    pridaj si ich do svojich hlasov a spusti `--hlasy` znova.
 3. `python3 generuj-hlasy.py --odhad` spočíta, koľko znakov (kreditov) generovanie spotrebuje.
-   So štyrmi hlasmi je to asi 53 000 znakov aj so značkami emócií. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
+   So štyrmi hlasmi je to asi 69 000 znakov aj so značkami emócií. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
 4. `python3 generuj-hlasy.py --max 10` vyskúša prvých 10 nahrávok. Keď sa ti páčia,
    `python3 generuj-hlasy.py` dorobí zvyšok. Hotové súbory preskakuje, takže ho môžeš prerušiť a spustiť znova.
    `--len "Zástava"` vygeneruje len vety udalostí, ktorých názov obsahuje zadaný text.
@@ -45,7 +45,7 @@ Súbory majú na konci písmeno hlasu: `v1t3rarm-a.mp3`, `v1t3rarm-b.mp3`.
 ## Možnosť B: vlastné nahrávky
 
 - Stačí mobil (Diktafón, Hlasové poznámky) v tichej miestnosti, asi 20 cm od úst.
-- Hraj emóciu naplno: volajúci na 112 nečíta, ale je v strese. Lapanie po dychu, zajakanie a plač sú vítané.
+- Hraj emóciu naplno: volajúci na 155 nečíta, ale je v strese. Lapanie po dychu, zajakanie a plač sú vítané.
 - Každú vetu ulož ako samostatný súbor a pomenuj ho podľa stĺpca `subor`.
   Prípona môže byť `.mp3`, `.m4a`, `.ogg`, `.opus`, `.wav` alebo `.webm`.
   Ak nahráva viac ľudí, každý môže pridať svoje písmeno: `v1t3rarm-e.m4a`.
@@ -61,7 +61,7 @@ Otvor `hra.html` cez webový server – na GitHub Pages
 (`https://480comand.github.io/gym-dennik/dispecing/hra.html`) alebo lokálne
 (`python3 -m http.server` v priečinku `gym-dennik` a potom `http://localhost:8000/dispecing/hra.html`).
 Pri otvorení súboru priamo z disku prehliadač nahrávky nenačíta. V hre nechaj zapnuté tlačidlá **Zvuk** a **Hlas**.
-Verzia hry na claude.ai nahrávky z priečinka nevidí a používa hlas prehliadača.
+Verzia hry na claude.ai má nahrávky priložené len vtedy, keď sa zverejnia spolu s ňou.
 
 Názov súboru vznikol z presného znenia vety. Keď sa veta v hre zmení, zmení sa aj názov.
 Po úprave viet treba vytvoriť nový `scenar.csv` a chýbajúce vety dogenerovať.
