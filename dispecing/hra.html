@@ -451,7 +451,7 @@
       <button class="btn sm ghost opt" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
       <button class="btn sm ghost opt" data-act="light" id="btnLight" title="Osvetlenie mapy">Večer</button>
       <button class="btn sm ghost opt" data-act="mute" id="btnMute">Zvuk</button>
-      <button class="btn sm ghost opt" data-act="voice" id="btnVoice" title="Hlas volajúceho (syntéza reči, ak ju prehliadač má)">Hlas</button>
+      <button class="btn sm ghost opt" data-act="voice" id="btnVoice" title="Hlasy volajúcich: nahrávky, ak sú v priečinku audio/volajuci, inak syntéza reči prehliadača s emóciou">Hlas</button>
       <button class="btn sm ghost more" data-act="more" id="btnMore" aria-label="Ďalšie nastavenia" aria-expanded="false">⋯</button>
     </div>
     <div class="xpline"><i id="xpLine"></i></div>
@@ -1379,8 +1379,8 @@ const PKEY='linka112-kraj';
 const OLD_COST={z_rlp:2, z_mo:1, h_mi:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
 function loadProg(){
   try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null');
-    if(p && p.v===1){ for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
-  return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0}; }
+    if(p && p.v===1){ if(p.voice===undefined) p.voice=true; for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
+  return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0, voice:true}; }
 let PROG=loadProg();
 function saveProg(){ try{ localStorage.setItem(PKEY, JSON.stringify(PROG)); }catch(e){} }
 const has = id => PROG.skills.includes(id);
@@ -1441,16 +1441,257 @@ const SND={
   thunder(){ noise(1.4,.22,90); noise(.5,.12,300,.05); },
   siren(){ for(let i=0;i<2;i++){ tone(960,.3,'triangle',.035,i*.62); tone(770,.3,'triangle',.035,i*.62+.31); } },
 };
-/* hlas volajúceho cez syntézu reči prehliadača (ak je zapnutý a hlas existuje) */
+/* ---------- hlasy volajúcich: emócie, telefónna linka a zvuky z miesta ---------- */
+const EMO={
+  panika:{l:'panika', dir:'kričí, hovorí rýchlo, zajakáva sa a lapá po dychu', rate:1.24, pitch:1.28, br:2.6},
+  strach:{l:'strach', dir:'vystrašený, trasúci sa hlas, rýchlejšie tempo', rate:1.12, pitch:1.16, br:1.8},
+  plac:{l:'plač', dir:'hovorí cez plač, vzlyká a robí prestávky', rate:.9, pitch:1.22, br:1.5},
+  sok:{l:'šok', dir:'otupený, pomalý, neveriacky, s prestávkami', rate:.86, pitch:.95, br:.9},
+  nervy:{l:'nervozita', dir:'nervózny a netrpezlivý, ale zrozumiteľný', rate:1.07, pitch:1.05, br:.9},
+  hnev:{l:'rozčúlenie', dir:'podráždený, nahnevaný, zvýšený hlas', rate:1.1, pitch:.92, br:.7},
+  pokoj:{l:'pokoj', dir:'pokojnejší, vecný', rate:1, pitch:1, br:0},
+  ulava:{l:'úľava', dir:'s úľavou, ale ešte zadýchaný', rate:.97, pitch:1.06, br:1},
+  zdesenie:{l:'zdesenie', dir:'zdesený, vyčíta si to, hlas sa mu láme', rate:1.18, pitch:1.32, br:2.2},
+  zmatok:{l:'zmätenosť', dir:'zmätený, neistý, hľadá slová', rate:.92, pitch:1, br:.6},
+  smiech:{l:'posmech', dir:'chichotá sa a robí si žarty', rate:1.1, pitch:1.25, br:0},
+};
+const OPEN_EMO=['panika','strach','zmatok','panika','zmatok'];
+const EMO_T={'Nezvestné dieťa':'plac','Zablúdený hubár':'strach','Domáce násilie':'strach','Vlámanie':'strach','Pád seniora':'nervy','Ťukanec':'nervy',
+  'Vyčerpaný turista':'strach','Krádež':'hnev','Opitý na zastávke':'hnev','Uviaznutý výťah':'strach','Podozrivý prášok':'strach','Zrazený chodec':'sok',
+  'Prevrátený kamión':'nervy','Strom na ceste':'nervy','Požiar kontajnera':'nervy'};
+const CALMER={panika:'strach', strach:'nervy', nervy:'pokoj', zdesenie:'strach'};
+const tplEmo = tpl => !tpl ? 'smiech' : EMO_T[tpl.title] || (tpl.prio===1 ? 'panika' : tpl.prio===2 ? 'strach' : tpl.cat==='msp' ? 'hnev' : 'nervy');
+const calmer = e => CALMER[e] || e;
+const ansEmo = tpl => tpl.prio===1 ? tplEmo(tpl) : calmer(tplEmo(tpl));
+const defEmo = cat => cat==='msp' ? 'hnev' : cat==='police' ? 'nervy' : 'strach';
+const fqEmo = (tpl, x) => !x[2] ? 'hnev' : tpl.prio===1 ? 'strach' : calmer(tplEmo(tpl));
+/* text pre nahrávku: bez meniacej sa polohy (tú volajúci povie na otázku „Kde ste?“) */
+const canonText = t => t.replace(/\s*(Bývame|Sme) \{loc\}\./,'').replace(/\s*\{loc\}/,'');
+const REPEAT_OPEN='Haló, to som zase ja, volal som pred chvíľou! ';
+const ST_L={arrest:'zástava srdca', unconscious:'bezvedomie', birth:'krvácanie po pôrode', injured:'ďalší zranený', fire:'oheň sa šíri', tech:'zhoršenie na mieste',
+  flood:'voda stúpa', panic:'panika vo výťahu', road:'hádka v kolóne', dizzy:'nevoľnosť po náraze', fumes:'ďalší ľudia s dýchaním', violence:'agresor sa vrátil',
+  brawl:'bitka pokračuje', cold:'podchladenie', missing:'stále sa neozval'};
+/* zvuky z miesta podľa udalosti (cez telefónnu linku) */
+const AMB_T={'Hromadná nehoda':['road','crowd'],'Požiar bytu':['fire','alarm'],'Lesný požiar':['fire','wind'],'Strom na ceste':['wind','road'],'Uviaznutý výťah':['hum'],
+  'Záplavy':['water','rain'],'Topiaci sa':['water','wind'],'Otrava CO':['room'],'Podozrenie na nákazu':['bus'],'Podozrivý prášok':['room'],'Bodnutie':['street','crowd'],
+  'Vlámanie':['night'],'Domáce násilie':['muffled'],'Nezvestné dieťa':['room'],'Krádež':['street'],'Rušenie pokoja':['music'],'Túlavý pes':['street'],
+  'Zle zaparkované auto':['street'],'Opitý na zastávke':['street'],'Výtržnosť':['crowd'],'Uviaznutý jaskyniar':['cave'],'Pôrod':['room']};
+const AMB_C={med:['room'], traffic:['road'], fire:['fire'], tech:['street'], hazmat:['alarm','crowd'], police:['street'], msp:['street'], mountain:['wind']};
+const ambOf = c => c.prank ? ['room'] : c.silent ? ['muffled'] : (c.tpl && (AMB_T[c.tpl.title] || AMB_C[c.tpl.cat])) || ['room'];
+
+/* nahrávky: audio/volajuci/<id>.mp3 alebo <id>-<hlas>.mp3 (napr. z ElevenLabs) a zoznam súborov v zoznam.json (v artefakte vypnuté) */
+const CLIP_DIR='audio/volajuci/';
+let CLIP_SET=null, CLIP_LOADING=false; const CLIPS=new Map(), CLIP_VOICES=new Set();
+const clipId = key => 'v'+hashStr(key).toString(36);
+function clipIndex(){
+  if(CLIP_SET || CLIP_LOADING || !CLIP_DIR || location.protocol==='file:') return;
+  CLIP_LOADING=true;
+  fetch(CLIP_DIR+'zoznam.json').then(r=>r.ok ? r.json() : []).then(list=>{
+    CLIP_SET=new Map();
+    for(const f of Array.isArray(list) ? list : []){
+      const m=String(f).match(/^(v[0-9a-z]+)(?:-([a-z0-9]{1,8}))?\.(mp3|m4a|ogg|oga|opus|wav|webm|aac)$/i); if(!m) continue;
+      const id=m[1].toLowerCase(), v=(m[2]||'').toLowerCase(); if(!CLIP_SET.has(id)) CLIP_SET.set(id, new Map()); CLIP_SET.get(id).set(v, f); if(v) CLIP_VOICES.add(v);
+    }
+  }).catch(()=>{ CLIP_SET=new Map(); });
+}
+/* nahrávka vety v hlase volajúceho; ak v ňom nie je, poslúži iný hlas */
+function clipFile(key, voice){ const vs=CLIP_SET && CLIP_SET.get(clipId(key)); if(!vs) return null; return vs.get(voice||'') || vs.get('') || vs.values().next().value; }
+function clipBuf(key, voice){
+  if(!key || !CLIP_SET || !CLIP_SET.size || !AC) return null;
+  const f=clipFile(key, voice); if(!f) return null;
+  const b=CLIPS.get(f); if(b && typeof b==='object') return b; if(b) return null;
+  CLIPS.set(f, 'loading');
+  fetch(CLIP_DIR+f).then(r=>r.arrayBuffer()).then(x=>AC.decodeAudioData(x)).then(buf=>CLIPS.set(f, buf)).catch(()=>CLIPS.set(f, 'bad'));
+  return null;
+}
+/* jeden volajúci = jeden hlas počas celého hovoru (podľa nahrávky jeho prvej vety) */
+function callVoice(c){
+  if(c.voiceSfx!==undefined) return c.voiceSfx;
+  if(!CLIP_SET || !CLIP_SET.size) return '';
+  const main=c.textKey && CLIP_SET.get(clipId(c.textKey)), all=[...CLIP_VOICES].sort();
+  return c.voiceSfx = main ? [...main.keys()].sort()[0] : all.length ? all[hashStr(c.tpl ? c.tpl.title : c.id)%all.length] : '';
+}
+/* všetko, čo môže volajúci povedať – nahrávky sa načítajú, kým hovor zvoní */
+function callKeys(c){
+  const k=[c.log[0] && c.log[0].key, c.textKey];
+  if(c.kind==='repeat'){ k.push('repeat:'+c.text); for(const x of repeatQs(c)) k.push(x[1]); for(const x of repeatFa(c)||[]) k.push(x[2]); return k; }
+  const t=c.tpl; if(!t) return k.concat(Object.values(PRANK_ANS), FQ_PRANK);
+  for(const q of ['hurt','danger']) k.push((ANS[t.title]||{})[q] || DEF_ANS[t.cat][q]);
+  for(const x of c.cx) k.push(x.yes);
+  for(const x of c.fq||[]) k.push(x[1]);
+  for(const x of FA[t.title]||[]) k.push(x[2]);
+  return k;
+}
+function prefetchCall(c){ if(PROG.voice && !muted) for(const k of callKeys(c)) clipBuf(k, callVoice(c)); }
+
+let PHONE=null, NB=null, BB=null, CALLAMB=null, VOICE=null;
+function phoneBus(){
+  if(PHONE) return PHONE;
+  const hp=AC.createBiquadFilter(), lp=AC.createBiquadFilter(), sh=AC.createWaveShaper(), cmp=AC.createDynamicsCompressor(), k=new Float32Array(1025);
+  hp.type='highpass'; hp.frequency.value=300; lp.type='lowpass'; lp.frequency.value=3400;
+  for(let i=0;i<1025;i++){ const x=i/512-1; k[i]=Math.tanh(1.8*x)/Math.tanh(1.8); } sh.curve=k;
+  cmp.threshold.value=-26; cmp.knee.value=12; cmp.ratio.value=5;
+  hp.connect(lp); lp.connect(sh); sh.connect(cmp); cmp.connect(AC.destination);
+  return PHONE=hp;
+}
+function nbuf(brown){
+  if(brown ? BB : NB) return brown ? BB : NB;
+  const len=AC.sampleRate*3, b=AC.createBuffer(1,len,AC.sampleRate), d=b.getChannelData(0); let last=0;
+  for(let i=0;i<len;i++){ const w=Math.random()*2-1; if(brown){ last=(last+.02*w)/1.02; d[i]=last*3.5; } else d[i]=w; }
+  return brown ? (BB=b) : (NB=b);
+}
+/* stavebné prvky zvukov */
+function aLoop(a, brown, type, freq, q, vol){
+  const s=AC.createBufferSource(), f=AC.createBiquadFilter(), g=AC.createGain();
+  s.buffer=nbuf(brown); s.loop=true; f.type=type; f.frequency.value=freq; f.Q.value=q; g.gain.value=vol;
+  s.connect(f); f.connect(g); g.connect(a.g); s.start(0, Math.random()*2); a.nodes.push(s,f,g); return {s,f,g};
+}
+function aLfo(a, param, rate, depth){ const o=AC.createOscillator(), g=AC.createGain(); o.frequency.value=rate; g.gain.value=depth; o.connect(g); g.connect(param); o.start(); a.nodes.push(o,g); }
+function aOsc(a, type, freq, vol, lpf){ const o=AC.createOscillator(), f=AC.createBiquadFilter(), g=AC.createGain(); o.type=type; o.frequency.value=freq; f.type='lowpass'; f.frequency.value=lpf; g.gain.value=vol; o.connect(f); f.connect(g); g.connect(a.g); o.start(); a.nodes.push(o,f,g); }
+function aBurst(a, brown, type, freq, q, dur, vol, when=0, attack=.005){
+  const t=AC.currentTime+.03+when, s=AC.createBufferSource(), f=AC.createBiquadFilter(), g=AC.createGain();   // malý predstih, aby zvuk nezačal v minulosti
+  s.buffer=nbuf(brown); f.type=type; f.frequency.value=freq; f.Q.value=q;
+  g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+attack); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  s.connect(f); f.connect(g); g.connect(a.g); s.start(t, Math.random()*2, dur+.05); return f;
+}
+function aTone(a, freq, dur, type, vol, when=0, f2, bp){
+  const t=AC.currentTime+.03+when, o=AC.createOscillator(), g=AC.createGain();
+  o.type=type; o.frequency.setValueAtTime(freq,t); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+  g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  if(bp){ const f=AC.createBiquadFilter(); f.type='bandpass'; f.frequency.value=bp; f.Q.value=3; o.connect(f); f.connect(g); } else o.connect(g);
+  g.connect(a.g); o.start(t); o.stop(t+dur+.05);
+}
+function aEvery(a, min, max, fn){
+  const next=()=>(min+Math.random()*(max-min))*1000;
+  const tick=()=>{ if(!a.alive) return; try{ fn(); }catch(e){} setTimeout(tick, next()); };
+  setTimeout(tick, next()*.5);
+}
+const shout = (a, vol=1) => { const f=150+Math.random()*90; aTone(a, f, .45+Math.random()*.4, 'sawtooth', .05*vol, 0, f*1.25, 700+Math.random()*500); };
+const carPass = (a, vol) => { const f=aBurst(a,true,'bandpass',450,1.2,2.8,vol,0,1.2), t=AC.currentTime; f.frequency.setValueAtTime(350,t); f.frequency.linearRampToValueAtTime(950,t+1.3); f.frequency.linearRampToValueAtTime(380,t+2.8); };
+const AMB_GEN={
+  line(a){ aLoop(a,false,'highpass',2400,.7,.012); },
+  room(a){ aLoop(a,true,'lowpass',600,.7,.05); },
+  road(a){ aLoop(a,true,'lowpass',380,.7,.13); aEvery(a,3,8,()=>carPass(a,.22)); aEvery(a,14,35,()=>{ aTone(a,415,.5,'square',.022); aTone(a,520,.5,'square',.018); }); },
+  street(a){ aLoop(a,true,'lowpass',320,.7,.08); aEvery(a,6,14,()=>carPass(a,.12)); },
+  fire(a){ aLoop(a,true,'lowpass',260,.7,.14); aEvery(a,.03,.22,()=>aBurst(a,false,'highpass',1800+Math.random()*1500,.7,.015+Math.random()*.03,.05+Math.random()*.12)); },
+  alarm(a){ aEvery(a,1.1,1.1,()=>aTone(a,940,.5,'square',.016)); },
+  wind(a){ const n=aLoop(a,false,'bandpass',520,1.1,.11); aLfo(a,n.f.frequency,.11,260); aLfo(a,n.g.gain,.17,.06); },
+  water(a){ const n=aLoop(a,false,'bandpass',1100,.9,.06); aLfo(a,n.f.frequency,.7,400); aEvery(a,.4,1.8,()=>aBurst(a,false,'bandpass',600+Math.random()*900,3,.12,.08,0,.01)); },
+  rain(a){ aLoop(a,false,'highpass',2600,.6,.035); },
+  crowd(a){ for(const f of [480,760,1150]){ const n=aLoop(a,true,'bandpass',f,4,.11); aLfo(a,n.g.gain,.3+Math.random()*.5,.07); } aEvery(a,3,9,()=>shout(a)); },
+  music(a){ aEvery(a,.48,.48,()=>{ aTone(a,150,.2,'sine',.3,0,60); aBurst(a,true,'lowpass',420,.7,.12,.1); }); },
+  hum(a){ aOsc(a,'sawtooth',120,.025,500); },
+  night(a){ aEvery(a,.5,1.4,()=>{ for(let i=0;i<3;i++) aTone(a,2900,.04,'sine',.012,i*.07); }); },
+  muffled(a){ aEvery(a,1.8,5,()=>aBurst(a,true,'lowpass',180,.7,.25,.35)); aEvery(a,3,8,()=>shout(a,.5)); },
+  cave(a){ aLoop(a,true,'lowpass',220,.7,.05); aEvery(a,.9,3.2,()=>aTone(a,1300+Math.random()*900,.18,'sine',.03,0,900)); },
+  bus(a){ aLoop(a,true,'lowpass',260,.7,.15); aOsc(a,'sawtooth',62,.02,300); },
+  /* dych volajúceho podľa jeho emócie – pri panike rýchly a hlasný */
+  breath(a){
+    const loop=()=>{ if(!a.alive) return; const r=a.br;
+      if(r>.15){ const per=1.6/r, v=.06*Math.min(1.5,r); aBurst(a,false,'bandpass',1250,.9,per*.38,v,0,.08); aBurst(a,false,'bandpass',850,.9,per*.45,v*.85,per*.45,.06); }
+      setTimeout(loop, r>.15 ? 1600/r : 700); };
+    loop();
+  },
+};
+function startAmb(c){
+  const a={id:c.id, alive:true, nodes:[], br:(EMO[c.mood]||EMO.pokoj).br, g:AC.createGain()};
+  a.g.gain.value=1; a.g.connect(phoneBus());
+  for(const k of new Set(['line','breath', ...ambOf(c)])) try{ AMB_GEN[k] && AMB_GEN[k](a); }catch(e){}
+  return a;
+}
+function stopAmb(){
+  const a=CALLAMB; CALLAMB=null; if(!a) return;
+  a.alive=false; try{ a.g.gain.setTargetAtTime(0, AC.currentTime, .12); }catch(e){}
+  setTimeout(()=>{ for(const n of a.nodes){ try{ n.stop && n.stop(); }catch(e){} try{ n.disconnect(); }catch(e){} } try{ a.g.disconnect(); }catch(e){} }, 700);
+}
+function duck(on){ if(CALLAMB) try{ CALLAMB.g.gain.setTargetAtTime(on ? .45 : 1, AC.currentTime, .1); }catch(e){} }
+/* zvuky z miesta hrajú, kým je hovor na linke */
+function syncCallAudio(){
+  const c = G && G.mode==='play' && !muted && AC ? G.calls.find(x=>x.state==='talk') : null;
+  if(c && CALLAMB && CALLAMB.id===c.id) return;
+  if(CALLAMB) stopAmb();
+  if(c) CALLAMB=startAmb(c);
+}
+function stopVoice(){
+  SPEAK_SEQ++;
+  if(VOICE){ try{ VOICE.stop(); }catch(e){} VOICE=null; }
+  if(window.speechSynthesis) try{ speechSynthesis.cancel(); }catch(e){}
+  duck(false);
+}
+function knocks(n){
+  if(muted || !AC) return;
+  const a=CALLAMB || {g:phoneBus(), nodes:[]};
+  for(let i=0;i<n;i++) aBurst(a,false,'bandpass',900,2,.07,.35,i*.32,.002);
+}
+/* úprava textu pre syntézu reči podľa emócie (v rozhovore ostáva pôvodný text) */
+function emoText(text, emo){
+  if(emo==='panika'){ const w=text.split(' '); if(w.length>3 && Math.random()<.5) text=w[0].replace(/[,.!?…]+$/,'')+'… '+text; return text.replace(/\.(\s|$)/g,'!$1'); }
+  if(emo==='plac' || emo==='sok' || emo==='zmatok') return text.replace(/, /g,'… ');
+  return text;
+}
 const VOICE_LANG={sk:'sk', hu:'hu', uk:'uk', en:'en'};
-function speak(c, text){
-  if(!PROG.voice || quiet() || muted || !window.speechSynthesis || !text || /^\(/.test(text)) return;
-  try{
-    const lang=c.interp ? 'sk' : (c.lang||'sk'), voices=speechSynthesis.getVoices(), v=voices.find(v=>v.lang && v.lang.toLowerCase().startsWith(VOICE_LANG[lang]));
-    if(!v) return;
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text); u.voice=v; u.lang=v.lang; u.rate=1.08; u.pitch=1+Math.random()*.3-.15; speechSynthesis.speak(u);
-  }catch(e){}
+function tts(c, text, emo){
+  if(!window.speechSynthesis) return;
+  const lang=c.interp ? 'sk' : (c.lang||'sk'), vs=speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith(VOICE_LANG[lang]));
+  if(!vs.length) return;
+  const E=EMO[emo]||EMO.pokoj, u=new SpeechSynthesisUtterance(emoText(text, emo));
+  u.voice=vs[(c.vi||0)%vs.length]; u.lang=u.voice.lang;
+  u.rate=clamp(E.rate*(c.vr||1), .5, 2); u.pitch=clamp(E.pitch*(c.vp||1), .1, 2);
+  u.onstart=()=>duck(true); u.onend=u.onerror=()=>duck(false);
+  speechSynthesis.speak(u);
+}
+/* volajúci hovorí: nahrávka, ak existuje, inak syntéza reči s emóciou */
+function speak(c, text, key, emo){
+  if(!c || quiet() || muted || !text) return;
+  if(emo){ c.mood=emo; if(CALLAMB && CALLAMB.id===c.id) CALLAMB.br=EMO[emo].br; }
+  if(/^\(/.test(text)){ const n=(text.match(/ťuk/g)||[]).length; if(n) knocks(n); return; }
+  if(!PROG.voice) return;
+  stopVoice();
+  const seq=++SPEAK_SEQ, voice=callVoice(c), buf=clipBuf(key, voice);
+  if(buf) return playClip(buf);
+  const f=key && CLIP_SET && clipFile(key, voice);
+  if(f && CLIPS.get(f)==='loading'){   // nahrávka sa ešte načítava – chvíľu počkáme, nech hlas nepreskakuje
+    const t0=performance.now(), wait=()=>{ if(seq!==SPEAK_SEQ) return; const b=CLIPS.get(f);
+      if(b && typeof b==='object') return playClip(b); if(b==='loading' && performance.now()-t0<1500) return setTimeout(wait, 100); tts(c, text, emo); };
+    return wait();
+  }
+  tts(c, text, emo);
+}
+let SPEAK_SEQ=0;
+function playClip(buf){
+  if(!AC || muted) return;
+  const s=AC.createBufferSource(), g=AC.createGain(); s.buffer=buf; g.gain.value=1.2; s.connect(g); g.connect(phoneBus());
+  s.onended=()=>{ if(VOICE===s){ VOICE=null; duck(false); } }; duck(true); s.start(); VOICE=s;
+}
+/* zoznam všetkých viet volajúcich pre scenár nahrávok (rovnaké kľúče, aké používa hra) */
+function voiceLines(){
+  const out=[], by=new Map();
+  /* tpl = udalosť, ktorej volajúci vetu hovorí; bez nej je veta spoločná pre všetkých volajúcich */
+  const add=(group, ctx, key, emo, text, tpl)=>{ if(!key) return; const o=by.get(key); if(o){ if(o.tpl!==tpl) o.tpl=''; return; }
+    const e={group, ctx, id:clipId(key), emo, emoL:EMO[emo].l, dir:EMO[emo].dir, text:text||key, tpl:tpl||''}; by.set(key, e); out.push(e); };
+  OPEN.forEach((t,i)=>add('Úvod hovoru','prvá veta po zdvihnutí', t, OPEN_EMO[i]));
+  for(const t of TPL){
+    const g=t.title+' (P'+t.prio+')', T=t.title;
+    for(const raw of t.texts) add(g,'čo sa stalo', canonText(raw), tplEmo(t), null, T);
+    for(const q of ['hurt','danger']){ const a=(ANS[t.title]||{})[q]; if(a) add(g, q==='hurt' ? 'odpoveď: je niekto zranený?' : 'odpoveď: hrozí ešte niečo?', a, ansEmo(t), null, T); }
+    for(const x of t.cx) add(g, 'skrytá komplikácia', x.yes, 'panika', null, T);
+    for(const x of FQ[t.title]||[]) add(g, 'doplňujúca otázka: „'+x[0]+'“', x[1], fqEmo(t, x), null, T);
+    for(const x of FA[t.title]||[]) add(g, (x[1] ? 'po dobrej rade' : 'po zlej rade')+': „'+x[0]+'“', x[2], x[1] ? 'ulava' : 'zdesenie', null, T);
+    const own=t.title in ESC_T, e = own ? ESC_T[t.title] : ESC_DEF[t.cat];
+    if(e){ add(g, 'opakovaný hovor – úvod', 'repeat:'+e.text, 'panika', REPEAT_OPEN+e.text, own ? T : ''); if(e.change) add(g, 'opakovaný hovor: čo sa zmenilo', e.change, 'panika', null, T); }
+  }
+  for(const [cat,a] of Object.entries(DEF_ANS)) for(const q of ['hurt','danger']) add('Všeobecné odpovede – '+CATS[cat].label.toLowerCase(), q==='hurt' ? 'je niekto zranený?' : 'hrozí ešte niečo?', a[q], defEmo(cat));
+  for(const [cat,x] of Object.entries(FQ_X)) add('Odpovede na zbytočné otázky', CATS[cat].label+': „'+x[0]+'“', x[1], 'hnev');
+  for(const [id,st] of Object.entries(ESC_ST)){
+    const g='Zhoršenie – '+ST_L[id];
+    add(g, 'opakovaný hovor: čo sa zmenilo', st.change, 'panika');
+    for(const x of st.q) add(g, 'otázka: „'+x[0]+'“', x[1], x[2] ? 'strach' : 'hnev');
+    for(const x of (typeof st.fa==='string' ? FA[st.fa] : st.fa)) add(g, (x[1] ? 'po dobrej rade' : 'po zlej rade')+': „'+x[0]+'“', x[2], x[1] ? 'ulava' : 'zdesenie');
+  }
+  PRANKS.forEach(t=>add('Zneužitie linky','úvod', t, 'smiech'));
+  Object.entries(PRANK_ANS).forEach(([q,t])=>add('Zneužitie linky','odpoveď na „'+QS[q]+'“', t, 'smiech'));
+  FQ_PRANK.forEach(t=>add('Zneužitie linky','doplňujúca otázka', t, 'smiech'));
+  return out;
 }
 /* šum (rádio, hrom) */
 function noise(dur, vol, freq, when=0){
@@ -1740,6 +1981,7 @@ function giveAid(inc, i){
   const f=inc && inc.fa, list=f && FA[inc.title], it=list && list[i];
   if(!it || f.given.includes(i) || inc.metAt || G.t<f.busy || !running()) return;
   aidEffect(inc, f, list, i);
+  speak({id:'I'+inc.id, lang:'sk', vp:inc.vp, vr:inc.vr, vi:inc.vi, voiceSfx:inc.voiceSfx, textKey:inc.tpl && inc.tpl.texts && canonText(inc.tpl.texts[0]), tpl:inc.tpl}, it[2], it[2], it[1] ? 'ulava' : 'zdesenie');
 }
 function aidEffect(inc, f, list, i){
   const it=list[i];
@@ -1896,9 +2138,10 @@ function spawnCall(){
   if(!prank){ tpl=weightedTpl(availableTpl()); node=placeFor(tpl); }
   else node=placeFor({place:'town'});
   const n=NODES[node];
-  const text = prank ? cpick(PRANKS) : cpick(tpl.texts).replace('{loc}', n.loc || '');
-  const c={id:'C'+(++G.cseq), tpl, prank, text, node, addr:addrOf(node), t0:G.t, state:'ring', talkAt:0,
-    log:[], asked:[], pend:null, lang:'sk', interp:false, silent:false, lost:null, cx:[], fq:[], fqAsked:[], info:0, brief:[]};
+  const raw = prank ? cpick(PRANKS) : cpick(tpl.texts), text = prank ? raw : raw.replace('{loc}', n.loc || '');
+  const c={id:'C'+(++G.cseq), tpl, prank, text, textKey: prank ? raw : canonText(raw), node, addr:addrOf(node), t0:G.t, state:'ring', talkAt:0,
+    log:[], asked:[], pend:null, lang:'sk', interp:false, silent:false, lost:null, cx:[], fq:[], fqAsked:[], info:0, brief:[],
+    vp:.88+Math.random()*.24, vr:.95+Math.random()*.1, vi:Math.floor(Math.random()*4), mood:tplEmo(tpl)};
   { const ft = tpl || cpick(TPL), list=(FQ[ft.title]||[]).concat([[...FQ_X[ft.cat], 0]]);
     for(let i=list.length-1;i>0;i--){ const j=Math.floor(CR()*(i+1)); [list[i],list[j]]=[list[j],list[i]]; }
     c.fq=list; }
@@ -1910,12 +2153,12 @@ function spawnCall(){
     if(c.silent || (n.type!=='town' && CR()<.45)) c.lost=makeLost(node);
   }
   /* úvodná veta: zhovorčivý volajúci povie hneď, čo sa stalo; inak sa musíš pýtať */
-  if(prank) c.log.push({who:'c', text:text});
-  else if(c.silent) c.log.push({who:'c', text:'(Ticho… počuť len vzrušený dych a vzdialený krik.)'});
-  else if(c.lang!=='sk') c.log.push({who:'c', text:FOPEN[c.lang]});
-  else if(CR()<.4){ c.log.push({who:'c', text:text}); c.asked.push('what'); }
-  else c.log.push({who:'c', text:cpick(OPEN)});
-  G.calls.push(c); G.stats.calls++;
+  if(prank) c.log.push({who:'c', text:text, key:raw, emo:'smiech'});
+  else if(c.silent) c.log.push({who:'c', text:'(Ticho… počuť len vzrušený dych a vzdialený krik.)', emo:'strach'});
+  else if(c.lang!=='sk') c.log.push({who:'c', text:FOPEN[c.lang], key:FOPEN[c.lang], emo:'panika'});
+  else if(CR()<.4){ c.log.push({who:'c', text:text, key:c.textKey, emo:tplEmo(tpl)}); c.asked.push('what'); }
+  else { const o=cpick(OPEN); c.log.push({who:'c', text:o, key:o, emo:OPEN_EMO[OPEN.indexOf(o)]}); }
+  G.calls.push(c); G.stats.calls++; prefetchCall(c);
   SND.ring(); G.lastRing=G.t;
   dirty();
 }
@@ -1973,19 +2216,31 @@ function answerFor(c, q){
   return (ANS[tpl.title]||{})[q] || DEF_ANS[tpl.cat][q];
 }
 function nearTown(node){ const n=NODES[node]; let best=null, bd=1e9; for(const t of Object.values(NODES)) if(t.type==='town' && t.id!==node){ const d=Math.hypot(t.x-n.x,t.z-n.z); if(d<bd){ bd=d; best=t.id; } } return best; }
+/* ktorá nahrávka a emócia patrí k odpovedi (poloha sa mení, tú hovorí len syntéza reči) */
+function answerMeta(c, q, a){
+  if(c.prank) return {key:a, emo:'smiech'};
+  if(c.silent) return {key:null, emo:'strach'};
+  const t=c.tpl, foreign=c.lang!=='sk' && !c.interp;
+  if(q==='where') return {key:null, emo:calmer(tplEmo(t))};
+  if(q==='what') return {key: foreign ? t.fx[c.lang] : c.textKey, emo:tplEmo(t)};
+  if(foreign) return {key:a, emo:'strach'};
+  const hits=cxOf(c, q);
+  if(hits.length) return {key: hits.length===1 ? a : null, emo:'panika'};
+  return (ANS[t.title]||{})[q] ? {key:a, emo:ansEmo(t)} : {key:a, emo:defEmo(t.cat)};
+}
 function stepCall(c){
   if(c.fa && c.fa.busy && G.t>=c.fa.busy){ c.fa.busy=0; dirty(); }
   if(!c.pend || G.t<c.pend.at) return;
   const pd=c.pend, q=pd.q; c.pend=null;
   if(pd.fq!==undefined){
     const x=c.fq[pd.fq], a=c.prank ? FQ_PRANK[Math.floor(Math.random()*FQ_PRANK.length)] : x[1];
-    c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a);
+    c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a, a, c.prank ? 'smiech' : fqEmo(c.tpl, x));
     if(!c.prank && x[2]){ c.info++; c.brief.push(a); }
     dirty(); return;
   }
   if(pd.rq!==undefined){
     const x=repeatQs(c)[pd.rq], inc=incById(c.incId);
-    c.log.push({who:'c', text:x[1], t:performance.now()}); speak(c, x[1]);
+    c.log.push({who:'c', text:x[1], t:performance.now()}); speak(c, x[1], x[1], pd.rq===0 ? 'panika' : x[2] ? 'strach' : 'hnev');
     if(pd.rq===0){ c.knows=true; if(inc){ inc.brief=inc.brief||[]; inc.brief.push('Zmena: '+x[1]); } }
     else if(x[2] && inc){ inc.brief=inc.brief||[]; inc.brief.push(x[1]); }
     dirty(); return;
@@ -1994,7 +2249,7 @@ function stepCall(c){
     c.interp=true;
     c.log.push({who:'sys', text:'Tlmočník je na linke.'});
     if(c.asked.includes('what')) c.log.push({who:'c', text:c.text, t:performance.now()});
-  } else { const a=answerFor(c,q); c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a); }
+  } else { const a=answerFor(c,q), m=answerMeta(c,q,a); c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a, m.key, m.emo); }
   dirty();
 }
 /* otázky, ktoré odhalili komplikáciu (pri tichom hovore ťuknutím) */
@@ -2009,13 +2264,13 @@ function answer(c){
   if(!c || c.state!=='ring' || !running()) return;
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   c.state='talk'; c.talkAt=G.t;
-  if(c.log[0]){ c.log[0].t=performance.now(); speak(c, c.log[0].text); }
+  if(c.log[0]){ c.log[0].t=performance.now(); speak(c, c.log[0].text, c.log[0].key, c.log[0].emo); }
   if(c.kind!=='repeat') G.stats.ans.push(G.t-c.t0);
   if(G.t-c.t0<5) G.score+=10;
   if(!quiet()) openSheet('calls');
   dirty();
 }
-function dropCall(c){ G.calls=G.calls.filter(x=>x!==c); dirty(); }
+function dropCall(c){ if(c && c.state==='talk') stopVoice(); if(c && CALLAMB && CALLAMB.id===c.id) stopAmb(); G.calls=G.calls.filter(x=>x!==c); dirty(); }
 const repLoss = v => v*(has('d_rep') ? .7 : 1);
 function classify(c, cat){
   if(!c || c.state!=='talk' || !running()) return;
@@ -2057,7 +2312,7 @@ function createIncident(c, cat){
   const inc={id:'I'+(++G.seq), no:G.seq, cat, title: prank ? CATS[cat].label : tpl.title, prio, needs, prank,
     work: prank ? 5 : tpl.work, tr: !prank && !!tpl.tr, search: !prank && !!tpl.search,
     node:c.node, x:n.x+Math.cos(ja)*jd, z:n.z+Math.sin(ja)*jd, addr:c.addr, text:c.lang!=='sk' && !c.interp && c.asked.includes('what') ? tpl.fx[c.lang] : c.text,
-    created:G.t, deadline:0, progress:0, metAt:0, frac:0, units:[], tpl, info:prank ? 0 : c.info||0, brief:prank ? [] : (c.brief||[]).slice(),
+    created:G.t, deadline:0, progress:0, metAt:0, frac:0, units:[], tpl, vp:c.vp, vr:c.vr, vi:c.vi, voiceSfx:c.voiceSfx, info:prank ? 0 : c.info||0, brief:prank ? [] : (c.brief||[]).slice(),
     hidden: prank ? [] : c.cx.filter(x=>!rv.includes(x)), lost: c.lost ? {...c.lost, clueKnown:c.asked.includes('where') && (c.lang==='sk' || c.interp)} : null};
   /* limit = základ podľa priority + dojazd najbližšej vhodnej posádky z jej základne */
   let worst=0; const ghostBest=[];
@@ -2176,7 +2431,9 @@ function escalate(inc){
   if(quiet()) return;
   const st=e.st || ESC_STATE_T[inc.title] || ESC_STATE_C[inc.cat];
   G.calls.push({id:'C'+(++G.cseq), kind:'repeat', incId:inc.id, inc:inc.no, tpl:inc.tpl, prank:false, node:inc.node, addr:inc.addr, text:e.text, t0:G.t, state:'ring', talkAt:0,
-    log:[{who:'c', text:'Haló, to som zase ja, volal som kvôli udalosti #'+inc.no+'! '+e.text}], asked:[], pend:null, lang:'sk', cx:[], st, change:e.change||null, knows:false, fa:null});
+    log:[{who:'c', text:'Haló, to som zase ja, volal som kvôli udalosti #'+inc.no+'! '+e.text, key:'repeat:'+e.text, emo:'panika'}], asked:[], pend:null, lang:'sk', cx:[], st, change:e.change||null, knows:false, fa:null,
+    vp:inc.vp||1, vr:inc.vr||1, vi:inc.vi||0, voiceSfx:inc.voiceSfx, mood:'panika'});
+  prefetchCall(G.calls[G.calls.length-1]);
   fx(inc.x, inc.z, 'Zhoršenie!', 'bad'); SND.alarm();
   say('#'+inc.no+' '+inc.title+': situácia sa zhoršila'+(e.need ? ' – treba aj '+needLabel(e.need).toLowerCase() : '')+'.', 'bad');
   G.stats.esc=(G.stats.esc||0)+1; comboBreak(); dirty();
@@ -2204,6 +2461,7 @@ function repeatAid(c, i){
   if(!inc || !list || !f || !c.knows || c.state!=='talk' || inc.metAt || f.given.includes(i) || G.t<f.busy || !list[i] || !running()) return;
   aidEffect(inc, f, list, i);
   c.log.push({who:'op', text:list[i][0]}, {who:'c', text:list[i][2], t:performance.now()});
+  speak(c, list[i][2], list[i][2], list[i][1] ? 'ulava' : 'zdesenie');
 }
 /* hľadanie volajúceho na mape */
 function tryLocate(inc, x, z){
@@ -3740,7 +3998,7 @@ function showSummary(){
 function clearWorld(){ for(const id of [...incObj.keys()]) dropIncMesh(id); for(const L of FX) L.el.remove(); FX.length=0; if(addP){ addP.list.length=0; norP.list.length=0; } }
 function restartDemo(){ clearWorld(); G=newGame('normal','demo'); applyWeatherFx(); }
 function start(tempo, mode){
-  audio(); clearWorld();
+  audio(); clearWorld(); clipIndex();
   CR=Math.random; WR=Math.random;
   let ch=null;
   if(mode && mode.daily){ const day=todayKey(); CR=rng(hashStr(day)); WR=rng(hashStr(day)+1); ch=dailyChallenge(day); }
@@ -3787,13 +4045,13 @@ function act(el){
   if(a==='chal') return start('normal', {ch:id});
   if(a==='daily') return start('normal', {daily:true});
   if(a==='mtab') return showMenu(id);
-  if(a==='voice'){ PROG.voice=!PROG.voice; saveProg(); el.textContent=PROG.voice ? 'Hlas zap.' : 'Hlas'; if(!PROG.voice && window.speechSynthesis) speechSynthesis.cancel(); return; }
+  if(a==='voice'){ PROG.voice=!PROG.voice; saveProg(); el.textContent=PROG.voice ? 'Hlas zap.' : 'Hlas'; if(PROG.voice) clipIndex(); else stopVoice(); return; }
   if(a==='menu'){ restartDemo(); showMenu(); return dirty(); }
   if(a==='tab') return setTab(el.dataset.tab);
   if(a==='grip'){ const app=$('#app'); app.dataset.sheet = app.dataset.sheet==='half' ? 'full' : 'half'; return syncTabs(); }
   if(a==='more'){ const app=$('#app'), on=app.dataset.more!=='1'; app.dataset.more=on ? '1' : ''; el.setAttribute('aria-expanded', String(on)); return; }
   if(a==='uf'){ UF=el.dataset.id; return dirty(); }
-  if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; return; }
+  if(a==='mute'){ muted=!muted; el.textContent=muted ? 'Zvuk vyp.' : 'Zvuk'; if(muted){ stopVoice(); stopAmb(); } return; }
   if(a==='light'){ const ks=Object.keys(LIGHTS); PROG.light=ks[(ks.indexOf(PROG.light)+1)%ks.length]; saveProg(); return applyLight(); }
   if(a==='view') return viewAll();
   if(a==='cov'){ covShow=!covShow; return dirty(); }
@@ -3880,6 +4138,7 @@ function frame(now){
     let left=dt*G.speed*TIME_SCALE;
     while(left>0 && running()){ const s=Math.min(.05,left); step(s); left-=s; }
   }
+  syncCallAudio();
   render3D(now);
   if(uiDirty || (running() && now-lastUI>450)){ uiDirty=false; lastUI=now; renderUI(); }
   updateTimers();

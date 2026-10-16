@@ -91,6 +91,14 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
 - **Počasie** (dážď, hmla, poľadovica, búrka, horúčava) mení rýchlosť jázd, vrtuľník aj druhy udalostí;
   v Košiciach býva dopravná špička.
 
+**Hlasy volajúcich** (tlačidlo **Hlas**, predvolene zapnuté)
+- Počas hovoru znie telefónna linka a zvuky z miesta podľa udalosti: doprava, oheň a požiarny alarm, vietor
+  na horách, voda, dav, hudba cez stenu, kvapky v jaskyni. Volajúci počuteľne dýcha – pri panike rýchlo a nahlas.
+- Každá veta má emóciu (panika, strach, plač, šok, zdesenie, úľava…). Hlas prehliadača podľa nej mení tempo a výšku.
+- Nahrávky z priečinka `audio/volajuci/` hra prehrá cez telefónnu linku namiesto hlasu prehliadača.
+  Môžu to byť vlastné nahrávky alebo AI hlasy z ElevenLabs, ktoré naraz vytvorí skript `generuj-hlasy.py`.
+  Scenár všetkých 437 slovenských viet a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+
 **Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
 satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;
 `img/kosicky-kraj-satelit.jpg`). Pri otvorení súboru priamo z disku (file://) prehliadač satelitnú snímku
