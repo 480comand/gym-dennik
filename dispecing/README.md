@@ -33,6 +33,16 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
 **Hovory**
 - **Vypytovanie:** otázky „Čo sa stalo?“, „Kde ste?“, „Je niekto zranený?“, „Hrozí ešte niečo?“. Odpovede odhalia
   skryté komplikácie (ďalší zranený, šíriaci sa oheň, ozbrojený útočník). Čo nezistíš, nahlási až posádka z miesta.
+- **Doplňujúce otázky k problému:** keď vieš, čo sa stalo, pribudnú pri každom zo 42 druhov udalostí tri otázky,
+  napríklad „Dýcha normálne, alebo len lapá po dychu?“ alebo „Je na kamióne oranžová tabuľa s číslami?“.
+  - Dve z nich sú dôležité: odpoveď dostane posádka do karty udalosti (+10 bodov) a na mieste je hotová rýchlejšie.
+  - Jedna je zbytočná (napríklad „Je dom poistený?“): stojí 5 bodov a zdržiava.
+  - Schopnosť s nápovedou zvýrazní dôležité otázky.
+- **Opakovaný hovor pri zhoršení:** volajúci znova zavolá a stav sa trochu zhorší.
+  - Zisti, čo presne sa zmenilo (napríklad bolesť na hrudi prešla do zástavy srdca alebo topiaceho sa vytiahli a nedýcha).
+  - Zmenu dostane posádka do karty udalosti. Potom vyber telefonickú prvú pomoc pre nový stav.
+  - Dobrá rada pomôže (+15 bodov a čas navyše). Za zlú radu: −30 bodov, −2 dôvery a horší stav.
+  - Zbytočná otázka stojí 5 bodov. Ak hovor ukončíš bez zistenia zmeny, body za upokojenie nedostaneš.
 - **Neznáma poloha:** volajúci nevie, kde je – mobil hlási len kruh. Podľa jeho opisu ho nájdeš ťuknutím na mapu.
 - **Cudzí jazyk a tiché hovory:** maďarčina, ukrajinčina a angličtina pri hraniciach (s tlmočníkom),
   tichý hovor, keď volajúci nemôže hovoriť a odpovedá ťuknutím.
@@ -66,6 +76,13 @@ záchranky (RZP, RLP, RV, vrtuľník), hasičov, políciu, mestskú políciu, CB
   - Ďalšiu radu môžeš dať, až keď volajúci dokončí predošlú. Keď posádka dorazí, ohodnotí, čo volajúci urobil.
   - Volajúcemu, ktorý nemôže hovoriť alebo nerozumie po slovensky a nemá tlmočníka, rady dať nemôžeš.
   - Medaila Anjel na linke: aspoň 6 dobrých rád a žiadna zlá.
+
+**Režim udalostí** (voľba v menu pri voľnej službe)
+- **Viac naraz:** hovory chodia priebežne a udalosti sa prekrývajú.
+- **Jedna po druhej:** riešiš vždy jeden prípad. Ďalší hovor príde, až keď je udalosť uzavretá a pacient má
+  pridelenú nemocnicu.
+  - Mimoriadne udalosti v tomto režime nie sú.
+  - Zhoršenie a opakovaný hovor prídu skôr a častejšie, aby bol čas na otázky a prvú pomoc.
 
 **Živý kraj**
 - Udalosti, ku ktorým pomoc mešká, sa zhoršia a volajúci zavolá znova. Posádky podávajú hlásenia rádiom.
