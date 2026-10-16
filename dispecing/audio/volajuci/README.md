@@ -14,6 +14,7 @@ Zatiaľ len po slovensky – volajúci v cudzom jazyku hovoria hlasom prehliada�
 | `udalost`, `situacia` | kedy veta v hre zaznie |
 | `text` | presné znenie vety |
 | `hovori` | udalosť, ktorej volajúci vetu hovorí; `*` = spoločná veta pre všetkých volajúcich |
+| `hlas` | `žena` alebo `muž`, ak volajúci hovorí v rode (napríklad „Prikryla som ju“); prázdne = ktokoľvek |
 
 ## Možnosť A: AI hlasy z ElevenLabs
 
@@ -24,16 +25,17 @@ Skript `generuj-hlasy.py` vytvorí všetky nahrávky naraz. Stačí Python 3, ni
    - Windows (PowerShell): `$env:ELEVENLABS_API_KEY = "tvoj_kluc"`
    - macOS / Linux: `export ELEVENLABS_API_KEY=tvoj_kluc`
 2. `python3 generuj-hlasy.py --hlasy` vypíše hlasy z tvojho účtu a pripraví `hlasy.json` so štyrmi z nich
-   (`a` až `d`). V súbore môžeš vymeniť `voice_id`, pridať hlasy `e` až `h` alebo priradiť hlas udalosti,
+   (`a` až `d`) aj s pohlavím (`"pohlavie": "Ž"` alebo `"M"`). V súbore môžeš vymeniť `voice_id`, pridať hlasy `e` až `h` alebo priradiť hlas udalosti,
    napríklad `"udalosti": {"Pôrod": "b"}`. Prirodzenejšie znejú hlasy so slovenským prízvukom z Voice Library –
    pridaj si ich do svojich hlasov a spusti `--hlasy` znova.
 3. `python3 generuj-hlasy.py --odhad` spočíta, koľko znakov (kreditov) generovanie spotrebuje.
-   So štyrmi hlasmi je to asi 44 000 znakov. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
+   So štyrmi hlasmi je to asi 53 000 znakov aj so značkami emócií. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
 4. `python3 generuj-hlasy.py --max 10` vyskúša prvých 10 nahrávok. Keď sa ti páčia,
    `python3 generuj-hlasy.py` dorobí zvyšok. Hotové súbory preskakuje, takže ho môžeš prerušiť a spustiť znova.
    `--len "Zástava"` vygeneruje len vety udalostí, ktorých názov obsahuje zadaný text.
 
-Model `eleven_v3` dostane pred každou vetou značku emócie, napríklad `[panicked]` alebo `[crying]`.
+Model `eleven_v4` dostane pred každou vetou značky emócie, napríklad `[panicked] [breathless]` alebo `[crying]`.
+Vety, v ktorých volajúci hovorí ako žena alebo muž, dostanú hlas správneho pohlavia; spoločné vety sú bez rodu.
 Značky si môžeš upraviť v slovníku `TAGS` na začiatku skriptu.
 
 Každá udalosť má svoj hlas, takže volajúci hovorí počas celého hovoru rovnakým hlasom.

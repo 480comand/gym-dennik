@@ -27,13 +27,15 @@ BASE = os.environ.get('ELEVENLABS_BASE', 'https://api.elevenlabs.io').rstrip('/'
 FORMAT = 'mp3_44100_64'           # telefónna kvalita stačí a súbory sú malé
 LETTERS = 'abcdefgh'
 
-# Emócia zo scenára → zvuková značka pre model eleven_v3 (v hranatých zátvorkách, po anglicky).
-# Môžeš ich upraviť; model eleven_multilingual_v2 značky nepozná a skript ich preň vynechá.
+# Emócia zo scenára → zvukové značky pre modely eleven_v4 a eleven_v3 (v hranatých zátvorkách, po anglicky).
+# Môžeš ich upraviť; staršie modely (eleven_multilingual_v2 a pod.) značky nepoznajú a skript ich vynechá.
 TAGS = {
-    'panika': '[panicked]', 'strach': '[scared]', 'plač': '[crying]', 'šok': '[in shock]',
-    'nervozita': '[nervous]', 'rozčúlenie': '[annoyed]', 'pokoj': '', 'úľava': '[relieved]',
-    'zdesenie': '[horrified]', 'zmätenosť': '[confused]', 'posmech': '[giggles]',
+    'panika': '[panicked] [breathless]', 'strach': '[scared] [trembling voice]', 'plač': '[crying]',
+    'šok': '[in shock] [slowly]', 'nervozita': '[nervous]', 'rozčúlenie': '[frustrated]', 'pokoj': '',
+    'úľava': '[relieved] [exhales]', 'zdesenie': '[horrified] [gasps]', 'zmätenosť': '[confused] [cautiously]',
+    'posmech': '[giggles] [mischievously]',
 }
+TAG_MODELS = ('eleven_v4', 'eleven_v3')
 
 
 def api(path, body=None, accept='application/json'):
@@ -81,13 +83,22 @@ def load_config():
 
 
 def plan(lines, cfg, voices, only=None):
-    """Ktoré súbory treba: veta udalosti v hlase jej volajúceho, spoločná veta v každom hlase."""
+    """Ktoré súbory treba: veta udalosti v hlase jej volajúceho (žena/muž podľa scenára),
+    spoločná veta v každom hlase."""
     letters = sorted(voices)
-    events = []
+    events, gender = [], {}
     for l in lines:
         if l['hovori'] != '*' and l['hovori'] not in events:
             events.append(l['hovori'])
-    assign = {e: cfg.get('udalosti', {}).get(e) or letters[i % len(letters)] for i, e in enumerate(events)}
+            gender[l['hovori']] = {'žena': 'Ž', 'muž': 'M'}.get(l.get('hlas', ''), '')
+    used = {}
+    def pick(e):
+        if cfg.get('udalosti', {}).get(e) in voices:
+            return cfg['udalosti'][e]
+        pool = [k for k in letters if gender[e] and voices[k].get('pohlavie') == gender[e]] or letters
+        n = used.get(tuple(pool), 0); used[tuple(pool)] = n + 1
+        return pool[n % len(pool)]
+    assign = {e: pick(e) for e in events}
     jobs = []
     for l in lines:
         if only and only.lower() not in (l['udalost'] + ' ' + l['hovori']).lower():
@@ -100,7 +111,7 @@ def plan(lines, cfg, voices, only=None):
 
 
 def text_for(line, model):
-    tag = TAGS.get(line['emocia'], '') if model.startswith('eleven_v3') else ''
+    tag = TAGS.get(line['emocia'], '') if model.startswith(TAG_MODELS) else ''
     return (tag + ' ' + line['text']).strip()
 
 
@@ -125,12 +136,14 @@ def cmd_voices():
         print('\nhlasy.json už existuje – nechávam ho, uprav ho podľa zoznamu vyššie.')
         return
     pick = vs[:4]
-    cfg = {'model': 'eleven_v3',
-           'hlasy': {LETTERS[i]: {'voice_id': v['voice_id'], 'meno': v.get('name', '')} for i, v in enumerate(pick)},
+    sex = lambda v: {'female': 'Ž', 'male': 'M'}.get((v.get('labels') or {}).get('gender', ''), '')
+    cfg = {'model': 'eleven_v4',
+           'hlasy': {LETTERS[i]: {'voice_id': v['voice_id'], 'meno': v.get('name', ''), 'pohlavie': sex(v)} for i, v in enumerate(pick)},
            'udalosti': {}}
     p.write_text(json.dumps(cfg, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     print(f'\nVytvoril som hlasy.json so {len(pick)} hlasmi ({", ".join(v.get("name", "") for v in pick)}).')
     print('Môžeš v ňom zmeniť voice_id, pridať hlasy (e–h) alebo do "udalosti" priradiť hlas udalosti, napr. "Pôrod": "b".')
+    print('Pri každom hlase nech je "pohlavie": "Ž" alebo "M" – vety, v ktorých volajúci hovorí ako žena alebo muž, dostanú hlas správneho pohlavia.')
 
 
 def main():
@@ -139,12 +152,12 @@ def main():
     ap.add_argument('--odhad', action='store_true', help='len spočíta znaky chýbajúcich viet')
     ap.add_argument('--len', metavar='TEXT', help='len udalosti, ktorých názov obsahuje TEXT')
     ap.add_argument('--max', type=int, default=0, help='najviac toľko nových súborov')
-    ap.add_argument('--model', help='model ElevenLabs (predvolene z hlasy.json, inak eleven_v3)')
+    ap.add_argument('--model', help='model ElevenLabs (predvolene z hlasy.json, inak eleven_v4)')
     a = ap.parse_args()
     if a.hlasy:
         return cmd_voices()
     cfg, voices = load_config()
-    model = a.model or cfg.get('model') or 'eleven_v3'
+    model = a.model or cfg.get('model') or 'eleven_v4'
     jobs, assign = plan(load_lines(), cfg, voices, a.len)
     todo = [j for j in jobs if not j[2].exists()]
     chars = sum(len(text_for(l, model)) for l, v, f in todo)
@@ -156,7 +169,7 @@ def main():
         todo = todo[:a.max]
     for n, (l, v, f) in enumerate(todo, 1):
         body = {'text': text_for(l, model), 'model_id': model}
-        if not model.startswith('eleven_v3'):
+        if not model.startswith(TAG_MODELS):
             body['voice_settings'] = {'stability': .35, 'similarity_boost': .75, 'style': .55, 'use_speaker_boost': True}
         audio = api(f"/v1/text-to-speech/{voices[v]['voice_id']}?output_format={FORMAT}", body, accept='audio/mpeg')
         f.write_bytes(audio)

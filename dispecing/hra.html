@@ -829,12 +829,12 @@ const TPL=[
   {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:7,title:'Zástava srdca',texts:['Manžel spadol na zem, nedýcha a nereaguje! Bývame {loc}.','Otec sa zrútil v záhrade a nemá pulz!']},
   {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:4,title:'Anafylaxia',texts:['Dcéru štípla osa, opuchá jej tvár a ťažko dýcha!']},
   {cat:'med',prio:1,needs:[AMB,DOC],work:10,tr:1,place:'town',w:4,title:'Pád z lešenia',texts:['Robotník spadol z lešenia z tretieho poschodia a nehýbe sa.']},
-  {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:5,title:'Bolesť na hrudi',texts:['Otca strašne páli na hrudi, je bledý a spotený.','Manželka sa sťažuje na tlak na hrudi, ide jej to do ľavej ruky.']},
-  {cat:'med',prio:1,needs:[AMB],work:8,tr:1,place:'town',w:5,title:'Mozgová príhoda',texts:['Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!','Manžel nevie zdvihnúť pravú ruku a motá sa mu reč.']},
+  {cat:'med',prio:1,needs:[AMB],work:9,tr:1,place:'town',w:5,title:'Bolesť na hrudi',texts:['Otca strašne páli na hrudi, je bledý a spotený.','Manžel sa sťažuje na tlak na hrudi, ide mu to do ľavej ruky.']},
+  {cat:'med',prio:1,needs:[AMB],work:8,tr:1,place:'town',w:5,title:'Mozgová príhoda',texts:['Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!','Manželka nevie zdvihnúť pravú ruku a motá sa jej reč.']},
   {cat:'med',prio:1,needs:[AMB,DOC],work:9,tr:1,place:'town',w:3,title:'Dusenie',texts:['Dedko sa dusí, je celý modrý a nevie sa nadýchnuť!']},
   {cat:'med',prio:2,needs:['RZP|RLP'],work:8,tr:1,place:'town',w:6,title:'Pôrod',texts:['Manželke praskla plodová voda a kontrakcie sú každé dve minúty!']},
   {cat:'med',prio:2,needs:['RZP|RLP'],work:8,tr:1,place:'town',w:6,title:'Otrava',texts:['Syn vypil čistič na odpad, vracia a plače.','Kamarát zjedol nejaké huby a teraz má kŕče.']},
-  {cat:'med',prio:3,needs:['RZP|RLP'],work:6,tr:0,place:'town',w:8,title:'Pád seniora',texts:['Babka spadla v obývačke, je pri vedomí, ale nevie vstať.','Susedovi je zle, má vysoký tlak a točí sa mu hlava.']},
+  {cat:'med',prio:3,needs:['RZP|RLP'],work:6,tr:0,place:'town',w:8,title:'Pád seniora',texts:['Babka spadla v obývačke, je pri vedomí, ale nevie vstať.','Susede je zle, má vysoký tlak a točí sa jej hlava.']},
   {cat:'traffic',prio:1,needs:[AMB,'HAS','PZ'],work:14,tr:1,place:'road',w:4,title:'Zakliesnený vodič',texts:['Osobné auto narazilo do stromu {loc}, vodič je zakliesnený a krváca!']},
   {cat:'traffic',prio:1,needs:[AMB,'RZP|RLP',DOC,'HAS','PZ'],work:18,tr:1,place:'road',w:2,title:'Hromadná nehoda',texts:['Autobus sa zrazil s osobným autom {loc}, je tam veľa zranených!']},
   {cat:'traffic',prio:2,needs:['RZP|RLP','PZ'],work:10,tr:1,place:'town',w:6,title:'Zrazený chodec',texts:['Auto zrazilo chodkyňu na priechode, leží na ceste a je pri vedomí.']},
@@ -972,8 +972,8 @@ const FA={
     ['Položte ho na chrbát na tvrdú podložku.',1,'Dobre, leží na zemi na chrbte.'],
     ['Stláčajte hrudník v strede, rýchlo a hlboko – 100 až 120-krát za minútu.',1,'Stláčam… raz, dva, tri, štyri… ťažké to je, ale idem ďalej.'],
     ['Pošlite niekoho po defibrilátor (AED), ak je nablízku.',1,'Sused beží po AED do lekárne oproti.'],
-    ['Skúste mu dať napiť vody.',0,'Nalial som mu do úst vodu… teraz mu bublá v hrdle!','človek v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
-    ['Posaďte ho a opierajte, nech sa preberie.',0,'Posadil som ho… hlava mu padá, stále nedýcha.','pri zástave srdca treba hneď stláčať hrudník na tvrdej podložke, sedenie stráca drahé minúty.'],
+    ['Skúste mu dať napiť vody.',0,'Naliali sme mu do úst vodu… teraz mu bublá v hrdle!','človek v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
+    ['Posaďte ho a opierajte, nech sa preberie.',0,'Posadili sme ho… hlava mu padá, stále nedýcha.','pri zástave srdca treba hneď stláčať hrudník na tvrdej podložke, sedenie stráca drahé minúty.'],
     ['Najprv mu aspoň minútu hľadajte pulz.',0,'Hľadám pulz… nič necítim, čo mám robiť?','keď nedýcha normálne, stláčanie musí začať hneď – každá minúta bez neho znižuje šancu na prežitie.']],
   'Anafylaxia':[
     ['Ak má adrenalínové pero, pichnite ho do vonkajšej strany stehna.',1,'Mala ho v taške, pichol som ho… trochu sa jej uľavilo.'],
@@ -1018,10 +1018,10 @@ const FA={
     ['Vyvolajte zvracanie prstom v krku.',0,'Zvracal… a teraz ho páli v hrdle ešte viac!','žieravina pri zvracaní poleptá pažerák druhýkrát a zvratky môžu vdýchnuť – zvracanie sa nevyvoláva.'],
     ['Dajte mu vypiť mlieko alebo olej, zneutralizuje to.',0,'Vypil mlieko a hneď to vyvrátil!','mlieko ani olej jed nezneutralizujú, iba vyvolajú zvracanie.']],
   'Pád seniora':[
-    ['Nech zostane ležať alebo sedieť, nezdvíhajte ho nasilu.',1,'Dobre, nechávam ju ležať na koberci.'],
-    ['Prikryte ho dekou, nech neprechladne.',1,'Prikryla som ju.'],
-    ['Postavte ho na nohy, nech to rozchodí.',0,'Postavili sme ju… zakričala od bolesti a zviezla sa na zem!','po páde môže mať zlomený krčok – na nohu sa nesmie postaviť.'],
-    ['Dajte mu niečo zo svojich liekov na tlak alebo na bolesť.',0,'Dala som jej svoju tabletku… teraz je celá ospalá.','cudzie lieky môžu spôsobiť pád tlaku alebo sa pobiť s jeho liekmi.']],
+    ['Nech zostane ležať alebo sedieť, nezdvíhajte ju nasilu.',1,'Dobre, nechávam ju ležať na koberci.'],
+    ['Prikryte ju dekou, nech neprechladne.',1,'Prikryla som ju.'],
+    ['Postavte ju na nohy, nech to rozchodí.',0,'Postavili sme ju… zakričala od bolesti a zviezla sa na zem!','po páde môže mať zlomený krčok – na nohu sa nesmie postaviť.'],
+    ['Dajte jej niečo zo svojich liekov na tlak alebo na bolesť.',0,'Dala som jej svoju tabletku… teraz je celá ospalá.','cudzie lieky môžu spôsobiť pád tlaku alebo sa pobiť s jeho liekmi.']],
   'Zakliesnený vodič':[
     ['Zapnite výstražné svetlá a postavte trojuholník.',1,'Svetlá blikajú, trojuholník stojí pred zákrutou.'],
     ['S vodičom nehýbte, iba sa s ním rozprávajte a upokojujte ho.',1,'Hovorím s ním, je pri vedomí.'],
@@ -1162,15 +1162,15 @@ const ESC_ST={
     q:[['Reaguje, keď ním zatrasiete a hlasno ho oslovíte?','Nie, vôbec nereaguje!',1],['Aké lieky berie?','Neviem… asi niečo na tlak.',0]], fa:'Zástava srdca'},
   unconscious:{change:'Pred chvíľou prestal odpovedať. Dýcha, ale chrčí a leží na chrbte.',
     q:[['Dýcha pravidelne?','Dýcha, ale chrčí, akoby mal niečo v krku.',1],['Kedy naposledy jedol?','Neviem, asi ráno…',0]],
-    fa:[['Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.',1,'Otočil som ho na bok… prestal chrčať, dýcha ľahšie.'],
+    fa:[['Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.',1,'Otočili sme ho na bok… prestal chrčať, dýcha ľahšie.'],
       ['Ostaňte pri ňom a sledujte dych – keby prestal dýchať, hneď mi to povedzte.',1,'Som pri ňom, dýcha.'],
-      ['Dajte mu napiť, nech sa preberie.',0,'Nalial som mu vodu… zakuckal sa a chrčí ešte viac!','v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
-      ['Podložte mu hlavu vysokým vankúšom.',0,'Dal som mu dva vankúše… chrčí ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a pacienta otočiť na bok.']]},
+      ['Dajte mu napiť, nech sa preberie.',0,'Naliali sme mu vodu… zakuckal sa a chrčí ešte viac!','v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
+      ['Podložte mu hlavu vysokým vankúšom.',0,'Dali sme mu dva vankúše… chrčí ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a pacienta otočiť na bok.']]},
   birth:{change:'Dieťa sa narodilo a plače, ale mama veľmi krváca a krv sa nezastavuje.',
     q:[['Vyšla už placenta?','Neviem… asi ešte nie.',1],['Ako sa bude dieťa volať?','Ešte sme nevybrali…',0]],
     fa:[['Priložte dieťa mame k prsníku.',1,'Dieťa saje… mama hovorí, že sa jej brucho sťahuje.'],
       ['Masírujte jej silno brucho pod pupkom krúživými pohybmi.',1,'Masírujem… krvácanie sa trochu spomalilo.'],
-      ['Ťahajte za pupočník, nech vyjde placenta.',0,'Potiahol som… krvácanie je ešte silnejšie!','ťahanie za pupočník môže vytrhnúť placentu a krvácanie zhoršiť.'],
+      ['Ťahajte za pupočník, nech vyjde placenta.',0,'Potiahli sme… krvácanie je ešte silnejšie!','ťahanie za pupočník môže vytrhnúť placentu a krvácanie zhoršiť.'],
       ['Nech sa mama postaví a ide sa umyť.',0,'Postavila sa… a omdlela!','pri silnom krvácaní hrozí kolaps – nech leží s nohami mierne hore.']]},
   injured:{change:'Do kolóny narazilo ďalšie auto. Vodička z neho silno krváca z ruky a je v šoku.',
     q:[['Je pri vedomí a odkiaľ krváca?','Je pri vedomí, krv jej strieka z predlaktia.',1],['Akej značky sú tie autá?','Škodovka a nejaká biela dodávka…',0]],
@@ -1192,18 +1192,18 @@ const ESC_ST={
   flood:{change:'Voda stále stúpa, prízemie je zatopené a susedia s deťmi sú na streche garáže.',
     q:[['Sú všetci mimo vody a v suchu?','My sme na poschodí, susedia na garáži.',1],['Koľko stálo auto v garáži?','To je teraz jedno…',0]],
     fa:[['Choďte na poschodie a vezmite si teplé oblečenie a telefón.',1,'Sme hore, máme deky aj telefóny.'],
-      ['Ak sa dá bezpečne, vypnite elektrinu hlavným ističom.',1,'Istič som vypol, bol ešte v suchu.'],
+      ['Ak sa dá bezpečne, vypnite elektrinu hlavným ističom.',1,'Istič sme vypli, bol ešte v suchu.'],
       ['Zíďte do pivnice zachrániť veci.',0,'Manžel išiel dole… voda ho strhla, ledva vyliezol!','v zatopenej pivnici hrozí utopenie a zásah prúdom.'],
       ['Prejdite cez vodu autom k susedom.',0,'Auto zostalo stáť vo vode a voda tečie dnu!','prúdiaca voda odnesie aj auto – cez zaplavenú cestu sa nejazdí.']]},
   panic:{change:'Dieťa rýchlo dýcha, plače a hovorí, že sa dusí.',
     q:[['Má dieťa astmu alebo inú chorobu?','Nie, je zdravé, len sa strašne bojí.',1],['Ktorá firma servisuje výťah?','Netuším…',0]],
     fa:[['Rozprávajte sa s ním pokojne a dýchajte spolu pomaly – nádych nosom, výdych ústami.',1,'Dýchame spolu… už je pokojnejšie.'],
-      ['Posaďte ho na zem a uvoľnite mu oblečenie.',1,'Sedí na zemi, rozopla som mu bundu.'],
-      ['Skúste vypáčiť dvere, nech má vzduch.',0,'Páčila som dvere… výťah sa pohol a dieťa kričí!','vo výťahu je vzduchu dosť a páčenie dverí je nebezpečné.'],
+      ['Posaďte ho na zem a uvoľnite mu oblečenie.',1,'Sedí na zemi, rozopli sme mu bundu.'],
+      ['Skúste vypáčiť dvere, nech má vzduch.',0,'Páčili sme dvere… výťah sa pohol a dieťa kričí!','vo výťahu je vzduchu dosť a páčenie dverí je nebezpečné.'],
       ['Nech dýcha do igelitového vrecka.',0,'Dýcha do vrecka… je ešte bledšie!','dýchanie do vrecka sa neodporúča – môže nebezpečne znížiť kyslík.']]},
   road:{change:'Je tu kolóna, vodiči sa hádajú a jeden chce strom rezať sám motorovou pílou.',
     q:[['Bijú sa alebo je niekto zranený?','Zatiaľ len kričia.',1],['Odkiaľ ste išli?','Z nákupu v meste…',0]],
-    fa:[['Nech všetci zostanú pri autách mimo stromu a počkajú na hasičov.',1,'Povedal som im to, odstúpili.'],
+    fa:[['Nech všetci zostanú pri autách mimo stromu a počkajú na hasičov.',1,'Povedali sme im to, odstúpili.'],
       ['Zapnite výstražné svetlá, nech do kolóny nikto nenarazí.',1,'Blikajú, autá spomaľujú.'],
       ['Nech ten vodič pílu použije, pôjde to rýchlejšie.',0,'Píla sa zasekla a strom sa pohol… skoro ho privalil!','strom pod napätím sa pri rezaní nečakane pohne – to je práca pre hasičov.']]},
   dizzy:{change:'Vodičke z druhého auta je zle, je bledá, točí sa jej hlava a chce odísť.',
@@ -1220,9 +1220,9 @@ const ESC_ST={
       ['Dajte im napiť mlieka, to pomáha pri otrave.',0,'Pijú mlieko… jeden ho hneď vyvrátil a dusí sa!','mlieko pri otrave plynom nepomáha a zvracanie zhorší dýchanie.']]},
   violence:{change:'Vrátil sa, búcha na dvere a kričí, že ich zabije. Má v ruke niečo kovové.',
     q:[['Vidíte, či má zbraň?','Má v ruke niečo ako tyč alebo nôž.',1],['Ako sa ten človek volá?','Neviem presne…',0]],
-    fa:[['Zamknite sa a zostaňte ďalej od okien a dverí.',1,'Zamkla som sa v spálni.'],
+    fa:[['Zamknite sa a zostaňte ďalej od okien a dverí.',1,'Zamkli sme sa v spálni.'],
       ['Sledujte ho len z bezpečia a hovorte mi, kam ide.',1,'Vidím ho z okna, stojí pri bráne.'],
-      ['Choďte von a skúste ho upokojiť.',0,'Vyšla som… hodil po mne kameň, mám rozbité čelo!','s agresívnym človekom sa nevyjednáva – nechajte to na políciu.'],
+      ['Choďte von a skúste ho upokojiť.',0,'Vyšli sme von… hodil po nás kameň, mám rozbité čelo!','s agresívnym človekom sa nevyjednáva – nechajte to na políciu.'],
       ['Vezmite si niečo na obranu a postavte sa mu.',0,'Manžel vyšiel s palicou… pobili sa, krváca!','konfrontácia končí zranením – zostaňte v bezpečí.']]},
   brawl:{change:'Bijú sa ďalej, rozbíjajú fľaše a hádžu ich po autách.',
     q:[['Majú nože alebo iné zbrane?','Nože nevidím, majú fľaše a palice.',1],['Poznáte niekoho z nich?','Nie, asi nie sú odtiaľto.',0]],
@@ -1467,7 +1467,10 @@ const defEmo = cat => cat==='msp' ? 'hnev' : cat==='police' ? 'nervy' : 'strach'
 const fqEmo = (tpl, x) => !x[2] ? 'hnev' : tpl.prio===1 ? 'strach' : calmer(tplEmo(tpl));
 /* text pre nahrávku: bez meniacej sa polohy (tú volajúci povie na otázku „Kde ste?“) */
 const canonText = t => t.replace(/\s*(Bývame|Sme) \{loc\}\./,'').replace(/\s*\{loc\}/,'');
-const REPEAT_OPEN='Haló, to som zase ja, volal som pred chvíľou! ';
+/* kto volá: žena (Ž) alebo muž (M) – podľa tvarov v jeho vetách; ostatné udalosti môže hovoriť ktokoľvek */
+const CALLER_G={'Zástava srdca':'Ž','Bolesť na hrudi':'Ž','Pád seniora':'Ž','Anafylaxia':'M','Mozgová príhoda':'M','Dusenie':'M','Pôrod':'M','Zrazený chodec':'M',
+  'Požiar bytu':'M','Požiar domu':'M','Otrava CO':'M','Vlámanie':'M','Zranený turista':'M','Vyčerpaný turista':'M'};
+const REPEAT_OPEN='Haló, to som zase ja, pred chvíľou sme spolu hovorili! ';
 const ST_L={arrest:'zástava srdca', unconscious:'bezvedomie', birth:'krvácanie po pôrode', injured:'ďalší zranený', fire:'oheň sa šíri', tech:'zhoršenie na mieste',
   flood:'voda stúpa', panic:'panika vo výťahu', road:'hádka v kolóne', dizzy:'nevoľnosť po náraze', fumes:'ďalší ľudia s dýchaním', violence:'agresor sa vrátil',
   brawl:'bitka pokračuje', cold:'podchladenie', missing:'stále sa neozval'};
@@ -1667,8 +1670,8 @@ function playClip(buf){
 function voiceLines(){
   const out=[], by=new Map();
   /* tpl = udalosť, ktorej volajúci vetu hovorí; bez nej je veta spoločná pre všetkých volajúcich */
-  const add=(group, ctx, key, emo, text, tpl)=>{ if(!key) return; const o=by.get(key); if(o){ if(o.tpl!==tpl) o.tpl=''; return; }
-    const e={group, ctx, id:clipId(key), emo, emoL:EMO[emo].l, dir:EMO[emo].dir, text:text||key, tpl:tpl||''}; by.set(key, e); out.push(e); };
+  const add=(group, ctx, key, emo, text, tpl)=>{ if(!key) return; const o=by.get(key); if(o){ if(o.tpl!==tpl){ o.tpl=''; o.g=''; } return; }
+    const e={group, ctx, id:clipId(key), emo, emoL:EMO[emo].l, dir:EMO[emo].dir, text:text||key, tpl:tpl||'', g:tpl && CALLER_G[tpl] || ''}; by.set(key, e); out.push(e); };
   OPEN.forEach((t,i)=>add('Úvod hovoru','prvá veta po zdvihnutí', t, OPEN_EMO[i]));
   for(const t of TPL){
     const g=t.title+' (P'+t.prio+')', T=t.title;
@@ -2431,7 +2434,7 @@ function escalate(inc){
   if(quiet()) return;
   const st=e.st || ESC_STATE_T[inc.title] || ESC_STATE_C[inc.cat];
   G.calls.push({id:'C'+(++G.cseq), kind:'repeat', incId:inc.id, inc:inc.no, tpl:inc.tpl, prank:false, node:inc.node, addr:inc.addr, text:e.text, t0:G.t, state:'ring', talkAt:0,
-    log:[{who:'c', text:'Haló, to som zase ja, volal som kvôli udalosti #'+inc.no+'! '+e.text, key:'repeat:'+e.text, emo:'panika'}], asked:[], pend:null, lang:'sk', cx:[], st, change:e.change||null, knows:false, fa:null,
+    log:[{who:'c', text:'Haló, to som zase ja, kvôli udalosti #'+inc.no+'! '+e.text, key:'repeat:'+e.text, emo:'panika'}], asked:[], pend:null, lang:'sk', cx:[], st, change:e.change||null, knows:false, fa:null,
     vp:inc.vp||1, vr:inc.vr||1, vi:inc.vi||0, voiceSfx:inc.voiceSfx, mood:'panika'});
   prefetchCall(G.calls[G.calls.length-1]);
   fx(inc.x, inc.z, 'Zhoršenie!', 'bad'); SND.alarm();
