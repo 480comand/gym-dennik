@@ -451,7 +451,7 @@
       <button class="btn sm ghost opt" data-act="speed" id="btnSpeed" title="Rýchlosť času">×1</button>
       <button class="btn sm ghost opt" data-act="light" id="btnLight" title="Osvetlenie mapy">Večer</button>
       <button class="btn sm ghost opt" data-act="mute" id="btnMute">Zvuk</button>
-      <button class="btn sm ghost opt" data-act="voice" id="btnVoice" title="Hlasy volajúcich: nahrávky, ak sú v priečinku audio/volajuci, inak syntéza reči prehliadača s emóciou">Hlas</button>
+      <button class="btn sm ghost opt" data-act="voice" id="btnVoice" title="Hlasy volajúcich: prehrá nahrávky z priečinka audio/volajuci (hlas prehliadača je vypnutý)">Hlas</button>
       <button class="btn sm ghost more" data-act="more" id="btnMore" aria-label="Ďalšie nastavenia" aria-expanded="false">⋯</button>
     </div>
     <div class="xpline"><i id="xpLine"></i></div>
@@ -1379,8 +1379,8 @@ const PKEY='linka112-kraj';
 const OLD_COST={z_rlp:2, z_mo:1, h_mi:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
 function loadProg(){
   try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null');
-    if(p && p.v===1){ if(p.voice===undefined) p.voice=true; for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
-  return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0, voice:true}; }
+    if(p && p.v===1){ if(p.voiceV!==2){ p.voice=false; p.voiceV=2; } for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
+  return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0, voice:false, voiceV:2}; }
 let PROG=loadProg();
 function saveProg(){ try{ localStorage.setItem(PKEY, JSON.stringify(PROG)); }catch(e){} }
 const has = id => PROG.skills.includes(id);
@@ -1486,6 +1486,8 @@ const AMB_T={'Hromadná nehoda':['road','crowd'],'Požiar bytu':['fire','alarm']
 const AMB_C={med:['room'], traffic:['road'], fire:['fire'], tech:['street'], hazmat:['alarm','crowd'], police:['street'], msp:['street'], mountain:['wind']};
 const ambOf = c => c.prank ? ['room'] : c.silent ? ['muffled'] : (c.tpl && (AMB_T[c.tpl.title] || AMB_C[c.tpl.cat])) || ['room'];
 
+/* zatiaľ vypnuté: umelé zvuky z miesta so šumom linky a hlas prehliadača – znejú strojovo; hrajú len nahrávky */
+const USE_AMBIENCE=false, USE_TTS=false;
 /* nahrávky: audio/volajuci/<id>.mp3 alebo <id>-<hlas>.mp3 (napr. z ElevenLabs) a zoznam súborov v zoznam.json (v artefakte vypnuté) */
 const CLIP_DIR='audio/volajuci/';
 let CLIP_SET=null, CLIP_LOADING=false; const CLIPS=new Map(), CLIP_VOICES=new Set();
@@ -1499,6 +1501,7 @@ function clipIndex(){
       const m=String(f).match(/^(v[0-9a-z]+)(?:-([a-z0-9]{1,8}))?\.(mp3|m4a|ogg|oga|opus|wav|webm|aac)$/i); if(!m) continue;
       const id=m[1].toLowerCase(), v=(m[2]||'').toLowerCase(); if(!CLIP_SET.has(id)) CLIP_SET.set(id, new Map()); CLIP_SET.get(id).set(v, f); if(v) CLIP_VOICES.add(v);
     }
+    if(G) for(const c of G.calls) prefetchCall(c);   // hovory, ktoré už zvonia
   }).catch(()=>{ CLIP_SET=new Map(); });
 }
 /* nahrávka vety v hlase volajúceho; ak v ňom nie je, poslúži iný hlas */
@@ -1616,6 +1619,7 @@ function stopAmb(){
 function duck(on){ if(CALLAMB) try{ CALLAMB.g.gain.setTargetAtTime(on ? .45 : 1, AC.currentTime, .1); }catch(e){} }
 /* zvuky z miesta hrajú, kým je hovor na linke */
 function syncCallAudio(){
+  if(!USE_AMBIENCE){ if(CALLAMB) stopAmb(); return; }
   const c = G && G.mode==='play' && !muted && AC ? G.calls.find(x=>x.state==='talk') : null;
   if(c && CALLAMB && CALLAMB.id===c.id) return;
   if(CALLAMB) stopAmb();
@@ -1640,7 +1644,7 @@ function emoText(text, emo){
 }
 const VOICE_LANG={sk:'sk', hu:'hu', uk:'uk', en:'en'};
 function tts(c, text, emo){
-  if(!window.speechSynthesis) return;
+  if(!USE_TTS || !window.speechSynthesis) return;
   const lang=c.interp ? 'sk' : (c.lang||'sk'), all=speechSynthesis.getVoices(), by=l=>all.filter(v=>v.lang && v.lang.toLowerCase().startsWith(l));
   const vs=by(VOICE_LANG[lang]).length ? by(VOICE_LANG[lang]) : lang==='sk' ? by('cs') : [];   // bez slovenského hlasu poslúži český
   if(!vs.length) return;
@@ -1654,15 +1658,15 @@ function tts(c, text, emo){
 function speak(c, text, key, emo){
   if(!c || quiet() || muted || !text) return;
   if(emo){ c.mood=emo; if(CALLAMB && CALLAMB.id===c.id) CALLAMB.br=EMO[emo].br; }
-  if(/^\(/.test(text)){ const n=(text.match(/ťuk/g)||[]).length; if(n) knocks(n); return; }
   if(!PROG.voice) return;
+  if(/^\(/.test(text)){ const n=(text.match(/ťuk/g)||[]).length; if(n) knocks(n); return; }
   stopVoice();
   const seq=++SPEAK_SEQ, voice=callVoice(c), buf=clipBuf(key, voice);
   if(buf) return playClip(buf);
   const f=key && CLIP_SET && clipFile(key, voice);
   if(f && CLIPS.get(f)==='loading'){   // nahrávka sa ešte načítava – chvíľu počkáme, nech hlas nepreskakuje
     const t0=performance.now(), wait=()=>{ if(seq!==SPEAK_SEQ) return; const b=CLIPS.get(f);
-      if(b && typeof b==='object') return playClip(b); if(b==='loading' && performance.now()-t0<1500) return setTimeout(wait, 100); tts(c, text, emo); };
+      if(b && typeof b==='object') return playClip(b); if(b==='loading' && performance.now()-t0<(USE_TTS ? 1500 : 5000)) return setTimeout(wait, 100); tts(c, text, emo); };
     return wait();
   }
   tts(c, text, emo);

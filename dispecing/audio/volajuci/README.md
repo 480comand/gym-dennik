@@ -1,8 +1,8 @@
 # Hlasy volajúcich
 
 Sem patria nahrávky viet, ktoré hovoria volajúci na linke 112. Hra si ich prehrá cez telefónnu linku
-(orezaný zvuk, šum, zvuky z miesta). Vetu, ktorá nahrávku nemá, prečíta hlas prehliadača s emóciou.
-Zatiaľ len po slovensky – volajúci v cudzom jazyku hovoria hlasom prehliadača.
+(orezaný zvuk ako v telefóne). Veta bez nahrávky ostane len ako text, lebo hlas prehliadača je zatiaľ vypnutý.
+Zatiaľ len po slovensky.
 
 `scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 437 slovenských viet:
 
