@@ -262,23 +262,38 @@ Odpoveď: áno – nové poradie práce platí.
 Rozhovor → Formulár → Naliehavosť → Vysielanie → Pokyny. Medzi krokmi sa dá ľubovoľne prepínať,
 posledné dve vety rozhovoru sú vždy viditeľné a otázky majú iný vzhľad ako bubliny rozhovoru.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q38 – Horná lišta počas hovoru.** Počas príjmu ostanú hore len hodiny hovoru a pauza; skóre, úroveň a dôvera
 sa ukážu po skončení príjmu.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q39 – Hlásenia.** Na mobile vždy len jedno hlásenie naraz; staršie sa dajú pozrieť v zozname hlásení.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q40 – Poradie v karte udalosti.** 1. posádky a tlačidlo Vyslať, 2. TANR (pri K), 3. súčinnosť IZS ako tri
 tlačidlá bez dlhého textu (vysvetlenie pod tlačidlom „?“), 4. pokyny volajúcemu (zbalené).
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno, ale pokyny volajúcemu sú POVINNÉ (nie zbalené, nie voliteľné).
 
 **Q41 – Počítač.** Na počítači ostáva rozloženie s mapou v strede; zmení sa len poradie v karte udalosti,
 vzhľad otázok a hlásenia. Kroky budú len na mobile.
+Odporúčanie: áno.
+Odpoveď: áno.
+
+## Kolo 8 – povinné pokyny volajúcemu (nadväzuje na Q40)
+
+**Q42 – Čo znamená „povinné“.**
+a) príjem sa nedá ukončiť, kým operátor nedá pokyn, b) príjem sa dá ukončiť, ale bez pokynu je trest
+a pacientovi sa priťaží, c) povinné len pri K a N, pri M odporúčané.
+Odporúčanie: b) + c) – pri K a N aspoň jeden správny pokyn, inak −20 a horší stav; pri M body navyše;
+v kurze krok „Pokyny“ svieti ako nesplnený, kým pokyn nedáš.
+Odpoveď: …
+
+**Q43 – Kedy sa pokyny dávajú.** Príjem sa už neukončí automaticky po vyslaní posádky, ale až tlačidlom
+„Ukončiť príjem“ (pri zástave po spustení TANR). Pokyny sa dávajú počas príjmu; po jeho ukončení len pri
+opakovanom hovore.
 Odporúčanie: áno.
 Odpoveď: …
