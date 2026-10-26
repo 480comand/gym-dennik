@@ -353,3 +353,22 @@ s triedením START, sekundárne prevozy, nočná zmena.
   prehliadka a polícia“. Nové situácie: Mŕtvy na lavičke, Nájdený mŕtvy v byte (rana, nejasné okolnosti). Chýbajúca polícia −20.
 - **Bolesť chrbta s mravčením:** N, ale len pri istých príznakoch zistených doplňujúcimi otázkami. V hre sú dve situácie s podobnou
   úvodnou vetou: M (moč a stolicu udrží, v rozkroku cíti) a N (únik moču, necitlivosť v rozkroku). Strom bolesti je upravený.
+
+## Stav plánu – učenie (etapa 3)
+
+Hotové naraz podľa pokynu „dokonči to celé naraz“:
+
+- **Rozbor hovoru** (a – d): kategória a naliehavosť s rozhodujúcim kritériom, chýbajúce / zbytočné / sugestívne otázky,
+  časová os, pokyny. V kurze a kazuistikách sa ukáže sám, vo voľnej službe po príchode posádky.
+- **Kurz:** 8 lekcií, karta s tipmi a kritériami, 4 hovory, odomknutie pri 3/4, nový hráč začína lekciou 1 (dá sa preskočiť),
+  prvé dve lekcie bez trestu za 90 s, čas 2×, krok Pokyny svieti ako nesplnený.
+- **Kazuistiky:** 10 prípadov, ktoré som napísal sám podľa typického priebehu z verejných zdrojov (ERC 2021, štúdie
+  o lapavom dýchaní, mozgovej príhode, netypickom infarkte u žien, AED s pomocou operátora, petechiách, otrave CO,
+  hypoglykémii, trauma triáži). Prerozprávané, anonymizované, zdroj je pri každej. Konkrétna kazuistika z ÚDZS
+  verejne dostupná nebola – ak nejakú máš, doplním ju.
+- **Skúška:** 10 hovorov (3 K, 3 N, 2 M, 2 O), skryté kritériá, bez lekára OS, výsledok v %, úspech od 80 %.
+- **AED na mape** (polohy ilustračné), **odklad** udalosti M bez voľnej posádky, **konzultácia s lekárom OS** (30 s).
+
+Na overenie v Exceli (hárky Kazuistiky a Kurz): netypický infarkt u ženy je K (bledá, studený pot, dýchavica) – nemá byť N?
+Horúčka so spavosťou a nezblednúcimi fľakmi je N (nové kritérium N v strome Ochorenia) – nemá byť K?
+

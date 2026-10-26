@@ -351,6 +351,28 @@
   .hlog .ht{font:600 12px var(--f-mono); color:var(--muted); padding-top:2px;}
   .credit{margin:0; font-size:11px; color:var(--muted);}
   .credit a{color:var(--muted);}
+  .deb{border-top:1px solid var(--line); padding-top:10px; display:grid; gap:6px;}
+  .deb h3{font:600 12px/1.2 var(--f-body); letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0;}
+  .dlist{list-style:none; margin:0; padding:0; display:grid; gap:5px; font-size:13.5px; line-height:1.45;}
+  .dlist li{position:relative; padding-left:22px;}
+  .dlist li > i:first-child{position:absolute; left:0; top:0; width:16px; text-align:center;}
+  .dk-ok, .dk-bad, .dk-n{font-style:normal; font-weight:700;}
+  .dk-ok{color:var(--p3);} .dk-bad{color:var(--p1);} .dk-n{color:var(--muted);}
+  .csteps .why{display:block; color:var(--muted); font-size:12.5px;}
+  .tline{list-style:none; margin:0; padding:0; display:grid; gap:4px; font-size:13px; line-height:1.4;}
+  .tline li{display:grid; grid-template-columns:40px 16px 1fr; gap:6px; align-items:start;}
+  .tline .ts{font:500 12px/1.4 var(--f-mono); color:var(--muted); text-align:right; font-variant-numeric:tabular-nums;}
+  .tline li > i{font-style:normal; font-weight:700; text-align:center;}
+  .keys.src a{color:var(--sodium);}
+  .lcard{border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin-top:8px; background:var(--card); display:grid; gap:6px;}
+  .lrow{display:grid; grid-template-columns:26px 1fr; gap:8px; font-size:12.5px; line-height:1.4; align-items:start;}
+  .lvtree.exam .lv ul{display:none;}
+  .ist.todo{color:var(--bad); border-bottom-color:var(--bad);}
+  .aedb, .consult, .defer{border:1px solid var(--line); border-radius:10px; padding:8px 10px; display:grid; gap:6px; background:var(--card);}
+  .aedb{border-color:color-mix(in srgb, var(--p3) 45%, var(--line)); background:color-mix(in srgb, var(--p3) 6%, var(--panel));}
+  .aedb .acts, .defer .acts{margin:0;}
+  .consult p{margin:0; font-size:13px;}
+  .l3.aed{font:700 9px/1 var(--f-body); background:var(--p3); color:#fff; border-radius:3px; padding:2px 3px; box-shadow:0 1px 2px rgba(20,32,46,.3);}
   .linkbtn{background:none; border:none; padding:0; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:12px;}
 
   /* menu: záložky, výzvy, medaily */
@@ -991,7 +1013,8 @@ const TREE={
     N:['Spavý, reaguje len na oslovenie alebo bolesť','Nebezpečná látka: lieky na spanie či na depresiu, vysoká dávka paracetamolu, drogy, chemikálie','Zmena správania, veľa zvracia, silná bolesť brucha'],
     M:['Ohrozené zdravie, nie život','Kašeľ či zvracanie po malom množstve','Dieťa, ktoré mohlo zjesť lieky alebo chemikáliu'],
     O:['Život nie je ohrozený','Konzultácia s NTIC, kontrolný telefonát']},
-  ochor:{M:['Dehydratácia, zvracanie, zhoršujúca sa horúčka','Upchatý katéter alebo vyústenie','Zhoršenie chronického stavu'],
+  ochor:{N:['Horúčka so spavosťou, s fľakmi, ktoré pod pohárom nezblednú, alebo so stuhnutým krkom','Horúčka so studenými končatinami a dieťa nepije ani nemočí'],
+    M:['Dehydratácia, zvracanie, zhoršujúca sa horúčka','Upchatý katéter alebo vyústenie','Zhoršenie chronického stavu'],
     O:['Horúčka, nevoľnosť, opuch bez ohrozenia','Odporuč 116117 alebo všeobecného lekára']},
   gyn:{N:['Rozbehnutý pôrod – vidno hlavičku, nutkanie tlačiť: veď pôrod telefonicky','Silné krvácanie, vypadnutá pupočná šnúra, pôrod pred 32. týždňom','Rizikový pôrod: dvojčatá, poloha koncom panvovým','Masívne gynekologické krvácanie, prudká bolesť, šok'],
     M:['Kontrakcie každých 5 minút v termíne','Odtok plodovej vody bez komplikácií','Silné gynekologické krvácanie bez šoku, možný potrat'],
@@ -1022,9 +1045,9 @@ const TPL=[
   /* náhle zastavenie obehu */
   {cat:'nzo',lvl:'K',w:6,title:'Zástava srdca',arrest:1,pt:'cardio',tr:1,work:10,place:'town',texts:['Manžel spadol na zem a nehýbe sa! Bývame {loc}.','Otec sa zrútil v záhrade a nereaguje!'],
     v:{ved:'Nereaguje! Ani keď ním trasiem a kričím na neho!', dych:'Neviem… len občas tak divne zalapá, ako keby chrápal.', obeh:'Je sivý, pery má fialové.', uraz:'Nie, len sa zrútil.', miesto:'Leží na zemi v obývačke, dvere sú otvorené.'}},
-  {cat:'nzo',lvl:'K',w:3,title:'Zástava srdca na ulici',arrest:1,izs:['PZ'],pt:'cardio',tr:1,work:10,place:'town',texts:['Na zastávke sa zrútil nejaký pán a leží na zemi!','Pri obchode spadol muž a nikto nevie, čo s ním!'],
+  {cat:'nzo',lvl:'K',w:3,help:1,title:'Zástava srdca na ulici',arrest:1,izs:['PZ'],pt:'cardio',tr:1,work:10,place:'town',texts:['Na zastávke sa zrútil nejaký pán a leží na zemi!','Pri obchode spadol muž a nikto nevie, čo s ním!'],
     v:{ved:'Nereaguje, pozerá do prázdna.', dych:'Nedýcha… teda len raz za čas tak zalapá po dychu.', obeh:'Je celý sivý.', uraz:'Nie, sám od seba sa zvalil.', krv:'Trochu z hlavy, ako padol na chodník.', miesto:'Sme na ulici, je tu veľa ľudí. Kúsok odtiaľto je lekáreň.'}},
-  {cat:'nzo',lvl:'K',alt:['uraz'],w:2,title:'Vytiahnutý z vody',arrest:1,cpr:'drown',izs:['PZ'],pt:'gen',tr:1,work:10,place:'lake',texts:['Vytiahli sme z vody chlapa, nehýbe sa!'],
+  {cat:'nzo',lvl:'K',alt:['uraz'],w:2,help:1,title:'Vytiahnutý z vody',arrest:1,cpr:'drown',izs:['PZ'],pt:'gen',tr:1,work:10,place:'lake',texts:['Vytiahli sme z vody chlapa, nehýbe sa!'],
     v:{ved:'Nereaguje, je studený a mokrý.', dych:'Nedýcha, z úst mu tečie voda!', obeh:'Je modrý.', uraz:'Skočil do vody a už sa nevynoril, vytiahli sme ho po pár minútach.', miesto:'Leží na móle, k vode sa dá prísť autom.'}},
   {cat:'nzo',lvl:'K',w:1,title:'Dojča nedýcha',arrest:1,cpr:'infant',pt:'child',tr:1,work:10,place:'town',texts:['Synček v postieľke nedýcha, je celý modrý!'],
     v:{ved:'Nereaguje, je úplne ochabnutý!', dych:'Nedýcha… nevidím, že by dýchal!', obeh:'Je modrý až sivý.', uraz:'Nie, spal v postieľke.', miesto:'Sme v detskej izbe, som s ním sama.'}},
@@ -1208,6 +1231,47 @@ const TPL=[
     v:{ved:'Asi áno, písala mi.', dych:'Neviem… myslím, že áno.', obeh:'Neviem.', uraz:'Nie, nepísala nič také.', krv:'Nie.', miesto:'Býva sama na prvom poschodí, dvere má asi zamknuté.'},
     h3:{pri:'Nie, som v práci. Len mi napísala správu.', no:'To neviem, nie som pri nej.', cq:{kedy:'Správu mi poslala pred pätnástimi minútami.', fast:'Písala, že nevie hovoriť a ruka ju nepočúva.', vek:'Päťdesiattri.'},
       ask:'Mám jej číslo, ale nedvíha mi.', who:0}},
+  /* kazuistiky: hovory len pre režim Kazuistiky (caseOnly) – prerozprávané modelové prípady, detaily vymyslené */
+  {cat:'nzo',lvl:'K',w:0,caseOnly:1,help:1,title:'Manžel chrápe a nedá sa zobudiť',arrest:1,pt:'cardio',tr:1,work:10,place:'ke',texts:['Manžel nejako divne chrápe a nemôžem ho zobudiť!'],
+    v:{ved:'Nereaguje… ani keď ho štipnem. Ale chrápe, takže spí, nie?', dych:'Áno, dýcha – tak nahlas chrápe, raz za čas.', obeh:'Okolo úst je taký sivý.', uraz:'Nie, ležal na gauči pri telke.', krv:'Nie.', miesto:'Sme v obývačke na treťom poschodí, výťah ide.'},
+    cqa:{dych2:'Nie normálne… zachrčí a potom dlho nič. Tak raz za desať sekúnd.', kedy:'Pred chvíľou ešte rozprával, potom sa zviezol na gauči.', kpr:'Nie, nikto.', aed:'Neviem o žiadnom.', znamky:'Nie, je teplý.', choroby:'Berie lieky na tlak a na srdce.', vek:'Šesťdesiatsedem.', pomoc:'Áno, je tu dcéra.'},
+    key:['dych2','pomoc']},
+  {cat:'nzo',lvl:'K',w:0,caseOnly:1,help:1,title:'Zrútil sa na tribúne',arrest:1,izsOk:['PZ','MSP'],pt:'cardio',tr:1,work:10,place:'i_zs',texts:['Na tribúne sa zrútil fanúšik, leží medzi sedadlami a nehýbe sa!'],
+    v:{ved:'Nereaguje, oči má otvorené.', dych:'Neviem… teraz zalapal a zase nič.', obeh:'Je bledý, pery má modré.', uraz:'Nie, len sa zvalil zo sedadla.', krv:'Nie.', miesto:'Sme na tribúne pri vchode B, je tu veľa ľudí aj usporiadatelia.'},
+    cqa:{dych2:'Len raz za čas zalapá, inak nič.', kedy:'Teraz, pred minútou.', kpr:'Nie, nikto sa ho neodváži dotknúť.', aed:'Áno, usporiadateľ hovorí, že pri vchode B visí defibrilátor.', znamky:'Nie.', choroby:'Neviem, nepoznám ho.', vek:'Asi päťdesiat.', pomoc:'Áno, je nás tu veľa, aj usporiadatelia.'},
+    key:['dych2','pomoc','aed']},
+  {cat:'neuro',lvl:'N',w:0,caseOnly:1,title:'Babka zrazu hovorí z cesty',pt:'neuro',tr:1,work:8,place:'snv',texts:['Babka od obeda hovorí z cesty a nevie chytiť lyžicu. Asi je len unavená, môže si ísť ľahnúť?'],
+    v:{ved:'Áno, je pri vedomí, pozerá na mňa.', dych:'Dýcha normálne.', obeh:'Farbu má normálnu.', uraz:'Nie, sedela pri stole.', krv:'Nie.', miesto:'Sme doma na prízemí, otvorím.'},
+    cqa:{kedy:'O pol jednej pri obede bola ešte úplne v poriadku. Teraz je trištvrte na jednu.', fast:'Áno, pravý kútik má dole a pravou rukou nič neudrží. Reč sa jej motá.', riedenie:'Áno, berie lieky na riedenie krvi.', epi:'Nie.', teplota:'Nie.', trvanie:'Kŕče nemá.', poranil:'Nie.', vek:'Sedemdesiatosem.'},
+    key:['kedy','fast','riedenie']},
+  {cat:'kardio',lvl:'K',w:0,caseOnly:1,self:1,title:'Pálenie žalúdka a studený pot',pt:'cardio',tr:1,work:9,place:'mi',texts:['Od rána ma páli žalúdok, je mi na zvracanie a teraz som celá spotená. Nemáte niečo na žalúdok?'],
+    v:{dych:'Trochu horšie sa mi dýcha… aj teraz, keď sedím.', obeh:'Som bledá a mokrá od potu, je mi zima.', uraz:'Nie.', krv:'Nie.', miesto:'Som doma, dvere otvorím.'},
+    cqa:{kde:'Páli ma pod hrudnou kosťou a ťahá ma to medzi lopatky a do sánky.', kedy:'Asi pred hodinou, keď som vešala prádlo.', tlak:'Nemerala som.', pulz:'Neviem, srdce mi búši.', srdce:'Nie, liečim sa len s cukrovkou a tlakom.', lieky:'Na cukrovku a na tlak.', ine:'Nie, len je mi strašne slabo.', odpadol:'Nie, ale točí sa mi hlava.', vek:'Päťdesiatosem.'},
+    key:['kde','kedy']},
+  {cat:'alerg',lvl:'N',w:0,caseOnly:1,self:1,title:'Bodla ma osa a škriabe ma v hrdle',pt:'gen',tr:1,work:9,place:'tv',texts:['Bodla ma osa do krku… škriabe ma v hrdle a ťažko sa mi hovorí.'],
+    v:{dych:'Dýcha sa mi ťažšie… a piští mi to.', obeh:'Mám červené fľaky po celom tele, točí sa mi hlava.', uraz:'Nie, len ma bodla osa.', krv:'Nie.', miesto:'Som v záhrade pri dome, bránka je otvorená.'},
+    cqa:{spustac:'Osa ma bodla do krku asi pred desiatimi minútami.', opuch:'Áno, opuchajú mi pery a jazyk mám hrubý.', veta:'Len… pár slov… naraz.', pero:'Áno, mám pero v kabelke, ale bojím sa ho pichnúť.', lieky:'Nie, nič som nebrala.'},
+    key:['opuch','veta','pero']},
+  {cat:'gyn',lvl:'N',w:0,caseOnly:1,title:'Tretie dieťa sa ponáhľa',pt:'gen',tr:1,work:8,place:'kc',texts:['Manželka rodí! Hovorí, že už musí tlačiť!'],
+    v:{ved:'Je pri vedomí, kričí od bolesti.', dych:'Dýcha rýchlo, ale normálne.', obeh:'Je červená a spotená.', uraz:'Nie.', krv:'Trochu krvi s vodou.', miesto:'Sme v spálni na prízemí, dvere otvorím.'},
+    cqa:{tyzden:'Je v 39. týždni, je to tretie dieťa.', voda:'Voda odtiekla pred desiatimi minútami, je číra.', kontrakcie:'Každú minútu, jedna za druhou.', tlacit:'Áno, tlačí… a už vidím hlavičku!', pohyby:'Áno.', komplik:'Áno, všetko bolo v poriadku.'},
+    key:['tyzden','kontrakcie','tlacit']},
+  {cat:'ochor',lvl:'N',w:0,caseOnly:1,title:'Horúčka a fľaky, ktoré nezblednú',pt:'child',tr:1,work:9,place:'rv',texts:['Dcérka má od noci horúčku a je taká unavená. Môžem s ňou počkať do rána k pediatričke?'],
+    v:{ved:'Je pri vedomí, ale stále spí. Keď ju zobudím, hneď zaspí.', dych:'Dýcha rýchlejšie.', obeh:'Je bledá a ruky a nohy má studené.', uraz:'Nie.', krv:'Nie.', miesto:'Sme doma na druhom poschodí.'},
+    cqa:{teplota:'39,6, nezrazilo sa to ani po sirupe.', kedy:'Od polnoci, teraz je päť ráno.', pije:'Od večera skoro nepila a plienku má suchú.', varovne:'Na nôžkach má malé fialové bodky… keď na ne pritlačím pohár, nezmiznú.', choroby:'Nie, je zdravá.', vek:'Tri roky.'},
+    key:['varovne','pije']},
+  {cat:'intox',lvl:'N',w:0,caseOnly:1,n:2,title:'Celá rodina má chrípku',izs:['HAS'],tr:1,work:10,place:'gl',texts:['Asi máme všetci chrípku – bolí nás hlava a je nám zle. Svokra je taká mimo, nevie, kde je.'],
+    v:{ved:'Svokra je zmätená a stále zaspáva. My ostatní sme pri vedomí.', dych:'Dýchajú normálne.', obeh:'Svokra je taká ružová v tvári.', uraz:'Nie.', krv:'Nie.', miesto:'Sme doma v byte, celú noc sme kúrili v piecke.'},
+    cqa:{viac:'Áno, bolí nás všetkých štyroch, aj deti. Aj pes je od rána nejaký spavý.', kedy:'Od rána, ako sme vstali, a je to horšie.', co:'Nič sme nebrali, len tabletku na hlavu.', alkohol:'Nie.', umysel:'Nie, nič také.', vaha:'Svokra má sedemdesiat rokov.', obal:'Nemáme nič.'},
+    key:['viac']},
+  {cat:'dm',alt:['neuro','vedomie'],lvl:'N',w:0,caseOnly:1,title:'Otec zrazu nevie hovoriť',tr:1,work:7,place:'mo',texts:['Otec zrazu nevie poriadne hovoriť a je celý mokrý. Asi má porážku!'],
+    v:{ved:'Je pri vedomí, ale je zmätený, nevie, aký je deň.', dych:'Dýcha normálne.', obeh:'Je bledý a celý mokrý od potu.', uraz:'Nie.', krv:'Nie.', miesto:'Sme doma v kuchyni, otvorím.'},
+    cqa:{glukomer:'Počkajte… glukomer ukazuje 2,1.', cukor:'Áno, má cukrovku, pichá si inzulín.', inzulin:'Ráno si pichol inzulín, ale obed vynechal, robil v záhrade.', prehlta:'Áno, prehĺta, keď mu podám pohár, napije sa.', smad:'Je zmätený, ale nezvracia.', pomoc:'Áno, je tu aj mama.', fast:'Reč má zmotanú, ale kútik neovisol a oboma rukami hýbe.', kedy:'Pred chvíľou, keď prišiel zo záhrady.'},
+    key:['glukomer','inzulin','prehlta']},
+  {cat:'dn',alt:['uraz'],lvl:'N',w:0,caseOnly:1,title:'Motorkár v priekope',izs:['PZ'],izsOk:['HAS'],pt:'trauma',heli:'trauma',tr:1,work:10,place:'w_ky',texts:['Motorkár vyletel zo zákruty a leží v priekope! Hýbe sa, ale je mimo.'],
+    v:{ved:'Je pri vedomí, ale stále opakuje to isté, nevie, čo sa stalo.', dych:'Dýcha rýchlo.', obeh:'Je bledý.', uraz:'Áno, vyletel z motorky v zákrute, letel niekoľko metrov.', krv:'Trochu z nohy, noha je divne vykrivená.', miesto:'Sme za zákrutou pri Kysaku, na ceste stojí niekoľko áut.'},
+    cqa:{zranenych:'Len on, iné auto v tom nebolo.', zakl:'Nie, leží v tráve vedľa motorky.', hori:'Nie, len z motorky kvapká benzín.', rychlost:'Išiel rýchlo, aspoň osemdesiat, vyletel zo sedla.', hybe:'Rukami hýbe, ľavou nohou nie, vraví, že ho bolí.', kdeje:'V priekope vedľa cesty, prilbu má na hlave.', vodic:'Áno, je tu.'},
+    key:['rychlost','hybe','kdeje']},
   /* nepatrí na 155 */
   {cat:'mimo',lvl:'O',o:['izs'],w:3,title:'Túlavý pes',place:'town',texts:['Na detskom ihrisku pobehuje agresívny pes bez náhubku.']},
   {cat:'mimo',lvl:'O',o:['izs'],w:3,title:'Krádež',place:'town',texts:['Z auta mi ukradli tašku. Kto mi pomôže?']},
@@ -1251,6 +1315,93 @@ const PRANK_ANS={what:'Nič, hehe… len sa nudím.', where:'Na Mesiaci! Hahaha.
   uraz:'Nie, hehe.', krv:'Jedine z nosa, keď sa smejem. Haha.', miesto:'Prístup? Hehe, cez okno.'};
 const PRANKS=['Haló, je tam záchranka? Hehe… máte veľmi pekný hlas.','Dobrý deň, chcel by som si objednať pizzu so šunkou.','Len skúšam, či to funguje. Ahoj!','Je tam záchranka? Môj kocúr mi zjedol večeru!','Koľko je hodín? Nemám baterku v mobile.'];
 for(const t of TPL){ t.fx=FTX[t.title]||null; t.cx=[]; }
+
+/* AED na mape: verejne dostupné defibrilátory (polohy sú ilustračné) */
+const AED_PTS={ke:{l:'obchodné centrum', min:3}, i_zs:{l:'vchod B pri pokladniach', min:2}, mi:{l:'mestský úrad', min:3}, snv:{l:'železničná stanica', min:3},
+  tv:{l:'športová hala', min:3}, rv:{l:'lekáreň na námestí', min:2}, mo:{l:'mestský úrad', min:3}, se:{l:'kultúrny dom', min:3}, kc:{l:'lekáreň', min:3}, l_si:{l:'plážová služba (v sezóne)', min:4}};
+const AED_DEB={used:[true,'pomocník ho priniesol a pripojil pred príchodom posádky'], fetch:[null,'pomocník poň išiel'], late:[null,'pomocník poň išiel, posádka však bola na mieste skôr'],
+  missed:[false,'bol nablízku a bolo koho poslať, ale nikto poň nešiel'], alone:[false,'osamelého volajúceho si posielal po AED – mal ostať pri stláčaní']};
+const aedOf = inc => inc && inc.fromCall && !inc.prank && inc.tpl && inc.tpl.arrest && inc.tpl.cpr!=='infant' && AED_PTS[inc.node] || null;
+const debAed = inc => { if(inc.deb && inc.deb.fa) inc.deb.fa.aed = inc.aed ? inc.aed.state : null; };
+function aedSend(inc){
+  const A=aedOf(inc); if(!A || inc.aed || inc.metAt || !inc.cpr || inc.cpr.skip || !running()) return;
+  if(inc.tpl.help){ inc.aed={state:'fetch', at:G.t+A.min}; tlog(inc, 'Pomocník poslaný po AED ('+A.l+')', true); say('#'+inc.no+': pomocník beží po AED – '+A.l+', asi '+A.min+' min.'); }
+  else { inc.aed={state:'alone'}; G.score-=10; dec('aedalone'); tlog(inc, 'Osamelého volajúceho si posielal po AED', false);
+    say('#'+inc.no+': volajúci je pri pacientovi sám – keby odbehol po AED, stláčanie by sa prerušilo. Jeden zachránca stláča a čaká na posádku. −10', 'bad'); }
+  debAed(inc); dirty();
+}
+function stepAed(){
+  for(const inc of G.incs){ const a=inc.aed;
+    if(!a || a.state!=='fetch' || G.t<a.at) continue;
+    if(inc.metAt){ a.state='late'; debAed(inc); continue; }
+    a.state='used'; G.score+=20; tlog(inc, 'AED je pri pacientovi – zapnutý, výboj podaný', true); debAed(inc);
+    say('#'+inc.no+': AED je pri pacientovi – volajúci ho zapol a riadi sa hlasovými pokynmi. +20', 'good'); dirty();
+  }
+}
+/* pri príchode posádky: AED bol nablízku a bolo koho poslať, ale nikto poň nešiel */
+function aedArrive(inc){
+  const A=aedOf(inc); if(!A || quiet()) return;
+  if(!inc.aed && inc.tpl.help && inc.cpr && inc.cpr.at){ inc.aed={state:'missed'}; dec('aedmiss'); note(inc, 'AED bol nablízku ('+A.l+'), ale nikto poň nešiel'); }
+  if(inc.aed && inc.aed.state==='fetch') inc.aed.state='late';
+  debAed(inc);
+}
+function aedBlock(inc){
+  const A=aedOf(inc); if(!A || inc.metAt || !inc.cpr || inc.cpr.skip) return '';
+  const a=inc.aed, st = !a ? '' : a.state==='fetch' ? 'Pomocník beží po AED – o chvíľu je späť.' : a.state==='used' ? 'AED je pripojený – volajúci robí, čo hovorí. Stláčanie prerušuje len na analýzu a výboj.' : a.state==='alone' ? 'Volajúci je pri pacientovi sám – ostáva pri stláčaní.' : '';
+  return `<div class="aedb"><div class="k">AED nablízku · ${esc(A.l)} · asi ${A.min} min</div>
+    ${a ? `<p class="keys">${st}</p>` : `<p class="keys">Ak je pri pacientovi ešte niekto, jeden stláča a druhý beží po defibrilátor. Osamelý volajúci od pacienta neodchádza.</p>
+    <button class="btn" data-act="aed" data-id="${inc.id}">Pošlite niekoho po AED</button>`}</div>`;
+}
+/* odklad: keď niet voľnej posádky, udalosť M počká na prvú uvoľnenú; K a N sa neodkladajú */
+const noFreeCrew = inc => !candidates(inc).some(c=>c.free) && needInfo(inc).missing.some(n=>!IZS_KINDS.includes(n));
+function deferBlock(inc){
+  if(!inc.fromCall || inc.prank || inc.metAt || inc.lost || inc.dispAt || !inc.lvl || inc.lvl==='O') return '';
+  if(inc.defer) return `<div class="defer"><p class="keys">Odložené – vyšle sa prvá uvoľnená vhodná posádka.</p><div class="acts"><button class="btn sm" data-act="undefer" data-id="${inc.id}">Zrušiť odklad</button></div></div>`;
+  if(!noFreeCrew(inc)) return '';
+  return `<div class="defer"><p class="keys">Žiadna vhodná posádka nie je voľná. Udalosť M môžeš odložiť – vyšle sa prvá uvoľnená posádka. K a N sa neodkladajú: presmeruj posádku z menej naliehavej udalosti alebo požiadaj o výpomoc.</p>
+    <div class="acts"><button class="btn" data-act="defer" data-id="${inc.id}">Odložiť do uvoľnenia posádky</button></div></div>`;
+}
+function deferInc(inc){
+  if(!inc || inc.defer || inc.dispAt || inc.metAt || !running()) return;
+  inc.defer=true;
+  if(inc.lvl==='K' || inc.lvl==='N'){ G.score-=20; dec('defer'); inc.harm=(inc.harm||0)+.1; tlog(inc, 'Odklad udalosti '+inc.lvl, false); say('#'+inc.no+': '+inc.lvl+' sa neodkladá – presmeruj posádku z menej naliehavej udalosti. −20', 'bad'); }
+  else { G.score+=5; tlog(inc, 'Odklad – čaká na uvoľnenú posádku', true); say('#'+inc.no+': odložené – vyšle sa prvá uvoľnená posádka. +5', 'good'); }
+  dirty();
+}
+function stepDefer(){
+  if(quiet()) return;
+  for(const inc of G.incs){
+    if(!inc.defer || inc.metAt) continue;
+    if(inc.dispAt){ inc.defer=false; continue; }
+    if(recommended(inc).length){ inc.defer=false; sendRecommended(inc); tlog(inc, 'Odklad skončil – vyslaná uvoľnená posádka', true); say('#'+inc.no+': odložená udalosť – vyslaná uvoľnená posádka.'); }
+  }
+}
+/* konzultácia s lekárom OS: trvá 30 s, lekár povie kategóriu, stupeň a rozhodujúce kritérium (v skúške nie je) */
+const CONSULT_SEC=30;
+const examOn = () => !!(G.script && G.script.kind==='exam');
+function consultBlock(c){
+  if(!c || examOn() || c.kind==='repeat') return '';
+  if(c.consultTxt) return `<div class="consult"><div class="k">Lekár OS</div><p>${esc(c.consultTxt)}</p></div>`;
+  const busy=c.pend && c.pend.consult;
+  return `<div class="consult">${c.consultNote ? `<p>${esc('Lekár OS: '+c.consultNote)}</p>` : ''}<button class="btn" data-act="consult" data-id="${c.id}" ${c.pend || c.consult || !cqOpen(c) ? 'disabled' : ''}>${busy ? 'Lekár OS počúva…' : 'Konzultovať s lekárom OS ('+CONSULT_SEC+' s)'}</button>
+    <p class="keys">Keď si nie si istý. Volajúci počká na linke, čas beží.</p></div>`;
+}
+function askConsult(c){
+  if(!c || c.state!=='talk' || c.pend || c.consult || !cqOpen(c) || examOn() || !running()) return;
+  c.consult=true; c.pend={consult:1, at:G.t+CONSULT_SEC/60};
+  c.log.push({who:'sys', text:'Konzultácia s lekárom OS…'}); tlog(c, 'Konzultácia s lekárom OS'); dirty();
+}
+/* lekár posúdi stav, až keď vie, kto je pri pacientovi, a pozná vedomie a dýchanie */
+const consultReady = c => c.prank || c.tpl.cat==='mimo' || !(hTrue(c.tpl)===3 && !c.asked.includes('pri') && !c.cb) && !(hNow(c)===2 && !(c.asked.includes('ved') && c.asked.includes('dych')));
+function consultAnswer(c){
+  const t=c.tpl;
+  if(c.prank) return 'Toto neznie ako zdravotný problém. Over si, či nejde o zneužitie linky.';
+  if(t.cat==='mimo') return 'Toto nepatrí na 155 – odovzdaj hovor na KS IZS 112.';
+  if(hTrue(t)===3 && !c.asked.includes('pri') && !c.cb) return 'Najprv zisti, či je volajúci pri pacientovi. Ak nie je, získaj kontakt na niekoho, kto pri ňom je.';
+  if(hNow(c)===2 && !(c.asked.includes('ved') && c.asked.includes('dych'))) return 'Bez vedomia a dýchania to neviem posúdiť – opýtaj sa na ne.';
+  const L=c.lvlTrue||t.lvl, k=critText(t);
+  return 'Podľa toho, čo opisuješ: '+CATS[t.cat].label.toLowerCase()+', stupeň '+L+' ('+LV_L[L]+')'+(k ? '. Rozhoduje: '+k.charAt(0).toLowerCase()+k.slice(1) : '')+'.';
+}
 const STREETS=['Hlavná','Školská','Mierová','Družstevná','Záhradná','Štúrova','Komenského','Sládkovičova','Nová','Jarná','Lesná','Poštová'];
 const KE_STREETS=['Hlavná','Južná trieda','Moyzesova','Trieda SNP','Popradská','Hlinkova','Komenského','Watsonova','Bauerova','Tr. arm. gen. L. Svobodu'];
 const BASE_PTS={1:300,2:200,3:120}, REP_OK={1:4,2:3,3:2}, REP_FAIL={1:16,2:12,3:7}, DL_BASE={1:22,2:32,3:46};
@@ -1920,6 +2071,8 @@ const CQ_ANS={
 };
 /* typ volajúceho: H1 volá pacient, H2 je pri pacientovi, H3 nie je pri pacientovi */
 const H_L={1:'H1 · pacient', 2:'H2 · pri ňom', 3:'H3 · nie je pri ňom'};
+/* časová os príjmu: sekundy od zdvihnutia hovoru */
+function tlog(x, text, ok){ if(!x || !x.tl || quiet()) return; const t0=x.talkAt!=null ? x.talkAt : x.callAt; x.tl.push({s:Math.round((G.t-t0)*60), text, ok}); }
 const H_PRI={1:'To som ja, volám za seba.', 2:'Áno, som hneď vedľa.'};
 const H3_NO='To neviem, nie som pri ňom.';
 /* rada pri O: bezpečnostná veta je povinná, ostatné vety sú správne (1) alebo chybné (0, prečo) */
@@ -1992,6 +2145,288 @@ const RADA={
     ['Vypite pohárik alkoholu, uvoľní to kŕče.',0,'alkohol s liekmi proti bolesti škodí žalúdku a pečeni.']]},
 };
 const RADA_OPTS=['rada','116117','ntic','psy'];
+/* kurz: 8 lekcií po kategóriách, karta s kritériami a 4 hovory; ďalšia lekcia sa odomkne pri 3 správnych zo 4 */
+const LESSONS=[
+  {n:1, name:'Zástava a porucha vedomia', cats:['nzo','vedomie'], calls:['Zástava srdca','Bezvedomie','Krátky kolaps','Isté známky smrti'],
+    tips:['Nereaguje a nedýcha normálne – aj občasné lapavé dychy sú zástava. Hneď TANR.','Bezvedomie s normálnym dýchaním je K, ale bez TANR – stabilizovaná poloha.','Krátky kolaps, po ktorom je úplne v poriadku, je M; senior, dieťa alebo srdcové ťažkosti robia z kolapsu N.','Isté známky smrti (stuhnutý, studený, fialové škvrny) – bez výjazdu, prehliadka mŕtveho tela.']},
+  {n:2, name:'Dýchanie a alergia', cats:['dych','alerg'], calls:['Anafylaxia','Dusenie','Hyperventilácia','Kašeľ a teplota'],
+    tips:['Nevie povedať celú vetu, modré pery alebo vdýchnuté sústo – K.','Opuch tváre a jazyka po bodnutí či lieku – N a hneď adrenalínové pero.','Rýchle dýchanie po rozrušení s mravčením okolo úst je M – vylúč bolesť na hrudi.','Kašeľ bez dýchavice je O – rada alebo 116117.']},
+  {n:3, name:'Srdce a bolesť', cats:['kardio','bolest'], calls:['Bolesť na hrudi','Prudká bolesť brucha','Vysoký tlak','Zabudnutá tabletka na tlak'],
+    tips:['Bolesť na hrudi s bledosťou, potom a dýchavicou je K – posádka a lekár.','Náhla prudká bolesť bez úrazu je N.','Vysoký tlak bez ďalších ťažkostí je M; s poruchou reči, slabosťou ruky či bolesťou na hrudi je to iný problém.','Otázky na liečbu sú O – operátor nerozhoduje o liekoch ani dávkach.']},
+  {n:4, name:'Neurológia a diabetes', cats:['neuro','dm'], calls:['Mozgová príhoda','Kŕče, ktoré neprestávajú','Zmätený diabetik','Nízky cukor'],
+    tips:['FAST – ovisnutý kútik, slabá ruka, porucha reči – N a zisti, kedy bol naposledy v poriadku.','Kŕče, ktoré neprestávajú alebo sa opakujú, sú K.','Zmätený diabetik je N; sladké len vtedy, keď vie prehĺtať.','Nízky cukor u orientovaného diabetika je M – nech zje niečo sladké.']},
+  {n:5, name:'Úrazy a dopravné nehody', cats:['uraz','dn'], calls:['Zrazený chodec','Zakliesnený vodič','Pád seniorky','Odreté koleno'],
+    tips:['Bezvedomie po úraze, pád z výšky, bodná rana na trupe či veľké krvácanie sú K.','Závažný mechanizmus nehody – vysoká rýchlosť, zakliesnenie, motorkár – je N; hasiči na vyslobodenie, polícia k nehode.','Senior po páde, ktorý nevie vstať, ale je pri vedomí, je M.','Odreniny a drobné rany sú O – rada.']},
+  {n:6, name:'Intoxikácie a psychické ťažkosti', cats:['intox','psych'], calls:['Predávkovanie liekmi','Hrozí skokom','Dieťa vypilo čistič','Úzkosť'],
+    tips:['Lieky na spanie či na depresiu, vysoká dávka a spavosť sú N.','Hrozba samovraždy s bezprostredným rizikom je N – vyžiadaj PZ, pri balkóne aj hasičov.','Dieťa, ktoré mohlo vypiť chemikáliu, je M – nevyvolávať zvracanie.','Úzkosť bez myšlienok na ublíženie si je O – linka psychologickej pomoci.']},
+  {n:7, name:'Pôrod, gynekológia a krvácanie', cats:['gyn','krv'], calls:['Pôrod','Krvácanie v tehotenstve','Zvracanie krvi','Menštruačné bolesti'],
+    tips:['Nutkanie tlačiť alebo viditeľná hlavička – N a veď pôrod telefonicky.','Silné krvácanie v tehotenstve je N.','Zvracanie krvi alebo čierna stolica je N; pri šoku hrozí zhoršenie.','Menštruačné bolesti bez silného krvácania sú O.']},
+  {n:8, name:'Odkladné hovory, mimo 155 a volajúci mimo pacienta', cats:['ochor','mimo'], calls:['Horúčka u dieťaťa','Dehydratácia seniorky','Túlavý pes','Otec volal, že ho bolí hrudník'],
+    tips:['Horúčka u čulého dieťaťa, ktoré pije, je O – ale opýtaj sa na vyrážky, stuhnutý krk a spavosť.','Dehydratácia so zmätenosťou u seniorky je M.','Túlavý pes je vec pre 112 – odovzdaj hovor.','Opýtaj sa vždy „Ste pri pacientovi?“ – volajúci, ktorý nie je pri pacientovi, odpovedá z pamäti.']},
+];
+/* skúška: 10 hovorov, strom kritérií skrytý, výsledok v percentách, úspech od 80 % */
+const EXAM_N=10, EXAM_PASS=80;
+/* kazuistiky: jeden hovor od prijatia po príchod posádky a rozbor krok po kroku.
+   Prípady sú prerozprávané podľa typického priebehu opísaného v odbornej literatúre – mená, miesta a čísla sú vymyslené.
+   kroky: [čo urobiť, prečo, kontrola] – kontrola: q:… základná otázka, cq:… otázka k problému, cat, lvl, disp, tanr, aed, fa, izs, h1 */
+const CASES=[
+  {id:'chrape', name:'Chrápe a nedá sa zobudiť', tpl:'Manžel chrápe a nedá sa zobudiť', focus:'Dýchanie u človeka, ktorý nereaguje',
+    intro:'Utorok 21:40, Košice. Volá žena z bytu na treťom poschodí.',
+    steps:[['Adresa a čo sa stalo','Poloha je prvá – keby sa hovor prerušil, posádka vie, kam ísť.','q:where'],
+      ['Vedomie: nereaguje ani na bolesť','Kto nereaguje, je v ohrození života – ďalšia otázka je dýchanie.','q:ved'],
+      ['Dýchanie: na „chrápe“ sa opýtaj „Dýcha normálne, alebo len občas zalapá?“','Chrčanie raz za desať sekúnd nie je normálne dýchanie. Je to zástava.','cq:dych2'],
+      ['Náhle zastavenie obehu, stupeň K','Pri zástave sa nečaká na ďalšie podrobnosti.','lvl'],
+      ['Posádka a lekár do 90 s','','disp'],
+      ['TANR: na chrbát na zem, stláčanie 100 – 120-krát za minútu','Volajúca stláča, kým nepríde posádka.','tanr'],
+      ['„Je tam ešte niekto?“ – dcéra otvorí dvere a čaká pri vchode','','cq:pomoc']],
+    learn:['Laik opíše lapavé dýchanie ako chrápanie, chrčanie, vzdychanie alebo „ešte dýcha“. Vždy sa pýtaj, či dýcha normálne.',
+      'Lapavé dýchanie je v prvých minútach zástavy časté. Je to signál začať TANR, nie dôvod čakať.',
+      'Keď si pri bezvedomí nie si istý dýchaním, postupuj ako pri zástave.'],
+    src:[['Štúdia o rozpoznaní lapavého dýchania a zástavy operátormi tiesňovej linky (PMC2727488)','https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2727488/'],
+      ['ERC Guidelines 2021 – Basic Life Support','https://www.cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Ba.pdf']]},
+  {id:'tribuna', name:'Zrútil sa na tribúne', tpl:'Zrútil sa na tribúne', focus:'TANR na verejnosti a defibrilátor nablízku',
+    intro:'Sobota 18:20, zimný štadión v Košiciach počas zápasu. Volá divák z tribúny.',
+    steps:[['Adresa: štadión, tribúna, vchod','Na veľkom objekte rozhoduje presné miesto a kto posádku privedie.','q:where'],
+      ['Vedomie a dýchanie: nereaguje, len občas zalapá','Lapavé dychy = zástava.','q:dych'],
+      ['Náhle zastavenie obehu, stupeň K','','lvl'],
+      ['Posádka a lekár do 90 s','','disp'],
+      ['„Je tam ešte niekto?“ a „Je nablízku defibrilátor?“','Keď je pri pacientovi viac ľudí, jeden stláča a druhý beží po AED.','cq:aed'],
+      ['TANR a pomocník po AED','AED zapnúť a robiť, čo hovorí. Stláčanie sa prerušuje len na analýzu a výboj.','aed'],
+      ['TANR – tempo 100 – 120-krát za minútu','','tanr']],
+    learn:['Pri jednom zachráncovi ho neposielaj po AED – stláčanie by sa prerušilo. Pri dvoch a viacerých áno.',
+      'Defibrilácia v prvých minútach zástavy výrazne zvyšuje šancu na prežitie. Operátor ju urýchli, keď sa na AED opýta.',
+      'Keď AED príde, nech ho zapnú a robia, čo hovorí. Operátor ostáva na linke.'],
+    src:[['Prehľad: použitie AED s pomocou operátora','https://abstracts.aijr.org/index.php/abs/article/view/286'],
+      ['Dostupnosť a použitie AED pri tiesňových hovoroch (Prehospital Emergency Care, 2019)','https://socialwork.utah.edu/research/publications/posts/2018/external-defibrillator-dispatch.php'],
+      ['ERC Guidelines 2021 – Basic Life Support','https://www.cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Ba.pdf']]},
+  {id:'babka', name:'Babka hovorí z cesty', tpl:'Babka zrazu hovorí z cesty', focus:'Čas pri mozgovej príhode',
+    intro:'Pondelok 12:45, Spišská Nová Ves. Volá vnučka, ktorá je na návšteve u starej mamy.',
+    steps:[['Adresa a čo sa stalo','Volajúca chce čakať do rána – o naliehavosti však rozhoduje operátor.','q:where'],
+      ['Vedomie a dýchanie sú v poriadku','','q:dych'],
+      ['Neurológia: ovisnutý kútik, slabá ruka, porucha reči?','Stačí jeden z príznakov.','cq:fast'],
+      ['„Kedy bola naposledy v poriadku?“','Od toho závisí, či sa dá cielená liečba ešte podať.','cq:kedy'],
+      ['Lieky na riedenie krvi','Posádka a nemocnica ich potrebujú vedieť.','cq:riedenie'],
+      ['Stupeň N, posádka do 90 s','','disp'],
+      ['Pokyny: ľahnúť, nič ústami, zapísať čas, pripraviť lieky','','fa']],
+    learn:['„Môže si ísť ľahnúť?“ je chyták. Pri príznakoch mozgovej príhody sa nečaká do rána.',
+      'Čas, kedy bol pacient naposledy v poriadku, je pre ďalšiu liečbu najdôležitejší údaj.',
+      'Operátori v štúdiách rozpoznali mozgovú príhodu zhruba v polovici až dvoch tretinách prípadov. Cielená otázka na príznaky to zlepšuje.'],
+    src:[['Rozpoznanie mozgovej príhody operátormi tiesňovej linky (IJCMPH)','https://www.ijcmph.com/index.php/ijcmph/article/view/8563'],
+      ['Identification of Stroke at the Emergency Medical Dispatch Center (NCT04784936)','https://clinicaltrials.gov/study/NCT04784936']]},
+  {id:'palenie', name:'Pálenie žalúdka a studený pot', tpl:'Pálenie žalúdka a studený pot', focus:'Netypické príznaky infarktu',
+    intro:'Štvrtok 9:15, Michalovce. Volá sama pacientka z domu.',
+    steps:[['Kto volá: H1 – pacientka sama','Vedomie je zrejmé z rozhovoru. Pýtaj sa na dýchanie a farbu kože.','h1'],
+      ['Koža: bledá, studený pot; aj dýchavica','','q:obeh'],
+      ['Kategória Kardiologické ťažkosti, nie bolesť brucha','Pálenie pod hrudnou kosťou so studeným potom je podozrenie na infarkt, aj keď to volajúca volá žalúdok.','cat'],
+      ['„Kde presne to bolí a kam to vystreľuje?“ – medzi lopatky a do sánky','','cq:kde'],
+      ['Stupeň K, posádka a lekár do 90 s','','disp'],
+      ['Pokyny: pokoj, sadnúť si, odomknúť, pripraviť lieky','','fa']],
+    learn:['Ženy, starší ľudia a diabetici mávajú pri infarkte netypické príznaky: nevoľnosť, pálenie „žáhy“, únavu, bolesť medzi lopatkami.',
+      'V dánskej štúdii dostali pacienti s infarktom a netypickými príznakmi záchranku zriedkavejšie a mali vyššiu úmrtnosť.',
+      'Diagnózu „žalúdok“ od volajúceho nepreberaj – pýtaj sa na príznaky.'],
+    src:[['Netypické príznaky infarktu a menej výjazdov (Healio, dánska štúdia 2021)','https://www.healio.com/news/cardiology/20210614/atypical-mi-symptoms-tied-to-negative-outcomes-lower-odds-of-emergency-response']]},
+  {id:'osa', name:'Osa a chrapot', tpl:'Bodla ma osa a škriabe ma v hrdle', focus:'Anafylaxia a adrenalínové pero',
+    intro:'Utorok 16:30, Trebišov. Volá žena zo záhrady.',
+    steps:[['Kto volá: H1 – pacientka sama','','h1'],
+      ['Dýchanie: piští pri nádychu, ťažko hovorí','Chrapot a pískanie sú varovné.','q:dych'],
+      ['Alergia: opuch pier a jazyka, nepovie celú vetu','','cq:opuch'],
+      ['Stupeň N, posádka do 90 s','','disp'],
+      ['„Máte adrenalínové pero?“ – a naviesť ju','Strach z pera je častý. Poistka, vonkajšia strana stehna, aj cez oblečenie, podržať.','cq:pero'],
+      ['Sedieť, pri slabosti ľahnúť s nohami hore, nevstávať','','fa']],
+    learn:['Adrenalín do svalu je pri anafylaxii prvý liek. Čakanie na posádku pacienta ohrozuje.',
+      'Pacient s anafylaxiou nemá vstávať ani chodiť – hrozí náhly kolaps.',
+      'Ak sa stav po 5 až 15 minútach nezlepší a je k dispozícii druhé pero, podáva sa druhá dávka.'],
+    src:[['ERC Guidelines 2021 – First Aid','https://cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Fi.pdf']]},
+  {id:'porod', name:'Tretie dieťa sa ponáhľa', tpl:'Tretie dieťa sa ponáhľa', focus:'Pôrod v behu po telefóne',
+    intro:'Streda 3:10, Kráľovský Chlmec. Volá manžel z domu.',
+    steps:[['Adresa a čo sa stalo','','q:where'],
+      ['Pôrod: týždeň a koľké dieťa','Tretie dieťa rodí rýchlejšie.','cq:tyzden'],
+      ['Kontrakcie a nutkanie tlačiť – vidno hlavičku','Viditeľná hlavička = pôrod v behu, nikam sa necestuje.','cq:tlacit'],
+      ['Stupeň N, posádka do 90 s','','disp'],
+      ['Viesť pôrod: poloha, uteráky, hlavičku neťahať ani nezadržiavať','','fa'],
+      ['Po pôrode: osušiť, na brucho matky, prikryť; pupočník nestrihať','','fa']],
+    learn:['Pri viditeľnej hlavičke sa pôrod vedie doma po telefóne.',
+      'Novorodenec rýchlo prechladne: osušiť, koža na kožu, prikryť aj hlavičku.',
+      'Ak dieťa nedýcha ani po osušení a stimulácii, operátor prechádza na oživovanie novorodenca.'],
+    src:[['ERC Guidelines 2021 – Newborn resuscitation and support of transition of infants at birth','https://scholarlypublications.universiteitleiden.nl/access/item%3A3642301/view']]},
+  {id:'petechie', name:'Horúčka a fľaky', tpl:'Horúčka a fľaky, ktoré nezblednú', focus:'Varovné príznaky pri horúčke u dieťaťa',
+    intro:'Nedeľa 5:00, Rožňava. Volá mama trojročného dievčatka.',
+    steps:[['Adresa a čo sa stalo','Mama sa pýta na pediatra – vyzerá to na radu.','q:where'],
+      ['Vedomie: stále zaspáva','Spavé dieťa s horúčkou nie je odkladný hovor.','q:ved'],
+      ['Koža: bledá, studené ruky a nohy','','q:obeh'],
+      ['„Má vyrážky, stuhnutý krk, je spavá?“ – fľaky pod pohárom nezblednú','Môže ísť o sepsu.','cq:varovne'],
+      ['„Pije a močí?“ – suchá plienka','','cq:pije'],
+      ['Stupeň N, posádka do 90 s – nie rada ani 116117','','lvl']],
+    learn:['Horúčka u čulého dieťaťa, ktoré pije, je odkladná. Spavé dieťa s fľakmi alebo so studenými končatinami nie.',
+      'Skúška pohárom: fľaky, ktoré pri pritlačení pohára nezblednú, sú dôvod na okamžitú pomoc. Na tmavšej koži ich hľadaj na dlaniach, chodidlách a v spojovkách.',
+      'Vyrážka býva neskorý príznak – pri spavom dieťati sa na ňu nečaká.'],
+    src:[['Royal Children\'s Hospital Melbourne – Fever and petechiae/purpura','https://www.rch.org.au/clinicalguide/guideline_index/fever_and_petechiae_purpura/']]},
+  {id:'chripka', name:'Celá rodina má chrípku', tpl:'Celá rodina má chrípku', focus:'Viac ľudí s rovnakými ťažkosťami',
+    intro:'Január, sobota 8:30, Gelnica. Volá muž z bytu.',
+    steps:[['Adresa a čo sa stalo','Volajúci si myslí, že ide o chrípku.','q:where'],
+      ['Vedomie: svokra je zmätená a spavá','Porucha vedomia mení naliehavosť.','q:ved'],
+      ['„Je tam viac ľudí, ktorým je zle?“ – všetci štyria aj pes','Rovnaké ťažkosti u viacerých naraz, bez horúčky = mysli na oxid uhoľnatý.','cq:viac'],
+      ['„Je k nim prístup, nehrozí tam niečo?“ – celú noc kúrili v piecke','','q:miesto'],
+      ['Intoxikácia, stupeň N, dve posádky','','lvl'],
+      ['Súčinnosť: hasiči zmerajú CO a vyvetrajú','','izs'],
+      ['Pokyny: všetci von, nič nezapínať','Kým sa byt nevyvetrá, je nebezpečný aj pre záchranárov.','fa']],
+    learn:['Bolesť hlavy, nevoľnosť a spavosť u celej rodiny naraz, najmä v zime pri kúrení, je typická pre otravu oxidom uhoľnatým.',
+      'Prvý pokyn je dostať všetkých von – nie liečiť doma.',
+      'Pri podozrení na CO vždy požiadaj o hasičov.'],
+    src:[['EMS World – Whole family\'s sick (kazuistika otravy CO)','https://www.hmpgloballearningnetwork.com/site/emsworld/article/10321081/whole-familys-sick']]},
+  {id:'cukor', name:'Porážka, ktorá nebola porážkou', tpl:'Otec zrazu nevie hovoriť', focus:'Nízky cukor, ktorý vyzerá ako mozgová príhoda',
+    intro:'Piatok 14:10, Moldava nad Bodvou. Volá syn.',
+    steps:[['Adresa a čo sa stalo – volajúci hovorí o porážke','','q:where'],
+      ['Vedomie: zmätený; koža: bledý, spotený','Studený pot pri zmätenosti je typický pre nízky cukor.','q:obeh'],
+      ['„Máte glukomer? Koľko ukazuje?“ – 2,1','V rodine diabetika býva glukomer takmer vždy – stačí sa opýtať.','cq:glukomer'],
+      ['„Pichal si inzulín? Jedol?“ – inzulín bez obeda','','cq:inzulin'],
+      ['„Vie prehĺtať?“','Sladké len vtedy, keď je pri vedomí a bezpečne prehĺta.','cq:prehlta'],
+      ['Stupeň N, posádka do 90 s','','disp'],
+      ['Pokyny: sladký nápoj, sedieť; keby prestal reagovať, nič do úst a na bok','','fa']],
+    learn:['Nízky cukor je najčastejšia zameniteľná „porážka“ a overíš ho jednou otázkou na glukomer.',
+      'Sladké len pri vedomí a bezpečnom prehĺtaní.',
+      'Aj keď sa po sladkom zlepší, posádku neruš – pri inzulíne môže cukor znova klesnúť.'],
+    src:[['JEMS – The Stroke That Wasn\'t','https://www.jems.com/?p=222438'],
+      ['emDocs – Stroke mimics: pearls and pitfalls','https://www.emdocs.net/stroke-mimics-pearls-and-pitfalls/']]},
+  {id:'motorka', name:'Motorkár v priekope', tpl:'Motorkár v priekope', focus:'Mechanizmus úrazu a prilba',
+    intro:'Nedeľa 15:40, cesta pri Kysaku. Volá vodič, ktorý pri nehode zastavil.',
+    steps:[['Adresa: cesta, smer a zákruta','Mimo obce pomôže najbližšia obec a smer jazdy.','q:where'],
+      ['Vedomie: pri vedomí, ale opakuje to isté','Zmätenosť po náraze je varovný príznak úrazu hlavy.','q:ved'],
+      ['Nehoda: rýchlosť, hýbe končatinami, kde leží','Motorkár vymrštený zo sedla vo vyššej rýchlosti = závažný mechanizmus.','cq:rychlost'],
+      ['Stupeň N, posádka do 90 s, zváž vrtuľník','','disp'],
+      ['Súčinnosť: polícia k dopravnej nehode','Pri vytekajúcom benzíne môžeš zvážiť aj hasičov.','izs'],
+      ['Pokyny: prilbu nesnímať, nehýbať ním, tlak na krvácanie, zabezpečiť miesto','','fa']],
+    learn:['Mechanizmus (rýchlosť, vymrštenie z vozidla) je kritérium samo osebe – aj keď pacient „len“ hovorí z cesty.',
+      'Prilba sa sníma len vtedy, keď pacient nedýcha a treba ho oživovať.',
+      'Bezpečnosť na mieste: výstražný trojuholník, svetlá, ľudia mimo cesty.'],
+    src:[['National Guideline for the Field Triage of Injured Patients, 2021','https://prod-dphhs.mt.gov/assets/publichealth/EMSTS/Trauma/FieldTriageGuidelines2021.pdf']]},
+];
+const CASE_FA={
+  'Babka zrazu hovorí z cesty':[
+    ['Nech si ľahne s hlavou mierne hore a nič neje ani nepije.',1,'Leží na gauči, hlavu má na vankúši.'],
+    ['Zapíšte si, kedy bola naposledy v poriadku, a pripravte jej lieky a kartičku poistenca.',1,'Zapísala som pol jednej, lieky mám v taške.'],
+    ['Ak bude zvracať alebo prestane reagovať, otočte ju na bok a hneď volajte.',1,'Dobre, nespúšťam ju z očí.'],
+    ['Dajte jej vypiť kávu, nech sa preberie.',0,'Napila sa… zakuckala sa, káva jej vytiekla z úst!','pri mozgovej príhode môže byť porušené prehĺtanie – nič ústami.'],
+    ['Nech si ľahne a vyspí sa, ráno sa uvidí.',0,'Uložila som ju… a teraz už takmer nereaguje!','pri mozgovej príhode rozhoduje čas – liečba je možná len niekoľko hodín od začiatku.']],
+  'Pálenie žalúdka a studený pot':[
+    ['Sadnite si alebo si ľahnite do polosedu a nehýbte sa.',1,'Sedím na gauči, opretá.'],
+    ['Odomknite dvere a pripravte si zoznam liekov.',1,'Dvere som odomkla, lieky mám na stole.'],
+    ['Ak vám bude horšie alebo budete omdlievať, hneď volajte znova.',1,'Dobre… mobil mám pri sebe.'],
+    ['Prejdite sa na čerstvom vzduchu, možno to prejde.',0,'Vyšla som na balkón… točí sa mi hlava, musela som si sadnúť!','pri podozrení na infarkt každá námaha zaťažuje srdce – pacient má byť v pokoji.'],
+    ['Vezmite si niečo na žalúdok a ľahnite si.',0,'Zobrala som si tabletku na žalúdok… stále ma to páli a som celá mokrá.','pálenie so studeným potom a dýchavicou môže byť infarkt – liek na žalúdok nepomôže a stráca sa čas.']],
+  'Bodla ma osa a škriabe ma v hrdle':[
+    ['Vytiahnite pero, zložte poistku a pichnite ho do vonkajšej strany stehna, aj cez nohavice.',1,'Pichla som ho… držím… už sa mi dýcha trochu ľahšie.'],
+    ['Sadnite si. Ak vám bude slabo, ľahnite si a dajte nohy hore.',1,'Sedím na lavičke, nebudem vstávať.'],
+    ['Odomknite bránku a nechajte telefón zapnutý pri sebe.',1,'Bránka je otvorená, telefón mám v ruke.'],
+    ['Choďte sa napiť studenej vody, opuch splaskne.',0,'Postavila som sa… zatmelo sa mi pred očami, musela som si sadnúť!','pri anafylaxii hrozí pri postavení kolaps a opuchnuté hrdlo prehĺtanie nezvládne.'],
+    ['S perom počkajte, kým príde záchranka.',0,'Čakám… je to horšie, skoro nemôžem dýchať!','adrenalín treba pri anafylaxii podať hneď – každá minúta zhoršuje opuch dýchacích ciest.']],
+  'Tretie dieťa sa ponáhľa':[
+    ['Nech si ľahne na chrbát alebo do polosedu, pod zadok dajte čisté uteráky.',1,'Leží na posteli, pod sebou má uteráky.'],
+    ['Hlavičku neťahajte ani nezadržiavajte, len ju podopierajte, keď vychádza.',1,'Podopieram… už je vonku celá hlavička… aj ramienka!'],
+    ['Dieťa hneď osušte, položte mame na brucho a prikryte oboch.',1,'Je na brušku, kričí! Prikryl som ich dekou.'],
+    ['Pupočník hneď prestrihnite nožnicami.',0,'Mám prestrihnúť pupočník? Nemám nič čisté…','pupočník netreba strihať – ošetrí ho posádka; nesterilný strih hrozí infekciou a krvácaním.'],
+    ['Nech dá nohy k sebe a počká na záchranku.',0,'Snaží sa nohy zovrieť… strašne kričí, hlavička je už vonku!','pôrod v behu sa nedá zastaviť – zadržiavanie hlavičky ohrozuje dieťa aj matku.']],
+  'Horúčka a fľaky, ktoré nezblednú':[
+    ['Nechajte ju ležať a nezabaľujte ju do perín, nech nie je prehriata.',1,'Leží v posteli, len pod tenkou dekou.'],
+    ['Pripravte kartičku poistenca a lieky, ktoré dostala, aj s časom podania.',1,'Mám to v taške, sirup dostala o tretej.'],
+    ['Ak prestane reagovať alebo bude ťažko dýchať, hneď volajte znova.',1,'Dobre, nespúšťam ju z očí.'],
+    ['Okúpte ju v studenej vode, nech zrazíte horúčku.',0,'Dala som ju do vane… celá sa trasie a fialovie!','studený kúpeľ spôsobí triašku a zhorší prekrvenie – dieťa v šoku ho neznesie.'],
+    ['Dajte jej antibiotikum, ktoré vám ostalo od minule.',0,'Dala som jej lyžičku… hneď to vyvrátila.','antibiotikum podáva lekár – zvyšky liekov môžu zakryť príznaky a spavé dieťa môže zvratky vdýchnuť.']],
+  'Celá rodina má chrípku':[
+    ['Všetci hneď von z bytu na čerstvý vzduch – aj so svokrou a psom.',1,'Sme vonku pred domom, svokru sme vyviedli.'],
+    ['Cestou otvorte okná a dvere, ale v byte sa nezdržujte.',1,'Otvoril som okno v kuchyni, už sme vonku.'],
+    ['Nič nezapínajte ani nevypínajte a nefajčite – hasiči to premerajú.',1,'Dobre, ničoho sa nedotýkame.'],
+    ['Ľahnite si všetci a vyspite sa, chrípka prejde.',0,'Ľahli sme si… a svokra už nereaguje!','oxid uhoľnatý nevidno ani necítiť – v byte sa otrava zhoršuje a spánok môže skončiť bezvedomím.'],
+    ['Dajte svokre kávu, nech sa preberie.',0,'Nechce piť, stále zaspáva a kašle…','zmätená pacientka nemusí bezpečne prehĺtať a káva otravu nelieči – treba ju dostať von.']],
+  'Otec zrazu nevie hovoriť':[
+    ['Keď vie bezpečne prehĺtať, nech pomaly vypije pohár sladkého nápoja alebo džúsu.',1,'Vypil pohár džúsu… už sa na mňa pozerá inak.'],
+    ['Nech sedí, nevstáva a nikam neodchádza, kým nepríde posádka.',1,'Sedí pri stole, mama je pri ňom.'],
+    ['Keby prestal reagovať, nedávajte mu nič do úst a uložte ho na bok.',1,'Dobre, keby sa niečo zmenilo, hneď vám zavolám.'],
+    ['Pichnite mu ešte inzulín, cukor mu určite stúpol.',0,'Pichol som mu… teraz je ešte zmätenejší a celý sa trasie!','pri nízkom cukre inzulín cukor ďalej zníži – hrozí bezvedomie a kŕče.'],
+    ['Nalejte mu do úst sladkú vodu, aj keď nereaguje.',0,'Nalievam… zakašľal a voda mu vyteká z úst!','kto nereaguje, nevie prehĺtať – tekutina zatečie do dýchacích ciest.']],
+  'Motorkár v priekope':[
+    ['Prilbu mu nesnímajte, kým dýcha, a nech hýbe hlavou čo najmenej.',1,'Prilba ostáva, držím mu hlavu rovno.'],
+    ['Krvácajúcu ranu na nohe stlačte čistou látkou a nepúšťajte.',1,'Tlačím mu na nohu tričko, krv už tak netečie.'],
+    ['Prikryte ho a zabezpečte miesto – výstražný trojuholník a svetlá.',1,'Je prikrytý bundou, trojuholník stojí za zákrutou.'],
+    ['Zložte mu prilbu, nech sa mu lepšie dýcha.',0,'Ťaháme mu prilbu… skríkol a hlava mu padá nabok!','pri úraze hlavy a krku hrozí poškodenie miechy – prilba sa sníma len pri zastavenom dýchaní.'],
+    ['Pomôžte mu sadnúť si a vyrovnajte mu nohu.',0,'Posadili sme ho… zbledol a skoro odpadol, noha strašne bolí!','zranený po páde z motorky môže mať poranenú chrbticu a zlomeninu – nehýbať ním.']],
+};
+Object.assign(FA, CASE_FA);
+const caseById = id => CASES.find(x=>x.id===id);
+const caseTpl = id => { const C=caseById(id); return C ? TPL.find(t=>t.title===C.tpl) : null; };
+/* kontrola kroku kazuistiky podľa toho, čo hráč v hovore urobil */
+function caseCheck(k, f, d){
+  if(!k || !f) return null;
+  const F=d.fa||{}, T=d.tri||{};
+  if(k.startsWith('q:')) return f.asked.includes(k.slice(2));
+  if(k.startsWith('cq:')) return f.cqAsked.includes(k.slice(3));
+  if(k==='cat') return !!T.catOk;
+  if(k==='lvl') return !!T.lvlOk;
+  if(k==='h1') return f.hMark===1;
+  if(k==='disp') return F.dispSec!=null && F.dispSec<=90;
+  if(k==='tanr') return !!F.tanr && !F.tanr.none;
+  if(k==='aed') return ['used','late','fetch'].includes(F.aed);
+  if(k==='fa') return F.must ? !!F.done : (F.given||[]).some(x=>x.ok);
+  if(k==='izs') return !(F.izsMiss||[]).length;
+  return null;
+}
+function caseExtra(C, f, d){
+  const steps=C.steps.map(s=>{ const ok=caseCheck(s[2], f, d); return `<li>${DK(ok)}<b>${esc(s[0])}</b>${s[1] ? `<span class="why">${esc(s[1])}</span>` : ''}</li>`; }).join('');
+  return `<section class="deb case"><h3>5. Ideálny postup krok po kroku</h3><ul class="dlist csteps">${steps}</ul></section>
+    <section class="deb"><h3>Čo si z toho zobrať</h3><ul class="dlist">${C.learn.map(x=>`<li>${DK()}${esc(x)}</li>`).join('')}</ul>
+    <p class="keys src">Zdroj: ${C.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join(' · ')}. Prípad je prerozprávaný podľa typického priebehu z literatúry, anonymizovaný, mená, miesta a čísla sú vymyslené.</p></section>`;
+}
+function showCase(id){
+  const C=caseById(id); if(!C) return;
+  const i=CASES.indexOf(C), st=(PROG.cases||{})[id], ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
+  ov.innerHTML=`<div class="sheet"><div class="k">Kazuistika ${i+1} z ${CASES.length}${st===2 ? ' · zvládnutá' : st===1 ? ' · skús znova' : ''}</div><h2 class="grade">${esc(C.name)}</h2>
+    <p class="lead">${esc(C.intro)}</p>
+    <p class="keys">Zameranie: <b>${esc(C.focus)}</b>. Hovor prijmi a postupuj ako v službe. Príjem beží v reálnom čase. Rozbor krok po kroku uvidíš po príchode posádky na miesto.</p>
+    <p class="keys src">Inšpirácia: ${C.src.map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join(' · ')}</p>
+    <div class="acts"><button class="btn go" data-act="cstart" data-id="${C.id}">Začať kazuistiku</button><button class="btn" data-act="mtab" data-id="cases">Späť</button></div></div>`;
+}
+/* kazuistika: rozbor po príchode posádky (alebo keď udalosť skončí bez nej) */
+function caseArrived(inc){
+  const sc=G.script; if(!sc || sc.kind!=='cases' || !inc.deb || inc.deb.caseDone) return;
+  const C=caseById(sc.id); if(!C) return;
+  inc.deb.caseDone=true; inc.deb.ready=true;
+  inc.deb.extra=caseExtra(C, inc.call, inc.deb);
+  scriptResult(inc.deb); G.debCase=inc.deb;
+  showDebrief(inc.deb, true);
+}
+
+/* rozhodujúce kritérium situácie: stupeň a poradie kritéria v strome jej kategórie, alebo vlastný text */
+const CRIT={
+  'Manžel chrápe a nedá sa zobudiť':'K0', 'Zrútil sa na tribúne':'K0', 'Babka zrazu hovorí z cesty':'N0', 'Pálenie žalúdka a studený pot':'K0',
+  'Bodla ma osa a škriabe ma v hrdle':'N1', 'Tretie dieťa sa ponáhľa':'N0', 'Horúčka a fľaky, ktoré nezblednú':'N0', 'Celá rodina má chrípku':'N0',
+  'Otec zrazu nevie hovoriť':'N0', 'Motorkár v priekope':'N1',
+  'Zástava srdca':'K0', 'Zástava srdca na ulici':'K0', 'Vytiahnutý z vody':'K0', 'Dojča nedýcha':'K0', 'Otec spadol na videohovore':'K0',
+  'Isté známky smrti':'O0', 'Mŕtvy na lavičke':'O1', 'Nájdený mŕtvy v byte':'O1',
+  'Bezvedomie':'K0', 'Diabetik v bezvedomí':'K1', 'Kolaps seniorky':'N2', 'Krátky kolaps':'M0', 'Mdloba, ktorá prešla':'O0',
+  'Ležiaci muž, volajúci odchádza':'Neznámy stav a volajúci neostane na mieste – posádka a mestská polícia na preverenie',
+  'Ťažká dýchavica':'K0', 'Astmatický záchvat':'N1', 'Dusenie':'K2', 'Hyperventilácia':'M0', 'Kašeľ a teplota':'O0',
+  'Zvracanie krvi':'N1', 'Krvácanie z nosa pri liekoch na riedenie':'N2', 'Zastavené krvácanie z nosa':'O0',
+  'Prudká bolesť brucha':'N0', 'Studená noha':'N2', 'Bolesť chrbta s mravčením':'M1', 'Bolesť chrbta s únikom moču':'N1', 'Obličková kolika':'M2', 'Dlhodobá bolesť chrbta':'O0',
+  'Bolesť na hrudi':'K0', 'Tlak na hrudi':'N0', 'Výboje defibrilátora':'K2', 'Búšenie srdca':'N1', 'Nepravidelný pulz':'M2', 'Zabudnutá tabletka na tlak':'O1', 'Vysoký tlak':'M1',
+  'Kolaps na túre':'K0', 'Mama nedvíha telefón':'N0', 'Otec volal, že ho bolí hrudník':'K0',
+  'Mozgová príhoda':'N0', 'Kŕče, ktoré neprestávajú':'K0', 'Horúčkové kŕče':'N1', 'Epileptik po záchvate':'O0', 'Závrat':'M0', 'Kamarátka napísala, že nevie hovoriť':'N0',
+  'Hrozí skokom':'N2', 'Agresívny pacient':'N1', 'Akútna reakcia na stres':'M1', 'Úzkosť':'O1',
+  'Anafylaxia':'N3', 'Žihľavka po lieku':'M1', 'Štípnutie včelou':'O0',
+  'Zmätený diabetik':'N0', 'Nízky cukor':'M0', 'Vysoký cukor bez ťažkostí':'O0',
+  'Zakliesnený vodič':'N1', 'Zrazený chodec':'K0', 'Nehoda motorkára':'N1', 'Ťukanec s bolesťou krku':'M0', 'Nehoda bez zranených':'O0', 'Hromadná nehoda':'K1',
+  'Pád z lešenia':'K3', 'Skok do plytkej vody':'N0', 'Pád seniorky':'M1', 'Bodnutie':'K1', 'Rana motorovou pílou':'K2', 'Zlomená ruka':'M0', 'Odreté koleno':'O0',
+  'Ťažký pacient na zemi':'M1', 'Zranený turista':'M0', 'Sused počul pád':'M1',
+  'Predávkovanie liekmi':'N1', 'Opitá maloletá':'N0', 'Otrava CO':'N1', 'Dieťa vypilo čistič':'M2', 'Zjedená tabletka':'O1', 'Opitý muž s rozbitou hlavou':'M0',
+  'Vyčerpaná turistka':'Vyčerpanie v teréne bez ohrozenia života – horská služba a RZP', 'Dehydratácia seniorky':'M0', 'Horúčka u dieťaťa':'O0', 'Upchatý katéter':'M1',
+  'Pôrod':'N0', 'Kontrakcie každých päť minút':'M0', 'Krvácanie v tehotenstve':'N1', 'Menštruačné bolesti':'O1',
+};
+function critText(t){
+  if(!t) return '';
+  if(t.cat==='mimo') return 'Nejde o zdravotný problém – odovzdať na KS IZS 112.';
+  const k=CRIT[t.title]; if(!k) return '';
+  if(!/^[KNMO]\d$/.test(k)) return k;
+  return ((TREE[t.cat]||{})[k[0]]||[])[+k[1]] || '';
+}
 
 
 /* opakovaný hovor: čo sa zmenilo, doplňujúce otázky a prvá pomoc pre nový stav */
@@ -2090,7 +2525,8 @@ const DEC_L=[['far','Posádka z ďaleka, hoci bližšia bola voľná'],['wrong',
   ['izsmiss','Chýbala súčinnosť IZS – posádka čakala'],['izsx','Zbytočne vyžiadaná zložka IZS'],['under','Podhodnotená naliehavosť'],['over','Nadhodnotená naliehavosť'],
   ['undero','Bez výjazdu, hoci pacient pomoc potreboval'],['slow','Vyslanie po viac ako 90 s'],
   ['sug','Sugestívna otázka – nespoľahlivá odpoveď'],['htype','Nesprávne určený typ volajúceho (H1/H2/H3)'],['h3','Nezistené, že volajúci nie je pri pacientovi'],
-  ['kontakt','Chýbal kontakt na niekoho pri pacientovi'],['nofa','Príjem ukončený bez pokynov pri K alebo N'],['safe','Rada bez vety „ak sa to zhorší, volajte znova“'],['radabad','Chybná rada pri odkladnom hovore']];
+  ['kontakt','Chýbal kontakt na niekoho pri pacientovi'],['nofa','Príjem ukončený bez pokynov pri K alebo N'],['safe','Rada bez vety „ak sa to zhorší, volajte znova“'],['radabad','Chybná rada pri odkladnom hovore'],
+  ['defer','Odložená udalosť K alebo N'],['aedalone','Osamelý volajúci poslaný po AED'],['aedmiss','AED nablízku, ale nikto poň nešiel']];
 const TEMPO={calm:{label:'Pokojné', k:1.35, note:'Menej hovorov, viac času na rozmýšľanie.'}, normal:{label:'Bežné', k:1, note:'Bežný deň na linke 155.'}, busy:{label:'Rušné', k:.72, note:'Hovory jeden za druhým.'}};
 
 /* počasie: rýchlosť pozemných posádok, vrtuľník, častejšie druhy udalostí */
@@ -2232,6 +2668,40 @@ function makeUnit([id,kind,home,,title]){
 }
 function activeDefs(){ return UNITS_DEF.filter(d=>!d[3] || has(d[3])); }
 /* mode: 'play' | 'pause' | 'over' | 'demo' (ukážka v pozadí úvodnej obrazovky) */
+/* hovor podľa scenára (kurz, kazuistika, skúška): bez cudzieho jazyka, neznámej polohy a opakovania */
+function spawnScripted(tpl){
+  const node=placeFor(tpl);
+  spawnCall({tpl, node, addr:addrOf(node), script:true});
+  const c=G.calls[G.calls.length-1]; c.script=true; return c;
+}
+const scriptBusy = () => G.calls.some(c=>c.state==='talk' || c.state==='ring') || G.incs.some(i=>i.intake) || G.debOpen || !$('#overlay').hidden;
+function stepScript(){
+  const sc=G.script; if(!sc || G.mode!=='play') return;
+  G.nextCall=1e9;
+  if(scriptBusy()) return;
+  if(sc.idx<sc.queue.length){ if(G.t>=sc.next){ spawnScripted(sc.queue[sc.idx]); sc.idx++; } return; }
+  if(sc.kind==='cases' && G.incs.some(i=>i.fromCall && !(i.deb && i.deb.shown))) return;   // kazuistika beží do príchodu posádky
+  if(!sc.done){ sc.done=true; scriptEnd(); }
+}
+/* výsledok hovoru v režime podľa scenára */
+function scriptResult(d){
+  const sc=G.script; if(!sc || !d || d.prank) return;
+  const ok=d.tri.catOk && d.tri.lvlOk && (d.tri.opt==null || d.tri.optOk);
+  sc.results.push({title:d.title, ok, d, pct:examScore(d)});
+  sc.next=G.t+1;
+}
+/* skúška: naliehavosť 40, čas do vyslania 15, TANR 15, súčinnosť 15, pokyny 15 */
+function examScore(d){
+  if(!d || d.prank) return 0;
+  const T=d.tri, F=d.fa||{}; let p=0;
+  p += (T.catOk ? 10 : 0) + (T.lvlOk && (T.opt==null || T.optOk) ? 30 : 0);
+  if(d.kind==='o') return p + (T.lvlOk ? 45 : 0) + (F.rada ? (F.rada.every(x=>x.ok) ? 8 : 0) + (F.safe ? 7 : 0) : 15);
+  p += (F.lvl==='K' || F.lvl==='N') ? (F.dispSec!=null && F.dispSec<=90 ? 15 : F.dispSec!=null ? 6 : 0) : (F.dispSec!=null ? 15 : 0);
+  p += !F.tanr ? 15 : F.tanr.none ? 0 : F.tanr.sec<=90 && F.tanr.rate>=100 && F.tanr.rate<=120 ? 15 : 8;
+  p += F.izsMiss.length || F.izsX.length ? Math.max(0, 15-8*(F.izsMiss.length+F.izsX.length)) : 15;
+  p += F.must ? (F.done ? 15 : 0) : F.no ? 15 : (F.given.some(x=>!x.ok) ? 8 : 15);
+  return p;
+}
 function newGame(tempo, mode, ch){
   const mq = ch ? (ch.majors||[]).map(m=>({...m})) : null;
   return {mode, tempo, ch:ch||null, majorQueue:mq, t:0, speed:1, score:0, rep:100, xp0:PROG.xp, lvl0:PROG.level, seq:0, cseq:0, calls:[], incs:[], units:activeDefs().map(makeUnit),
@@ -2529,7 +2999,7 @@ function voiceLines(){
     for(const raw of t.texts) add(g,'čo sa stalo', canonText(raw), tplEmo(t), null, T);
     for(const q of V_KEYS){ const a=t.v[q]; if(a) add(g, 'odpoveď: „'+QS[q]+'“', a, ansEmo(t), null, T); }
     for(const x of FQ[t.title]||[]) add(g, 'doplňujúca otázka: „'+x[0]+'“', x[1], fqEmo(t, x), null, T);
-    for(const [id,a] of Object.entries(CQ_ANS[t.title]||{})) add(g, 'otázka k problému: „'+(id==='*' ? 'ostatné otázky' : CQ_DEF[id][0])+'“', a, ansEmo(t), null, T);
+    for(const [id,a] of Object.entries(t.cqa||CQ_ANS[t.title]||{})) add(g, 'otázka k problému: „'+(id==='*' ? 'ostatné otázky' : CQ_DEF[id][0])+'“', a, ansEmo(t), null, T);
     if(t.pri) add(g, 'odpoveď: „'+QS.pri+'“', t.pri, ansEmo(t), null, T);
     if(t.h3){
       const h=t.h3;
@@ -2761,9 +3231,11 @@ function dispatch(u, inc){
 /* prvé vyslanie: pri K a N do 90 sekúnd od prijatia hovoru */
 function firstDispatch(inc){
   inc.dispAt=G.t; const sec=Math.round((G.t-inc.callAt)*60); inc.dispSec=sec;
+  tlog(inc, 'Vyslaná prvá posádka', (inc.lvl!=='K' && inc.lvl!=='N') || sec<=90);
   if(!quiet() && !inc.prank && (inc.lvl==='K' || inc.lvl==='N')){
     (G.stats.dispS=G.stats.dispS||[]).push(sec);
     if(sec<=90){ G.score+=20; G.stats.dispOk=(G.stats.dispOk||0)+1; say('#'+inc.no+': posádka vyslaná '+fmtSec(sec)+' po prijatí hovoru (cieľ do 90 s). +20', 'good'); }
+    else if(G.script && G.script.kind==='course' && G.script.id<=2) say('#'+inc.no+': vyslanie trvalo '+fmtSec(sec)+' – cieľ pri K a N je do 90 s (v tejto lekcii bez trestu).');
     else { G.score-=10; dec('slow'); if(inc.trueLvl==='K') inc.harm=(inc.harm||0)+Math.min(.3, (sec-90)/60*.06); say('#'+inc.no+': vyslanie trvalo '+fmtSec(sec)+' – pri K a N je cieľ do 90 s. −10', 'bad'); }
   }
   endIntakeMaybe(inc);
@@ -2880,7 +3352,7 @@ function giveAid(inc, i){
 }
 function aidEffect(inc, f, list, i){
   const it=list[i];
-  f.given.push(i); f.busy=G.t+1; f.last=it[2]; f.lastBad=!it[1];
+  f.given.push(i); f.busy=G.t+1; f.last=it[2]; f.lastBad=!it[1]; if(inc.intake) tlog(inc, 'Pokyn: '+it[0], !!it[1]);
   if(it[1]) inc.aidGood=(inc.aidGood||0)+1; else inc.aidBad=(inc.aidBad||0)+1;
   if(it[1]){
     inc.harm=Math.max(-.2, (inc.harm||0)-.08); inc.deadline+=FA_TIME[inc.prio]; G.score+=15; G.stats.faOk=(G.stats.faOk||0)+1;
@@ -3018,7 +3490,7 @@ function weightedTpl(list){
   return list[list.length-1];
 }
 function availableTpl(){
-  return TPL.filter(t=>t.needs.every(n=>n.split('|').some(k=>G.units.some(u=>u.kind===k))));
+  return TPL.filter(t=>!t.caseOnly && t.needs.every(n=>n.split('|').some(k=>G.units.some(u=>u.kind===k))));
 }
 const needAvail = need => need.split('|').some(k=>G.units.some(u=>u.kind===k));
 /* ďalšia potreba len vtedy, keď na ňu v kraji vôbec je dosť posádok */
@@ -3030,6 +3502,7 @@ function canAdd(needs, need){
 const BORDERISH=new Set(['w_ml','w_vn','kc','ct','bo','vk','so','ca','ke','l_si','p_mo','p_sb','p_kl','p_dm']);
 function spawnCall(re){
   let prank=!re && CR()<.07, tpl=null, node;
+  const script = re && re.script;
   if(re){ tpl=re.tpl; node=re.node; }
   else if(!prank){ tpl=weightedTpl(availableTpl()); node=placeFor(tpl); }
   else node=placeFor({place:'town'});
@@ -3039,18 +3512,18 @@ function spawnCall(re){
     log:[], asked:[], pend:null, lang:'sk', interp:false, silent:false, lost:null, cx:[], fq:[], fqAsked:[], info:0, brief:[], cat:null, oOpen:false,
     ans:{}, cqAsked:[], traps:[], hMark:0, cb:0, contact:null, cbFail:false, rada:null,
     vp:.88+Math.random()*.24, vr:.95+Math.random()*.1, vi:Math.floor(Math.random()*4), mood:tplEmo(tpl)};
-  if(re){ c.recall=true; c.lvlTrue=re.lvl; c.vx=RECALL_V[re.lvl]; c.harm0=.2; }
+  if(re && !script){ c.recall=true; c.lvlTrue=re.lvl; c.vx=RECALL_V[re.lvl]; c.harm0=.2; }
   { const ft = tpl || cpick(TPL.filter(t=>FQ[t.title])), own=FQ[ft.title];
     if(own){ const map=FQ_CQ[ft.title]||[], list=own.filter((x,i)=>tpl && tpl.title===ft.title ? !map[i] : true).concat([[...(FQ_X[ft.cat]||FQ_X.mimo), 0]]);
       for(let i=list.length-1;i>0;i--){ const j=Math.floor(CR()*(i+1)); [list[i],list[j]]=[list[j],list[i]]; }
       c.fq=list; } }
-  if(!prank && !re){
+  if(!prank && !re && !G.script){
     if(tpl.fx && BORDERISH.has(node) && CR()<.3) c.lang=cpick(['hu','uk','en']);
     if(n.type!=='town' && CR()<.45) c.lost=makeLost(node);
   }
   /* úvodná veta: zhovorčivý volajúci povie hneď, čo sa stalo; inak sa musíš pýtať */
   if(prank) c.log.push({who:'c', text:text, key:raw, emo:'smiech'});
-  else if(re){ const o=REPEAT_OPEN+text+' Je to oveľa horšie, pošlite niekoho!'; c.log.push({who:'c', text:o, key:'recall:'+c.textKey, emo:'panika'}); c.asked.push('what'); }
+  else if(re && !script){ const o=REPEAT_OPEN+text+' Je to oveľa horšie, pošlite niekoho!'; c.log.push({who:'c', text:o, key:'recall:'+c.textKey, emo:'panika'}); c.asked.push('what'); }
   else if(c.lang!=='sk') c.log.push({who:'c', text:FOPEN[c.lang], key:FOPEN[c.lang], emo:'panika'});
   else if(CR()<.4){ c.log.push({who:'c', text:text, key:c.textKey, emo:tplEmo(tpl)}); c.asked.push('what'); }
   else { const o=cpick(OPEN); c.log.push({who:'c', text:o, key:o, emo:OPEN_EMO[OPEN.indexOf(o)]}); }
@@ -3100,6 +3573,7 @@ function markH(c, h){
 const cqText = (c, id) => { const d=CQ_DEF[id]; return hNow(c)===1 && d[1] || d[0]; };
 function cqKeyIds(t){
   if(!t) return [];
+  if(t.key) return t.key;
   const map=FQ_CQ[t.title]||[], fq=FQ[t.title]||[];
   return map.filter((id,i)=>id && fq[i] && fq[i][2]);
 }
@@ -3110,7 +3584,7 @@ function cqAnswer(c, id){
   if(hTrue(t)===3) return (t.h3.cq && t.h3.cq[id]) || t.h3.no || H3_NO;
   const map=FQ_CQ[t.title]||[], i=map.indexOf(id), fq=FQ[t.title]||[];
   if(i>=0 && fq[i]) return fq[i][1];
-  const own=CQ_ANS[t.title]||{};
+  const own=t.cqa||CQ_ANS[t.title]||{};
   return own[id] || own['*'] || (t.self && d[3]) || d[2];
 }
 function cqIsKey(c, id){
@@ -3180,6 +3654,7 @@ function stepCall(c){
   if(c.fa && c.fa.busy && G.t>=c.fa.busy){ c.fa.busy=0; dirty(); }
   if(!c.pend || G.t<c.pend.at) return;
   const pd=c.pend, q=pd.q; c.pend=null;
+  if(pd.consult){ const a=consultAnswer(c), done=consultReady(c); if(done) c.consultTxt=a; else { c.consult=false; c.consultNote=a; } c.log.push({who:'sys', text:'Lekár OS: '+a}); say('Lekár OS: '+a); dirty(); return; }
   if(pd.fq!==undefined){
     const x=c.fq[pd.fq], a=c.prank ? FQ_PRANK[Math.floor(Math.random()*FQ_PRANK.length)] : x[1];
     c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a, a, c.prank ? 'smiech' : fqEmo(c.tpl, x));
@@ -3200,7 +3675,7 @@ function stepCall(c){
   }
   if(q==='cb'){
     const h=c.tpl.h3;
-    if(h.who){ c.cb=h.who; c.log.push({who:'sys', text: h.who===1 ? 'Spojenie s pacientom.' : 'Spojenie s osobou pri pacientovi.'}); c.log.push({who:'c', text:h.greet, t:performance.now()}); speak(c, h.greet, h.greet, 'strach');
+    if(h.who){ c.cb=h.who; tlog(c, 'Spojenie s '+(h.who===1 ? 'pacientom' : 'osobou pri pacientovi'), true); c.log.push({who:'sys', text: h.who===1 ? 'Spojenie s pacientom.' : 'Spojenie s osobou pri pacientovi.'}); c.log.push({who:'c', text:h.greet, t:performance.now()}); speak(c, h.greet, h.greet, 'strach');
       /* nový volajúci je pri pacientovi – vitálne funkcie a otázky k problému sa pýtaš znova */
       c.asked=c.asked.filter(x=>!ZZF.includes(x)); c.cqAsked=[]; for(const k of Object.keys(c.ans)) if(ZZF.includes(k) || k.startsWith('cq:')) delete c.ans[k]; }
     else { c.cbFail=true; c.log.push({who:'sys', text:'Telefón zvoní, nikto nedvíha.'}); }
@@ -3218,6 +3693,7 @@ function stepCall(c){
     c.log.push({who:'sys', text:'Tlmočník je na linke.'});
     if(c.asked.includes('what')) c.log.push({who:'c', text:c.text, t:performance.now()});
   } else { const a=answerFor(c,q), m=answerMeta(c,q,a); c.log.push({who:'c', text:a, t:performance.now()}); speak(c, a, m.key, m.emo); c.ans[q]=a;
+    if(q==='what') tlog(c, 'Zistené, čo sa stalo'); if(q==='pri' && !c.prank && hTrue(c.tpl)===3) tlog(c, 'Zistené: volajúci nie je pri pacientovi', true);
     if(q==='kontakt' && hTrue(c.tpl)===3) c.contact={who:c.tpl.h3.who}; }
   dirty();
 }
@@ -3230,6 +3706,7 @@ function answer(c){
   if(G.calls.some(x=>x.state==='talk')){ say('Najprv dokonči hovor, ktorý máš na linke.'); return; }
   for(const inc of G.incs) if(inc.intake) finishIntake(inc);   // nový hovor ukončí príjem predchádzajúceho
   c.state='talk'; c.talkAt=G.t; G.istep=1;
+  c.tl=[]; tlog(c, 'Hovor prijatý po '+Math.round((G.t-c.t0)*60)+' s zvonenia'); if(c.asked.includes('what')) tlog(c, 'Volajúci hneď povedal, čo sa stalo');
   syncCallAudio();   // zvuky z miesta hneď po zdvihnutí
   const first=c.log[0];
   if(c.kind!=='repeat') c.log.unshift({who:'op', text:GREET});
@@ -3248,7 +3725,7 @@ const incName = i => i.known || !i.fromCall ? i.title : i.label;
 function pickCat(c, cat){
   if(!c || c.state!=='talk' || !running() || c.kind==='repeat' || !CATS[cat]) return;
   if(cat==='prank') return markPrank(c);
-  c.cat = c.cat===cat ? null : cat; c.oOpen = c.cat==='mimo'; dirty();
+  c.cat = c.cat===cat ? null : cat; c.oOpen = c.cat==='mimo'; if(c.cat) tlog(c, 'Kategória: '+CATS[c.cat].label); dirty();
 }
 function markPrank(c){
   G.stats.cls++;
@@ -3262,7 +3739,7 @@ function markPrank(c){
 function pickLvl(c, lvl){
   if(!c || c.state!=='talk' || !running() || c.kind==='repeat' || !c.cat || c.cat==='mimo' || !LV_PRIO[lvl]) return;
   if(lvl==='O'){ c.oOpen=!c.oOpen; if(c.oOpen) G.istep=4; dirty(); return; }
-  G.stats.cls++;
+  G.stats.cls++; tlog(c, 'Naliehavosť '+lvl+' – založená udalosť');
   createIncident(c, c.cat, lvl); dropCall(c); G.istep=4;
 }
 const OPT_SAY={rada:'Poradím vám, čo robiť doma. Keby sa to zhoršilo, hneď volajte znova.', '116117':'Toto nie je stav pre záchranku. Zavolajte na 116117 alebo k svojmu lekárovi.',
@@ -3270,7 +3747,7 @@ const OPT_SAY={rada:'Poradím vám, čo robiť doma. Keby sa to zhoršilo, hneď
   smrt:'Je mi to veľmi ľúto. Zariadim prehliadku mŕtveho tela, lekár za vami príde.', smrtpz:'Je mi to veľmi ľúto. Zariadim prehliadku mŕtveho tela a informujem políciu. Prosím, ničoho sa nedotýkajte.', izs:'Toto nie je pre záchrannú službu, prepájam vás na linku 112.'};
 function resolveO(c, opt){
   if(!c || c.state!=='talk' || !running() || !OPT[opt] || !c.cat || c.kind==='repeat' || c.rada) return;
-  G.stats.cls++;
+  G.stats.cls++; c.oOpt=opt; tlog(c, 'Bez výjazdu: '+OPT[opt].toLowerCase());
   c.log.push({who:'op', text:OPT_SAY[opt]});
   if(c.prank){ G.score+=15; G.stats.pranks++; say('Bez výjazdu – a dobre: bolo to zneužitie linky. +15', 'good'); dropCall(c); return; }
   const t=c.tpl, truth=c.lvlTrue||t.lvl;
@@ -3292,12 +3769,13 @@ function resolveO(c, opt){
     const R=RADA[t.title];
     if(R && RADA_OPTS.includes(opt) && !quiet()){
       const n=R.l.length+1, order=[...Array(n).keys()]; for(let i=n-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
-      c.rada={opt, order, sel:[]}; c.oDone=true; G.istep=4; dirty(); return;
+      c.rada={opt, order, sel:[]}; c.oOpt=opt; c.oDone=true; G.istep=4; dirty(); return;
     }
   } else {
     scheduleRecall(c);
     say('Hovor uzavretý bez výjazdu: '+OPT[opt].toLowerCase()+'.');
   }
+  if(!c.prank) debriefO(c);
   dropCall(c);
 }
 /* vety rady: index R.l.length je bezpečnostná veta */
@@ -3314,13 +3792,16 @@ function radaDone(c){
   if(!safe){ pts-=10; dec('safe'); }
   if(bad.length) dec('radabad', bad.length);
   G.score+=pts;
+  tlog(c, 'Rada volajúcemu a koniec hovoru', !bad.length && safe);
   say('Rada volajúcemu: '+(bad.length ? 'chybná rada – '+bad[0].why+' ' : '')+(safe ? '' : 'chýbalo „ak sa to zhorší, volajte znova“. ')+(pts>=0 ? '+'+pts : '−'+Math.abs(pts)), bad.length || !safe ? 'bad' : 'good');
+  debriefO(c);
   dropCall(c);
 }
 /* podhodnotený hovor: volajúci zavolá znova a stav je horší */
 const RECALL_V={K:{ved:'Teraz už takmer nereaguje, len stoná!', dych:'Dýcha rýchlo a plytko.', obeh:'Má sivú farbu a celé čelo od potu!'},
   N:{ved:'Reaguje, ale pomaly a to, čo hovorí, nedáva zmysel.', obeh:'Má bledú farbu a potí sa.'}};
 function scheduleRecall(c){
+  if(G.script) return;   // v kurze, kazuistike a skúške sa nevolá znova
   const t=c.tpl, lvl=c.lvlTrue||t.lvl;
   (G.recalls=G.recalls||[]).push({at:G.t+({K:2, N:4, M:7}[lvl]||6), tpl:t, node:c.node, addr:c.addr, lvl: lvl==='M' ? 'N' : 'K', orig:lvl});
 }
@@ -3330,6 +3811,97 @@ function recallCall(r){
     say('Volajúci, ktorému si pomohol bez výjazdu, volá znova – stav sa zhoršil (správne bolo '+r.orig+'). −40, −4 dôvery', 'bad'); checkRep();
   }
   spawnCall(r);
+}
+/* čo sa v hovore udialo – pre rozbor */
+function callFacts(c){
+  const t=c.tpl;
+  return {asked:c.asked.slice(), cqAsked:c.cqAsked.slice(), traps:c.traps.map(i=>((CQ_TRAP[c.cat]||[])[i]||[])[0]).filter(Boolean),
+    useless:c.fqAsked.filter(i=>c.fq[i] && !c.fq[i][2]).map(i=>c.fq[i][0]), hMark:c.hMark, cb:c.cb, cat:c.cat, consult:!!c.consult, prank:!!c.prank};
+}
+/* rozbor hovoru: kategória a naliehavosť s kritériom, otázky, časová os, pokyny */
+function makeDebrief(src, kind){
+  const t=src.tpl, f=kind==='o' ? callFacts(src) : (src.call||{}), out={no:kind==='o' ? null : src.no, kind, title:t ? t.title : 'Zneužitie linky', at:G.t, ready:kind==='o' || !!G.script};
+  if(!t || f.prank) return Object.assign(out, {prank:true, tl:src.tl||[]});
+  const ht=hTrue(t), truthLvl=(kind==='o' ? src.lvlTrue : src.trueLvl) || t.lvl, cat=src.cat;
+  out.tri={cat:CATS[cat] ? CATS[cat].label : '–', catTrue:CATS[t.cat].label, catOk:cat===t.cat || t.alt.includes(cat), lvl:kind==='o' ? 'O' : src.lvl, lvlTrue:truthLvl, crit:critText(t)};
+  out.tri.lvlOk = out.tri.lvl===truthLvl;
+  if(kind==='o'){ out.tri.opt=src.oOpt ? OPT[src.oOpt] : ''; out.tri.optTrue=(t.o||[]).map(o=>OPT[o]).join(' / '); out.tri.optOk=!!src.oOpt && (t.o||[]).includes(src.oOpt); }
+  const miss=[];
+  if(!f.asked.includes('where') && !src.lost) miss.push('adresa');
+  const who=f.cb || ht;
+  if(who===2){ if(!f.asked.includes('ved')) miss.push('vedomie'); if(!f.asked.includes('dych')) miss.push('dýchanie'); }
+  if(ht===3 && !f.asked.includes('pri')) miss.push('„Ste pri pacientovi?“ – volajúci nebol pri pacientovi');
+  if(ht===3 && !f.asked.includes('kontakt')) miss.push('kontakt na niekoho pri pacientovi');
+  for(const id of cqKeyIds(t)) if(!f.cqAsked.includes(id)) miss.push(CQ_DEF[id][0]);
+  out.q={miss, useless:f.useless||[], traps:f.traps||[], hMark:f.hMark, hTrue:ht, consult:f.consult};
+  out.tl=src.tl||[];
+  if(kind==='o'){
+    const R=src.rada;
+    out.fa = R ? {rada:R.sel.map(i=>radaList(t)[i]), safe:R.sel.includes(radaList(t).length-1)} : {};
+  } else {
+    const list=src.fa ? faOf(src) : null;
+    out.fa={given:list ? src.fa.given.map(i=>({t:list[i][0], ok:!!list[i][1], why:list[i][3]||''})) : [], must:faNeeded(src), done:faDone(src), no:src.faNo||'',
+      tanr: src.cpr && src.cpr.at ? {sec:Math.round((src.cpr.at-src.callAt)*60), rate:src.cpr.rate} : src.tpl && src.tpl.arrest ? {none:true} : null,
+      aed: src.aed ? src.aed.state : null, izsMiss:(src.izsNeed||[]).filter(k=>!src.izsReq.includes(k)).map(k=>IZS_L[k]), izsX:(src.izsReq||[]).filter(k=>!(src.izsNeed||[]).includes(k) && !((t.izsOk||[]).includes(k))).map(k=>IZS_L[k]),
+      dispSec:src.dispSec, lvl:src.lvl};
+  }
+  return out;
+}
+function debriefInc(inc){
+  if(quiet() || !inc.fromCall || inc.deb) return;
+  inc.deb=makeDebrief(inc, 'inc'); (G.debriefs=G.debriefs||[]).push(inc.deb);
+  if(G.script && G.script.kind!=='cases') scriptResult(inc.deb);
+  if(G.script && G.script.kind==='course') showDebrief(inc.deb, true);
+}
+function debriefO(c){
+  if(quiet()) return;
+  const d=makeDebrief(c, 'o'); (G.debriefs=G.debriefs||[]).push(d);
+  if(G.script && G.script.kind==='cases'){ const C=caseById(G.script.id); if(C){ d.extra=caseExtra(C, callFacts(c), d); d.caseDone=true; } }
+  if(G.script) scriptResult(d);
+  if(G.script && G.script.kind!=='exam') showDebrief(d, true);
+}
+const DK = ok => ok===true ? '<i class="dk-ok">✓</i>' : ok===false ? '<i class="dk-bad">✗</i>' : '<i class="dk-n">·</i>';
+function debriefHTML(d){
+  if(d.prank) return `<p>Zneužitie linky – hovor bez zdravotného problému.</p>`;
+  const T=d.tri, Q=d.q, F=d.fa||{};
+  let h=`<section class="deb"><h3>1. Kategória a naliehavosť</h3><ul class="dlist">
+    <li>${DK(T.catOk)}Kategória: <b>${esc(T.cat)}</b>${T.catOk ? '' : ' – správne: <b>'+esc(T.catTrue)+'</b>'}</li>
+    <li>${DK(T.lvlOk)}Naliehavosť: <b>${T.lvl}</b>${T.lvlOk ? '' : ' – správne: <b>'+T.lvlTrue+' ('+LV_L[T.lvlTrue]+')</b>'}</li>
+    ${T.crit ? `<li>${DK()}Rozhodlo kritérium: „${esc(T.crit)}“</li>` : ''}
+    ${T.opt!=null ? `<li>${DK(T.optOk)}Riešenie: ${esc(T.opt||'–')}${T.optOk ? '' : ' – lepšie: '+esc(T.optTrue)}</li>` : ''}</ul></section>`;
+  h+=`<section class="deb"><h3>2. Otázky</h3><ul class="dlist">
+    <li>${DK(Q.hMark ? Q.hMark===Q.hTrue : null)}Typ volajúceho: ${Q.hMark ? 'označený H'+Q.hMark : 'neoznačený'}${Q.hMark===Q.hTrue ? '' : ' – správne H'+Q.hTrue+' ('+H_L[Q.hTrue].split(' · ')[1]+')'}</li>
+    ${Q.miss.length ? Q.miss.map(m=>`<li>${DK(false)}Chýbalo: ${esc(m)}</li>`).join('') : `<li>${DK(true)}Na nič dôležité si nezabudol.</li>`}
+    ${Q.traps.map(m=>`<li>${DK(false)}Sugestívna otázka: „${esc(m)}“</li>`).join('')}
+    ${Q.useless.map(m=>`<li>${DK(false)}Zbytočná otázka: „${esc(m)}“</li>`).join('')}
+    ${Q.consult ? `<li>${DK()}Konzultoval si s lekárom OS.</li>` : ''}</ul></section>`;
+  h+=`<section class="deb"><h3>3. Časová os</h3><ol class="tline">${d.tl.map(e=>`<li><span class="ts">${fmtSec(e.s)}</span>${DK(e.ok)}<span>${esc(e.text)}</span></li>`).join('')}</ol></section>`;
+  h+=`<section class="deb"><h3>4. Pokyny volajúcemu</h3><ul class="dlist">`;
+  if(d.kind==='o'){
+    if(F.rada){ h+=F.rada.map(x=>`<li>${DK(x.ok)}${esc(x.t)}${x.ok ? '' : ' – '+esc(x.why)}</li>`).join('') + (F.safe ? '' : `<li>${DK(false)}Chýbala veta „ak sa to zhorší, volajte znova“.</li>`); }
+    else h+=`<li>${DK()}Pri tomto vybavení sa rada nedáva.</li>`;
+  } else {
+    if(F.no) h+=`<li>${DK()}${esc(F.no)}</li>`;
+    h+=F.given.map(x=>`<li>${DK(x.ok)}${esc(x.t)}${x.ok ? '' : ' – '+esc(x.why)}</li>`).join('');
+    if(F.must && !F.done) h+=`<li>${DK(false)}Pri ${F.lvl==='K' ? 'K' : 'K a N'} chýbal povinný pokyn volajúcemu.</li>`;
+    if(!F.given.length && !F.must && !F.no) h+=`<li>${DK()}Pokyny neboli povinné.</li>`;
+    if(F.tanr) h+= F.tanr.none ? `<li>${DK(false)}TANR sa nezačala.</li>` : `<li>${DK(F.tanr.sec<=90 && F.tanr.rate>=100 && F.tanr.rate<=120)}TANR od ${fmtSec(F.tanr.sec)}, tempo ${F.tanr.rate}/min</li>`;
+    if(F.aed && AED_DEB[F.aed]) h+=`<li>${DK(AED_DEB[F.aed][0])}AED: ${AED_DEB[F.aed][1]}</li>`;
+    for(const k of F.izsMiss||[]) h+=`<li>${DK(false)}Chýbala súčinnosť: ${esc(k)}</li>`;
+    for(const k of F.izsX||[]) h+=`<li>${DK(false)}Zbytočne vyžiadané: ${esc(k)}</li>`;
+  }
+  h+='</ul></section>';
+  if(d.extra) h+=d.extra;
+  return h;
+}
+function showDebrief(d, auto){
+  const wasPlay=G.mode==='play'; if(wasPlay){ G.mode='pause'; pauseBtn(true); }
+  G.debOpen=true;
+  const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu'); ov.dataset.resume=wasPlay ? '1' : '';
+  ov.innerHTML=`<div class="sheet"><div class="row"><div class="grow"><div class="k">Rozbor hovoru${d.no ? ' · udalosť #'+d.no : ''}</div><h2 class="grade" style="margin-top:4px">${esc(d.title)}</h2></div>
+    <button class="btn go" data-act="closeDeb">${wasPlay ? 'Pokračovať' : 'Zavrieť'}</button></div>${debriefHTML(d)}
+    <div class="acts"><button class="btn go" data-act="closeDeb">${wasPlay ? 'Pokračovať' : 'Zavrieť'}</button></div></div>`;
+  ov.scrollTop=0;
 }
 /* typ volajúceho a volajúci mimo pacienta: body a poznámky do rozboru */
 function hScore(c){
@@ -3380,7 +3952,7 @@ function createIncident(c, cat, lvl){
     const e=escFor(tpl, truth);
     if(e && (!e.need || canAdd(needs.concat(hidden.map(x=>x.need)), e.need)) && !(e.need===DOC && needs.includes(DOC)) && Math.random()<Math.min(.85, e.p*(G.single ? 1.4 : 1))) inc.esc={...e, at:G.t+(G.single ? .28 : .45)*(inc.deadline-G.t)};
   }
-  inc.atPatient = prank || hNow(c)!==3; inc.log=c.log.slice(); inc.hMark=c.hMark; inc.cqAsked=c.cqAsked.slice();
+  inc.atPatient = prank || hNow(c)!==3; inc.log=c.log.slice(); inc.hMark=c.hMark; inc.cqAsked=c.cqAsked.slice(); inc.tl=c.tl||[]; inc.call=callFacts(c);
   const fa=!prank && faOf(inc);
   if(!inc.atPatient) inc.faNo='Volajúci nie je pri pacientovi – pokyny ani TANR mu dať nemôžeš.';
   else if(fa){
@@ -3487,11 +4059,12 @@ const faNeeded = inc => !!inc && inc.fromCall && !inc.prank && !inc.mimo && (inc
 const faDone = inc => !!inc.fa && inc.fa.given.some(i=>faOf(inc)[i][1]);
 function finishIntake(inc){
   if(!inc || !inc.intake) return;
-  inc.intake=false;
+  inc.intake=false; tlog(inc, 'Koniec príjmu');
   if(!quiet() && faNeeded(inc) && !faDone(inc)){
     G.score-=20; inc.harm=(inc.harm||0)+.1; dec('nofa'); note(inc, 'pokyny volajúcemu chýbali');
     say('#'+inc.no+': príjem ukončený bez pokynov volajúcemu – pri K a N sú povinné. −20, stav pacienta sa zhoršil', 'bad');
   }
+  debriefInc(inc);
   dirty();
 }
 function tanrStart(inc){
@@ -3518,7 +4091,7 @@ function tanrTap(inc){
   const now=performance.now();
   if(p.taps.length && now-p.taps[p.taps.length-1]>2500) p.taps=[];   // dlhá pauza – tempo odznova
   p.taps.push(now);
-  if(!p.at){ p.at=G.t; endIntakeMaybe(inc); }
+  if(!p.at){ p.at=G.t; tlog(inc, 'TANR – prvé stlačenie', (p.at-inc.callAt)*60<=90); endIntakeMaybe(inc); }
   if(p.taps.length>=9){
     const iv=p.taps.slice(-9), avgMs=(iv[8]-iv[0])/8, rate=Math.round(60000/avgMs);
     p.rate=rate; p.q = rate>=100 && rate<=120 ? 1 : rate>=90 && rate<=130 ? .7 : .4; p.step=p.n+1;
@@ -3532,7 +4105,8 @@ function tanrTap(inc){
   dirty();
 }
 /* zástava srdca: šancu na prežitie určuje čas bez obehu, kvalita TANR a príchod posádky */
-function arrestOutcome(inc){
+function arrestOutcome(inc){ arrestCore(inc); if(inc.aed && inc.aed.state==='used'){ inc.harm*=.6; inc.arrNote+=', AED pripojený pred príchodom posádky'; } }
+function arrestCore(inc){
   const t0=inc.callAt-1, cprAt=inc.cpr && inc.cpr.at ? inc.cpr.at : null;
   const noflow=Math.max(0, (cprAt||inc.metAt)-t0), low=cprAt ? Math.max(0, inc.metAt-cprAt) : 0, q=cprAt ? (inc.cpr.q||.7) : 0;
   inc.harm=(inc.harm||0)*.5 + .1*noflow + .012*low*(1.6-q);
@@ -3690,7 +4264,8 @@ function offScreen(x,z){
   return V3.z>1 || Math.abs(V3.x)>.8 || Math.abs(V3.y)>.8;
 }
 /* ---------- výsledky zásahov ---------- */
-function removeInc(inc){ G.incs=G.incs.filter(x=>x!==inc); if(G.sel.inc===inc.id) G.sel.inc=null; dropIncMesh(inc.id); dirty(); }
+function removeInc(inc){ if(G.script && G.script.kind==='cases' && inc.fromCall){ finishIntake(inc); if(inc.deb && !inc.deb.caseDone) caseArrived(inc); }
+  G.incs=G.incs.filter(x=>x!==inc); if(G.sel.inc===inc.id) G.sel.inc=null; dropIncMesh(inc.id); dirty(); }
 function releaseUnits(inc, keep){ for(const id of inc.units){ const u=unitById(id); if(u && u!==keep && u.inc===inc.id) goHome(u); } }
 const hospFull = H => (H.pat||[]).filter(t=>t>G.t).length>=H.cap;
 const hospMatch = (H, pt) => H.spec.includes(pt) || (pt==='gen' && H.spec.includes('gen'));
@@ -3787,7 +4362,7 @@ function wasted(inc){
   say(inc.mimo ? '#'+inc.no+': na mieste nie je pacient – hovor nepatril na 155, mal ísť na KS IZS 112. Zbytočný výjazd. −40' : 'Na mieste nikto nie je – hovor bol zneužitie linky. −40', 'bad');
   releaseUnits(inc); removeInc(inc); SND.bad(); checkRep();
 }
-function checkRep(){ if(G.rep<=0){ G.rep=0; endGame(); } dirty(); }
+function checkRep(){ if(G.rep<=0){ G.rep=0; if(!G.script) endGame(); } dirty(); }
 
 /* ukážková služba v pozadí úvodnej obrazovky – hrá sama */
 function demoBot(){
@@ -3815,8 +4390,9 @@ function demoBot(){
 const caseOpen = () => G.calls.length>0 || G.incs.length>0 || G.units.some(u=>u.status===5 && !u.hospId) || !!(G.recalls && G.recalls.length);
 function step(dt){
   G.t+=dt;
+  if(G.script) stepScript();
   if(G.single && caseOpen()) G.nextCall=Math.max(G.nextCall, G.t+(G.tempo==='busy' ? 1 : G.tempo==='calm' ? 4 : 2));
-  if(G.t>=G.nextCall){
+  if(G.t>=G.nextCall && !G.script){
     spawnCall();
     const base=(G.ch && G.ch.rate ? G.ch.rate : lerp(15, 9, clamp(G.t/900,0,1)) * TEMPO[G.tempo].k) * (G.calls.length>=3 ? 1.6 : 1);
     G.nextCall=G.t + base*(.7+CR()*.6);
@@ -3835,6 +4411,7 @@ function step(dt){
   }
   if(!running()) return;
   for(const c of G.calls) stepCall(c);
+  stepAed(); stepDefer();
   if(G.mode==='play') stepWorld();
   if(G.t-covAt>=1) computeCoverage();
   if(G.mode==='play' && G.t>=(G.covCheck||30)){
@@ -3853,10 +4430,10 @@ function step(dt){
   for(const inc of [...G.incs]){
     if(inc.fa && inc.fa.busy && G.t>=inc.fa.busy){ inc.fa.busy=0; dirty(); }
     if(inc.izsWait && inc.izsWait.length && G.t>=(inc.izsTry||0)){ inc.izsTry=G.t+1; for(const k of [...inc.izsWait]) izsSend(inc, k); }
-    if(inc.intake && (G.t-inc.callAt)*60>300){ inc.intake=false; dirty(); }
+    if(inc.intake && (G.t-inc.callAt)*60>300) finishIntake(inc);
     const info=needInfo(inc);
     if(info.met){
-      if(!inc.metAt){ inc.metAt=G.t; finishIntake(inc); inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); applyLate(inc, info); if(inc.fromCall && inc.tpl && inc.tpl.arrest && !inc.prank) arrestOutcome(inc); aidReport(inc); dirty(); }
+      if(!inc.metAt){ inc.metAt=G.t; aedArrive(inc); finishIntake(inc); tlog(inc, 'Posádka na mieste ('+Math.round(G.t-inc.callAt)+' min po prijatí hovoru)'); if(inc.deb){ inc.deb.ready=true; if(inc.deb.fa) inc.deb.fa.dispSec=inc.dispSec; caseArrived(inc); if(!G.script && !G.debHint && !quiet()){ G.debHint=1; say('#'+inc.no+': posádka je na mieste – rozbor hovoru nájdeš v karte udalosti a na konci služby.'); } } inc.frac=clamp((inc.deadline-G.t)/(inc.deadline-inc.created),0,1); applyLate(inc, info); if(inc.fromCall && inc.tpl && inc.tpl.arrest && !inc.prank) arrestOutcome(inc); aidReport(inc); dirty(); }
       inc.progress+=dt*workRate(inc);
       if(!inc.saidHalf && inc.progress>=inc.work/2){ inc.saidHalf=true; const lead=inc.units.map(unitById).find(u=>u && u.status===4 && u.inc===inc.id); if(lead && !quiet() && Math.random()<.6) radio(lead, HALF_MED, 'good'); }
       if(inc.progress>=inc.work) resolve(inc);
@@ -4055,6 +4632,7 @@ function buildStaticLabels(){
     else if(n.poi==='border') staticLabels.push(mkLabel('poi border', esc(n.name.replace(' – hraničný priechod','')), n.x, n.y+.8, n.z, null, 165));
   }
   for(const h of HOSPITALS){ const n=NODES[h]; const L=mkLabel('hosp','H', n.x+n.r*.7, n.y+2, n.z-n.r*.4, null, 230); L.keep=true; staticLabels.push(L); }
+  for(const id of Object.keys(AED_PTS)){ const n=NODES[id]; if(!n) continue; const r=n.r||.5; const L=mkLabel('aed','AED', n.x-r*.75, n.y+1.8, n.z+r*.35, null, 170); L.keep=true; staticLabels.push(L); }
   /* okolie kraja: mestá a názvy krajov a krajín (len na orientáciu) */
   for(const t of CTX_TOWNS){ const L=mkLabel('town ctx'+(t.big?' big':''), esc(t.name), t.x, groundY(t.x,t.z)+1.4, t.z, null, t.big ? 0 : 240); L.pop=t.big ? 20000 : 3000; staticLabels.push(L); }
   for(const [name,x,z] of CTX_LABELS){ const L=mkLabel('region', esc(name.toUpperCase()), x, groundY(x,z)+2, z, null, 0); L.pop=1; staticLabels.push(L); }
@@ -4844,16 +5422,16 @@ function logLine(m){
 function triageBlock(c){
   const cat=c.cat;
   if(cat==='mimo') return oBlock(c, 'Hovor nepatrí na 155 – ako ho vybavíš?');
-  const tr=TREE[cat]||{};
-  let h=`<div class="lvtree"><div class="k">${esc(CATS[cat].label)} · naliehavosť</div>`;
+  const tr=TREE[cat]||{}, hide=G.script && G.script.kind==='exam';
+  let h=`<div class="lvtree${hide ? ' exam' : ''}"><div class="k">${esc(CATS[cat].label)} · naliehavosť${hide ? ' (skúška – kritériá sú skryté)' : ''}</div>`;
   for(const L of LV){
-    const items=tr[L]||[], off=!items.length && L!=='O';
+    const items=tr[L]||[], off=!items.length && L!=='O' && !hide;
     h+=`<div class="lv${off ? ' off' : ''}${c.oOpen && L==='O' ? ' on' : ''}" style="--lc:${LV_COL[L]}">
       <button class="btn lvb" data-act="lvl" data-id="${c.id}" data-type="${L}" ${off ? 'disabled' : ''}><b>${L}</b><span>${LV_L[L]}</span><kbd>${L}</kbd></button>
-      <ul>${(items.length ? items : [L==='O' ? 'Bez výjazdu: rada, 116117, konzultácia' : 'V tejto kategórii sa nepoužíva']).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+      ${hide ? '' : `<ul>${(items.length ? items : [L==='O' ? 'Bez výjazdu: rada, 116117, konzultácia' : 'V tejto kategórii sa nepoužíva']).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}</div>`;
   }
   if(tr.note) h+=`<p class="keys">${esc(tr.note)}</p>`;
-  h+='</div>';
+  h+='</div>'+consultBlock(c);
   return h;
 }
 function oBlock(c, title){
@@ -4861,7 +5439,7 @@ function oBlock(c, title){
 }
 /* príjem hovoru v piatich krokoch: na mobile jeden krok na obrazovku, na počítači všetko pod sebou */
 const ISTEPS=['Rozhovor','Problém','Naliehavosť','Vyslanie','Pokyny'];
-const stepTabs = (cur, l4) => `<nav class="isteps" aria-label="Kroky príjmu">${ISTEPS.map((n,i)=>`<button class="ist${cur===i+1 ? ' on' : ''}" data-act="istep" data-type="${i+1}" aria-current="${cur===i+1 ? 'step' : 'false'}"><b>${i+1}</b>${i===3 && l4 ? l4 : n}</button>`).join('')}</nav>`;
+const stepTabs = (cur, l4, todo) => `<nav class="isteps" aria-label="Kroky príjmu">${ISTEPS.map((n,i)=>`<button class="ist${cur===i+1 ? ' on' : ''}${todo && i===4 ? ' todo' : ''}" data-act="istep" data-type="${i+1}" aria-current="${cur===i+1 ? 'step' : 'false'}"><b>${i+1}</b>${i===3 && l4 ? l4 : n}</button>`).join('')}</nav>`;
 const stepNav = cur => `<div class="inav mo">${cur>1 ? `<button class="btn" data-act="istep" data-type="${cur-1}">← ${ISTEPS[cur-2]}</button>` : '<span></span>'}${cur<5 ? `<button class="btn" data-act="istep" data-type="${cur+1}">${ISTEPS[cur]} →</button>` : '<span></span>'}</div>`;
 const clip = (t, n=60) => t.length>n ? t.slice(0, n-1)+'…' : t;
 /* posledné dve vety sú vždy na očiach, celý prepis sa dá rozbaliť */
@@ -4966,7 +5544,8 @@ function izsBlock(inc){
     <p class="keys">${esc('HaZZ: '+IZS_WHEN.HAS+'. PZ: '+IZS_WHEN.PZ+'. MsP: '+IZS_WHEN.MSP+'.')}</p></div>`;
 }
 /* TANR: pokyny volajúcemu a tempo stláčania */
-function tanrBlock(inc){
+function tanrBlock(inc){ return tanrCore(inc)+aedBlock(inc); }
+function tanrCore(inc){
   const p=inc.cpr, nzo=inc.cat==='nzo';
   if(!p){
     if(inc.metAt || inc.lvl!=='K') return '';
@@ -5010,7 +5589,7 @@ function renderDispatch(){
     setHTML(box, `<div class="disp intakev" data-cur="${cur}" style="--pc:${LV_COL[inc.lvl]||'var(--p'+inc.prio+')'}">
       <div class="row">${lvChip(inc)}${catIco(inc.cat)}<span class="ttl grow">#${inc.no} ${esc(incName(inc))}</span><b class="ctime" data-call="${inc.callAt}">0:00</b></div>
       ${ring ? `<button class="btn sm ringme" data-act="answer" data-id="${ring.id}">${ICON.phone} Zvoní ďalší hovor – ukončiť príjem a prijať</button>` : ''}
-      ${stepTabs(cur)}
+      ${stepTabs(cur, null, must && !faDone(inc))}
       <section class="istep mo" data-step="1">${lastLines(inc.log||[], false)}${inc.brief && inc.brief.length ? `<div class="found"><span class="k">Zistené</span>${inc.brief.map(b=>`<span class="fchip">${esc(clip(b, 52))}</span>`).join('')}</div>` : ''}</section>
       <section class="istep mo" data-step="2"><p class="keys">Kategória: <b>${esc(CATS[inc.cat].label)}</b>. Hovor už prebieha k vyslaniu a pokynom.</p></section>
       <section class="istep mo" data-step="3"><p class="keys">Naliehavosť: <b>${inc.lvl} – ${LV_L[inc.lvl]}</b></p></section>
@@ -5022,6 +5601,7 @@ function renderDispatch(){
         ${inc.lost ? `<div class="locate"><b>Kde je volajúci?</b><p>${inc.lost.clueKnown ? '„'+esc(inc.lost.clue)+'“' : 'Na polohu si sa nepýtal – máš len kruh z mobilu.'}</p>
           <p class="keys">Ťukni na mapu tam, kde si myslíš, že volajúci je. Po troch chybách polohu spresní operátor.</p>
           <div class="acts"><button class="btn sm" data-act="zoomlost" data-id="${inc.id}">Ukázať kruh</button><button class="btn sm" data-act="autoloc" data-id="${inc.id}" ${inc.lost.auto?'disabled':''}>${inc.lost.auto ? 'Operátor hľadá…' : 'Požiadať operátora (4 min)'}</button></div></div>` : send}
+        ${deferBlock(inc)}
         ${tanrBlock(inc)}
         ${izsBlock(inc)}
         ${harmRow(inc)}
@@ -5050,11 +5630,13 @@ function renderDispatch(){
     ${inc.fromCall ? izsBlock(inc) : ''}
     ${faBlock(inc)}
     ${inc.metAt ? `<div class="tbar work"><i data-work="${inc.id}"></i></div>` : ''}
+    ${inc.deb && inc.deb.ready ? `<button class="btn" data-act="debrief" data-id="${G.debriefs.indexOf(inc.deb)}">Rozbor hovoru</button>` : ''}
     ${inc.lost ? `<div class="locate"><b>Kde je volajúci?</b>
         <p>${inc.lost.clueKnown ? '„'+esc(inc.lost.clue)+'“' : 'Na polohu si sa nepýtal – máš len kruh z mobilu.'}</p>
         <p class="keys">Ťukni na mapu tam, kde si myslíš, že volajúci je (v žltom kruhu). Po troch chybách polohu spresní operátor.</p>
         <div class="acts"><button class="btn sm" data-act="zoomlost" data-id="${inc.id}">Ukázať kruh</button><button class="btn sm" data-act="autoloc" data-id="${inc.id}" ${inc.lost.auto?'disabled':''}>${inc.lost.auto ? 'Operátor hľadá…' : 'Požiadať operátora (4 min)'}</button></div></div>`
       : rows || `<p class="empty">${info.met ? 'Všetky potrebné posádky sú na mieste.' : info.missing.every(n=>IZS_KINDS.includes(n)) ? 'Posádky ZZS sú vyslané, čaká sa na zložky IZS.' : 'Žiadna vhodná posádka nie je voľná.'}</p>`}
+    ${deferBlock(inc)}
     ${rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>`
       : rec.length===1 ? `<p class="keys">Enter vyšle odporúčanú posádku. Posádku môžeš vyslať aj ťuknutím na vozidlo na mape.</p>`
       : !inc.lost && !has('d_rec') && info.missing.some(n=>!IZS_KINDS.includes(n)) ? `<p class="keys">Vyber posádky sám – podľa naliehavosti tú s najkratším dojazdom. Asistenta vysielania odomkneš v schopnostiach.</p>` : ''}
@@ -5213,7 +5795,7 @@ function updateTimers(){
 }
 
 /* ---------- prekryvné okná ---------- */
-let MENU_TAB='free';
+let MENU_TAB = PROG.sessions ? 'free' : 'course';   // nový hráč začína kurzom
 const STAR = n => '<span class="stars" aria-label="'+n+' z 3 hviezdičiek">'+[0,1,2].map(i=>`<i class="${i<n?'on':''}">★</i>`).join('')+'</span>';
 function showMenu(tab){
   if(tab) MENU_TAB=tab;
@@ -5221,7 +5803,25 @@ function showMenu(tab){
   const owned=PROG.skills.length, stars=PROG.stars||{}, day=todayKey(), daily=dailyChallenge(day), dbest=PROG.daily && PROG.daily.day===day ? PROG.daily.best : null;
   const medals=PROG.medals||{};
   let body='';
-  if(MENU_TAB==='free'){
+  if(MENU_TAB==='course'){
+    const CP=PROG.course||{best:{}, open:1};
+    body=`<p class="keys">Osem lekcií po kategóriách. Každá má kartu s kritériami a 4 hovory, po každom hovore uvidíš rozbor. Ďalšia lekcia sa odomkne pri 3 správnych zo 4.</p>
+      <div class="chals">${LESSONS.map(L=>{ const open=L.n<=CP.open, b=CP.best[L.n];
+        return `<button class="chal${open?'':' lock'}" data-act="lesson" data-id="${L.n}" ${open?'':'disabled'}><span class="row"><b class="grow">${L.n}. ${esc(L.name)}</b>${b!=null ? `<span class="sub">${b} / 4</span>` : ''}</span>
+          <span class="sub">${L.cats.map(c=>CATS[c].short).join(' · ')}</span>${open ? '' : '<span class="sub">Odomkne sa po zvládnutí predchádzajúcej lekcie.</span>'}</button>`; }).join('')}</div>
+      ${CP.open<LESSONS.length ? `<div class="acts"><button class="linkbtn" data-act="skipcourse">Kurz preskočiť – odomknúť všetky lekcie</button></div>` : ''}`;
+  } else if(MENU_TAB==='cases'){
+    const P=PROG.cases||{};
+    body=`<p class="keys">Desať hovorov podľa typických situácií z odbornej literatúry – prerozprávané a anonymizované. Hovor ide od prijatia po príchod posádky v reálnom čase, potom nasleduje rozbor krok po kroku so zdrojom.</p>
+      <div class="chals">${CASES.map((C,i)=>`<button class="chal" data-act="case" data-id="${C.id}"><span class="row"><b class="grow">${i+1}. ${esc(C.name)}</b>${P[C.id]===2 ? '<span class="sub">✓ zvládnutá</span>' : P[C.id]===1 ? '<span class="sub">skús znova</span>' : ''}</span>
+        <span class="sub">${esc(C.focus)}</span></button>`).join('')}</div>`;
+  } else if(MENU_TAB==='exam'){
+    const E=PROG.exam;
+    body=`<div class="chal daily"><span class="row"><b class="grow">Skúška · ${EXAM_N} hovorov</b>${E ? `<span class="sub">najlepšie ${E.best} %${E.passed ? ' · úspešná '+E.passed+'×' : ''}</span>` : ''}</span>
+        <span class="sub">3 kritické, 3 naliehavé, 2 menej naliehavé a 2 odkladné hovory v náhodnom poradí. Kritériá naliehavosti sú skryté, lekár OS nie je k dispozícii a príjem beží v reálnom čase. Rozbory uvidíš až na konci.</span>
+        <span class="goals">· naliehavosť 40 % · čas do vyslania 15 % · TANR 15 % · súčinnosť IZS 15 % · pokyny 15 %<br>· úspech od ${EXAM_PASS} %</span></div>
+      <div class="acts"><button class="btn go" data-act="exam">Začať skúšku</button></div>`;
+  } else if(MENU_TAB==='free'){
     body=`<div class="gmode"><span class="k">Udalosti</span><div class="seg two">${[['multi','Viac naraz'],['single','Jedna po druhej']].map(([k,t])=>`<button class="btn${(k==='single')===!!PROG.single ? ' on' : ''}" data-act="gmode" data-id="${k}" aria-pressed="${(k==='single')===!!PROG.single}">${t}</button>`).join('')}</div>
       <span class="sub">${PROG.single ? 'Riešiš vždy len jeden prípad – ďalší hovor príde, až keď ho uzavrieš. Viac času na otázky a prvú pomoc.' : 'Hovory chodia priebežne a udalosti sa prekrývajú ako v skutočnej službe.'}</span></div>
     <div class="diffs">${Object.entries(TEMPO).map(([k,t])=>`<button class="diff" data-act="start" data-tempo="${k}"><b>${t.label}</b><span>${PROG.single ? (k==='calm' ? 'Dlhší čas na rozmyslenie.' : k==='normal' ? 'Bežné tempo prípadov.' : 'Prípady prídu hneď po sebe.') : t.note}</span></button>`).join('')}</div>
@@ -5253,12 +5853,12 @@ function showMenu(tab){
     <p class="lead">Si operátor a dispečer záchrannej zdravotnej služby. Zdvíhaš hovory na linku 155, štruktúrovaným rozhovorom určíš naliehavosť a vysielaš posádky RZP, RLP, RV, vrtuľník a horskú službu. O hasičov a políciu žiadaš cez KS IZS.</p>
     <div class="prog"><div><div class="k">Tvoj postup</div><b>Úroveň ${PROG.level}</b></div><div class="grow"><div class="track"><i style="width:${PROG.xp/xpNeed(PROG.level)*100}%"></i></div><div class="k" style="margin-top:5px">${PROG.xp} / ${xpNeed(PROG.level)} XP · ${owned} odomknutých schopností · rekord ${PROG.best} b.</div></div>
       <button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button></div>
-    <div class="seg" role="tablist">${[['free','Voľná služba'],['ch','Výzvy'],['day','Denná výzva']].map(([k,t])=>`<button class="btn${MENU_TAB===k?' on':''}" role="tab" aria-selected="${MENU_TAB===k}" data-act="mtab" data-id="${k}">${t}</button>`).join('')}</div>
+    <div class="seg six" role="tablist">${[['course','Kurz'],['cases','Kazuistiky'],['exam','Skúška'],['free','Voľná služba'],['ch','Výzvy'],['day','Denná výzva']].map(([k,t])=>`<button class="btn${MENU_TAB===k?' on':''}" role="tab" aria-selected="${MENU_TAB===k}" data-act="mtab" data-id="${k}">${t}</button>`).join('')}</div>
     ${body}
     <div class="medals">${MEDALS.map(([id,name,desc])=>`<span class="medal${medals[id]?' got':''}" title="${esc(name+': '+desc)}"><b>${esc(name)}</b>${medals[id] ? '×'+medals[id] : ''}</span>`).join('')}</div>
     <p class="keys">Klávesy: <kbd>A</kbd> prijať hovor · <kbd>1</kbd>–<kbd>8</kbd> otázky rozhovoru · <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd> doplňujúce otázky · <kbd>K</kbd><kbd>N</kbd><kbd>M</kbd><kbd>O</kbd> naliehavosť · <kbd>S</kbd> TANR a tempo stláčania · <kbd>T</kbd> tlmočník · <kbd>Enter</kbd> vyslať odporúčané · <kbd>Medzerník</kbd> pauza · <kbd>Esc</kbd> zrušiť výber.</p>
     <div class="acts"><button class="linkbtn" data-act="reset">Vymazať postup a začať od nuly</button></div>
-    <p class="credit">Hra nie je oficiálnou pomôckou operačného strediska – kritériá naliehavosti sú zjednodušené a napísané vlastnými slovami. Stanice záchrannej služby (RLP, RV, RZP): vyhláška MZ SR č. 116/2025 Z. z. Reliéf: Terrain Tiles (SRTM, EU-DEM – Copernicus). Hranice krajov: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek, pohorí a špecializácie nemocníc sú zjednodušené. 3D: three.js.</p>
+    <p class="credit">Hra nie je oficiálnou pomôckou operačného strediska – kritériá naliehavosti sú zjednodušené a napísané vlastnými slovami. Stanice záchrannej služby (RLP, RV, RZP): vyhláška MZ SR č. 116/2025 Z. z. Reliéf: Terrain Tiles (SRTM, EU-DEM – Copernicus). Hranice krajov: geodáta <a href="https://www.amcharts.com/" target="_blank" rel="noopener">amCharts</a> (linkware licencia). Polohy obcí, ciest, riek, pohorí a špecializácie nemocníc sú zjednodušené, polohy AED sú ilustračné. Kazuistiky sú prerozprávané modelové prípady podľa odbornej literatúry – zdroj je pri každej. 3D: three.js.</p>
   </div>`;
 }
 function showSkills(){
@@ -5346,6 +5946,11 @@ function triageReport(){
     s.noAddr ? `Bez overenia adresy: ${s.noAddr}×` : ''].filter(Boolean);
   return `<div><div class="k" style="margin-bottom:6px">Rozbor príjmu hovorov</div><ul class="declist tri">${rows.map(r=>`<li>${r}</li>`).join('')}</ul></div>`;
 }
+function debList(){
+  const L=G.debriefs||[]; if(!L.length) return '';
+  const rows=L.map((d,i)=>({d,i})).slice(-30).reverse();
+  return `<div><div class="k" style="margin-bottom:6px">Rozbor hovorov</div><ul class="dlist">${rows.map(({d,i})=>`<li>${DK(d.prank ? null : !!(d.tri.catOk && d.tri.lvlOk))}${d.no ? '#'+d.no+' ' : ''}${esc(d.title)}${d.prank ? '' : ' · '+esc(d.tri.lvl||'')} <button class="linkbtn" data-act="debrief" data-id="${i}">rozbor</button></li>`).join('')}</ul></div>`;
+}
 function showSummary(){
   const s=G.stats, avgR=s.resp.length ? Math.round(s.resp.reduce((a,b)=>a+b,0)/s.resp.length) : null;
   const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
@@ -5364,12 +5969,66 @@ function showSummary(){
     <p class="keys">${G.newBest ? 'Nový rekord!' : 'Rekord: '+PROG.best+' b.'} · Najdlhšia séria: ${G.comboMax||0}${s.precise ? ' · Presné vyslania: '+s.precise : ''}${s.missed ? ' · Posádka potrebovala pomoc navyše: '+s.missed : ''}${s.esc ? ' · Zhoršené udalosti: '+s.esc : ''}${s.wasted ? ' · Plané výjazdy: '+s.wasted : ''}${s.pranks ? ' · Odhalené zneužitia: '+s.pranks : ''}</p>
     ${triageReport()}
     ${decReport()}
+    ${debList()}
     ${G.newMedals.length ? `<div><div class="k" style="margin-bottom:6px">Nové medaily</div><div class="medals">${G.newMedals.map(id=>{ const m=MEDALS.find(x=>x[0]===id); return `<span class="medal new" title="${esc(m[2])}"><b>${esc(m[1])}</b></span>`; }).join('')}</div></div>` : ''}
     <div class="acts"><button class="btn go" data-act="again">${G.ch ? 'Hrať znova' : 'Nová služba'}</button><button class="btn" data-act="skills">Schopnosti${PROG.points?` <span class="badge">${PROG.points}</span>`:''}</button><button class="btn" data-act="menu">Hlavné menu</button></div>
   </div>`;
 }
 function clearWorld(){ for(const id of [...incObj.keys()]) dropIncMesh(id); for(const L of FX) L.el.remove(); FX.length=0; if(addP){ addP.list.length=0; norP.list.length=0; } }
 function restartDemo(){ clearWorld(); G=newGame('normal','demo'); applyWeatherFx(); }
+function startScript(kind, id){
+  const queue = kind==='course' ? LESSONS[id-1].calls.map(t=>TPL.find(x=>x.title===t)) : kind==='cases' ? [caseTpl(id)] : examQueue();
+  start('normal', {single:true});
+  G.script={kind, id, queue, idx:0, results:[], next:G.t+.5, done:false};
+  G.nextCall=1e9; G.nextMajor=1e9; G.nextWeather=1e9; G.weather='clear';
+  $('#hints').innerHTML='';
+  say(kind==='course' ? 'Lekcia '+id+': '+LESSONS[id-1].name+' – 4 hovory. Prvý je na ceste.' : kind==='exam' ? 'Skúška: '+EXAM_N+' hovorov, kritériá sú skryté. Príjem beží v reálnom čase.' : 'Kazuistika: hovor je na ceste. Príjem beží v reálnom čase.');
+  dirty();
+}
+function examQueue(){
+  const pool=TPL.filter(t=>!t.caseOnly && t.cat!=='mimo'), pick=[], by=L=>pool.filter(t=>t.lvl===L && !pick.includes(t));
+  for(const [L,n] of [['K',3],['N',3],['M',2],['O',2]]) for(let i=0;i<n;i++){ const l=by(L); if(l.length) pick.push(l[Math.floor(Math.random()*l.length)]); }
+  for(let i=pick.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [pick[i],pick[j]]=[pick[j],pick[i]]; }
+  return pick;
+}
+function showLesson(n){
+  const L=LESSONS[n-1], ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu');
+  const tree=L.cats.filter(c=>TREE[c]).map(c=>`<div class="lcard"><b>${esc(CATS[c].label)}</b>${LV.filter(x=>(TREE[c][x]||[]).length).map(x=>`<div class="lrow"><span class="prio" style="--pc:${LV_COL[x]}">${x}</span><span>${TREE[c][x].map(esc).join(' · ')}</span></div>`).join('')}</div>`).join('');
+  ov.innerHTML=`<div class="sheet"><div class="k">Kurz · lekcia ${n} z ${LESSONS.length}</div><h2 class="grade">${esc(L.name)}</h2>
+    <ul class="dlist">${L.tips.map(t=>`<li>${DK()}${esc(t)}</li>`).join('')}</ul>
+    <details class="fullog"><summary>Kritériá naliehavosti v tejto lekcii</summary>${tree}</details>
+    <p class="keys">4 hovory. Po každom uvidíš rozbor. Ďalšia lekcia sa odomkne pri 3 správnych zo 4 (správna kategória aj naliehavosť).${n<=2 ? ' V tejto lekcii sa za vyslanie po 90 s nestrháva.' : ''}</p>
+    <div class="acts"><button class="btn go" data-act="lstart" data-id="${n}">Začať lekciu</button><button class="btn" data-act="menu">Späť do menu</button></div></div>`;
+}
+function scriptEnd(){
+  const sc=G.script; G.mode='over';
+  const ov=$('#overlay'); ov.hidden=false; ov.classList.remove('menu'); ov.dataset.resume='';
+  const res=sc.results, ok=res.filter(r=>r.ok).length;
+  const list=`<ul class="dlist">${res.map(r=>`<li>${DK(r.ok)}${esc(r.title)}${sc.kind==='exam' ? ` · <b>${r.pct} %</b>` : ''} <button class="linkbtn" data-act="debrief" data-id="${(G.debriefs||[]).indexOf(r.d)}">rozbor</button></li>`).join('')}</ul>`;
+  let h='';
+  if(sc.kind==='course'){
+    const pass=ok>=3 && !sc.quit; PROG.course=PROG.course||{best:{}, open:1};
+    PROG.course.best[sc.id]=Math.max(PROG.course.best[sc.id]||0, ok);
+    if(pass) PROG.course.open=Math.max(PROG.course.open, Math.min(LESSONS.length, sc.id+1));
+    saveProg();
+    h=`<div class="k">Kurz · lekcia ${sc.id}</div><h2 class="grade">${pass ? 'Lekcia zvládnutá' : 'Skús to ešte raz'}</h2>
+      <p class="lead">Správne ${ok} zo ${res.length} hovorov.${pass ? (sc.id<LESSONS.length ? ' Odomkla sa ďalšia lekcia.' : ' Prešiel si celý kurz – vyskúšaj kazuistiky a skúšku.') : ' Na odomknutie ďalšej lekcie treba 3 správne zo 4.'}</p>${list}
+      <div class="acts">${pass && sc.id<LESSONS.length ? `<button class="btn go" data-act="lesson" data-id="${sc.id+1}">Ďalšia lekcia</button>` : ''}<button class="btn${pass ? '' : ' go'}" data-act="lesson" data-id="${sc.id}">Opakovať lekciu</button><button class="btn" data-act="menu">Menu</button></div>`;
+  } else if(sc.kind==='exam'){
+    const pct=Math.round(res.reduce((a,r)=>a+r.pct,0)/Math.max(1,EXAM_N)), pass=pct>=EXAM_PASS && res.length===EXAM_N;
+    PROG.exam={best:Math.max((PROG.exam||{}).best||0, pct), passed:((PROG.exam||{}).passed||0)+(pass ? 1 : 0)}; saveProg();
+    h=`<div class="k">Skúška</div><h2 class="grade">${pass ? 'Skúška úspešná' : 'Skúška neúspešná'}</h2>
+      <div class="sumgrid"><div><b>${pct} %</b><span class="k">výsledok</span></div><div><b>${ok} / ${EXAM_N}</b><span class="k">správna naliehavosť</span></div><div><b>${EXAM_PASS} %</b><span class="k">hranica úspechu</span></div></div>
+      <p class="keys">Každý hovor: naliehavosť 40 %, čas do vyslania 15 %, TANR 15 %, súčinnosť IZS 15 %, pokyny 15 %.</p>${list}
+      <div class="acts"><button class="btn go" data-act="exam">Nová skúška</button><button class="btn" data-act="menu">Menu</button></div>`;
+  } else {
+    const C=CASES.find(x=>x.id===sc.id); PROG.cases=PROG.cases||{}; if(res[0]) PROG.cases[sc.id]=Math.max(PROG.cases[sc.id]||0, res[0].ok ? 2 : 1); saveProg();
+    h=`<div class="k">Kazuistika</div><h2 class="grade">${esc(C.name)}</h2>${list}
+      <div class="acts"><button class="btn go" data-act="mtab" data-id="cases">Ďalšie kazuistiky</button><button class="btn" data-act="case" data-id="${C.id}">Hrať znova</button><button class="btn" data-act="menu">Menu</button></div>`;
+  }
+  sc.endHTML=`<div class="sheet">${h}</div>`; ov.innerHTML=sc.endHTML; ov.scrollTop=0;
+  if(sc.kind==='course' || sc.kind==='exam') SND[ok>=3 ? 'ok' : 'bad']();
+}
 function start(tempo, mode){
   audio(); clearWorld(); clipIndex();
   CR=Math.random; WR=Math.random;
@@ -5417,7 +6076,7 @@ function act(el){
   if(a==='again') return start(G.tempo, G.modeOpt);
   if(a==='chal') return start('normal', {ch:id});
   if(a==='daily') return start('normal', {daily:true});
-  if(a==='mtab') return showMenu(id);
+  if(a==='mtab'){ if(G.mode!=='demo'){ restartDemo(); } return showMenu(id); }
   if(a==='voice'){ PROG.voice=!PROG.voice; saveProg(); el.textContent=PROG.voice ? 'Hlas zap.' : 'Hlas'; if(PROG.voice) clipIndex(); else stopVoice(); return; }
   if(a==='menu'){ restartDemo(); showMenu(); return dirty(); }
   if(a==='tab') return setTab(el.dataset.tab);
@@ -5430,13 +6089,23 @@ function act(el){
   if(a==='skills') return showSkills();
   if(a==='closeSkills') return closeSkills();
   if(a==='log') return showLog();
+  if(a==='debrief'){ const d=(G.debriefs||[])[+id]; if(d) showDebrief(d); return; }
+  if(a==='closeDeb'){ G.debOpen=false; const d=G.debCase; G.debCase=null; if(d) d.shown=true;
+    if(G.mode==='over' && G.script && G.script.endHTML){ const ov=$('#overlay'); ov.innerHTML=G.script.endHTML; ov.scrollTop=0; return; }
+    return closeSkills(); }
+  if(a==='lesson') return showLesson(+id);
+  if(a==='skipcourse'){ PROG.course=PROG.course||{best:{}, open:1}; PROG.course.open=LESSONS.length; saveProg(); return showMenu('course'); }
+  if(a==='lstart') return startScript('course', +id);
+  if(a==='exam') return startScript('exam');
+  if(a==='case') return showCase(id);
+  if(a==='cstart') return startScript('cases', id);
   if(a==='buy') return buySkill(id);
   if(a==='reset'){
     if(Date.now()-resetArmed>4000){ resetArmed=Date.now(); el.textContent='Naozaj vymazať? Klikni znova.'; return; }
     PROG={v:1, xp:0, level:1, points:1, skills:[], best:0, light:PROG.light, sessions:0}; saveProg(); restartDemo(); showMenu(); return dirty();
   }
   if(a==='pause' || a==='resume') return togglePause();
-  if(a==='quit'){ G.mode='play'; return endGame(); }
+  if(a==='quit'){ G.mode='play'; if(G.script && !G.script.done){ G.script.done=true; G.script.quit=true; return scriptEnd(); } return endGame(); }
   if(a==='speed'){ if(G.mode!=='play') return; G.speed = G.speed===1 ? 2 : G.speed===2 ? 4 : 1; el.textContent='×'+G.speed; return; }
   if(G.mode!=='play') return;
   if(a==='answer') answer(callById(id));
@@ -5452,6 +6121,10 @@ function act(el){
   else if(a==='tanrskip') tanrSkip(incById(id));
   else if(a==='tanrc') tanrChoose(incById(id), +el.dataset.type);
   else if(a==='tanrtap') tanrTap(incById(id));
+  else if(a==='aed') aedSend(incById(id));
+  else if(a==='defer') deferInc(incById(id));
+  else if(a==='undefer'){ const inc=incById(id); if(inc){ inc.defer=false; dirty(); } }
+  else if(a==='consult') askConsult(callById(id));
   else if(a==='endintake') finishIntake(incById(id));
   else if(a==='hmark') markH(callById(id), +el.dataset.type);
   else if(a==='cq') askCq(callById(id), el.dataset.type);
@@ -5528,7 +6201,7 @@ let last=performance.now(), lastUI=0;
 function frame(now){
   const dt=Math.min(.1, (now-last)/1000); last=now;
   if(running()){
-    let left=dt*(intakeActive() ? INTAKE_RATE : G.speed*TIME_SCALE);
+    let left=dt*(intakeActive() ? (G.script && G.script.kind!=='course' ? INTAKE_RATE/2 : INTAKE_RATE) : G.speed*TIME_SCALE);
     while(left>0 && running()){ const s=Math.min(.05,left); step(s); left-=s; }
     const ia=intakeActive(), app=$('#app'), ip = !ia ? '' : G.calls.some(c=>c.state==='talk' && c.kind!=='repeat') ? 'call' : 'inc';
     app.classList.toggle('intake', ia); if(app.dataset.ip!==ip) app.dataset.ip=ip;

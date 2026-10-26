@@ -20,12 +20,14 @@ Návrhy vzhľadu (plátno): https://claude.ai/artifact/KymduvAAYGFi4JDVVyC8FG
 - Etapa 1 (vzhľad a mapa) – hotová.
 - Etapa 2 (príjem hovoru) – hotová: 5 krokov, H1/H2/H3 s 5 novými situáciami H3 (2 skryté), otázky k problému
   v 15 kategóriách so 16 chytákmi, rady pri O pre 13 situácií, povinné pokyny pri K a N, koniec príjmu tlačidlom.
+- Etapa 3 (učenie) – hotová: rozbor hovoru (4 časti a časová os), kurz s 8 lekciami, 10 kazuistík so zdrojmi,
+  skúška z 10 hovorov s hranicou 80 %, AED na mape, odklad udalosti M a konzultácia s lekárom OS.
 
 ## Poradie
 
 1. **Etapa 1 – vzhľad a mapa.** Logika hry sa nemení, všetky doterajšie testy musia prejsť.
 2. **Etapa 2 – príjem hovoru** v novom vzhľade: kroky, H1/H2/H3, otázky k problému, chytáky, rada pri O.
-3. Potom pokračuje plán z grilovania: rozbor hovoru, kurz, kazuistiky, skúška, AED / odklad / konzultácia s lekárom OS.
+3. Potom pokračuje plán z grilovania: rozbor hovoru, kurz, kazuistiky, skúška, AED / odklad / konzultácia s lekárom OS (hotové).
 
 ## Časť 1 – priebeh príjmu a typ volajúceho
 

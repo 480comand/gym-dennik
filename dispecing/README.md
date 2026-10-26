@@ -52,13 +52,35 @@ pacientovi, H3 nie je pri pacientovi. Správne označenie +5, nesprávne −5. P
 pri pacientovi (inak −10), opýtať sa na kontakt na niekoho pri ňom (inak −10) a zavolať späť – potom sa dajú dať
 pokyny aj TANR. Dve situácie sú **skryté H3**: z úvodu to nie je poznať a volajúci odpovedá z pamäti.
 
-- Počas príjmu beží čas takmer naozaj: 2 sekundy hry za sekundu. Hodiny hovoru ukazujú čas od prijatia.
-- V katalógu je 87 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
+- Počas príjmu beží čas takmer naozaj: vo voľnej službe a v kurze 2 sekundy hry za sekundu, v kazuistikách a v skúške
+  v reálnom čase. Hodiny hovoru ukazujú čas od prijatia.
+- V katalógu je 87 situácií pre voľnú službu, kurz a skúšku (asi štvrtina je odkladných alebo na 155 nepatrí)
+  a 10 ďalších len pre kazuistiky.
+- **Konzultácia s lekárom OS** (krok Naliehavosť): trvá 30 s, lekár povie kategóriu, stupeň a rozhodujúce kritérium.
+  Keď chýba vedomie a dýchanie alebo pri H3 nie je jasné, kto je pri pacientovi, najprv pošle doplniť otázky. V skúške nie je.
+
+**Režimy učenia** (záložky v menu; nový hráč začína kurzom, dá sa preskočiť)
+- **Rozbor hovoru:** kategória a naliehavosť s rozhodujúcim kritériom, chýbajúce, zbytočné a sugestívne otázky,
+  časová os hovoru a pokyny volajúcemu. V kurze a kazuistikách sa ukáže sám, vo voľnej službe po príchode posádky
+  (tlačidlo v karte udalosti a zoznam na konci služby).
+- **Kurz:** 8 lekcií po kategóriách (zástava a vedomie, dýchanie a alergia, srdce a bolesť, neurológia a diabetes,
+  úrazy a nehody, intoxikácie a psychika, pôrod a krvácanie, odkladné hovory a volajúci mimo pacienta). Každá má
+  kartu s tipmi a kritériami a 4 hovory; ďalšia lekcia sa odomkne pri 3 správnych zo 4. V prvých dvoch lekciách
+  sa za vyslanie po 90 s nestrháva.
+- **Kazuistiky:** 10 hovorov od prijatia po príchod posádky, potom rozbor s ideálnym postupom krok po kroku
+  (čo si urobil ✓ a čo chýbalo ✗), „čo si z toho zobrať“ a zdroj. Prípady sú prerozprávané podľa typického priebehu
+  z odbornej literatúry (ERC 2021, štúdie o rozpoznaní lapavého dýchania, mozgovej príhody, netypického infarktu,
+  AED s pomocou operátora a ďalšie), anonymizované, detaily sú vymyslené.
+- **Skúška:** 10 hovorov (3 K, 3 N, 2 M, 2 O) v náhodnom poradí, kritériá naliehavosti skryté, bez lekára OS.
+  Každý hovor: naliehavosť 40 %, čas do vyslania 15 %, TANR 15 %, súčinnosť IZS 15 %, pokyny 15 %.
+  Úspech od 80 %, výsledok len na obrazovke.
 
 **Vysielanie posádok**
 - K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
 - N: RZP, RLP len vtedy, keď je bližšie. M: RZP bez majákov (jazdí o niečo pomalšie).
 - Ku K a N treba vyslať posádku **do 90 sekúnd** od prijatia hovoru (+20 bodov, inak trest a pri K horší stav).
+- **Odklad:** keď nie je voľná vhodná posádka, udalosť M sa dá odložiť (+5) – vyšle sa prvá uvoľnená posádka.
+  K a N sa neodkladajú (−20): presmeruj posádku z menej naliehavej udalosti alebo požiadaj o výpomoc.
 - **Vrtuľník:** neprístupný terén, ťažký úraz, šetrný a rýchly prevoz do centra (napríklad poranenie chrbtice
   na neurochirurgiu do Košíc) alebo veľká vzdialenosť. Bez indikácie je to chyba.
 - **Nemocnice:** PCI – VÚSCH a Nemocnica Košice-Šaca; iktové centrá – UNLP, Šaca, Michalovce, Trebišov,
@@ -83,10 +105,13 @@ pokyny aj TANR. Dve situácie sú **skryté H3**: z úvodu to nie je poznať a v
 - Pri zástave vyberieš štyri správne pokyny (reproduktor, poloha, ruky na hrudník, stláčanie) a ťukaním udávaš
   tempo stláčania. Dospelý dostane len stláčanie; pri utopenom a dojčati (dva prsty, asi 4 cm) aj úvodné vdychy, ak to volajúci vie. Hra meria tempo (100–120/min) a čas od prijatia hovoru po prvé stlačenie (do 60 s +40).
 - Výsledok zástavy závisí od času bez obehu, kvality TANR a príchodu posádky. Bez TANR pacient väčšinou neprežije.
+- **AED na mape** (zelené značky, polohy ilustračné): keď je pri pacientovi viac ľudí, jeden stláča a druhý beží
+  po defibrilátor – ak ho prinesie pred posádkou, +20 a lepší výsledok. Osamelého volajúceho po AED neposielaj (−10).
+  Nevyužitý AED sa ukáže v rozbore.
 - Pri ďalších stavoch sú telefonické pokyny (stabilizovaná poloha, adrenalínové pero, zastavenie krvácania,
   vedenie pôrodu a ďalšie). Dobrý pokyn pomôže, zlý ublíži. Lieky (napríklad aspirín) operátor po telefóne neodporúča.
 - Kontrola odborného obsahu: `kontrola/Linka155-kontrola-obsahu.xlsx` (situácie, otázky k problému, rady pri O,
-  stromy K/N/M/O, TANR, stĺpce na pripomienky).
+  stromy K/N/M/O, TANR, kazuistiky so zdrojmi, lekcie kurzu, stĺpce na pripomienky).
 
 **Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka z ďaleka a dôsledky zlého vyslania,
 pokrytie kraja, neznáma poloha volajúceho, hovory v cudzom jazyku s tlmočníkom, zneužitie linky,
@@ -96,7 +121,7 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
-- Scenár všetkých 1146 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Scenár všetkých 1290 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Vzhľad a mapa:** svetlý vzhľad „pracovná stanica“ (biele karty, jedna modrá, farby len pre naliehavosť K/N/M/O,
 písmo IBM Plex). Mapa je svetlá 3D zo skutočného reliéfu (výškové dáta Terrain Tiles – SRTM, EU-DEM). Košický kraj

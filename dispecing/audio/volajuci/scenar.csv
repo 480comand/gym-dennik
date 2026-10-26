@@ -415,7 +415,7 @@ vpfy61m.mp3;pokoj;pokojnejší, vecný;Epileptik po záchvate (O);otázka k prob
 v5eqpgr.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Závrat (M);čo sa stalo;Od rána sa mi točí hlava, je mi zle a zvraciam.;Závrat;
 v1s4bxv4.mp3;pokoj;pokojnejší, vecný;Závrat (M);doplňujúca otázka: „Nemáte poruchu reči alebo slabú ruku či nohu?“;Nie, to nie.;*;
 v1y3vr0o.mp3;pokoj;pokojnejší, vecný;Závrat (M);doplňujúca otázka: „Kedy to začalo?“;Ráno po prebudení.;Závrat;
-voudqpo.mp3;pokoj;pokojnejší, vecný;Závrat (M);otázka k problému: „Koľko má rokov?“;Päťdesiatosem.;Závrat;
+voudqpo.mp3;pokoj;pokojnejší, vecný;Závrat (M);otázka k problému: „Koľko má rokov?“;Päťdesiatosem.;*;
 v1p5kmdu.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Hrozí skokom (N);čo sa stalo;Syn stojí na balkóne na ôsmom poschodí a hovorí, že skočí!;Hrozí skokom;muž
 v1ipwlzy.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Hrozí skokom (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, kričí na nás.;Hrozí skokom;muž
 voo0o8u.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Hrozí skokom (N);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Zatiaľ nie.;Hrozí skokom;muž
@@ -483,7 +483,7 @@ v4opcmj.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený dia
 vp1fd6x.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);doplňujúca otázka: „Máte glukomer? Koľko ukazuje?“;2,4.;Zmätený diabetik;žena
 vmshzb8.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);doplňujúca otázka: „Vie prehĺtať?“;Áno, pije, keď mu dám.;Zmätený diabetik;žena
 vru62mr.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);otázka k problému: „Pichal si inzulín alebo vzal lieky? Jedol?“;Ráno si pichol, ale skoro nič nejedol.;Zmätený diabetik;žena
-vacjw6e.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);otázka k problému: „Je smädný, zvracia, je zmätený?“;Je zmätený, ale nezvracia.;Zmätený diabetik;žena
+vacjw6e.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);otázka k problému: „Je smädný, zvracia, je zmätený?“;Je zmätený, ale nezvracia.;*;
 v16zqm1t.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zmätený diabetik (N);otázka k problému: „Je tam ešte niekto, kto môže pomôcť?“;Áno, som pri ňom.;Zmätený diabetik;žena
 v1wga0su.mp3;úľava;s úľavou, ale ešte zadýchaný;Zmätený diabetik (N);po dobrej rade: „Ak vie prehĺtať, dajte mu sladký nápoj alebo cukor.“;Vypil pohár džúsu, už je trochu pri sebe.;Zmätený diabetik;žena
 vyfelu4.mp3;úľava;s úľavou, ale ešte zadýchaný;Zmätený diabetik (N);po dobrej rade: „Zmerajte mu cukor, ak máte glukomer.“;Ukazuje 2,4.;Zmätený diabetik;žena
@@ -824,7 +824,7 @@ vqko1mz.mp3;pokoj;pokojnejší, vecný;Upchatý katéter (M);otázka k problému
 v9ny30d.mp3;pokoj;pokojnejší, vecný;Upchatý katéter (M);otázka k problému: „Koľko má rokov?“;Sedemdesiatšesť.;*;
 v14erqnk.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Pôrod (N);čo sa stalo;Manželke praskla plodová voda a kontrakcie sú každé dve minúty!;Pôrod;muž
 v1adbkek.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Pôrod (N);čo sa stalo;Manželka tlačí, už vidno hlavičku!;Pôrod;muž
-v7hnuu0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, kričí od bolesti.;Pôrod;muž
+v7hnuu0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, kričí od bolesti.;*;
 vdnzgc0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je červená, spotená.;Pôrod;muž
 v1tciq14.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (N);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Trochu, s plodovou vodou.;Pôrod;muž
 v16iq2vz.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Pôrod (N);doplňujúca otázka: „Koľké dieťa to je a v ktorom je týždni?“;Tretie, je v 39. týždni.;Pôrod;muž
@@ -839,7 +839,7 @@ v1jd89gy.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pôrod (N);po z
 vwg98mh.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pôrod (N);po zlej rade: „Keď uvidíte hlavičku, potiahnite dieťa von.“;Potiahol som… mama kričí od bolesti a krváca!;Pôrod;muž
 v1bjmo6.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pôrod (N);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Dieťa je na svete, ale mama strašne krváca!;Pôrod;muž
 v1loiuen.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Kontrakcie každých päť minút (M);čo sa stalo;Manželke idú kontrakcie každých päť minút, je v termíne. Je to prvé dieťa.;Kontrakcie každých päť minút;
-vcg8o1u.mp3;pokoj;pokojnejší, vecný;Kontrakcie každých päť minút (M);doplňujúca otázka: „Bolo tehotenstvo bez komplikácií?“;Áno, všetko bolo v poriadku.;Kontrakcie každých päť minút;
+vcg8o1u.mp3;pokoj;pokojnejší, vecný;Kontrakcie každých päť minút (M);doplňujúca otázka: „Bolo tehotenstvo bez komplikácií?“;Áno, všetko bolo v poriadku.;*;
 vgycoms.mp3;pokoj;pokojnejší, vecný;Kontrakcie každých päť minút (M);otázka k problému: „V ktorom je týždni? Koľké dieťa to je?“;V 40. týždni, prvé dieťa.;Kontrakcie každých päť minút;
 v46rf5m.mp3;pokoj;pokojnejší, vecný;Kontrakcie každých päť minút (M);otázka k problému: „Ako často sú kontrakcie?“;Každých päť minút.;Kontrakcie každých päť minút;
 vnoezcv.mp3;pokoj;pokojnejší, vecný;Kontrakcie každých päť minút (M);otázka k problému: „Môže byť tehotná?“;Áno.;*;
@@ -955,6 +955,155 @@ v8i2782.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Kamarátka na
 v1r3lz6z.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Kamarátka napísala, že nevie hovoriť (N);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Správu mi poslala pred pätnástimi minútami.;Kamarátka napísala, že nevie hovoriť;žena
 v1su4mfc.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Kamarátka napísala, že nevie hovoriť (N);otázka k problému: „Ovisol mu kútik, má slabú ruku alebo poruchu reči?“;Písala, že nevie hovoriť a ruka ju nepočúva.;Kamarátka napísala, že nevie hovoriť;žena
 v1vmef07.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Kamarátka napísala, že nevie hovoriť (N);otázka k problému: „Koľko má rokov?“;Päťdesiattri.;Kamarátka napísala, že nevie hovoriť;žena
+vvvu4qo.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);čo sa stalo;Manžel nejako divne chrápe a nemôžem ho zobudiť!;Manžel chrápe a nedá sa zobudiť;
+v56g26u.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje… ani keď ho štipnem. Ale chrápe, takže spí, nie?;Manžel chrápe a nedá sa zobudiť;
+vo7a3f6.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);odpoveď: „Dýcha? Dýcha normálne?“;Áno, dýcha – tak nahlas chrápe, raz za čas.;Manžel chrápe a nedá sa zobudiť;
+v1e1xyth.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Okolo úst je taký sivý.;Manžel chrápe a nedá sa zobudiť;
+vtbjgq1.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, ležal na gauči pri telke.;Manžel chrápe a nedá sa zobudiť;
+v1cv2jeb.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme v obývačke na treťom poschodí, výťah ide.;Manžel chrápe a nedá sa zobudiť;
+vw0ddln.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Dýcha normálne, alebo len občas zalapá po dychu?“;Nie normálne… zachrčí a potom dlho nič. Tak raz za desať sekúnd.;Manžel chrápe a nedá sa zobudiť;
+v16xdnb8.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Pred chvíľou ešte rozprával, potom sa zviezol na gauči.;Manžel chrápe a nedá sa zobudiť;
+v138rwls.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Stláča mu niekto hrudník?“;Nie, nikto.;*;
+vs3sveu.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Je nablízku defibrilátor (AED)?“;Neviem o žiadnom.;*;
+vs39xe.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Lieči sa s niečím dlhodobo?“;Berie lieky na tlak a na srdce.;Manžel chrápe a nedá sa zobudiť;
+v4n7pi8.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Koľko má rokov?“;Šesťdesiatsedem.;Manžel chrápe a nedá sa zobudiť;
+v1xziig6.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Manžel chrápe a nedá sa zobudiť (K);otázka k problému: „Je tam ešte niekto, kto môže pomôcť?“;Áno, je tu dcéra.;Manžel chrápe a nedá sa zobudiť;
+v1hwvlkz.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);čo sa stalo;Na tribúne sa zrútil fanúšik, leží medzi sedadlami a nehýbe sa!;Zrútil sa na tribúne;
+vj6phfg.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, oči má otvorené.;Zrútil sa na tribúne;
+v1byo02u.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);odpoveď: „Dýcha? Dýcha normálne?“;Neviem… teraz zalapal a zase nič.;Zrútil sa na tribúne;
+vlt62u7.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je bledý, pery má modré.;Zrútil sa na tribúne;
+v8i2m6z.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, len sa zvalil zo sedadla.;Zrútil sa na tribúne;
+v13qx2x.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme na tribúne pri vchode B, je tu veľa ľudí aj usporiadatelia.;Zrútil sa na tribúne;
+va88xf1.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Dýcha normálne, alebo len občas zalapá po dychu?“;Len raz za čas zalapá, inak nič.;Zrútil sa na tribúne;
+v1g9tihg.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Teraz, pred minútou.;Zrútil sa na tribúne;
+v5b78mq.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Stláča mu niekto hrudník?“;Nie, nikto sa ho neodváži dotknúť.;Zrútil sa na tribúne;
+v11ozyt4.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Je nablízku defibrilátor (AED)?“;Áno, usporiadateľ hovorí, že pri vchode B visí defibrilátor.;Zrútil sa na tribúne;
+v14obvel.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Koľko má rokov?“;Asi päťdesiat.;Zrútil sa na tribúne;
+vi89km5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zrútil sa na tribúne (K);otázka k problému: „Je tam ešte niekto, kto môže pomôcť?“;Áno, je nás tu veľa, aj usporiadatelia.;Zrútil sa na tribúne;
+v7ye3tk.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Babka zrazu hovorí z cesty (N);čo sa stalo;Babka od obeda hovorí z cesty a nevie chytiť lyžicu. Asi je len unavená, môže si ísť ľahnúť?;Babka zrazu hovorí z cesty;
+v3wi1y3.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);odpoveď: „Je pri vedomí? Reaguje?“;Áno, je pri vedomí, pozerá na mňa.;Babka zrazu hovorí z cesty;
+ve5sauo.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha normálne.;*;
+va75gw7.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Farbu má normálnu.;*;
+v1r0ycat.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, sedela pri stole.;Babka zrazu hovorí z cesty;
+v163ip9c.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme doma na prízemí, otvorím.;Babka zrazu hovorí z cesty;
+vd1y3uh.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;O pol jednej pri obede bola ešte úplne v poriadku. Teraz je trištvrte na jednu.;Babka zrazu hovorí z cesty;
+v11764wz.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);otázka k problému: „Ovisol mu kútik, má slabú ruku alebo poruchu reči?“;Áno, pravý kútik má dole a pravou rukou nič neudrží. Reč sa jej motá.;Babka zrazu hovorí z cesty;
+vjmmz1g.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);otázka k problému: „Berie lieky na riedenie krvi?“;Áno, berie lieky na riedenie krvi.;Babka zrazu hovorí z cesty;
+v1inz4f4.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);otázka k problému: „Ako dlho kŕče trvajú? Prebral sa medzi nimi?“;Kŕče nemá.;*;
+v19ljqj.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Babka zrazu hovorí z cesty (N);otázka k problému: „Koľko má rokov?“;Sedemdesiatosem.;Babka zrazu hovorí z cesty;
+vhbfhf6.mp3;úľava;s úľavou, ale ešte zadýchaný;Babka zrazu hovorí z cesty (N);po dobrej rade: „Nech si ľahne s hlavou mierne hore a nič neje ani nepije.“;Leží na gauči, hlavu má na vankúši.;Babka zrazu hovorí z cesty;
+vpnekf1.mp3;úľava;s úľavou, ale ešte zadýchaný;Babka zrazu hovorí z cesty (N);po dobrej rade: „Zapíšte si, kedy bola naposledy v poriadku, a pripravte jej lieky a kartičku poistenca.“;Zapísala som pol jednej, lieky mám v taške.;Babka zrazu hovorí z cesty;
+vsh80zz.mp3;úľava;s úľavou, ale ešte zadýchaný;Babka zrazu hovorí z cesty (N);po dobrej rade: „Ak bude zvracať alebo prestane reagovať, otočte ju na bok a hneď volajte.“;Dobre, nespúšťam ju z očí.;*;
+vtvjke8.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Babka zrazu hovorí z cesty (N);po zlej rade: „Dajte jej vypiť kávu, nech sa preberie.“;Napila sa… zakuckala sa, káva jej vytiekla z úst!;Babka zrazu hovorí z cesty;
+v16obq72.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Babka zrazu hovorí z cesty (N);po zlej rade: „Nech si ľahne a vyspí sa, ráno sa uvidí.“;Uložila som ju… a teraz už takmer nereaguje!;Babka zrazu hovorí z cesty;
+v1wd3mlw.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);čo sa stalo;Od rána ma páli žalúdok, je mi na zvracanie a teraz som celá spotená. Nemáte niečo na žalúdok?;Pálenie žalúdka a studený pot;
+vayuv9b.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);odpoveď: „Dýcha? Dýcha normálne?“;Trochu horšie sa mi dýcha… aj teraz, keď sedím.;Pálenie žalúdka a studený pot;
+vqk22b6.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Som bledá a mokrá od potu, je mi zima.;Pálenie žalúdka a studený pot;
+v1xduqn7.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Som doma, dvere otvorím.;Pálenie žalúdka a studený pot;
+vsunrnt.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Kde presne to bolí a kam to vystreľuje?“;Páli ma pod hrudnou kosťou a ťahá ma to medzi lopatky a do sánky.;Pálenie žalúdka a studený pot;
+v1b259x7.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Asi pred hodinou, keď som vešala prádlo.;Pálenie žalúdka a studený pot;
+v1aeji8d.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Koľko ukazuje tlakomer?“;Nemerala som.;Pálenie žalúdka a studený pot;
+v1s3i5sg.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Koľko má pulz? Bije srdce pravidelne?“;Neviem, srdce mi búši.;Pálenie žalúdka a studený pot;
+v13bdi0m.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Lieči sa so srdcom? Mal infarkt alebo stent?“;Nie, liečim sa len s cukrovkou a tlakom.;Pálenie žalúdka a studený pot;
+v1612i22.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Aké lieky berie? Vzal si ich dnes?“;Na cukrovku a na tlak.;Pálenie žalúdka a studený pot;
+v1scitx8.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Má aj iné ťažkosti – poruchu reči, slabú ruku, zle vidí?“;Nie, len je mi strašne slabo.;Pálenie žalúdka a studený pot;
+vlehb0i.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Pálenie žalúdka a studený pot (K);otázka k problému: „Odpadol, stratil vedomie?“;Nie, ale točí sa mi hlava.;Pálenie žalúdka a studený pot;
+vdu8i84.mp3;úľava;s úľavou, ale ešte zadýchaný;Pálenie žalúdka a studený pot (K);po dobrej rade: „Sadnite si alebo si ľahnite do polosedu a nehýbte sa.“;Sedím na gauči, opretá.;Pálenie žalúdka a studený pot;
+v88nui4.mp3;úľava;s úľavou, ale ešte zadýchaný;Pálenie žalúdka a studený pot (K);po dobrej rade: „Odomknite dvere a pripravte si zoznam liekov.“;Dvere som odomkla, lieky mám na stole.;Pálenie žalúdka a studený pot;
+v1v9bvnt.mp3;úľava;s úľavou, ale ešte zadýchaný;Pálenie žalúdka a studený pot (K);po dobrej rade: „Ak vám bude horšie alebo budete omdlievať, hneď volajte znova.“;Dobre… mobil mám pri sebe.;Pálenie žalúdka a studený pot;
+v5p7rng.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pálenie žalúdka a studený pot (K);po zlej rade: „Prejdite sa na čerstvom vzduchu, možno to prejde.“;Vyšla som na balkón… točí sa mi hlava, musela som si sadnúť!;Pálenie žalúdka a studený pot;
+vdu9lbq.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Pálenie žalúdka a studený pot (K);po zlej rade: „Vezmite si niečo na žalúdok a ľahnite si.“;Zobrala som si tabletku na žalúdok… stále ma to páli a som celá mokrá.;Pálenie žalúdka a studený pot;
+v1rjdy4q.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bodla ma osa a škriabe ma v hrdle (N);čo sa stalo;Bodla ma osa do krku… škriabe ma v hrdle a ťažko sa mi hovorí.;Bodla ma osa a škriabe ma v hrdle;
+vvujslk.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha sa mi ťažšie… a piští mi to.;Bodla ma osa a škriabe ma v hrdle;
+vd69qwp.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Mám červené fľaky po celom tele, točí sa mi hlava.;Bodla ma osa a škriabe ma v hrdle;
+v1umv0cb.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, len ma bodla osa.;Bodla ma osa a škriabe ma v hrdle;
+v13aqgrv.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Som v záhrade pri dome, bránka je otvorená.;Bodla ma osa a škriabe ma v hrdle;
+v5uzana.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);otázka k problému: „Na čo reagoval a kedy?“;Osa ma bodla do krku asi pred desiatimi minútami.;Bodla ma osa a škriabe ma v hrdle;
+v143w712.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);otázka k problému: „Opuchá mu tvár, jazyk alebo hrdlo?“;Áno, opuchajú mi pery a jazyk mám hrubý.;Bodla ma osa a škriabe ma v hrdle;
+v1rew923.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);otázka k problému: „Vie povedať celú vetu?“;Len… pár slov… naraz.;Bodla ma osa a škriabe ma v hrdle;
+v1wonoxu.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);otázka k problému: „Je alergik? Má adrenalínové pero?“;Áno, mám pero v kabelke, ale bojím sa ho pichnúť.;Bodla ma osa a škriabe ma v hrdle;
+v2ruyor.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bodla ma osa a škriabe ma v hrdle (N);otázka k problému: „Aké lieky berie? Vzal si ich dnes?“;Nie, nič som nebrala.;Bodla ma osa a škriabe ma v hrdle;
+vnfpw8h.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodla ma osa a škriabe ma v hrdle (N);po dobrej rade: „Vytiahnite pero, zložte poistku a pichnite ho do vonkajšej strany stehna, aj cez nohavice.“;Pichla som ho… držím… už sa mi dýcha trochu ľahšie.;Bodla ma osa a škriabe ma v hrdle;
+vltg737.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodla ma osa a škriabe ma v hrdle (N);po dobrej rade: „Sadnite si. Ak vám bude slabo, ľahnite si a dajte nohy hore.“;Sedím na lavičke, nebudem vstávať.;Bodla ma osa a škriabe ma v hrdle;
+vk0lf5y.mp3;úľava;s úľavou, ale ešte zadýchaný;Bodla ma osa a škriabe ma v hrdle (N);po dobrej rade: „Odomknite bránku a nechajte telefón zapnutý pri sebe.“;Bránka je otvorená, telefón mám v ruke.;Bodla ma osa a škriabe ma v hrdle;
+vgn44th.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bodla ma osa a škriabe ma v hrdle (N);po zlej rade: „Choďte sa napiť studenej vody, opuch splaskne.“;Postavila som sa… zatmelo sa mi pred očami, musela som si sadnúť!;Bodla ma osa a škriabe ma v hrdle;
+vruv2aw.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bodla ma osa a škriabe ma v hrdle (N);po zlej rade: „S perom počkajte, kým príde záchranka.“;Čakám… je to horšie, skoro nemôžem dýchať!;Bodla ma osa a škriabe ma v hrdle;
+v3gmo4l.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Tretie dieťa sa ponáhľa (N);čo sa stalo;Manželka rodí! Hovorí, že už musí tlačiť!;Tretie dieťa sa ponáhľa;
+vjgbn3x.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha rýchlo, ale normálne.;Tretie dieťa sa ponáhľa;
+v11nmp25.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je červená a spotená.;Tretie dieťa sa ponáhľa;
+vwfdwy0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Trochu krvi s vodou.;Tretie dieťa sa ponáhľa;
+v2r7o8a.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme v spálni na prízemí, dvere otvorím.;Tretie dieťa sa ponáhľa;
+vcnrlxr.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);otázka k problému: „V ktorom je týždni? Koľké dieťa to je?“;Je v 39. týždni, je to tretie dieťa.;Tretie dieťa sa ponáhľa;
+v1gnlqkd.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);otázka k problému: „Odtiekla plodová voda? Krváca?“;Voda odtiekla pred desiatimi minútami, je číra.;Tretie dieťa sa ponáhľa;
+vbtucb8.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);otázka k problému: „Ako často sú kontrakcie?“;Každú minútu, jedna za druhou.;Tretie dieťa sa ponáhľa;
+v1m5hhr9.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Tretie dieťa sa ponáhľa (N);otázka k problému: „Má nutkanie tlačiť? Vidno hlavičku?“;Áno, tlačí… a už vidím hlavičku!;Tretie dieťa sa ponáhľa;
+vl5t0jc.mp3;úľava;s úľavou, ale ešte zadýchaný;Tretie dieťa sa ponáhľa (N);po dobrej rade: „Nech si ľahne na chrbát alebo do polosedu, pod zadok dajte čisté uteráky.“;Leží na posteli, pod sebou má uteráky.;Tretie dieťa sa ponáhľa;
+v1qemwv6.mp3;úľava;s úľavou, ale ešte zadýchaný;Tretie dieťa sa ponáhľa (N);po dobrej rade: „Hlavičku neťahajte ani nezadržiavajte, len ju podopierajte, keď vychádza.“;Podopieram… už je vonku celá hlavička… aj ramienka!;Tretie dieťa sa ponáhľa;
+vv4nk4q.mp3;úľava;s úľavou, ale ešte zadýchaný;Tretie dieťa sa ponáhľa (N);po dobrej rade: „Dieťa hneď osušte, položte mame na brucho a prikryte oboch.“;Je na brušku, kričí! Prikryl som ich dekou.;Tretie dieťa sa ponáhľa;
+v1glcsr4.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Tretie dieťa sa ponáhľa (N);po zlej rade: „Pupočník hneď prestrihnite nožnicami.“;Mám prestrihnúť pupočník? Nemám nič čisté…;Tretie dieťa sa ponáhľa;
+v1x70os3.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Tretie dieťa sa ponáhľa (N);po zlej rade: „Nech dá nohy k sebe a počká na záchranku.“;Snaží sa nohy zovrieť… strašne kričí, hlavička je už vonku!;Tretie dieťa sa ponáhľa;
+v1x3acs3.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Horúčka a fľaky, ktoré nezblednú (N);čo sa stalo;Dcérka má od noci horúčku a je taká unavená. Môžem s ňou počkať do rána k pediatričke?;Horúčka a fľaky, ktoré nezblednú;
+v104l9h3.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, ale stále spí. Keď ju zobudím, hneď zaspí.;Horúčka a fľaky, ktoré nezblednú;
+v1rqhiyo.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha rýchlejšie.;Horúčka a fľaky, ktoré nezblednú;
+vvcvktr.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je bledá a ruky a nohy má studené.;Horúčka a fľaky, ktoré nezblednú;
+v12k5odq.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme doma na druhom poschodí.;Horúčka a fľaky, ktoré nezblednú;
+v1xrod8r.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);otázka k problému: „Má teplotu? Koľko?“;39,6, nezrazilo sa to ani po sirupe.;Horúčka a fľaky, ktoré nezblednú;
+v3vhil0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Od polnoci, teraz je päť ráno.;Horúčka a fľaky, ktoré nezblednú;
+v6q3y8j.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);otázka k problému: „Pije a močí normálne?“;Od večera skoro nepila a plienku má suchú.;Horúčka a fľaky, ktoré nezblednú;
+v1tohgy2.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);otázka k problému: „Má vyrážky, stuhnutý krk, je spavý?“;Na nôžkach má malé fialové bodky… keď na ne pritlačím pohár, nezmiznú.;Horúčka a fľaky, ktoré nezblednú;
+vy8zp05.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Horúčka a fľaky, ktoré nezblednú (N);otázka k problému: „Koľko má rokov?“;Tri roky.;Horúčka a fľaky, ktoré nezblednú;
+vmarypz.mp3;úľava;s úľavou, ale ešte zadýchaný;Horúčka a fľaky, ktoré nezblednú (N);po dobrej rade: „Nechajte ju ležať a nezabaľujte ju do perín, nech nie je prehriata.“;Leží v posteli, len pod tenkou dekou.;Horúčka a fľaky, ktoré nezblednú;
+v7eprtb.mp3;úľava;s úľavou, ale ešte zadýchaný;Horúčka a fľaky, ktoré nezblednú (N);po dobrej rade: „Pripravte kartičku poistenca a lieky, ktoré dostala, aj s časom podania.“;Mám to v taške, sirup dostala o tretej.;Horúčka a fľaky, ktoré nezblednú;
+vawsc6y.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Horúčka a fľaky, ktoré nezblednú (N);po zlej rade: „Okúpte ju v studenej vode, nech zrazíte horúčku.“;Dala som ju do vane… celá sa trasie a fialovie!;Horúčka a fľaky, ktoré nezblednú;
+vtskx2h.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Horúčka a fľaky, ktoré nezblednú (N);po zlej rade: „Dajte jej antibiotikum, ktoré vám ostalo od minule.“;Dala som jej lyžičku… hneď to vyvrátila.;Horúčka a fľaky, ktoré nezblednú;
+v1lw00qu.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Celá rodina má chrípku (N);čo sa stalo;Asi máme všetci chrípku – bolí nás hlava a je nám zle. Svokra je taká mimo, nevie, kde je.;Celá rodina má chrípku;
+vh2kc8v.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);odpoveď: „Je pri vedomí? Reaguje?“;Svokra je zmätená a stále zaspáva. My ostatní sme pri vedomí.;Celá rodina má chrípku;
+vggppas.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);odpoveď: „Dýcha? Dýcha normálne?“;Dýchajú normálne.;Celá rodina má chrípku;
+vtfhjp6.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Svokra je taká ružová v tvári.;Celá rodina má chrípku;
+v1ga9cyq.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme doma v byte, celú noc sme kúrili v piecke.;Celá rodina má chrípku;
+v1ytnwvf.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);otázka k problému: „Je tam viac ľudí, ktorým je zle?“;Áno, bolí nás všetkých štyroch, aj deti. Aj pes je od rána nejaký spavý.;Celá rodina má chrípku;
+vu2xavk.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Od rána, ako sme vstali, a je to horšie.;Celá rodina má chrípku;
+vzi8vvd.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);otázka k problému: „Čo presne a koľko užil?“;Nič sme nebrali, len tabletku na hlavu.;Celá rodina má chrípku;
+v1w5jzzw.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);otázka k problému: „Koľko má rokov a koľko váži?“;Svokra má sedemdesiat rokov.;Celá rodina má chrípku;
+vwyt6q.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Celá rodina má chrípku (N);otázka k problému: „Máte obal alebo zvyšky toho, čo užil?“;Nemáme nič.;Celá rodina má chrípku;
+v13seyd3.mp3;úľava;s úľavou, ale ešte zadýchaný;Celá rodina má chrípku (N);po dobrej rade: „Všetci hneď von z bytu na čerstvý vzduch – aj so svokrou a psom.“;Sme vonku pred domom, svokru sme vyviedli.;Celá rodina má chrípku;
+v9b6ytq.mp3;úľava;s úľavou, ale ešte zadýchaný;Celá rodina má chrípku (N);po dobrej rade: „Cestou otvorte okná a dvere, ale v byte sa nezdržujte.“;Otvoril som okno v kuchyni, už sme vonku.;Celá rodina má chrípku;
+v1bw116w.mp3;úľava;s úľavou, ale ešte zadýchaný;Celá rodina má chrípku (N);po dobrej rade: „Nič nezapínajte ani nevypínajte a nefajčite – hasiči to premerajú.“;Dobre, ničoho sa nedotýkame.;Celá rodina má chrípku;
+vtctxai.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Celá rodina má chrípku (N);po zlej rade: „Ľahnite si všetci a vyspite sa, chrípka prejde.“;Ľahli sme si… a svokra už nereaguje!;Celá rodina má chrípku;
+v15eletd.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Celá rodina má chrípku (N);po zlej rade: „Dajte svokre kávu, nech sa preberie.“;Nechce piť, stále zaspáva a kašle…;Celá rodina má chrípku;
+v15l2jdy.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otec zrazu nevie hovoriť (N);čo sa stalo;Otec zrazu nevie poriadne hovoriť a je celý mokrý. Asi má porážku!;Otec zrazu nevie hovoriť;
+v11nbt5.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, ale je zmätený, nevie, aký je deň.;Otec zrazu nevie hovoriť;
+v1qyb63v.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je bledý a celý mokrý od potu.;Otec zrazu nevie hovoriť;
+v1idv54c.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme doma v kuchyni, otvorím.;Otec zrazu nevie hovoriť;
+v9fqbgm.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Máte glukomer? Koľko ukazuje?“;Počkajte… glukomer ukazuje 2,1.;Otec zrazu nevie hovoriť;
+vkcv4a7.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Má cukrovku?“;Áno, má cukrovku, pichá si inzulín.;Otec zrazu nevie hovoriť;
+v3jwi7s.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Pichal si inzulín alebo vzal lieky? Jedol?“;Ráno si pichol inzulín, ale obed vynechal, robil v záhrade.;Otec zrazu nevie hovoriť;
+v1ofhszw.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Vie prehĺtať? Napije sa?“;Áno, prehĺta, keď mu podám pohár, napije sa.;Otec zrazu nevie hovoriť;
+vynpvcm.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Je tam ešte niekto, kto môže pomôcť?“;Áno, je tu aj mama.;Otec zrazu nevie hovoriť;
+v1s2c49q.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Ovisol mu kútik, má slabú ruku alebo poruchu reči?“;Reč má zmotanú, ale kútik neovisol a oboma rukami hýbe.;Otec zrazu nevie hovoriť;
+v10eua5d.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Otec zrazu nevie hovoriť (N);otázka k problému: „Kedy sa to začalo? Prišlo to náhle?“;Pred chvíľou, keď prišiel zo záhrady.;Otec zrazu nevie hovoriť;
+v1jg4e81.mp3;úľava;s úľavou, ale ešte zadýchaný;Otec zrazu nevie hovoriť (N);po dobrej rade: „Keď vie bezpečne prehĺtať, nech pomaly vypije pohár sladkého nápoja alebo džúsu.“;Vypil pohár džúsu… už sa na mňa pozerá inak.;Otec zrazu nevie hovoriť;
+v1lj02aq.mp3;úľava;s úľavou, ale ešte zadýchaný;Otec zrazu nevie hovoriť (N);po dobrej rade: „Nech sedí, nevstáva a nikam neodchádza, kým nepríde posádka.“;Sedí pri stole, mama je pri ňom.;Otec zrazu nevie hovoriť;
+vorsf1e.mp3;úľava;s úľavou, ale ešte zadýchaný;Otec zrazu nevie hovoriť (N);po dobrej rade: „Keby prestal reagovať, nedávajte mu nič do úst a uložte ho na bok.“;Dobre, keby sa niečo zmenilo, hneď vám zavolám.;Otec zrazu nevie hovoriť;
+vu1mz89.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otec zrazu nevie hovoriť (N);po zlej rade: „Pichnite mu ešte inzulín, cukor mu určite stúpol.“;Pichol som mu… teraz je ešte zmätenejší a celý sa trasie!;Otec zrazu nevie hovoriť;
+vm49pom.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Otec zrazu nevie hovoriť (N);po zlej rade: „Nalejte mu do úst sladkú vodu, aj keď nereaguje.“;Nalievam… zakašľal a voda mu vyteká z úst!;Otec zrazu nevie hovoriť;
+v1d48lfo.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Motorkár v priekope (N);čo sa stalo;Motorkár vyletel zo zákruty a leží v priekope! Hýbe sa, ale je mimo.;Motorkár v priekope;
+vl6ixnv.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, ale stále opakuje to isté, nevie, čo sa stalo.;Motorkár v priekope;
+voi5ar4.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Áno, vyletel z motorky v zákrute, letel niekoľko metrov.;Motorkár v priekope;
+vut36cm.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Trochu z nohy, noha je divne vykrivená.;Motorkár v priekope;
+v4z3qzp.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme za zákrutou pri Kysaku, na ceste stojí niekoľko áut.;Motorkár v priekope;
+vwtttzx.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Koľko je zranených?“;Len on, iné auto v tom nebolo.;Motorkár v priekope;
+v10fj712.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Je niekto zakliesnený v aute?“;Nie, leží v tráve vedľa motorky.;Motorkár v priekope;
+vbfn3zf.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Horí niečo alebo vyteká z auta?“;Nie, len z motorky kvapká benzín.;Motorkár v priekope;
+vmge05a.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Ako sa to stalo, akou rýchlosťou?“;Išiel rýchlo, aspoň osemdesiat, vyletel zo sedla.;Motorkár v priekope;
+v1gt5nju.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Hýbe rukami aj nohami, cíti ich?“;Rukami hýbe, ľavou nohou nie, vraví, že ho bolí.;Motorkár v priekope;
+vea3vbx.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Kde presne je – v aute, na ceste, mimo cesty?“;V priekope vedľa cesty, prilbu má na hlave.;Motorkár v priekope;
+v13wfut5.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Motorkár v priekope (N);otázka k problému: „Ostal vodič na mieste?“;Áno, je tu.;Motorkár v priekope;
+vksc9fr.mp3;úľava;s úľavou, ale ešte zadýchaný;Motorkár v priekope (N);po dobrej rade: „Prilbu mu nesnímajte, kým dýcha, a nech hýbe hlavou čo najmenej.“;Prilba ostáva, držím mu hlavu rovno.;Motorkár v priekope;
+v13vs29v.mp3;úľava;s úľavou, ale ešte zadýchaný;Motorkár v priekope (N);po dobrej rade: „Krvácajúcu ranu na nohe stlačte čistou látkou a nepúšťajte.“;Tlačím mu na nohu tričko, krv už tak netečie.;Motorkár v priekope;
+vv2z0pr.mp3;úľava;s úľavou, ale ešte zadýchaný;Motorkár v priekope (N);po dobrej rade: „Prikryte ho a zabezpečte miesto – výstražný trojuholník a svetlá.“;Je prikrytý bundou, trojuholník stojí za zákrutou.;Motorkár v priekope;
+vmabpxf.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Motorkár v priekope (N);po zlej rade: „Zložte mu prilbu, nech sa mu lepšie dýcha.“;Ťaháme mu prilbu… skríkol a hlava mu padá nabok!;Motorkár v priekope;
+v1rvk693.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Motorkár v priekope (N);po zlej rade: „Pomôžte mu sadnúť si a vyrovnajte mu nohu.“;Posadili sme ho… zbledol a skoro odpadol, noha strašne bolí!;Motorkár v priekope;
 vl86uyd.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Túlavý pes (O);čo sa stalo;Na detskom ihrisku pobehuje agresívny pes bez náhubku.;Túlavý pes;
 v34mjx.mp3;pokoj;pokojnejší, vecný;Túlavý pes (O);doplňujúca otázka: „Pohrýzol niekoho?“;Zatiaľ nie, ale vrčí na deti.;Túlavý pes;
 v19g9173.mp3;pokoj;pokojnejší, vecný;Túlavý pes (O);doplňujúca otázka: „Kde presne je teraz?“;Pri pieskovisku.;Túlavý pes;
@@ -964,8 +1113,6 @@ v1ctlv66.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Strom na ces
 v1cwxtun.mp3;pokoj;pokojnejší, vecný;Strom na ceste (O);doplňujúca otázka: „Strhol strom aj elektrické drôty?“;Áno, drôty ležia na ceste!;Strom na ceste;
 vn039z4.mp3;pokoj;pokojnejší, vecný;Strom na ceste (O);doplňujúca otázka: „Je pod stromom auto alebo človek?“;Nie, auto stihlo zastaviť.;Strom na ceste;
 v8z99va.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Je pri vedomí? Reaguje?“;Áno, je pri vedomí a rozpráva so mnou.;*;
-ve5sauo.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Dýcha? Dýcha normálne?“;Dýcha normálne.;*;
-va75gw7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Akú má farbu kože? Je bledý, spotený?“;Farbu má normálnu.;*;
 v1qa8ppr.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Stal sa úraz? Spadol, udrel sa?“;Nie, úraz to nebol.;*;
 vg3sj1w.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Krváca? Odkiaľ a ako veľmi?“;Nie, nekrváca.;*;
 v7v8dml.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Všeobecné odpovede – o pacientovi;„Je k nemu prístup? Hrozí tam niečo?“;Nie, nič nehrozí. Dvere vám otvoríme.;*;
@@ -1096,9 +1243,7 @@ v7g5nch.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k 
 v11domj8.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Aké lieky berie? Vzal si ich dnes?“;Nič zvláštne.;*;
 v1kpd9fz.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Lieči sa s niečím dlhodobo?“;Nič vážne.;*;
 v1u1s3q6.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Je tam ešte niekto, kto môže pomôcť?“;Nie, nikto iný tu nie je.;*;
-v138rwls.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;volá sám pacient: „Je pri vás niekto?“;Nie, nikto.;*;
 ve9uuo1.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Dýcha normálne, alebo len občas zalapá po dychu?“;Neviem… nevidím dobre.;*;
-vs3sveu.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Je nablízku defibrilátor (AED)?“;Neviem o žiadnom.;*;
 v9klhq1.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Je studený, stuhnutý, má na tele fialové škvrny?“;Nie, je ešte teplý.;*;
 vudwsn7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Má cukrovku?“;Nie, cukrovku nie.;*;
 vxkxagr.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Máte glukomer? Koľko ukazuje?“;Nemerali sme.;*;
@@ -1109,7 +1254,6 @@ v1licvnv.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k
 v1fji63o.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Koľko krvi asi stratil?“;Neviem odhadnúť.;*;
 v19bmm9b.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Kde presne to bolí a kam to vystreľuje?“;Neviem presne opísať.;*;
 v1ynidi.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Je epileptik? Berie lieky?“;Nie, neviem o tom.;*;
-v1inz4f4.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Ako dlho kŕče trvajú? Prebral sa medzi nimi?“;Kŕče nemá.;*;
 vnytw9h.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;volá sám pacient: „Ako dlho kŕče trvajú? Prebral sa medzi nimi?“;Kŕče nemám.;*;
 v2lembj.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Poranil sa pri tom?“;Nie, nevidím zranenie.;*;
 vszwie9.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Otázky k problému – všeobecné odpovede;„Pichal si inzulín alebo vzal lieky? Jedol?“;Áno, normálne.;*;
