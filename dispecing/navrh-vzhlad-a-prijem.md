@@ -15,6 +15,12 @@ a rozširuje ho o typ volajúceho, otázky k problému a radu pri odkladných ho
 
 Návrhy vzhľadu (plátno): https://claude.ai/artifact/KymduvAAYGFi4JDVVyC8FG
 
+## Stav
+
+- Etapa 1 (vzhľad a mapa) – hotová.
+- Etapa 2 (príjem hovoru) – hotová: 5 krokov, H1/H2/H3 s 5 novými situáciami H3 (2 skryté), otázky k problému
+  v 15 kategóriách so 16 chytákmi, rady pri O pre 13 situácií, povinné pokyny pri K a N, koniec príjmu tlačidlom.
+
 ## Poradie
 
 1. **Etapa 1 – vzhľad a mapa.** Logika hry sa nemení, všetky doterajšie testy musia prejsť.

@@ -33,19 +33,27 @@ políciu nevysielaš – len o ne požiadaš cez KS IZS (súčinnosť).
 
 Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti sú zjednodušené a napísané vlastnými slovami.
 
-**Príjem hovoru – štruktúrovaný rozhovor**
-- Počas príjmu (rozhovor, vyslanie, TANR) beží čas takmer naozaj: 2 sekundy hry za sekundu. Hodiny hovoru
-  ukazujú čas od prijatia.
-- Otázky: adresa, čo sa stalo a päť základných vecí – vedomie, dýchanie, krvný obeh (farba kože), úraz,
-  krvácanie – a prístup na miesto. Pri každej udalosti sú aj doplňujúce otázky k problému (zbytočná stojí body).
-- Body dostaneš za každú zo základných otázok. Ak neoveríš adresu, vedomie alebo dýchanie, prídeš o body.
-- **Základný formulár:** vyberieš kategóriu (náhle zastavenie obehu, porucha vedomia, dýchanie, krvácanie,
-  bolesť, kardio, neurológia a kŕče, psychické ťažkosti, alergia, diabetes, dopravná nehoda, úrazy,
-  intoxikácie, ochorenia, gynekológia a pôrod, nepatrí na 155, zneužitie). Ukáže sa strom s kritériami.
-- **Naliehavosť:** K kritický, N naliehavý, M menej naliehavý, O odkladný. Pri K, N a M vznikne udalosť,
-  pri O hovor vybavíš bez výjazdu: rada, 116117, NTIC, linka psychologickej pomoci, prehliadka mŕtveho tela
-  alebo odovzdanie na KS IZS 112.
-- V katalógu je 82 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
+**Príjem hovoru v piatich krokoch** (na mobile cez celú obrazovku, krok po kroku; na počítači pod sebou)
+1. **Rozhovor:** posledné dve vety sú vždy na očiach, celý prepis sa dá rozbaliť; riadok „Zistené“ zbiera dôležité
+   odpovede. Označíš **typ volajúceho** a pýtaš sa základné otázky: adresa, čo sa stalo, „Ste pri pacientovi?“,
+   vedomie, dýchanie, koža a obeh, úraz, krvácanie, prístup.
+2. **Problém:** vyberieš kategóriu a voľne sa pýtaš **neutrálne otázky k problému** (6 až 9 v každej kategórii).
+   Medzi nimi je aj **sugestívna otázka** („Bolesť na hrudi nemá, však?“) – stojí −5 a volajúci na ňu pritaká.
+3. **Naliehavosť:** strom kategórie s kritériami K kritický, N naliehavý, M menej naliehavý, O odkladný.
+4. **Vyslanie / riešenie:** pri K, N a M vznikne udalosť a vysielaš posádky, nasleduje TANR a súčinnosť IZS.
+   Pri O vyberieš spôsob (rada, 116117, NTIC, linka psychologickej pomoci, prehliadka mŕtveho tela, odovzdanie na
+   112) a pri rade aj **konkrétne vety** – správne +5, chybné −10 a povinná veta „ak sa to zhorší, volajte znova“
+   (bez nej −10).
+5. **Pokyny:** pri K a N sú pokyny volajúcemu **povinné** – bez aspoň jedného správneho −20 a stav sa zhorší.
+   Príjem končí len tlačidlom **Ukončiť príjem**, príchodom posádky alebo prijatím ďalšieho hovoru.
+
+**Typ volajúceho:** H1 volá sám pacient (vedomie sa nepýta, za vedomie ani dýchanie sa nestrháva), H2 je pri
+pacientovi, H3 nie je pri pacientovi. Správne označenie +5, nesprávne −5. Pri H3 treba zistiť, že volajúci nie je
+pri pacientovi (inak −10), opýtať sa na kontakt na niekoho pri ňom (inak −10) a zavolať späť – potom sa dajú dať
+pokyny aj TANR. Dve situácie sú **skryté H3**: z úvodu to nie je poznať a volajúci odpovedá z pamäti.
+
+- Počas príjmu beží čas takmer naozaj: 2 sekundy hry za sekundu. Hodiny hovoru ukazujú čas od prijatia.
+- V katalógu je 87 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
 
 **Vysielanie posádok**
 - K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
@@ -77,7 +85,8 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
 - Výsledok zástavy závisí od času bez obehu, kvality TANR a príchodu posádky. Bez TANR pacient väčšinou neprežije.
 - Pri ďalších stavoch sú telefonické pokyny (stabilizovaná poloha, adrenalínové pero, zastavenie krvácania,
   vedenie pôrodu a ďalšie). Dobrý pokyn pomôže, zlý ublíži. Lieky (napríklad aspirín) operátor po telefóne neodporúča.
-- Kontrola odborného obsahu: `kontrola/Linka155-kontrola-obsahu.xlsx` (situácie, stromy K/N/M/O, TANR, stĺpce na pripomienky).
+- Kontrola odborného obsahu: `kontrola/Linka155-kontrola-obsahu.xlsx` (situácie, otázky k problému, rady pri O,
+  stromy K/N/M/O, TANR, stĺpce na pripomienky).
 
 **Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka z ďaleka a dôsledky zlého vyslania,
 pokrytie kraja, neznáma poloha volajúceho, hovory v cudzom jazyku s tlmočníkom, zneužitie linky,
@@ -87,7 +96,7 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
-- Scenár všetkých 798 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Scenár všetkých 1146 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Vzhľad a mapa:** svetlý vzhľad „pracovná stanica“ (biele karty, jedna modrá, farby len pre naliehavosť K/N/M/O,
 písmo IBM Plex). Mapa je svetlá 3D zo skutočného reliéfu (výškové dáta Terrain Tiles – SRTM, EU-DEM). Košický kraj
