@@ -163,42 +163,75 @@ Odpoveď: zatiaľ len jeden režim – osobitný režim pre verejnosť nebude.
 **Q22 – Potvrdenie Q18.** Pri rozbore hovoru si napísal „a“. Znamená to áno – rozbor obsahuje všetko
 (kategória a naliehavosť s kritériom, chýbajúce a zbytočné otázky, časová os, pokyny)?
 Odporúčanie: áno, všetko.
-Odpoveď: …
+Odpoveď: áno – rozbor obsahuje všetko (a–d).
 
 **Q23 – Zdroje kazuistík** (nadväzuje na Q15).
 Verejné kazuistiky (odborné články, prípady ÚDZS) použijem len ako inšpiráciu: prerozprávam ich vlastnými slovami,
 anonymizujem a pod rozborom uvediem zdroj. Vyhľadám ich ja.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q24 – Čo pôjde do Excelu na kontrolu** (nadväzuje na Q9, Q20).
 Hárok 1: situácie (úvodná veta, odpovede, kategória, naliehavosť, súčinnosť, nemocnica, pokyny volajúcemu).
 Hárok 2: stromy kritérií K/N/M/O pre každú kategóriu. Hárok 3: kroky TANR. Každý riadok so stĺpcom na pripomienky.
 Odporúčanie: áno, všetky tri hárky.
-Odpoveď: …
+Odpoveď: áno – všetky tri hárky.
 
 **Q25 – Poradie práce** (nadväzuje na Q6, Q10–Q20).
 1. kontrola obsahu (partak-155 a Excel), 2. rozbor hovoru, 3. mobil – príjem na celú obrazovku a vysielanie zo zoznamu,
 4. kurz, 5. kazuistiky, 6. skúška.
 Odporúčanie: áno, v tomto poradí.
-Odpoveď: …
+Odpoveď: áno – v tomto poradí.
 
 **Q26 – Ďalšie funkcie po skúške.** Ktoré z návrhov druhej fázy chceš?
 a) AED na mape a navedenie volajúceho k nemu, b) odklad, keď nie je voľná posádka, c) konzultácia s lekárom
 operačného strediska, d) hromadné nešťastie s triedením START, e) sekundárne prevozy, f) nočná zmena.
 Odporúčanie: a), b), c); ostatné neskôr.
-Odpoveď: …
+Odpoveď: áno – a) AED, b) odklad, c) konzultácia s lekárom OS; ostatné neskôr. („Po skúške“ = po dokončení režimu skúšky z Q16, nie po vyskúšaní hry.)
 
 **Q27 – Hra na mobile.** Skúšal si hru na svojom mobile? Ide 3D mapa plynulo, alebo sa seká?
 (Fakt, ktorý zistiť neviem – podľa neho rozhodneme o úspornom režime.)
-Odpoveď: …
+Odpoveď: neodpovedané – opakovať v kole 5.
 
 **Q28 – Výsledky pre učiteľa** (nadväzuje na Q16).
 a) študent ukáže obrázok s výsledkom (bez servera, výsledky ostávajú v jeho prehliadači), b) spoločná tabuľa
 výsledkov triedy (potrebuje prihlásenie a ukladanie na serveri).
 Odporúčanie: a).
-Odpoveď: …
+Odpoveď: zatiaľ vynechať – výsledky pre učiteľa nebudú, len hodnotenie po skončení hry.
 
 **Q29 – Hlasy volajúcich.** Hlasy a ElevenLabs nechávame mimo plánu, kým nebude hotový kurz a skúška.
+Odporúčanie: áno.
+Odpoveď: neodpovedané – opakovať v kole 5.
+
+## Kolo 5
+
+**Q27 (znova) – Hra na mobile.** Skúšal si hru na svojom mobile? Ide 3D mapa plynulo, alebo sa seká?
+Ak si ju neskúšal, vyskúšaj ju prosím – podľa toho rozhodneme o úspornom režime.
+Odpoveď: …
+
+**Q29 (znova) – Hlasy volajúcich.** Hlasy a ElevenLabs nechávame mimo plánu, kým nebude hotový kurz a skúška.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q30 – Obrázok s výsledkom skúšky** (zosúladenie Q16 a Q28).
+V Q16 si súhlasil s obrázkom na ukázanie učiteľovi, v Q28 si výsledky pre učiteľa vynechal.
+Obrázok vynecháme a po skúške ostane len hodnotenie na obrazovke.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q31 – Prvé spustenie.** Nový hráč začne lekciou 1 kurzu (dá sa preskočiť), skúsený ide rovno do menu.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q32 – Herné prvky.** Schopnosti a odomykanie posádok, výzvy s hviezdičkami, denná výzva a medaily ostávajú.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q33 – Chýbajúce kategórie.** Strom pre úrazy nechám svoj (overíš ho v Exceli). Asistencie a neodkladnú
+prepravu osoby zatiaľ do hry nedávam.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q34 – Hovory v cudzom jazyku.** Hovory po maďarsky, ukrajinsky a anglicky s tlmočníkom ostávajú (text, bez hlasu).
 Odporúčanie: áno.
 Odpoveď: …
