@@ -290,10 +290,45 @@ a) príjem sa nedá ukončiť, kým operátor nedá pokyn, b) príjem sa dá uko
 a pacientovi sa priťaží, c) povinné len pri K a N, pri M odporúčané.
 Odporúčanie: b) + c) – pri K a N aspoň jeden správny pokyn, inak −20 a horší stav; pri M body navyše;
 v kurze krok „Pokyny“ svieti ako nesplnený, kým pokyn nedáš.
-Odpoveď: …
+Odpoveď: b) + c) – pri K a N aspoň jeden správny pokyn, inak −20 a horší stav; pri M body navyše; v kurze krok „Pokyny“ svieti ako nesplnený.
 
 **Q43 – Kedy sa pokyny dávajú.** Príjem sa už neukončí automaticky po vyslaní posádky, ale až tlačidlom
 „Ukončiť príjem“ (pri zástave po spustení TANR). Pokyny sa dávajú počas príjmu; po jeho ukončení len pri
 opakovanom hovore.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
+
+## Zhrnutie – spoločné porozumenie (čaká na potvrdenie)
+
+**Smer hry**
+- Primárne pre študentov záchranárstva; jadrom je príjem hovoru, mapa a vysielanie ho dopĺňajú.
+- Hlavné zariadenie je mobil; hobby projekt bez termínu.
+- Repozitár ostáva verejný; v hre len vlastné formulácie kritérií, nič doslovne z obrazoviek OS, fotky obrazoviek sa neukladajú.
+- OS ZZS SR zatiaľ neoslovujeme; výsledky pre učiteľa a režim pre verejnosť zatiaľ nebudú; hlasy odložené.
+
+**Odborný obsah**
+- Návrh pripravím ja (aj cez partak-155), schvaľuješ ty, kritické veci (TANR, pôrod, dusenie) aj kolega z OS.
+- Kontrola cez Excel: hárok situácií, hárok stromov K/N/M/O, hárok krokov TANR, každý so stĺpcom na pripomienky.
+- Strom úrazov ostáva môj (overíš ho); asistencie a neodkladná preprava osoby do hry nepatria.
+
+**Poradie práce**
+1. Excel na kontrolu obsahu.
+2. Prehľadnosť na mobile: príjem na celú obrazovku po krokoch (Rozhovor → Formulár → Naliehavosť → Vysielanie → Pokyny),
+   hore len hodiny hovoru a pauza, jedno hlásenie naraz, v karte udalosti poradie posádky → TANR → súčinnosť (tlačidlo „?“)
+   → povinné pokyny; na počítači ostáva mapa v strede.
+3. Rozbor hovoru: kategória a naliehavosť s rozhodujúcim kritériom, chýbajúce a zbytočné otázky, časová os, pokyny;
+   hneď po príjme v kurze a kazuistikách, vo voľnej službe po príchode posádky.
+4. Kurz: 8 lekcií po kategóriách, karta s kritériami a 4 hovory, ďalšia lekcia pri 3 zo 4; nový hráč začína lekciou 1.
+5. Kazuistiky: jeden hovor od zdvihnutia po príchod posádky s rozborom; prvých 10 napíšem ja, aj podľa verejných
+   kazuistík a ÚDZS (prerozprávané, anonymizované, so zdrojom).
+6. Skúška: 10 hovorov, strom skrytý, výsledok v percentách, úspech od 80 %, len hodnotenie na obrazovke.
+7. AED na mape, odklad pri nedostatku posádok, konzultácia s lekárom OS.
+
+**Pravidlá**
+- Čas príjmu: voľná služba a kurz 2× (prvé dve lekcie bez trestu za 90 s), kazuistiky a skúška v reálnom čase.
+- Povinné pokyny: pri K a N aspoň jeden správny pokyn, inak −20 a horší stav; pri M body navyše.
+- Príjem sa končí tlačidlom „Ukončiť príjem“ (pri zástave až po spustení TANR); pokyny sa dávajú počas príjmu.
+- Ostávajú schopnosti, výzvy, denná výzva, medaily a hovory v cudzom jazyku (text, bez hlasu).
+
+**Neskôr / odložené:** oslovenie OS ZZS SR, výsledky pre učiteľa, režim pre verejnosť, hlasy, hromadné nešťastie
+s triedením START, sekundárne prevozy, nočná zmena.
