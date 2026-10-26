@@ -248,10 +248,37 @@ Odpoveď: áno.
 
 **Q35 – Čo je na mobile neprehľadné.** Sedí audit vyššie s tým, čo ti prekáža? Ak ťa trápi ešte niečo iné, dopíš to.
 Odporúčanie: áno, všetkých 5 bodov.
-Odpoveď: …
+Odpoveď: áno – všetkých 5 bodov sedí.
 
 **Q36 – Poradie práce po zistení z mobilu** (mení Q25).
 1. pripraviť Excel na kontrolu obsahu (kým ho kontroluješ ty a kolega, robím ďalej), 2. prehľadnosť na mobile,
 3. rozbor hovoru, 4. kurz, 5. kazuistiky, 6. skúška, 7. AED, odklad, konzultácia s lekárom.
+Odporúčanie: áno.
+Odpoveď: áno – nové poradie práce platí.
+
+## Kolo 7 – riešenie prehľadnosti na mobile
+
+**Q37 – Príjem hovoru na mobile.** Hovor zaberie celú obrazovku (bez mapy) a ide po krokoch s lištou hore:
+Rozhovor → Formulár → Naliehavosť → Vysielanie → Pokyny. Medzi krokmi sa dá ľubovoľne prepínať,
+posledné dve vety rozhovoru sú vždy viditeľné a otázky majú iný vzhľad ako bubliny rozhovoru.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q38 – Horná lišta počas hovoru.** Počas príjmu ostanú hore len hodiny hovoru a pauza; skóre, úroveň a dôvera
+sa ukážu po skončení príjmu.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q39 – Hlásenia.** Na mobile vždy len jedno hlásenie naraz; staršie sa dajú pozrieť v zozname hlásení.
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q40 – Poradie v karte udalosti.** 1. posádky a tlačidlo Vyslať, 2. TANR (pri K), 3. súčinnosť IZS ako tri
+tlačidlá bez dlhého textu (vysvetlenie pod tlačidlom „?“), 4. pokyny volajúcemu (zbalené).
+Odporúčanie: áno.
+Odpoveď: …
+
+**Q41 – Počítač.** Na počítači ostáva rozloženie s mapou v strede; zmení sa len poradie v karte udalosti,
+vzhľad otázok a hlásenia. Kroky budú len na mobile.
 Odporúčanie: áno.
 Odpoveď: …
