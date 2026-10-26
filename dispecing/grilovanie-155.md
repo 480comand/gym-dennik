@@ -28,30 +28,75 @@ Pri každej otázke je odporúčanie; „áno“ znamená súhlas s odporúčan�
 **Q1 – Hlavná cieľová skupina.** Keď sa realizmus a zábava pobijú, kto má prednosť?
 a) študenti záchranárstva, b) operátori v zaškolení, c) verejnosť.
 Odporúčanie: a) študenti záchranárstva; verejnosť dostane jednoduchší režim, tréning operátorov neskôr.
-Odpoveď: …
+Odpoveď: a) študenti záchranárstva majú prednosť.
 
 **Q2 – Zverejnenie a metodika.** Metodika rozhovoru nie je verejná. Ako s hrou naložíme?
 a) verejne na GitHub Pages s vlastnými, zjednodušenými kritériami, b) len súkromne, kým OS ZZS SR nedá súhlas,
 c) požiadať OS ZZS SR o spoluprácu a potom verejne.
 Odporúčanie: a) teraz verejne s vlastnými kritériami bez textov z obrazoviek, súbežne c).
-Odpoveď: …
+Odpoveď: b) + c) súkromne, kým OS ZZS SR nedá súhlas, a požiadať OS o spoluprácu.
 
 **Q3 – Jadro hry.** Čo je hlavná činnosť hráča?
 a) príjem hovoru (rozhovor, naliehavosť, pokyny), b) riadenie posádok na mape, c) oboje rovnako.
 Odporúčanie: a) príjem hovoru je jadro, mapa a vysielanie ho dopĺňajú.
-Odpoveď: …
+Odpoveď: a) jadrom je príjem hovoru.
 
 **Q4 – Kto schvaľuje odborný obsah.** Situácie, kritériá a pokyny volajúcim musia byť správne.
 a) len ty, b) ja pripravím návrh (aj cez skill partak-155) a ty schváliš, c) navyše druhý odborník z OS.
 Odporúčanie: b) a pri TANR, pôrode a dusení aj c).
-Odpoveď: …
+Odpoveď: a) + b) + c) ja pripravím návrh, ty schváliš, kritické veci prejde aj druhý odborník z OS.
 
 **Q5 – Hlavné zariadenie.** Na čom sa bude hrať najčastejšie?
 a) mobil, b) počítač, c) oboje rovnako.
 Odporúčanie: a) mobil, počítač plnohodnotne.
-Odpoveď: …
+Odpoveď: a) mobil.
 
 **Q6 – Termín a rozsah.** Je pevný cieľ, dokedy má byť hra hotová (napríklad ukážka na škole či na stredisku)?
 a) bez termínu, hobby projekt, b) konkrétny termín a udalosť.
 Odporúčanie: b), ak taký termín je – podľa neho zoradíme priority.
+Odpoveď: a) bez termínu, hobby projekt.
+
+### Zistené po kole 1
+
+- Repozitár `480comand/gym-dennik` je **verejný**. Na vetve `main` je len aplikácia gym denníka (GitHub Pages),
+  hra je na vetve `claude/vigilant-thompson-aa6dg5` a v otvorenom PR #1 – teda je verejne viditeľná.
+- Artefakt hry na claude.ai je súkromný.
+
+## Kolo 2
+
+**Q7 – Čo s hrou vo verejnom repozitári** (nadväzuje na Q2 b).
+a) nový súkromný repozitár (napr. `linka-155`), hru presunúť tam, v `gym-dennik` zatvoriť PR #1 a zmazať vetvu,
+b) celý `gym-dennik` prepnúť na súkromný (gym denník na GitHub Pages bez platenia prestane fungovať),
+c) nechať tak.
+Pozn.: aj po zmazaní vetvy ostane história zatvoreného PR viditeľná; úplne ju odstráni len súkromný repozitár alebo podpora GitHubu.
+Odporúčanie: a), a ak treba, požiadať podporu GitHubu o odstránenie PR.
+Odpoveď: …
+
+**Q8 – Oslovenie OS ZZS SR** (nadväzuje na Q2 c).
+Pripravím krátky návrh spolupráce (čo hra je, pre koho, o čo žiadame: súhlas s použitím metodiky, odborná kontrola)
+a odkaz na ukážku; pošleš ho ty.
+Odporúčanie: áno, adresát vedenie OS alebo oddelenie vzdelávania.
+Odpoveď: …
+
+**Q9 – Druhý odborník a forma kontroly** (nadväzuje na Q4).
+Máš konkrétneho kolegu (lekár OS, skúsený operátor)? Kontrolu by som pripravil ako prehľadnú tabuľu situácií
+(úvodná veta, odpovede, správna naliehavosť, súčinnosť, pokyny) s možnosťou komentovať.
+Odporúčanie: áno, tabuľa s komentármi; meno kolegu doplníš.
+Odpoveď: …
+
+**Q10 – Režimy pre študentov** (nadväzuje na Q1, Q3).
+Čo pridať k voľnej službe? a) kurz po kategóriách s rastúcou náročnosťou, b) kazuistiky – pripravené hovory
+s rozborom, c) skúška bez pomôcok s hodnotením.
+Odporúčanie: všetky tri; poradie a) → b) → c).
+Odpoveď: …
+
+**Q11 – Kedy dostane študent rozbor hovoru.**
+a) až keď posádka príde na miesto (teraz), b) hneď po ukončení príjmu s vysvetlením, ktoré kritérium rozhodlo,
+c) až na konci služby.
+Odporúčanie: b) v kurze a kazuistikách, a) vo voľnej službe.
+Odpoveď: …
+
+**Q12 – Príjem hovoru na mobile** (nadväzuje na Q3, Q5).
+Počas príjmu by hovor zabral celú obrazovku (rozhovor, formulár, strom), mapa sa ukáže až pri vysielaní.
+Odporúčanie: áno.
 Odpoveď: …
