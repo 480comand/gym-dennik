@@ -21,7 +21,7 @@ v1v0198w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zástava srdca 
 viwz1or.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);čo sa stalo;Na zastávke sa zrútil nejaký pán a leží na zemi!;Zástava srdca na ulici;žena
 v7bytec.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);čo sa stalo;Pri obchode spadol muž a nikto nevie, čo s ním!;Zástava srdca na ulici;žena
 v90bp3n.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, pozerá do prázdna.;Zástava srdca na ulici;žena
-vbkeech.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha… teda len raz za čas tak zachrčí.;Zástava srdca na ulici;žena
+v1dm60go.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha… teda len raz za čas tak zalapá po dychu.;Zástava srdca na ulici;žena
 v1byy6pe.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je celý sivý.;Zástava srdca na ulici;žena
 v1xu1gok.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, sám od seba sa zvalil.;Zástava srdca na ulici;žena
 v13an2bu.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zástava srdca na ulici (K);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Trochu z hlavy, ako padol na chodník.;Zástava srdca na ulici;žena
@@ -36,6 +36,14 @@ v1trc5xf.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Vyti
 v1fkw9cq.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Vytiahnutý z vody (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Leží na móle, k vode sa dá prísť autom.;Vytiahnutý z vody;žena
 v1esx8p7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Vytiahnutý z vody (K);doplňujúca otázka: „Ako dlho bol pod vodou?“;Asi tri, štyri minúty.;Vytiahnutý z vody;žena
 v1fu86my.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Vytiahnutý z vody (K);doplňujúca otázka: „Bola voda studená?“;Voda je ešte dosť studená.;Vytiahnutý z vody;žena
+vsd0n0w.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);čo sa stalo;Synček v postieľke nedýcha, je celý modrý!;Dojča nedýcha;žena
+vkwalbn.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, je úplne ochabnutý!;Dojča nedýcha;žena
+v1jap0vx.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha… nevidím, že by dýchal!;Dojča nedýcha;žena
+v11qabjx.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je modrý až sivý.;Dojča nedýcha;žena
+v1xh4al5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, spal v postieľke.;Dojča nedýcha;žena
+v1igq240.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dojča nedýcha (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sme v detskej izbe, som s ním sama.;Dojča nedýcha;žena
+vvad8i.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dojča nedýcha (K);doplňujúca otázka: „Koľko má mesiacov?“;Štyri mesiace.;Dojča nedýcha;žena
+v41ktdy.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dojča nedýcha (K);doplňujúca otázka: „Kedy ste ho videli naposledy v poriadku?“;Pred hodinou, keď som ho uložila spať.;Dojča nedýcha;žena
 vdbfj1r.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Isté známky smrti (O);čo sa stalo;Dobrý deň… starý otec ráno nevstal. Myslím, že už nežije.;Isté známky smrti;
 v15pvgmc.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje. Je studený.;Isté známky smrti;
 v1j49tm0.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha. Je celý stuhnutý a na chrbte má fialové škvrny.;Isté známky smrti;
@@ -47,17 +55,17 @@ vywf6od.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);doplňujúca otá
 v12dq29o.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Isté známky smrti (O);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je mu horšie, prestáva reagovať!;*;
 v86xncv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);čo sa stalo;Suseda leží na chodbe a nedá sa prebrať!;Bezvedomie;žena
 v1nv2gks.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, ani keď na ňu kričím a zatrasiem ňou.;Bezvedomie;žena
-v1ju0nc5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha, ale chrčí.;Bezvedomie;žena
+vimc0hv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha pravidelne, len trochu chrápe.;Bezvedomie;žena
 vf1a1h0.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je bledá.;*;
 v12va1qm.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Neviem, našla som ju tak.;Bezvedomie;žena
 v1uk6z66.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Nevidím krv.;Bezvedomie;žena
 vjsd5xs.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Leží na chodbe pred bytom na treťom poschodí, výťah ide.;Bezvedomie;žena
 vk7x11j.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bezvedomie (K);doplňujúca otázka: „Ako dlho tam môže ležať?“;Neviem, ráno bola ešte v poriadku.;Bezvedomie;žena
 v1ge5skd.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bezvedomie (K);doplňujúca otázka: „Má nejakú chorobu, napríklad cukrovku?“;Viem, že má cukrovku.;Bezvedomie;žena
-vf1mdyk.mp3;úľava;s úľavou, ale ešte zadýchaný;Bezvedomie (K);po dobrej rade: „Otočte ju na bok do stabilizovanej polohy a jemne jej zakloňte hlavu.“;Otočila som ju na bok… prestala chrčať, dýcha ľahšie.;Bezvedomie;žena
+v6zuniq.mp3;úľava;s úľavou, ale ešte zadýchaný;Bezvedomie (K);po dobrej rade: „Otočte ju na bok do stabilizovanej polohy a jemne jej zakloňte hlavu.“;Otočila som ju na bok… prestala chrápať, dýcha ľahšie.;Bezvedomie;žena
 v1spsxlh.mp3;úľava;s úľavou, ale ešte zadýchaný;Bezvedomie (K);po dobrej rade: „Ostaňte pri nej a sledujte dych – keby prestala dýchať, hneď mi to povedzte.“;Som pri nej, dýcha.;Bezvedomie;žena
-vs4c45j.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bezvedomie (K);po zlej rade: „Dajte jej napiť, nech sa preberie.“;Naliala som jej vodu do úst… zakuckala sa a chrčí ešte viac!;Bezvedomie;žena
-v1jkdchr.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bezvedomie (K);po zlej rade: „Podložte jej hlavu vysokým vankúšom.“;Dala som jej pod hlavu dva vankúše… chrčí ešte viac!;Bezvedomie;žena
+v1ducha1.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bezvedomie (K);po zlej rade: „Dajte jej napiť, nech sa preberie.“;Naliala som jej vodu do úst… zakuckala sa a chrápe ešte viac!;Bezvedomie;žena
+v1y7jejl.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bezvedomie (K);po zlej rade: „Podložte jej hlavu vysokým vankúšom.“;Dala som jej pod hlavu dva vankúše… chrápe ešte viac!;Bezvedomie;žena
 v96899q.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Diabetik v bezvedomí (K);čo sa stalo;Manžel je cukrovkár, nedá sa prebrať a je celý spotený!;Diabetik v bezvedomí;žena
 v1n8vmy9.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Diabetik v bezvedomí (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, ani keď ho štípnem.;Diabetik v bezvedomí;žena
 v1jyfsgi.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Diabetik v bezvedomí (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha.;Diabetik v bezvedomí;žena
@@ -83,7 +91,7 @@ v16m45bl.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);odpoveď: „Je pri v
 v1ixmdmh.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je trochu bledá.;Krátky kolaps;
 vvpx5a9.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Nie, chytili sme ju.;Krátky kolaps;
 v34apno.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Sedí vonku pred kostolom.;Krátky kolaps;
-vl0jjg5.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);doplňujúca otázka: „Koľko má rokov a je zdravá?“;Šestnásť, je zdravá.;Krátky kolaps;
+vo6p6al.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);doplňujúca otázka: „Koľko má rokov a je zdravá?“;Dvadsaťpäť, je zdravá.;Krátky kolaps;
 v1nrf4na.mp3;pokoj;pokojnejší, vecný;Krátky kolaps (M);doplňujúca otázka: „Jedla dnes niečo?“;Nie, od rána nič.;Krátky kolaps;
 v1m36muh.mp3;úľava;s úľavou, ale ešte zadýchaný;Krátky kolaps (M);po dobrej rade: „Nech si ľahne a vyloží nohy hore.“;Leží na lavičke s nohami na batohu, už má farbu.;Krátky kolaps;
 v16xfak5.mp3;úľava;s úľavou, ale ešte zadýchaný;Krátky kolaps (M);po dobrej rade: „Keď je úplne pri sebe, dajte jej napiť niečo sladké.“;Vypila džús, je jej lepšie.;Krátky kolaps;
@@ -128,6 +136,7 @@ vg0gqsk.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dusen
 vx0bjh5.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Dusenie (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Celý modrie!;Dusenie;muž
 v172wgv7.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dusenie (K);doplňujúca otázka: „Vie kašľať alebo hovoriť?“;Nie, len chrčí a drží sa za krk!;Dusenie;muž
 vyxgin5.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Dusenie (K);doplňujúca otázka: „Čo prehltol?“;Kus mäsa pri obede.;Dusenie;muž
+vbrkkcw.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (K);po dobrej rade: „Ak vie kašľať, nech silno kašle – nič iné nerobte.“;Nevie kašľať, len chrčí… čo mám robiť?;Dusenie;muž
 v1x2mdq8.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (K);po dobrej rade: „Ak nevie kašľať, predkloňte ho a 5-krát ho udrite medzi lopatky.“;Udieram ho… niečo sa pohlo, ale stále chrčí!;Dusenie;muž
 v1ezfc85.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (K);po dobrej rade: „Keď to nepomôže, 5-krát mu stlačte brucho pod rebrami dnu a hore.“;Stláčam… vyletelo to von, kašle!;Dusenie;muž
 vgqyenr.mp3;úľava;s úľavou, ale ešte zadýchaný;Dusenie (K);po dobrej rade: „Keby stratil vedomie, položte ho na zem a začnite stláčať hrudník.“;Je pri vedomí, kašle a dýcha.;Dusenie;muž
@@ -203,7 +212,7 @@ v1hlif1y.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bole
 vxftbca.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bolesť na hrudi (K);doplňujúca otázka: „Ako dlho bolesť trvá?“;Asi pol hodiny a neprechádza.;Bolesť na hrudi;žena
 vlxhp1g.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bolesť na hrudi (K);doplňujúca otázka: „Mal už niekedy problémy so srdcom?“;Pred dvoma rokmi mu dávali stent.;*;
 v1rt47uu.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (K);po dobrej rade: „Nech sedí v pohodlnej polohe a vôbec sa nenamáha.“;Sedí v kresle a nehýbe sa.;*;
-v1a8k271.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (K);po dobrej rade: „Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.“;Rozhrýzol acylpyrín, alergie nemá.;*;
+v1a4p6b4.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť na hrudi (K);po zlej rade: „Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.“;Rozhrýzol acylpyrín… a teraz ho páli žalúdok.;*;
 vinflqw.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť na hrudi (K);po dobrej rade: „Pripravte jeho lieky a odomknite dvere pre záchranku.“;Lieky mám v ruke, dvere sú otvorené.;*;
 v1phm0q3.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť na hrudi (K);po zlej rade: „Nech sa prejde, možno to rozchodí.“;Prešiel pár krokov a oprel sa o stenu, je celý sivý!;*;
 vvelx3w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť na hrudi (K);po zlej rade: „Odvezte ho radšej sami autom do nemocnice.“;Viedli sme ho do auta… v aute skolaboval!;*;
@@ -228,9 +237,14 @@ vz3t432.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Búšenie srdca 
 v7mnvv0.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Nepravidelný pulz (M);čo sa stalo;Od rána mi srdce bije nepravidelne a som strašne unavený.;Nepravidelný pulz;muž
 v1j6c58h.mp3;pokoj;pokojnejší, vecný;Nepravidelný pulz (M);doplňujúca otázka: „Ste zadýchaný alebo vás bolí na hrudi?“;Nie, len som unavený.;Nepravidelný pulz;muž
 v1y5h00g.mp3;pokoj;pokojnejší, vecný;Nepravidelný pulz (M);doplňujúca otázka: „Beriete lieky na srdce?“;Áno, na tlak.;Nepravidelný pulz;muž
-v9iwor3.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vysoký tlak bez ťažkostí (O);čo sa stalo;Namerala som si tlak 175 na 95. Je to nebezpečné?;Vysoký tlak bez ťažkostí;žena
-v17nji4e.mp3;pokoj;pokojnejší, vecný;Vysoký tlak bez ťažkostí (O);odpoveď: „Je pri vedomí? Reaguje?“;Áno, je mi dobre, len ma to vystrašilo.;Vysoký tlak bez ťažkostí;žena
-v14a0asv.mp3;pokoj;pokojnejší, vecný;Vysoký tlak bez ťažkostí (O);doplňujúca otázka: „Beriete lieky na tlak?“;Áno, ale dnes som ich zabudla.;Vysoký tlak bez ťažkostí;žena
+vpg8ecz.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Zabudnutá tabletka na tlak (O);čo sa stalo;Zabudla som si ráno vziať tabletku na tlak. Mám si ju vziať teraz? Inak mi nič nie je.;Zabudnutá tabletka na tlak;žena
+vdtv3wa.mp3;pokoj;pokojnejší, vecný;Zabudnutá tabletka na tlak (O);odpoveď: „Je pri vedomí? Reaguje?“;Áno, je mi dobre.;Zabudnutá tabletka na tlak;žena
+v15a0xqm.mp3;pokoj;pokojnejší, vecný;Zabudnutá tabletka na tlak (O);doplňujúca otázka: „Koľko vám teraz ukazuje tlakomer?“;140 na 85.;Zabudnutá tabletka na tlak;žena
+vd384dc.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Vysoký tlak (M);čo sa stalo;Namerala som si tlak 180 na 100 a trochu ma bolí hlava.;Vysoký tlak;žena
+v8tkewo.mp3;pokoj;pokojnejší, vecný;Vysoký tlak (M);odpoveď: „Je pri vedomí? Reaguje?“;Áno, som v poriadku, len ma bolí hlava.;Vysoký tlak;žena
+vcvslgr.mp3;pokoj;pokojnejší, vecný;Vysoký tlak (M);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Som trochu červená v tvári.;Vysoký tlak;žena
+v15bdj6v.mp3;pokoj;pokojnejší, vecný;Vysoký tlak (M);doplňujúca otázka: „Bolí vás na hrudi, máte slabú ruku, poruchu reči alebo vidíte zle?“;Nie, len ma trochu bolí hlava.;Vysoký tlak;žena
+v14a0asv.mp3;pokoj;pokojnejší, vecný;Vysoký tlak (M);doplňujúca otázka: „Beriete lieky na tlak?“;Áno, ale dnes som ich zabudla.;Vysoký tlak;žena
 viy8noo.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Mozgová príhoda (N);čo sa stalo;Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!;Mozgová príhoda;muž
 vzjc9j2.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Mozgová príhoda (N);čo sa stalo;Manželka nevie zdvihnúť pravú ruku a motá sa jej reč.;Mozgová príhoda;muž
 vve7kel.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Mozgová príhoda (N);odpoveď: „Je pri vedomí? Reaguje?“;Je pri vedomí, ale rozpráva nezrozumiteľne.;Mozgová príhoda;muž
@@ -243,7 +257,7 @@ vuuejno.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Mozgová príhod
 v1ddt74z.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Mozgová príhoda (N);po zlej rade: „Nechajte ju vyspať, ráno to bude lepšie.“;Zaspala… a ťažko ju prebúdzam!;Mozgová príhoda;muž
 v6yzw6k.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);čo sa stalo;Syn kŕčuje už desať minút a neprestáva!;Kŕče, ktoré neprestávajú;žena
 v9zyjiw.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, stále sa trasie.;Kŕče, ktoré neprestávajú;žena
-v13gqi4o.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Dýcha? Dýcha normálne?“;Chrčí, má penu pri ústach.;Kŕče, ktoré neprestávajú;žena
+v8dw30x.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha nepravidelne, má penu pri ústach.;Kŕče, ktoré neprestávajú;žena
 vn3xfrw.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Okolo úst je modrastý.;Kŕče, ktoré neprestávajú;žena
 v1p4tpvv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Keď padal, narazil si hlavu o stôl.;Kŕče, ktoré neprestávajú;žena
 v16f03a.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kŕče, ktoré neprestávajú (K);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Trochu z jazyka.;Kŕče, ktoré neprestávajú;žena
@@ -253,6 +267,7 @@ vdam2an.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Kŕče, kt
 va4ofaf.mp3;úľava;s úľavou, ale ešte zadýchaný;Kŕče, ktoré neprestávajú (K);po dobrej rade: „Odtiahnite od neho nábytok a predmety, o ktoré sa môže udrieť.“;Odtiahla som stôl, leží na koberci.;Kŕče, ktoré neprestávajú;žena
 vsmdbqd.mp3;úľava;s úľavou, ale ešte zadýchaný;Kŕče, ktoré neprestávajú (K);po dobrej rade: „Nič mu nevkladajte do úst a nedržte ho nasilu.“;Dobre, nechávam ho tak.;Kŕče, ktoré neprestávajú;žena
 vf1a70d.mp3;úľava;s úľavou, ale ešte zadýchaný;Kŕče, ktoré neprestávajú (K);po dobrej rade: „Keď sa prestane triasť, otočte ho na bok.“;Prestal sa triasť, je na boku a dýcha.;Kŕče, ktoré neprestávajú;žena
+v1fh9ueb.mp3;úľava;s úľavou, ale ešte zadýchaný;Kŕče, ktoré neprestávajú (K);po dobrej rade: „Pozrite sa na hodinky a merajte, ako dlho záchvat trvá.“;Trvá to už jedenásť minút…;Kŕče, ktoré neprestávajú;žena
 vajkc8x.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kŕče, ktoré neprestávajú (K);po zlej rade: „Vložte mu do úst lyžicu, nech si neodhryzne jazyk.“;Strčila som mu lyžicu… vylomil si zub a krváca!;Kŕče, ktoré neprestávajú;žena
 vrdgfrp.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kŕče, ktoré neprestávajú (K);po zlej rade: „Pevne ho držte, nech sa netrasie.“;Držíme ho… vykĺbil si rameno!;Kŕče, ktoré neprestávajú;žena
 vg2nf3w.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Horúčkové kŕče (N);čo sa stalo;Dcérka má horúčku a zrazu sa začala triasť a prevracať oči!;Horúčkové kŕče;žena
@@ -355,7 +370,7 @@ vribqgl.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zakliesnený vod
 v18oy407.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zakliesnený vodič (N);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Vodič prestáva reagovať a je celý bledý!;Zakliesnený vodič;
 vu4iem.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);čo sa stalo;Auto zrazilo chodkyňu na priechode, leží na ceste!;Zrazený chodec;muž
 vk11m78.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Je pri vedomí? Reaguje?“;Neodpovedá, len tak stoná.;Zrazený chodec;muž
-v10spm3v.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha, ale divne, chrčí.;Zrazený chodec;muž
+v7z8bx1.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha rýchlo a nahlas.;Zrazený chodec;muž
 v1k8ofxi.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Auto ju zrazilo asi päťdesiatkou, odletela niekoľko metrov.;Zrazený chodec;muž
 vft8ced.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Krváca? Odkiaľ a ako veľmi?“;Krváca z hlavy.;*;
 v1b5ppkm.mp3;šok;otupený, pomalý, neveriacky, s prestávkami;Zrazený chodec (K);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Leží v jazdnom pruhu, autá ju obchádzajú.;Zrazený chodec;muž
@@ -497,7 +512,7 @@ vkm7qol.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Kolaps na 
 vlmvs0r.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Kolaps na túre (K);doplňujúca otázka: „Ako ďaleko ste od chaty alebo cesty?“;Asi hodinu chôdze od chaty.;Kolaps na túre;
 v1ehdkkd.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (K);po dobrej rade: „Nech si sadne a nehýbe sa.“;Sedí na batohu opretý o strom.;Kolaps na túre;
 v1t84hfm.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (K);po dobrej rade: „Oblečte ho do suchého a prikryte, nech neprechladne.“;Má na sebe moju bundu a izolačnú fóliu.;Kolaps na túre;
-vh3pl98.mp3;úľava;s úľavou, ale ešte zadýchaný;Kolaps na túre (K);po dobrej rade: „Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.“;Mám acylpyrín v lekárničke, rozhrýzol ho.;Kolaps na túre;
+vrd3xt.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kolaps na túre (K);po zlej rade: „Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.“;Rozhrýzol acylpyrín… teraz je mu ešte horšie.;Kolaps na túre;
 vc5idiy.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kolaps na túre (K);po zlej rade: „Nech pomaly pokračuje k najbližšej chate.“;Šli sme pár metrov a zrútil sa!;Kolaps na túre;
 vo77a61.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Kolaps na túre (K);po zlej rade: „Dajte mu glg slivovice na zahriatie.“;Napil sa… teraz sa trasie ešte viac.;Kolaps na túre;
 v1n9xid2.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Kolaps na túre (K);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je mu horšie, zrútil sa na zem!;Kolaps na túre;
@@ -648,13 +663,13 @@ v1hs6ta8.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – zástava s
 v177k7p2.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – zástava srdca;po dobrej rade: „Stláčajte hrudník v strede, rýchlo a hlboko – 100 až 120-krát za minútu.“;Stláčam… raz, dva, tri, štyri… ťažké to je, ale idem ďalej.;*;
 vhj6zgb.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – zástava srdca;po zlej rade: „Posaďte ho a opierajte, nech sa preberie.“;Posadili sme ho… hlava mu padá, stále nedýcha.;*;
 v159l80p.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – zástava srdca;po zlej rade: „Najprv mu aspoň minútu hľadajte pulz.“;Hľadám pulz… nič necítim, čo mám robiť?;*;
-v16cwala.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – bezvedomie;opakovaný hovor: čo sa zmenilo;Pred chvíľou prestal odpovedať. Dýcha, ale chrčí a leží na chrbte.;*;
-vhnu7ri.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – bezvedomie;otázka: „Dýcha pravidelne?“;Dýcha, ale chrčí, akoby mal niečo v krku.;*;
+v1nf9mp4.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – bezvedomie;opakovaný hovor: čo sa zmenilo;Pred chvíľou prestal odpovedať. Dýcha, ale chrápe a leží na chrbte.;*;
+vayjl4a.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – bezvedomie;otázka: „Dýcha pravidelne?“;Dýcha pravidelne, ale chrápe, akoby mal niečo v krku.;*;
 v1dxlt3i.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – bezvedomie;otázka: „Kedy naposledy jedol?“;Neviem, asi ráno…;*;
-v1ius4vp.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bezvedomie;po dobrej rade: „Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.“;Otočili sme ho na bok… prestal chrčať, dýcha ľahšie.;*;
+v1gerecd.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bezvedomie;po dobrej rade: „Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.“;Otočili sme ho na bok… prestal chrápať, dýcha ľahšie.;*;
 v50ntko.mp3;úľava;s úľavou, ale ešte zadýchaný;Zhoršenie – bezvedomie;po dobrej rade: „Ostaňte pri ňom a sledujte dych – keby prestal dýchať, hneď mi to povedzte.“;Som pri ňom, dýcha.;*;
-v5faymz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Dajte mu napiť, nech sa preberie.“;Naliali sme mu vodu… zakuckal sa a chrčí ešte viac!;*;
-v1d6rjzz.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Podložte mu hlavu vysokým vankúšom.“;Dali sme mu dva vankúše… chrčí ešte viac!;*;
+vz8gb6l.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Dajte mu napiť, nech sa preberie.“;Naliali sme mu vodu… zakuckal sa a chrápe ešte viac!;*;
+v1n8dgpt.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Zhoršenie – bezvedomie;po zlej rade: „Podložte mu hlavu vysokým vankúšom.“;Dali sme mu dva vankúše… chrápe ešte viac!;*;
 v1v97df0.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Zhoršenie – krvácanie po pôrode;opakovaný hovor: čo sa zmenilo;Dieťa sa narodilo a plače, ale mama veľmi krváca a krv sa nezastavuje.;*;
 v3b2565.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Zhoršenie – krvácanie po pôrode;otázka: „Vyšla už placenta?“;Neviem… asi ešte nie.;*;
 vt01ztn.mp3;rozčúlenie;podráždený, nahnevaný, zvýšený hlas;Zhoršenie – krvácanie po pôrode;otázka: „Ako sa bude dieťa volať?“;Ešte sme nevybrali…;*;

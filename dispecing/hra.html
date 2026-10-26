@@ -796,7 +796,7 @@ const isIzs = u => !!KINDS[u.kind].izs;
 const IZS_KINDS=['HAS','PZ','MSP'];
 const IZS_L={HAS:'Hasiči (HaZZ)', PZ:'Polícia (PZ)', MSP:'Mestská polícia (MsP)'};
 const IZS_WHEN={HAS:'vyslobodenie z auta, otvorenie bytu, ťažký pacient, oheň, voda, plyn',
-  PZ:'agresia, nútený prevoz, opitý maloletý, kolaps či zástava na verejnosti, nehoda so zraneným',
+  PZ:'dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, agresia, nútený prevoz, opitý maloletý',
   MSP:'preverenie, keď volajúci neostane na mieste'};
 const IZS_MISS={HAS:'Potrebujeme hasičov – bez nich sa k pacientovi nedostaneme!', PZ:'Potrebujeme políciu – situácia je nebezpečná!', MSP:'Potrebujeme mestskú políciu na preverenie a súčinnosť.'};
 const STATUS={1:'Voľná',2:'Na základni',3:'Výjazd',4:'Na mieste',5:'Transport',6:'V nemocnici'};
@@ -883,7 +883,7 @@ const LV_PRIO={K:1, N:2, M:3, O:4};
 const LV_COL={K:'var(--p1)', N:'var(--p2)', M:'#3ddc97', O:'#5aa9ff'};
 /* stromy kategórií: kritériá stupňov naliehavosti (zjednodušené, vlastnými slovami) */
 const TREE={
-  nzo:{K:['Nereaguje a nedýcha normálne – aj lapavé, chrčivé dychy sú zástava','Hneď TANR, najbližšia posádka a lekár'],
+  nzo:{K:['Nereaguje a nedýcha normálne – aj občasné lapavé dychy sú zástava','Hneď TANR, najbližšia posádka a lekár'],
     O:['Nedýcha a má isté známky smrti: stuhnutý, studený, fialové škvrny'], note:'Ak pacient dýcha, vyber kategóriu Porucha vedomia.'},
   vedomie:{K:['Bezvedomie – nereaguje, ale dýcha','Diabetik v bezvedomí (veľmi nízky alebo vysoký cukor)'],
     N:['Spavý, zmätený, reaguje len na oslovenie alebo bolesť','Po kolapse ostal spavý alebo je nový zmätok','Kolaps u dieťaťa, seniora alebo pri srdcových ťažkostiach'],
@@ -960,14 +960,16 @@ const TPL=[
   {cat:'nzo',lvl:'K',w:6,title:'Zástava srdca',arrest:1,pt:'cardio',tr:1,work:10,place:'town',texts:['Manžel spadol na zem a nehýbe sa! Bývame {loc}.','Otec sa zrútil v záhrade a nereaguje!'],
     v:{ved:'Nereaguje! Ani keď ním trasiem a kričím na neho!', dych:'Neviem… len občas tak divne zalapá, ako keby chrápal.', obeh:'Je sivý, pery má fialové.', uraz:'Nie, len sa zrútil.', miesto:'Leží na zemi v obývačke, dvere sú otvorené.'}},
   {cat:'nzo',lvl:'K',w:3,title:'Zástava srdca na ulici',arrest:1,izs:['PZ'],pt:'cardio',tr:1,work:10,place:'town',texts:['Na zastávke sa zrútil nejaký pán a leží na zemi!','Pri obchode spadol muž a nikto nevie, čo s ním!'],
-    v:{ved:'Nereaguje, pozerá do prázdna.', dych:'Nedýcha… teda len raz za čas tak zachrčí.', obeh:'Je celý sivý.', uraz:'Nie, sám od seba sa zvalil.', krv:'Trochu z hlavy, ako padol na chodník.', miesto:'Sme na ulici, je tu veľa ľudí. Kúsok odtiaľto je lekáreň.'}},
-  {cat:'nzo',lvl:'K',alt:['uraz'],w:2,title:'Vytiahnutý z vody',arrest:1,izs:['PZ'],pt:'gen',tr:1,work:10,place:'lake',texts:['Vytiahli sme z vody chlapa, nehýbe sa!'],
+    v:{ved:'Nereaguje, pozerá do prázdna.', dych:'Nedýcha… teda len raz za čas tak zalapá po dychu.', obeh:'Je celý sivý.', uraz:'Nie, sám od seba sa zvalil.', krv:'Trochu z hlavy, ako padol na chodník.', miesto:'Sme na ulici, je tu veľa ľudí. Kúsok odtiaľto je lekáreň.'}},
+  {cat:'nzo',lvl:'K',alt:['uraz'],w:2,title:'Vytiahnutý z vody',arrest:1,cpr:'drown',izs:['PZ'],pt:'gen',tr:1,work:10,place:'lake',texts:['Vytiahli sme z vody chlapa, nehýbe sa!'],
     v:{ved:'Nereaguje, je studený a mokrý.', dych:'Nedýcha, z úst mu tečie voda!', obeh:'Je modrý.', uraz:'Skočil do vody a už sa nevynoril, vytiahli sme ho po pár minútach.', miesto:'Leží na móle, k vode sa dá prísť autom.'}},
+  {cat:'nzo',lvl:'K',w:1,title:'Dojča nedýcha',arrest:1,cpr:'infant',pt:'child',tr:1,work:10,place:'town',texts:['Synček v postieľke nedýcha, je celý modrý!'],
+    v:{ved:'Nereaguje, je úplne ochabnutý!', dych:'Nedýcha… nevidím, že by dýchal!', obeh:'Je modrý až sivý.', uraz:'Nie, spal v postieľke.', miesto:'Sme v detskej izbe, som s ním sama.'}},
   {cat:'nzo',lvl:'O',o:['smrt'],w:2,title:'Isté známky smrti',place:'town',texts:['Dobrý deň… starý otec ráno nevstal. Myslím, že už nežije.'],
     v:{ved:'Nereaguje. Je studený.', dych:'Nedýcha. Je celý stuhnutý a na chrbte má fialové škvrny.', obeh:'Je bledý a studený, má fialové fľaky.', uraz:'Nie, ležal v posteli, bol dlho chorý.', miesto:'Je v posteli, som tu s babkou.'}},
   /* porucha vedomia */
   {cat:'vedomie',lvl:'K',w:4,title:'Bezvedomie',tr:1,work:9,place:'town',texts:['Suseda leží na chodbe a nedá sa prebrať!'],
-    v:{ved:'Nereaguje, ani keď na ňu kričím a zatrasiem ňou.', dych:'Dýcha, ale chrčí.', obeh:'Je bledá.', uraz:'Neviem, našla som ju tak.', krv:'Nevidím krv.', miesto:'Leží na chodbe pred bytom na treťom poschodí, výťah ide.'}},
+    v:{ved:'Nereaguje, ani keď na ňu kričím a zatrasiem ňou.', dych:'Dýcha pravidelne, len trochu chrápe.', obeh:'Je bledá.', uraz:'Neviem, našla som ju tak.', krv:'Nevidím krv.', miesto:'Leží na chodbe pred bytom na treťom poschodí, výťah ide.'}},
   {cat:'vedomie',alt:['dm'],lvl:'K',w:2,title:'Diabetik v bezvedomí',tr:1,work:8,place:'town',texts:['Manžel je cukrovkár, nedá sa prebrať a je celý spotený!'],
     v:{ved:'Nereaguje, ani keď ho štípnem.', dych:'Dýcha.', obeh:'Je bledý a úplne mokrý od potu.'}},
   {cat:'vedomie',lvl:'N',w:4,title:'Kolaps seniorky',tr:1,work:8,place:'town',texts:['Mama odpadla pri obede. Prebrala sa, ale je nejaká zmätená.'],
@@ -976,7 +978,7 @@ const TPL=[
     v:{ved:'Áno, už sa prebrala a rozpráva normálne.', obeh:'Je trochu bledá.', uraz:'Nie, chytili sme ju.', miesto:'Sedí vonku pred kostolom.'}},
   {cat:'vedomie',alt:['neuro','kardio'],lvl:'O',o:['rada','116117'],self:1,w:3,title:'Mdloba, ktorá prešla',place:'town',texts:['Dobrý deň, pred chvíľou sa mi zatmelo pred očami a skoro som odpadla. Už je to dobré.'],
     v:{ved:'Áno, už je mi dobre.', obeh:'Už nie som bledá, sestra hovorí, že vyzerám normálne.', uraz:'Nie, sadla som si.'}},
-  {cat:'vedomie',alt:['intox'],lvl:'M',w:2,title:'Ležiaci muž, volajúci odchádza',izs:['MSP'],tr:1,work:6,place:'town',texts:['Pri obchodnom centre leží nejaký chlap… ja už musím ísť, nemám čas.'],
+  {cat:'vedomie',alt:['intox'],lvl:'M',w:2,title:'Ležiaci muž, volajúci odchádza',izs:['MSP'],izsOk:['PZ'],tr:1,work:6,place:'town',texts:['Pri obchodnom centre leží nejaký chlap… ja už musím ísť, nemám čas.'],
     v:{ved:'Neviem, asi spí. Nešiel som k nemu.', dych:'To neviem.', obeh:'Neviem, nevidel som mu do tváre.', uraz:'Neviem.', krv:'Nevidel som.', miesto:'Ja tam už nie som, nebudem čakať.'}},
   /* dýchanie */
   {cat:'dych',lvl:'K',w:3,title:'Ťažká dýchavica',tr:1,work:9,place:'town',texts:['Otec sa dusí, nemôže sa nadýchnuť!'],
@@ -1013,13 +1015,15 @@ const TPL=[
   {cat:'kardio',lvl:'N',self:1,w:3,title:'Búšenie srdca',pt:'cardio',tr:1,work:7,place:'town',texts:['Srdce mi strašne rýchlo búši, tlakomer ukazuje pulz 180.'],
     v:{dych:'Trochu sa zadýchavam.', obeh:'Asi som trochu bledý.'}},
   {cat:'kardio',lvl:'M',self:1,w:2,title:'Nepravidelný pulz',tr:1,work:6,place:'town',texts:['Od rána mi srdce bije nepravidelne a som strašne unavený.']},
-  {cat:'kardio',lvl:'O',o:['rada','116117'],self:1,w:4,title:'Vysoký tlak bez ťažkostí',place:'town',texts:['Namerala som si tlak 175 na 95. Je to nebezpečné?'],
-    v:{ved:'Áno, je mi dobre, len ma to vystrašilo.'}},
+  {cat:'kardio',lvl:'O',o:['rada','116117'],self:1,w:3,title:'Zabudnutá tabletka na tlak',place:'town',texts:['Zabudla som si ráno vziať tabletku na tlak. Mám si ju vziať teraz? Inak mi nič nie je.'],
+    v:{ved:'Áno, je mi dobre.'}},
+  {cat:'kardio',lvl:'M',self:1,w:3,title:'Vysoký tlak',tr:1,work:6,place:'town',texts:['Namerala som si tlak 180 na 100 a trochu ma bolí hlava.'],
+    v:{ved:'Áno, som v poriadku, len ma bolí hlava.', obeh:'Som trochu červená v tvári.'}},
   /* neurológia a kŕče */
   {cat:'neuro',lvl:'N',w:5,title:'Mozgová príhoda',pt:'neuro',tr:1,work:8,place:'town',texts:['Mame zrazu ovisol kútik úst a nevie poriadne hovoriť!','Manželka nevie zdvihnúť pravú ruku a motá sa jej reč.'],
     v:{ved:'Je pri vedomí, ale rozpráva nezrozumiteľne.'}},
   {cat:'neuro',alt:['vedomie'],lvl:'K',w:2,title:'Kŕče, ktoré neprestávajú',tr:1,work:9,place:'town',texts:['Syn kŕčuje už desať minút a neprestáva!'],
-    v:{ved:'Nereaguje, stále sa trasie.', dych:'Chrčí, má penu pri ústach.', obeh:'Okolo úst je modrastý.', uraz:'Keď padal, narazil si hlavu o stôl.', krv:'Trochu z jazyka.', miesto:'Leží na zemi v izbe.'}},
+    v:{ved:'Nereaguje, stále sa trasie.', dych:'Dýcha nepravidelne, má penu pri ústach.', obeh:'Okolo úst je modrastý.', uraz:'Keď padal, narazil si hlavu o stôl.', krv:'Trochu z jazyka.', miesto:'Leží na zemi v izbe.'}},
   {cat:'neuro',lvl:'N',w:3,title:'Horúčkové kŕče',pt:'child',tr:1,work:7,place:'town',texts:['Dcérka má horúčku a zrazu sa začala triasť a prevracať oči!'],
     v:{ved:'Nereaguje, trasie sa.', dych:'Dýcha, ale rýchlo.', obeh:'Je celá horúca, okolo úst trochu modrá.'}},
   {cat:'neuro',alt:['vedomie'],lvl:'O',o:['rada'],w:2,title:'Epileptik po záchvate',place:'town',texts:['Brat je epileptik, mal záchvat, ale už sa preberá. Som pri ňom.'],
@@ -1051,7 +1055,7 @@ const TPL=[
   {cat:'dn',alt:['uraz'],lvl:'N',w:4,title:'Zakliesnený vodič',izs:['HAS','PZ'],pt:'trauma',tr:1,work:14,place:'road',texts:['Osobné auto narazilo do stromu {loc}, vodič je zakliesnený!'],
     v:{ved:'Je pri vedomí, stoná.', obeh:'Je bledý.', uraz:'Narazil do stromu, auto je celé pokrčené a nevie z neho vyliezť.', krv:'Krváca z nohy, ale nie veľa.', miesto:'Auto je v priekope, dvere sa nedajú otvoriť. Z motora sa trochu dymí.'}},
   {cat:'dn',alt:['uraz'],lvl:'K',w:3,title:'Zrazený chodec',izs:['PZ'],pt:'trauma',tr:1,work:10,place:'town',texts:['Auto zrazilo chodkyňu na priechode, leží na ceste!'],
-    v:{ved:'Neodpovedá, len tak stoná.', dych:'Dýcha, ale divne, chrčí.', obeh:'Je bledá.', uraz:'Auto ju zrazilo asi päťdesiatkou, odletela niekoľko metrov.', krv:'Krváca z hlavy.', miesto:'Leží v jazdnom pruhu, autá ju obchádzajú.'}},
+    v:{ved:'Neodpovedá, len tak stoná.', dych:'Dýcha rýchlo a nahlas.', obeh:'Je bledá.', uraz:'Auto ju zrazilo asi päťdesiatkou, odletela niekoľko metrov.', krv:'Krváca z hlavy.', miesto:'Leží v jazdnom pruhu, autá ju obchádzajú.'}},
   {cat:'dn',alt:['uraz'],lvl:'N',w:3,title:'Nehoda motorkára',izs:['PZ'],pt:'trauma',heli:'trauma',tr:1,work:10,place:'road',texts:['Motorkár vyletel zo zákruty {loc}!'],
     v:{ved:'Je pri vedomí, má prilbu, hovorí, že ho bolí noha.', obeh:'Je bledý.', uraz:'Išiel rýchlo, vyletel zo zákruty a narazil do zvodidiel.', krv:'Nohu má od krvi, nohavice sú roztrhané.', miesto:'Leží za zvodidlami pri ceste.'}},
   {cat:'dn',alt:['uraz'],lvl:'M',w:3,title:'Ťukanec s bolesťou krku',izs:['PZ'],tr:1,work:6,place:'road',texts:['Ťukli sme do seba {loc}, vodičku z druhého auta bolí krk.'],
@@ -1182,7 +1186,7 @@ const FA={
     ['Preneste ho do tieňa alebo dnu.',0,'Niesli sme ho… stratil vedomie!','zraneného po páde sa presúva iba vtedy, keď mu hrozí bezprostredné nebezpečenstvo.']],
   'Bolesť na hrudi':[
     ['Nech sedí v pohodlnej polohe a vôbec sa nenamáha.',1,'Sedí v kresle a nehýbe sa.'],
-    ['Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.',1,'Rozhrýzol acylpyrín, alergie nemá.'],
+    ['Ak nie je alergický na aspirín, nech jednu tabletu rozhryzie.',0,'Rozhrýzol acylpyrín… a teraz ho páli žalúdok.','operátor po telefóne lieky neodporúča – o liečbe rozhodne posádka.'],
     ['Pripravte jeho lieky a odomknite dvere pre záchranku.',1,'Lieky mám v ruke, dvere sú otvorené.'],
     ['Nech sa prejde, možno to rozchodí.',0,'Prešiel pár krokov a oprel sa o stenu, je celý sivý!','námaha pri infarkte zväčšuje poškodenie srdca – nech sedí v pokoji.'],
     ['Odvezte ho radšej sami autom do nemocnice.',0,'Viedli sme ho do auta… v aute skolaboval!','srdce môže kedykoľvek zlyhať a v aute mu nikto nepomôže – nech čaká na záchranku.']],
@@ -1193,6 +1197,7 @@ const FA={
     ['Dajte jej aspirín, rozriedi krv.',0,'Dal som jej tabletku… zakuckala sa, nevie dobre prehĺtať!','pri porážke nesmie dostať nič ústami, a ak krváca do mozgu, aspirín to zhorší.'],
     ['Nechajte ju vyspať, ráno to bude lepšie.',0,'Zaspala… a ťažko ju prebúdzam!','pri mozgovej príhode rozhoduje čas – liečba musí začať čo najskôr.']],
   'Dusenie':[
+    ['Ak vie kašľať, nech silno kašle – nič iné nerobte.',1,'Nevie kašľať, len chrčí… čo mám robiť?'],
     ['Ak nevie kašľať, predkloňte ho a 5-krát ho udrite medzi lopatky.',1,'Udieram ho… niečo sa pohlo, ale stále chrčí!'],
     ['Keď to nepomôže, 5-krát mu stlačte brucho pod rebrami dnu a hore.',1,'Stláčam… vyletelo to von, kašle!'],
     ['Keby stratil vedomie, položte ho na zem a začnite stláčať hrudník.',1,'Je pri vedomí, kašle a dýcha.'],
@@ -1276,7 +1281,7 @@ const FA={
   'Kolaps na túre':[
     ['Nech si sadne a nehýbe sa.',1,'Sedí na batohu opretý o strom.'],
     ['Oblečte ho do suchého a prikryte, nech neprechladne.',1,'Má na sebe moju bundu a izolačnú fóliu.'],
-    ['Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.',1,'Mám acylpyrín v lekárničke, rozhrýzol ho.'],
+    ['Ak nie je alergický na aspirín a máte ho, nech jednu tabletu rozhryzie.',0,'Rozhrýzol acylpyrín… teraz je mu ešte horšie.','operátor po telefóne lieky neodporúča – o liečbe rozhodne posádka.'],
     ['Nech pomaly pokračuje k najbližšej chate.',0,'Šli sme pár metrov a zrútil sa!','námaha pri bolesti na hrudi môže spôsobiť zástavu srdca – nech čaká na mieste.'],
     ['Dajte mu glg slivovice na zahriatie.',0,'Napil sa… teraz sa trasie ešte viac.','alkohol rozšíri cievy, telo rýchlejšie stráca teplo a srdce sa viac zaťaží.']],
   'Zranený turista':[
@@ -1340,10 +1345,10 @@ const FQ={
 /* telefonické pokyny pre nové situácie linky 155 */
 Object.assign(FA, {
   'Bezvedomie':[
-    ['Otočte ju na bok do stabilizovanej polohy a jemne jej zakloňte hlavu.',1,'Otočila som ju na bok… prestala chrčať, dýcha ľahšie.'],
+    ['Otočte ju na bok do stabilizovanej polohy a jemne jej zakloňte hlavu.',1,'Otočila som ju na bok… prestala chrápať, dýcha ľahšie.'],
     ['Ostaňte pri nej a sledujte dych – keby prestala dýchať, hneď mi to povedzte.',1,'Som pri nej, dýcha.'],
-    ['Dajte jej napiť, nech sa preberie.',0,'Naliala som jej vodu do úst… zakuckala sa a chrčí ešte viac!','v bezvedomí nevie prehĺtať a voda jej zatečie do dýchacích ciest.'],
-    ['Podložte jej hlavu vysokým vankúšom.',0,'Dala som jej pod hlavu dva vankúše… chrčí ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a otočiť na bok.']],
+    ['Dajte jej napiť, nech sa preberie.',0,'Naliala som jej vodu do úst… zakuckala sa a chrápe ešte viac!','v bezvedomí nevie prehĺtať a voda jej zatečie do dýchacích ciest.'],
+    ['Podložte jej hlavu vysokým vankúšom.',0,'Dala som jej pod hlavu dva vankúše… chrápe ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a otočiť na bok.']],
   'Diabetik v bezvedomí':[
     ['Otočte ho na bok a jemne mu zakloňte hlavu.',1,'Leží na boku, dýcha.'],
     ['Pripravte jeho glukomer a lieky pre záchranárov.',1,'Glukomer aj inzulín mám pri sebe.'],
@@ -1400,6 +1405,7 @@ Object.assign(FA, {
     ['Odtiahnite od neho nábytok a predmety, o ktoré sa môže udrieť.',1,'Odtiahla som stôl, leží na koberci.'],
     ['Nič mu nevkladajte do úst a nedržte ho nasilu.',1,'Dobre, nechávam ho tak.'],
     ['Keď sa prestane triasť, otočte ho na bok.',1,'Prestal sa triasť, je na boku a dýcha.'],
+    ['Pozrite sa na hodinky a merajte, ako dlho záchvat trvá.',1,'Trvá to už jedenásť minút…'],
     ['Vložte mu do úst lyžicu, nech si neodhryzne jazyk.',0,'Strčila som mu lyžicu… vylomil si zub a krváca!','do úst sa pri kŕčoch nič nevkladá – hrozí poranenie a vdýchnutie.'],
     ['Pevne ho držte, nech sa netrasie.',0,'Držíme ho… vykĺbil si rameno!','násilné držanie kŕče nezastaví a hrozí poranenie.']],
   'Horúčkové kŕče':[
@@ -1485,16 +1491,22 @@ const FA_AR=[
   ['Ak je vás viac, každé dve minúty sa pri stláčaní vystriedajte.',1,'Striedame sa so synom, stláčame ďalej.'],
   ['Prestaňte na chvíľu stláčať a skúste mu nahmatať pulz.',0,'Prestala som… nič necítim, čo teraz?','každé prerušenie stláčania znižuje šancu na prežitie – stláča sa bez prestávky, kým nepríde posádka.'],
   ['Dajte mu napiť vody, nech sa preberie.',0,'Naliali sme mu do úst vodu… teraz mu bublá v hrdle!','človek bez vedomia nevie prehĺtať a voda mu zatečie do dýchacích ciest.']];
-const faOf = inc => inc && inc.tpl && inc.tpl.arrest ? FA_AR : FA[inc.title];
+const FA_AR_INF=[
+  ['Nech niekto otvorí dvere a čaká na záchranku pred domom.',1,'Sused beží dole otvoriť.'],
+  ['Neprestávajte, kým nepríde posádka, aj keď sa vám zdá, že to nepomáha.',1,'Stláčam a dýcham ďalej…'],
+  ['Zatraste ním, aby sa prebral.',0,'Zatriasla som ním… stále nedýcha!','trasenie dojčaťa je nebezpečné a stráca čas – treba hneď stláčať a vdychovať.'],
+  ['Dajte mu napiť, nech sa preberie.',0,'Nalievam mu vodu… vyteká mu z úst!','dojča bez vedomia nevie prehĺtať – voda mu zatečie do dýchacích ciest.']];
+const faOf = inc => inc && inc.tpl && inc.tpl.arrest ? (inc.tpl.cpr==='infant' ? FA_AR_INF : FA_AR) : FA[inc.title];
 /* doplňujúce otázky k novým situáciám: [otázka, odpoveď, dôležitá pre posádku?] */
 Object.assign(FQ, {
   'Zástava srdca na ulici':[['Je niekde nablízku defibrilátor (AED)?','V lekárni oproti majú na stene AED!',1],['Vie tam niekto oživovať?','Je tu jedna pani, hovorí, že je zdravotná sestra.',1]],
+  'Dojča nedýcha':[['Koľko má mesiacov?','Štyri mesiace.',1],['Kedy ste ho videli naposledy v poriadku?','Pred hodinou, keď som ho uložila spať.',1]],
   'Vytiahnutý z vody':[['Ako dlho bol pod vodou?','Asi tri, štyri minúty.',1],['Bola voda studená?','Voda je ešte dosť studená.',1]],
   'Isté známky smrti':[['Kedy ste ho naposledy videli živého?','Večer o desiatej, išiel spať.',1],['Liečil sa u lekára?','Áno, mal rakovinu, chodila k nemu doktorka.',1]],
   'Bezvedomie':[['Ako dlho tam môže ležať?','Neviem, ráno bola ešte v poriadku.',1],['Má nejakú chorobu, napríklad cukrovku?','Viem, že má cukrovku.',1]],
   'Diabetik v bezvedomí':[['Pichal si dnes inzulín a jedol?','Ráno si pichol a nejedol, nemal chuť.',1],['Máte glukomer?','Áno, ukazuje 1,8.',1]],
   'Kolaps seniorky':[['Koľko má rokov?','Osemdesiatdva.',1],['Berie lieky na srdce alebo na riedenie krvi?','Áno, Warfarín a niečo na tlak.',1]],
-  'Krátky kolaps':[['Koľko má rokov a je zdravá?','Šestnásť, je zdravá.',1],['Jedla dnes niečo?','Nie, od rána nič.',1]],
+  'Krátky kolaps':[['Koľko má rokov a je zdravá?','Dvadsaťpäť, je zdravá.',1],['Jedla dnes niečo?','Nie, od rána nič.',1]],
   'Mdloba, ktorá prešla':[['Máte bolesť na hrudi alebo búšenie srdca?','Nie, nič také.',1],['Stalo sa vám to už niekedy?','Áno, keď dlho stojím v teple.',1]],
   'Ležiaci muž, volajúci odchádza':[['Môžete pri ňom počkať, kým niekto príde?','Nie, ponáhľam sa. Zbohom.',1],['Dýcha? Videli ste, či sa hýbe?','Neviem, nešiel som k nemu.',1]],
   'Ťažká dýchavica':[['Má chronickú chorobu pľúc alebo astmu?','Áno, roky má CHOCHP, je na kyslíku.',1],['Ako dlho to trvá?','Zhoršuje sa to od rána.',1]],
@@ -1513,7 +1525,8 @@ Object.assign(FQ, {
   'Výboje defibrilátora':[['Koľkokrát ho to kopla?','Trikrát za desať minút.',1],['Stratil vedomie?','Na chvíľu áno, pri prvom výboji.',1]],
   'Búšenie srdca':[['Bolí vás na hrudi alebo ste odpadli?','Nie, len búši a som zadýchaný.',1],['Mali ste to už niekedy?','Áno, raz, v nemocnici to zastavili liekom.',1]],
   'Nepravidelný pulz':[['Ste zadýchaný alebo vás bolí na hrudi?','Nie, len som unavený.',1],['Beriete lieky na srdce?','Áno, na tlak.',1]],
-  'Vysoký tlak bez ťažkostí':[['Bolí vás hlava alebo hrudník, vidíte zle?','Nie, nič také.',1],['Beriete lieky na tlak?','Áno, ale dnes som ich zabudla.',1]],
+  'Zabudnutá tabletka na tlak':[['Bolí vás hlava alebo hrudník, vidíte zle?','Nie, nič také.',1],['Koľko vám teraz ukazuje tlakomer?','140 na 85.',1]],
+  'Vysoký tlak':[['Bolí vás na hrudi, máte slabú ruku, poruchu reči alebo vidíte zle?','Nie, len ma trochu bolí hlava.',1],['Beriete lieky na tlak?','Áno, ale dnes som ich zabudla.',1]],
   'Kŕče, ktoré neprestávajú':[['Je epileptik a berie lieky?','Áno, ale lieky mu došli pred týždňom.',1],['Prebral sa medzi záchvatmi?','Nie, toto je už druhý a medzi nimi sa neprebral.',1]],
   'Horúčkové kŕče':[['Koľko má rokov?','Dva roky.',1],['Ako dlho kŕče trvajú?','Asi dve minúty.',1]],
   'Epileptik po záchvate':[['Je to jeho bežný záchvat?','Áno, má ich tak raz za mesiac.',1],['Poranil sa?','Nie, nič nevidím.',1]],
@@ -1571,12 +1584,12 @@ const FQ_PRANK=['Hehe… to je jedno.','Ehm… neviem. Haha.','Čo? Aha… áno,
 const ESC_ST={
   arrest:{change:'Odpadol na zem a nedýcha! Len občas zalapá po dychu…',
     q:[['Reaguje, keď ním zatrasiete a hlasno ho oslovíte?','Nie, vôbec nereaguje!',1],['Aké lieky berie?','Neviem… asi niečo na tlak.',0]], fa:'Zástava srdca'},
-  unconscious:{change:'Pred chvíľou prestal odpovedať. Dýcha, ale chrčí a leží na chrbte.',
-    q:[['Dýcha pravidelne?','Dýcha, ale chrčí, akoby mal niečo v krku.',1],['Kedy naposledy jedol?','Neviem, asi ráno…',0]],
-    fa:[['Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.',1,'Otočili sme ho na bok… prestal chrčať, dýcha ľahšie.'],
+  unconscious:{change:'Pred chvíľou prestal odpovedať. Dýcha, ale chrápe a leží na chrbte.',
+    q:[['Dýcha pravidelne?','Dýcha pravidelne, ale chrápe, akoby mal niečo v krku.',1],['Kedy naposledy jedol?','Neviem, asi ráno…',0]],
+    fa:[['Otočte ho na bok do stabilizovanej polohy a jemne mu zakloňte hlavu.',1,'Otočili sme ho na bok… prestal chrápať, dýcha ľahšie.'],
       ['Ostaňte pri ňom a sledujte dych – keby prestal dýchať, hneď mi to povedzte.',1,'Som pri ňom, dýcha.'],
-      ['Dajte mu napiť, nech sa preberie.',0,'Naliali sme mu vodu… zakuckal sa a chrčí ešte viac!','v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
-      ['Podložte mu hlavu vysokým vankúšom.',0,'Dali sme mu dva vankúše… chrčí ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a pacienta otočiť na bok.']]},
+      ['Dajte mu napiť, nech sa preberie.',0,'Naliali sme mu vodu… zakuckal sa a chrápe ešte viac!','v bezvedomí nevie prehĺtať a voda mu zatečie do dýchacích ciest.'],
+      ['Podložte mu hlavu vysokým vankúšom.',0,'Dali sme mu dva vankúše… chrápe ešte viac!','hlava ohnutá dopredu zatvorí dýchacie cesty – treba ju zakloniť a pacienta otočiť na bok.']]},
   birth:{change:'Dieťa sa narodilo a plače, ale mama veľmi krváca a krv sa nezastavuje.',
     q:[['Vyšla už placenta?','Neviem… asi ešte nie.',1],['Ako sa bude dieťa volať?','Ešte sme nevybrali…',0]],
     fa:[['Priložte dieťa mame k prsníku.',1,'Dieťa saje… mama hovorí, že sa jej brucho sťahuje.'],
@@ -1880,10 +1893,10 @@ const fqEmo = (tpl, x) => !x[2] ? 'hnev' : tpl.prio===1 ? 'strach' : calmer(tplE
 /* text pre nahrávku: bez meniacej sa polohy (tú volajúci povie na otázku „Kde ste?“) */
 const canonText = t => t.replace(/\s*(Bývame|Sme) \{loc\}\./,'').replace(/\s*\{loc\}/,'');
 /* kto volá: žena (Ž) alebo muž (M) – podľa tvarov v jeho vetách; ostatné udalosti môže hovoriť ktokoľvek */
-const CALLER_G={'Zástava srdca':'Ž','Zástava srdca na ulici':'Ž','Vytiahnutý z vody':'Ž','Bolesť na hrudi':'Ž','Tlak na hrudi':'Ž','Pád seniorky':'Ž','Anafylaxia':'M','Mozgová príhoda':'M','Dusenie':'M','Pôrod':'M','Zrazený chodec':'M',
+const CALLER_G={'Dojča nedýcha':'Ž','Zástava srdca':'Ž','Zástava srdca na ulici':'Ž','Vytiahnutý z vody':'Ž','Bolesť na hrudi':'Ž','Tlak na hrudi':'Ž','Pád seniorky':'Ž','Anafylaxia':'M','Mozgová príhoda':'M','Dusenie':'M','Pôrod':'M','Zrazený chodec':'M',
   'Otrava CO':'M','Zranený turista':'M','Vyčerpaná turistka':'M','Bezvedomie':'Ž','Diabetik v bezvedomí':'Ž','Mdloba, ktorá prešla':'Ž','Ležiaci muž, volajúci odchádza':'M','Ťažká dýchavica':'Ž',
   'Kašeľ a teplota':'Ž','Zvracanie krvi':'Ž','Prudká bolesť brucha':'Ž','Studená noha':'Ž','Bolesť chrbta s mravčením':'M','Obličková kolika':'M','Búšenie srdca':'M','Nepravidelný pulz':'M',
-  'Vysoký tlak bez ťažkostí':'Ž','Kŕče, ktoré neprestávajú':'Ž','Horúčkové kŕče':'Ž','Hrozí skokom':'M','Agresívny pacient':'Ž','Úzkosť':'M','Zmätený diabetik':'Ž','Nízky cukor':'M',
+  'Zabudnutá tabletka na tlak':'Ž','Vysoký tlak':'Ž','Kŕče, ktoré neprestávajú':'Ž','Horúčkové kŕče':'Ž','Hrozí skokom':'M','Agresívny pacient':'Ž','Úzkosť':'M','Zmätený diabetik':'Ž','Nízky cukor':'M',
   'Vysoký cukor bez ťažkostí':'M','Rana motorovou pílou':'Ž','Zlomená ruka':'M','Ťažký pacient na zemi':'Ž','Krvácanie v tehotenstve':'Ž','Menštruačné bolesti':'Ž'};
 const REPEAT_OPEN='Haló, to som zase ja, pred chvíľou sme spolu hovorili! ';
 const ST_L={arrest:'zástava srdca', unconscious:'bezvedomie', birth:'krvácanie po pôrode', injured:'ďalší zranený', fire:'oheň sa šíri', tech:'zhoršenie na mieste',
@@ -2876,6 +2889,7 @@ function izsSend(inc, kind){
   setStatus(best,3); routeTo(best, inc.node, {x:inc.x, z:inc.z});
 }
 function izsArrived(u, inc){
+  if(!inc.izsNeed.includes(u.kind) && inc.tpl && (inc.tpl.izsOk||[]).includes(u.kind)){ setStatus(u,4); return; }   // aj táto zložka je v poriadku
   if(!inc.izsNeed.includes(u.kind)){
     if(!quiet()){ G.score-=10; dec('izsx'); radio(u, 'Na mieste. '+KINDS[u.kind].short+' tu nie je potrebná, vraciame sa.', 'bad'); say('#'+inc.no+': '+IZS_L[u.kind]+' tu nebola potrebná – zbytočne viazaná zložka IZS. −10', 'bad'); }
     const i=inc.needs.indexOf(u.kind); if(i>=0) inc.needs.splice(i,1);
@@ -2885,10 +2899,22 @@ function izsArrived(u, inc){
   if(!inc.izsLate.includes(u.kind) && !quiet() && !inc.major){ G.score+=15; G.stats.izsOk=(G.stats.izsOk||0)+1; say('#'+inc.no+': '+IZS_L[u.kind]+' na mieste – súčinnosť si vyžiadal včas. +15', 'good'); }
 }
 /* TANR – telefonicky asistovaná resuscitácia: pokyny a tempo stláčania */
-const TANR_STEPS=[
-  [['Položte ho na chrbát na zem, na tvrdú podložku.',1],['Posaďte ho a podoprite mu hlavu.',0,'pri zástave sa stláča len v ľahu na tvrdej podložke.']],
-  [['Kľaknite si k nemu, dajte dlane na stred hrudníka, jednu na druhú.',1],['Najprv mu hľadajte pulz na krku.',0,'hľadanie pulzu laika len zdržiava – keď nedýcha normálne, stláča sa hneď.']],
-  [['Stláčajte silno a rýchlo, päť až šesť centimetrov. Počítajte so mnou nahlas.',1],['Najprv mu dvakrát vdýchnite do úst.',0,'pri telefonickej resuscitácii dospelého laik iba stláča – vdychy ho zdržia.']]];
+/* TANR podľa skriptu ERC: reproduktor, poloha, ruky, stláčanie; dojča a utopený s úvodnými vdychmi, ak to volajúci vie */
+const TANR_SPK=[['Zapnite reproduktor a dajte telefón vedľa seba na zem.',1],['Držte telefón pri uchu a stláčajte jednou rukou.',0,'s telefónom pri uchu sa nedá stláčať oboma rukami – reproduktor uvoľní ruky.']];
+const TANR_STEPS={
+  adult:[TANR_SPK,
+    [['Položte ho na chrbát na zem, na tvrdú podložku.',1],['Posaďte ho a podoprite mu hlavu.',0,'pri zástave sa stláča len v ľahu na tvrdej podložke.']],
+    [['Kľaknite si k nemu, dajte dlane na stred hrudníka, jednu na druhú.',1],['Najprv mu hľadajte pulz na krku.',0,'hľadanie pulzu laika len zdržiava – keď nedýcha normálne, stláča sa hneď.']],
+    [['Stláčajte silno a rýchlo, päť až šesť centimetrov. Počítajte so mnou nahlas.',1],['Najprv mu dvakrát vdýchnite do úst.',0,'pri telefonickej resuscitácii dospelého laik iba stláča – vdychy ho zdržia.']]],
+  drown:[TANR_SPK,
+    [['Položte ho na chrbát na zem, na tvrdú podložku.',1],['Najprv ho otočte hore nohami, nech z neho vytečie voda.',0,'vylievanie vody stráca drahé minúty – treba hneď oživovať.']],
+    [['Kľaknite si k nemu, dajte dlane na stred hrudníka, jednu na druhú.',1],['Najprv mu hľadajte pulz na krku.',0,'hľadanie pulzu laika len zdržiava – keď nedýcha normálne, stláča sa hneď.']],
+    [['Ak viete dýchať z úst do úst, najprv 5-krát vdýchnite, potom 30 stlačení a 2 vdychy. Ak nie, len silno a rýchlo stláčajte.',1],['Len stláčajte, vdychy pri utopenom nikdy nerobte.',0,'pri utopení chýba kyslík – kto vie dýchať z úst do úst, má začať 5 vdychmi.']]],
+  infant:[TANR_SPK,
+    [['Položte ho na chrbát na stôl alebo na zem.',1],['Držte ho zvislo a potľapkajte ho po chrbte.',0,'dojča bez dychu treba hneď oživovať v ľahu na tvrdej podložke.']],
+    [['Dajte dva prsty do stredu hrudníka, tesne pod spojnicu bradaviek.',1],['Tlačte dlaňou celou váhou.',0,'dojča má krehký hrudník – stláča sa dvoma prstami asi do hĺbky 4 cm.']],
+    [['Ak viete, najprv 5-krát jemne vdýchnite do úst aj nosa naraz, potom 15 stlačení a 2 vdychy. Ak nie, len stláčajte asi 4 cm, rýchlo.',1],['Zatraste ním, nech sa preberie.',0,'trasenie dojčaťa je nebezpečné a stráca čas – treba hneď stláčať.']]]};
+const tanrSteps = inc => TANR_STEPS[(inc.tpl && inc.tpl.cpr) || 'adult'];
 const tanrPending = inc => inc.cat==='nzo' && inc.lvl==='K' && !(inc.cpr && (inc.cpr.at || inc.cpr.skip));
 function endIntakeMaybe(inc){ if(inc.intake && inc.dispAt && !tanrPending(inc)){ inc.intake=false; dirty(); } }
 function tanrStart(inc){
@@ -2898,26 +2924,27 @@ function tanrStart(inc){
     say('#'+inc.no+': volajúci hovorí, že pacient dýcha a hýbe sa. TANR len pri bezvedomí a nenormálnom dýchaní – najprv over vedomie a dýchanie. −15', 'bad');
     endIntakeMaybe(inc); dirty(); return;
   }
-  inc.cpr={step:0, taps:[], at:0, q:0, rate:0, wrong:[], order:TANR_STEPS.map(()=>Math.random()<.5)};
+  const st=tanrSteps(inc);
+  inc.cpr={step:0, n:st.length, taps:[], at:0, q:0, rate:0, wrong:[], order:st.map(()=>Math.random()<.5)};
   dirty();
 }
 function tanrSkip(inc){ if(!inc || inc.cpr) return; inc.cpr={skip:true}; endIntakeMaybe(inc); dirty(); }
 function tanrChoose(inc, i){
-  const p=inc && inc.cpr; if(!p || p.skip || p.step>2 || !running()) return;
-  const opt=TANR_STEPS[p.step][i]; if(!opt) return;
+  const p=inc && inc.cpr; if(!p || p.skip || p.step>=p.n || !running()) return;
+  const opt=tanrSteps(inc)[p.step][i]; if(!opt) return;
   if(opt[1]){ p.step++; SND.blip(); }
   else if(!p.wrong.includes(p.step+':'+i)){ p.wrong.push(p.step+':'+i); G.score-=10; say('Zlý pokyn – '+opt[2]+' −10', 'bad'); SND.bad(); }
   dirty();
 }
 function tanrTap(inc){
-  const p=inc && inc.cpr; if(!p || p.skip || p.step!==3 || inc.metAt || !running()) return;
+  const p=inc && inc.cpr; if(!p || p.skip || p.step!==p.n || inc.metAt || !running()) return;
   const now=performance.now();
   if(p.taps.length && now-p.taps[p.taps.length-1]>2500) p.taps=[];   // dlhá pauza – tempo odznova
   p.taps.push(now);
   if(!p.at){ p.at=G.t; endIntakeMaybe(inc); }
   if(p.taps.length>=9){
     const iv=p.taps.slice(-9), avgMs=(iv[8]-iv[0])/8, rate=Math.round(60000/avgMs);
-    p.rate=rate; p.q = rate>=100 && rate<=120 ? 1 : rate>=90 && rate<=130 ? .7 : .4; p.step=4;
+    p.rate=rate; p.q = rate>=100 && rate<=120 ? 1 : rate>=90 && rate<=130 ? .7 : .4; p.step=p.n+1;
     const sec=Math.round((p.at-inc.callAt)*60);
     let pts = sec<=60 ? 40 : sec<=90 ? 25 : sec<=120 ? 10 : 0;
     if(p.q===1) pts+=10;
@@ -3203,7 +3230,7 @@ function demoBot(){
   for(const inc of G.incs){
     if(inc.lost) inc.lost=null;
     for(const k of inc.izsNeed||[]) izsRequest(inc, k);
-    if(inc.tpl && inc.tpl.arrest && !inc.cpr) inc.cpr={step:4, at:G.t, q:1, taps:[]};
+    if(inc.tpl && inc.tpl.arrest && !inc.cpr) inc.cpr={step:5, n:4, at:G.t, q:1, taps:[]};
     for(const c of recommended(inc)) dispatch(c.u, inc);
   }
 }
@@ -4324,11 +4351,11 @@ function tanrBlock(inc){
       <div class="acts"><button class="btn${nzo ? ' go' : ''}" data-act="tanr" data-id="${inc.id}">Začať TANR <kbd>S</kbd></button>${nzo ? `<button class="btn" data-act="tanrskip" data-id="${inc.id}">TANR netreba</button>` : ''}</div></div>`;
   }
   if(p.skip) return p.bad ? '<p class="keys">TANR zrušená – pacient dýcha.</p>' : '';
-  if(p.step<=2){
-    const opts=TANR_STEPS[p.step], ord=p.order[p.step] ? [1,0] : [0,1];
-    return `<div class="tanr hot"><div class="k">TANR · krok ${p.step+1} z 3 – čo povieš volajúcemu?</div><div class="faopts">${ord.map(i=>`<button class="faopt${p.wrong.includes(p.step+':'+i) ? ' bad' : ''}" data-act="tanrc" data-id="${inc.id}" data-type="${i}" ${p.wrong.includes(p.step+':'+i) ? 'disabled' : ''}><i>${p.wrong.includes(p.step+':'+i) ? '✗' : ''}</i><span>${esc(opts[i][0])}</span></button>`).join('')}</div></div>`;
+  if(p.step<p.n){
+    const opts=tanrSteps(inc)[p.step], ord=p.order[p.step] ? [1,0] : [0,1];
+    return `<div class="tanr hot"><div class="k">TANR · krok ${p.step+1} z ${p.n} – čo povieš volajúcemu?</div><div class="faopts">${ord.map(i=>`<button class="faopt${p.wrong.includes(p.step+':'+i) ? ' bad' : ''}" data-act="tanrc" data-id="${inc.id}" data-type="${i}" ${p.wrong.includes(p.step+':'+i) ? 'disabled' : ''}><i>${p.wrong.includes(p.step+':'+i) ? '✗' : ''}</i><span>${esc(opts[i][0])}</span></button>`).join('')}</div></div>`;
   }
-  if(p.step===3) return `<div class="tanr hot"><div class="k">TANR · udávaj tempo stláčania</div>
+  if(p.step===p.n) return `<div class="tanr hot"><div class="k">TANR · udávaj tempo stláčania</div>
     <p class="keys">Ťukaj v rytme, v akom má volajúci stláčať – 100 až 120-krát za minútu, asi dvakrát za sekundu. „Raz, dva, tri, štyri…“</p>
     <button class="btn go tap" data-act="tanrtap" data-id="${inc.id}">Stlač <kbd>S</kbd><span class="sub">${Math.min(p.taps.length,9)} / 9</span></button></div>`;
   return `<div class="tanr on"><div class="k">TANR prebieha</div><p class="keys">Volajúci stláča hrudník od ${fmtSec((p.at-inc.callAt)*60)} po prijatí hovoru, tempo ${p.rate}/min. Nech neprestáva, kým nepríde posádka.</p></div>`;
@@ -4398,7 +4425,7 @@ function renderIncs(){
   if(!list.length) h+=`<p class="empty">Žiadna otvorená udalosť. Udalosť vznikne, keď pri hovore určíš kategóriu a naliehavosť K, N alebo M.</p>`;
   for(const inc of list){
     h+=`<div class="inc${G.sel.inc===inc.id?' sel':''}" style="--pc:${LV_COL[inc.lvl]||'var(--p'+inc.prio+')'}" data-act="inc" data-id="${inc.id}">
-      <div class="row">${lvChip(inc)}${catIco(inc.cat)}<span class="ttl grow">#${inc.no} ${esc(incName(inc))}</span>${inc.major ? '<span class="chip mu">UHPO</span>' : ''}${inc.intake ? '<span class="chip warn">príjem</span>' : ''}${inc.cpr && inc.cpr.step===4 ? '<span class="chip">TANR</span>' : ''}${inc.escalated ? '<span class="chip warn">horšie</span>' : ''}${harmChip(inc)}
+      <div class="row">${lvChip(inc)}${catIco(inc.cat)}<span class="ttl grow">#${inc.no} ${esc(incName(inc))}</span>${inc.major ? '<span class="chip mu">UHPO</span>' : ''}${inc.intake ? '<span class="chip warn">príjem</span>' : ''}${inc.cpr && inc.cpr.n && inc.cpr.step>inc.cpr.n ? '<span class="chip">TANR</span>' : ''}${inc.escalated ? '<span class="chip warn">horšie</span>' : ''}${harmChip(inc)}
         ${inc.metAt ? '<span class="timer">zásah</span>' : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}</div>
       <div class="addr">${inc.lost ? 'Poloha neznáma – nájdi volajúceho' : esc(inc.addr)}</div>
       <div class="needs">${needChips(inc)}</div>
@@ -4808,7 +4835,7 @@ document.addEventListener('keydown', e=>{
   else if(talk && k.length===1 && k>='1' && k<='8'){ ask(talk, Q_ORDER[+k-1]); }
   else if(talk && 'knmo'.includes(k) && k.length===1 && talk.cat){ pickLvl(talk, k.toUpperCase()); }
   else if(talk && k==='t'){ interp(talk); }
-  else if(k==='s'){ const inc=incById(G.sel.inc) || G.incs.find(i=>i.cpr && i.cpr.step===3); if(inc){ if(!inc.cpr && inc.lvl==='K') tanrStart(inc); else if(inc.cpr && inc.cpr.step===3) tanrTap(inc); } }
+  else if(k==='s'){ const inc=incById(G.sel.inc) || G.incs.find(i=>i.cpr && i.cpr.step===i.cpr.n); if(inc){ if(!inc.cpr && inc.lvl==='K') tanrStart(inc); else if(inc.cpr && inc.cpr.step===inc.cpr.n) tanrTap(inc); } }
   else if(k==='enter' && !onBtn && has('d_rec')){ const inc=incById(G.sel.inc); if(inc){ e.preventDefault(); sendRecommended(inc); } }
   else if(k==='escape'){ G.sel.inc=null; G.sel.unit=null; dirty(); }
 });

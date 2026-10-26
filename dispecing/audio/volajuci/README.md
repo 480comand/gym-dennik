@@ -4,7 +4,7 @@ Sem patria nahrávky viet, ktoré hovoria volajúci na linke 155. Hra si ich pre
 (orezaný zvuk ako v telefóne). Veta bez nahrávky ostane len ako text, lebo hlas prehliadača je zatiaľ vypnutý.
 Zatiaľ len po slovensky.
 
-`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 760 slovenských viet:
+`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 775 slovenských viet:
 
 | Stĺpec | Význam |
 |---|---|

@@ -45,7 +45,7 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
 - **Naliehavosť:** K kritický, N naliehavý, M menej naliehavý, O odkladný. Pri K, N a M vznikne udalosť,
   pri O hovor vybavíš bez výjazdu: rada, 116117, NTIC, linka psychologickej pomoci, prehliadka mŕtveho tela
   alebo odovzdanie na KS IZS 112.
-- V katalógu je 77 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
+- V katalógu je 79 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
 
 **Vysielanie posádok**
 - K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
@@ -65,17 +65,18 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
 
 **Súčinnosť IZS** (tlačidlá v karte udalosti)
 - Hasiči: vyslobodenie z auta, otvorenie bytu, ťažký pacient, oheň, voda, plyn.
-- Polícia: agresia, nútený prevoz, opitý maloletý, kolaps či zástava na verejnosti, nehoda so zraneným.
+- Polícia: dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, agresia, nútený prevoz, opitý maloletý.
 - Mestská polícia: preverenie, keď volajúci neostane na mieste.
 - Včas vyžiadaná zložka: +15. Zabudnutá zložka: posádka ju vyžiada z miesta a čaká (−20, horší stav).
   Zbytočne vyžiadaná zložka: −10.
 
 **TANR – telefonicky asistovaná resuscitácia**
-- Pri zástave vyberieš tri správne pokyny (poloha, ruky na hrudník, stláčanie bez vdychov) a ťukaním udávaš
-  tempo stláčania. Hra meria tempo (100–120/min) a čas od prijatia hovoru po prvé stlačenie (do 60 s +40).
+- Pri zástave vyberieš štyri správne pokyny (reproduktor, poloha, ruky na hrudník, stláčanie) a ťukaním udávaš
+  tempo stláčania. Dospelý dostane len stláčanie; pri utopenom a dojčati (dva prsty, asi 4 cm) aj úvodné vdychy, ak to volajúci vie. Hra meria tempo (100–120/min) a čas od prijatia hovoru po prvé stlačenie (do 60 s +40).
 - Výsledok zástavy závisí od času bez obehu, kvality TANR a príchodu posádky. Bez TANR pacient väčšinou neprežije.
 - Pri ďalších stavoch sú telefonické pokyny (stabilizovaná poloha, adrenalínové pero, zastavenie krvácania,
-  vedenie pôrodu a ďalšie). Dobrý pokyn pomôže, zlý ublíži.
+  vedenie pôrodu a ďalšie). Dobrý pokyn pomôže, zlý ublíži. Lieky (napríklad aspirín) operátor po telefóne neodporúča.
+- Kontrola odborného obsahu: `kontrola/Linka155-kontrola-obsahu.xlsx` (situácie, stromy K/N/M/O, TANR, stĺpce na pripomienky).
 
 **Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka z ďaleka a dôsledky zlého vyslania,
 pokrytie kraja, neznáma poloha volajúceho, hovory v cudzom jazyku s tlmočníkom, zneužitie linky,
@@ -85,7 +86,7 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
-- Scenár všetkých 760 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Scenár všetkých 775 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
 satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;

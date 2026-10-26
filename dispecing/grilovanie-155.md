@@ -332,3 +332,16 @@ Odpoveď: áno.
 
 **Neskôr / odložené:** oslovenie OS ZZS SR, výsledky pre učiteľa, režim pre verejnosť, hlasy, hromadné nešťastie
 s triedením START, sekundárne prevozy, nočná zmena.
+
+**Potvrdené používateľom** – zhrnutie platí, začína sa krokom 1.
+
+## Rozhodnutia po predkontrole obsahu (Excel)
+
+- Doplniť všetko, čo chýbalo: krok TANR „Zapnite reproduktor“, TANR pri utopenom a dojčati (nová situácia Dojča nedýcha),
+  pokyny „ak vie kašľať, nech kašle“ a „merajte čas záchvatu“.
+- Rozpor „chrčí“ opravený: pri bezvedomí „dýcha pravidelne, len trochu chrápe“, v strome NZO len lapavé dychy.
+- Krátky kolaps: pacientka má 25 rokov. Vysoký tlak: nová situácia M (180/100 s miernou bolesťou hlavy), odkladná situácia je teraz
+  konzultácia zabudnutej tabletky.
+- **Aspirín sa po telefóne nepodáva** – v hre je chybný pokyn.
+- **Polícia ide k dopravným nehodám, k resuscitácii a bezvedomiu na verejnosti** (pri ležiacom mužovi pri obchodnom centre je PZ bez trestu).
+- Ostáva na overenie v Exceli: postup pri istých známkach smrti, bolesť chrbta s pomočením (M podľa stromu), strom pre úrazy (vlastný).
