@@ -344,4 +344,12 @@ s triedením START, sekundárne prevozy, nočná zmena.
   konzultácia zabudnutej tabletky.
 - **Aspirín sa po telefóne nepodáva** – v hre je chybný pokyn.
 - **Polícia ide k dopravným nehodám, k resuscitácii a bezvedomiu na verejnosti** (pri ležiacom mužovi pri obchodnom centre je PZ bez trestu).
-- Ostáva na overenie v Exceli: postup pri istých známkach smrti, bolesť chrbta s pomočením (M podľa stromu), strom pre úrazy (vlastný).
+- Ostáva na overenie v Exceli: strom pre úrazy (vlastný, obrazovku Úrazy som nemal). Osobitný postup UHPO je odložený.
+
+### Doplňujúce odpovede
+
+- **Isté známky smrti:** prehliadka mŕtveho tela. Políciu informovať, len ak je to na verejnosti alebo sú nejasné známky
+  s podozrením na cudzie zavinenie. V hre sú dve riešenia: „Úmrtie doma – prehliadka“ a „Úmrtie na verejnosti alebo nejasné –
+  prehliadka a polícia“. Nové situácie: Mŕtvy na lavičke, Nájdený mŕtvy v byte (rana, nejasné okolnosti). Chýbajúca polícia −20.
+- **Bolesť chrbta s mravčením:** N, ale len pri istých príznakoch zistených doplňujúcimi otázkami. V hre sú dve situácie s podobnou
+  úvodnou vetou: M (moč a stolicu udrží, v rozkroku cíti) a N (únik moču, necitlivosť v rozkroku). Strom bolesti je upravený.

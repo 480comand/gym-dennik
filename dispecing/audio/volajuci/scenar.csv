@@ -53,6 +53,22 @@ v1p761xx.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);odpoveď: „Je 
 v1u0a6yb.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);doplňujúca otázka: „Kedy ste ho naposledy videli živého?“;Večer o desiatej, išiel spať.;Isté známky smrti;
 vywf6od.mp3;pokoj;pokojnejší, vecný;Isté známky smrti (O);doplňujúca otázka: „Liečil sa u lekára?“;Áno, mal rakovinu, chodila k nemu doktorka.;Isté známky smrti;
 v12dq29o.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Isté známky smrti (O);opakovaný hovor – úvod;Haló, to som zase ja, pred chvíľou sme spolu hovorili! Je mu horšie, prestáva reagovať!;*;
+v9jdunb.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Mŕtvy na lavičke (O);čo sa stalo;V parku na lavičke sedí muž, vôbec sa nehýbe a je úplne studený.;Mŕtvy na lavičke;muž
+v1p1j3ri.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, ani keď som ním zatriasol.;Mŕtvy na lavičke;muž
+v1bt9ekn.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha, je celý stuhnutý.;Mŕtvy na lavičke;muž
+vb5b8ym.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Je sivý a na rukách má fialové fľaky.;Mŕtvy na lavičke;muž
+v15iiwlr.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Neviem, len tak tu sedí. Nikoho tu nepoznám.;Mŕtvy na lavičke;muž
+v1fnxba5.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Je v parku pri fontáne, na lavičke.;Mŕtvy na lavičke;muž
+v4wjug0.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);doplňujúca otázka: „Kedy ste ho naposledy videli živého?“;Neviem, ráno o šiestej tu už sedel.;Mŕtvy na lavičke;muž
+v153s0ur.mp3;pokoj;pokojnejší, vecný;Mŕtvy na lavičke (O);doplňujúca otázka: „Poznáte ho?“;Nie, nikdy som ho nevidel.;Mŕtvy na lavičke;muž
+v1btj0mc.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Nájdený mŕtvy v byte (O);čo sa stalo;Prišla som za bratom, leží v kuchyni na zemi a je studený.;Nájdený mŕtvy v byte;žena
+vpe3obw.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, je studený ako ľad.;Nájdený mŕtvy v byte;žena
+vyxhxsr.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);odpoveď: „Dýcha? Dýcha normálne?“;Nedýcha, je úplne stuhnutý.;Nájdený mŕtvy v byte;žena
+vm56oru.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);odpoveď: „Akú má farbu kože? Je bledý, spotený?“;Na tvári a rukách má fialové fľaky.;Nájdený mŕtvy v byte;žena
+v1jed4st.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);odpoveď: „Stal sa úraz? Spadol, udrel sa?“;Na hlave má ranu a na zemi je zaschnutá krv. Neviem, čo sa stalo.;Nájdený mŕtvy v byte;žena
+viaj2f.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);odpoveď: „Je k nemu prístup? Hrozí tam niečo?“;Je v kuchyni na zemi, dvere boli odomknuté.;Nájdený mŕtvy v byte;žena
+vkkuqmm.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);doplňujúca otázka: „Kedy ste ho naposledy videli živého?“;Predvčerom večer mi ešte volal.;Nájdený mŕtvy v byte;žena
+v1u279kz.mp3;pokoj;pokojnejší, vecný;Nájdený mŕtvy v byte (O);doplňujúca otázka: „Liečil sa u lekára?“;Nie, bol zdravý, mal štyridsať rokov.;Nájdený mŕtvy v byte;žena
 v86xncv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);čo sa stalo;Suseda leží na chodbe a nedá sa prebrať!;Bezvedomie;žena
 v1nv2gks.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Je pri vedomí? Reaguje?“;Nereaguje, ani keď na ňu kričím a zatrasiem ňou.;Bezvedomie;žena
 vimc0hv.mp3;panika;kričí, hovorí rýchlo, zajakáva sa a lapá po dychu;Bezvedomie (K);odpoveď: „Dýcha? Dýcha normálne?“;Dýcha pravidelne, len trochu chrápe.;Bezvedomie;žena
@@ -196,9 +212,16 @@ v1ota2da.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Studená noh
 vaw2da6.mp3;úľava;s úľavou, ale ešte zadýchaný;Studená noha (N);po dobrej rade: „Nech leží a nohu nechá voľne, nižšie ako srdce.“;Leží, noha je dole na koberci.;Studená noha;žena
 v64td2h.mp3;úľava;s úľavou, ale ešte zadýchaný;Studená noha (N);po dobrej rade: „Nohu nemasírujte a nezohrievajte.“;Dobre, nechávam ju tak.;Studená noha;žena
 v33gat9.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Studená noha (N);po zlej rade: „Zabaľte jej nohu do termoforu.“;Dala som termofor… noha bolí ešte viac!;Studená noha;žena
-vnvkrf.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bolesť chrbta s mravčením (M);čo sa stalo;Od rána ma strašne bolí chrbát, mravčí mi noha a nevládzem chodiť.;Bolesť chrbta s mravčením;muž
-v7j003i.mp3;pokoj;pokojnejší, vecný;Bolesť chrbta s mravčením (M);doplňujúca otázka: „Udržíte moč a stolicu?“;Neviem… pred chvíľou som sa pomočil.;Bolesť chrbta s mravčením;muž
-v1dfgovb.mp3;pokoj;pokojnejší, vecný;Bolesť chrbta s mravčením (M);doplňujúca otázka: „Zdvíhali ste niečo ťažké?“;Áno, ráno som nosil cement.;Bolesť chrbta s mravčením;muž
+vngw77b.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bolesť chrbta s mravčením (M);čo sa stalo;Od rána ma strašne bolí chrbát a mravčí mi noha.;Bolesť chrbta s mravčením;muž
+v3cy4m7.mp3;pokoj;pokojnejší, vecný;Bolesť chrbta s mravčením (M);doplňujúca otázka: „Udržíte moč a stolicu?“;Áno, s tým problém nemám.;Bolesť chrbta s mravčením;muž
+v1msz6zp.mp3;pokoj;pokojnejší, vecný;Bolesť chrbta s mravčením (M);doplňujúca otázka: „Cítite normálne dotyk v rozkroku?“;Áno, tam cítim normálne.;Bolesť chrbta s mravčením;muž
+vwpc8cx.mp3;strach;vystrašený, trasúci sa hlas, rýchlejšie tempo;Bolesť chrbta s únikom moču (N);čo sa stalo;Od včera ma strašne bolí chrbát a mravčia mi nohy.;Bolesť chrbta s únikom moču;muž
+v1k8f8hn.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bolesť chrbta s únikom moču (N);doplňujúca otázka: „Udržíte moč a stolicu?“;Neviem… pred chvíľou som sa pomočil a ani som to necítil.;Bolesť chrbta s únikom moču;muž
+v1i1otp.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Bolesť chrbta s únikom moču (N);doplňujúca otázka: „Cítite normálne dotyk v rozkroku?“;Nie, je to tam akoby znecitlivené.;Bolesť chrbta s únikom moču;muž
+vom27nr.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť chrbta s únikom moču (N);po dobrej rade: „Ľahnite si v polohe, v ktorej vás to bolí najmenej, a už nevstávajte.“;Ležím na posteli, nohy mám pokrčené.;Bolesť chrbta s únikom moču;muž
+v1vtfbl5.mp3;úľava;s úľavou, ale ešte zadýchaný;Bolesť chrbta s únikom moču (N);po dobrej rade: „Pripravte si doklady a zoznam liekov, nech sú pri vás.“;Mám ich pri posteli.;Bolesť chrbta s únikom moču;muž
+vbxd81w.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť chrbta s únikom moču (N);po zlej rade: „Skúste sa rozchodiť, nech sa chrbát uvoľní.“;Skúsil som vstať… noha sa mi podlomila a spadol som!;Bolesť chrbta s únikom moču;muž
+v1xv03me.mp3;zdesenie;zdesený, vyčíta si to, hlas sa mu láme;Bolesť chrbta s únikom moču (N);po zlej rade: „Zoberte si tabletku proti bolesti a uvidíme.“;Zobral som tabletku… ale rozkrok stále necítim.;Bolesť chrbta s únikom moču;muž
 vdbfbk5.mp3;nervozita;nervózny a netrpezlivý, ale zrozumiteľný;Obličková kolika (M);čo sa stalo;Mám strašnú bolesť v boku, vystreľuje to do slabín. Už som mal obličkové kamene.;Obličková kolika;muž
 v17g2qau.mp3;pokoj;pokojnejší, vecný;Obličková kolika (M);doplňujúca otázka: „Máte teplotu alebo zimnicu?“;Nie, teplotu nemám.;Obličková kolika;muž
 v18e5bd8.mp3;pokoj;pokojnejší, vecný;Obličková kolika (M);doplňujúca otázka: „Je v moči krv?“;Trochu ružový je.;Obličková kolika;muž

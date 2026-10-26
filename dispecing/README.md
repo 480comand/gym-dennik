@@ -45,7 +45,7 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
 - **Naliehavosť:** K kritický, N naliehavý, M menej naliehavý, O odkladný. Pri K, N a M vznikne udalosť,
   pri O hovor vybavíš bez výjazdu: rada, 116117, NTIC, linka psychologickej pomoci, prehliadka mŕtveho tela
   alebo odovzdanie na KS IZS 112.
-- V katalógu je 79 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
+- V katalógu je 82 situácií. Asi štvrtina z nich je odkladných alebo na 155 nepatrí.
 
 **Vysielanie posádok**
 - K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
@@ -65,7 +65,8 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
 
 **Súčinnosť IZS** (tlačidlá v karte udalosti)
 - Hasiči: vyslobodenie z auta, otvorenie bytu, ťažký pacient, oheň, voda, plyn.
-- Polícia: dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, agresia, nútený prevoz, opitý maloletý.
+- Polícia: dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, úmrtie na verejnosti alebo za nejasných okolností,
+  agresia, nútený prevoz, opitý maloletý. Pri úmrtí doma bez podozrenia stačí prehliadka mŕtveho tela.
 - Mestská polícia: preverenie, keď volajúci neostane na mieste.
 - Včas vyžiadaná zložka: +15. Zabudnutá zložka: posádka ju vyžiada z miesta a čaká (−20, horší stav).
   Zbytočne vyžiadaná zložka: −10.
@@ -86,7 +87,7 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
-- Scenár všetkých 775 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Scenár všetkých 798 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
 satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;

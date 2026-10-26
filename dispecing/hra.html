@@ -796,7 +796,7 @@ const isIzs = u => !!KINDS[u.kind].izs;
 const IZS_KINDS=['HAS','PZ','MSP'];
 const IZS_L={HAS:'Hasiči (HaZZ)', PZ:'Polícia (PZ)', MSP:'Mestská polícia (MsP)'};
 const IZS_WHEN={HAS:'vyslobodenie z auta, otvorenie bytu, ťažký pacient, oheň, voda, plyn',
-  PZ:'dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, agresia, nútený prevoz, opitý maloletý',
+  PZ:'dopravná nehoda, resuscitácia alebo bezvedomie na verejnosti, úmrtie na verejnosti alebo za nejasných okolností, agresia, nútený prevoz, opitý maloletý',
   MSP:'preverenie, keď volajúci neostane na mieste'};
 const IZS_MISS={HAS:'Potrebujeme hasičov – bez nich sa k pacientovi nedostaneme!', PZ:'Potrebujeme políciu – situácia je nebezpečná!', MSP:'Potrebujeme mestskú políciu na preverenie a súčinnosť.'};
 const STATUS={1:'Voľná',2:'Na základni',3:'Výjazd',4:'Na mieste',5:'Transport',6:'V nemocnici'};
@@ -884,7 +884,7 @@ const LV_COL={K:'var(--p1)', N:'var(--p2)', M:'#3ddc97', O:'#5aa9ff'};
 /* stromy kategórií: kritériá stupňov naliehavosti (zjednodušené, vlastnými slovami) */
 const TREE={
   nzo:{K:['Nereaguje a nedýcha normálne – aj občasné lapavé dychy sú zástava','Hneď TANR, najbližšia posádka a lekár'],
-    O:['Nedýcha a má isté známky smrti: stuhnutý, studený, fialové škvrny'], note:'Ak pacient dýcha, vyber kategóriu Porucha vedomia.'},
+    O:['Nedýcha a má isté známky smrti: stuhnutý, studený, fialové škvrny','Úmrtie na verejnosti alebo za nejasných okolností (rana, podozrenie na cudzie zavinenie) – informuj aj políciu'], note:'Ak pacient dýcha, vyber kategóriu Porucha vedomia.'},
   vedomie:{K:['Bezvedomie – nereaguje, ale dýcha','Diabetik v bezvedomí (veľmi nízky alebo vysoký cukor)'],
     N:['Spavý, zmätený, reaguje len na oslovenie alebo bolesť','Po kolapse ostal spavý alebo je nový zmätok','Kolaps u dieťaťa, seniora alebo pri srdcových ťažkostiach'],
     M:['Krátko odpadol a úplne sa prebral','Tesne pred kolapsom: závrat, slabosť, studený pot, mžitky'],
@@ -896,8 +896,8 @@ const TREE={
   krv:{N:['Masívne krvácanie, známky šoku (bledý, studený pot)','Zvracanie krvi alebo „kávovej usadeniny“, čierna či čerstvá krv v stolici','Krvácanie z nosa, ktoré sa nedá zastaviť, alebo pri liekoch na riedenie krvi','Krv v moči so slabosťou a bledosťou'],
     M:['Menšie krvácanie zo žalúdka či čriev','Opakované krvácanie z nosa, nie masívne','Krv v moči bez známok šoku'],
     O:['Krvácanie z nosa sa zastavilo, je stabilný','Krvácanie z ďasien, drobné krvácanie z konečníka','Rada volajúcemu']},
-  bolest:{N:['Náhla prudká bolesť bez úrazu – hlava, brucho, chrbát','Studená, bledá, bolestivá končatina','Neznesiteľná bolesť, bledosť, známky šoku','Kolaps pri bolesti'],
-    M:['Silná, postupne vzniknutá bolesť hlavy, brucha či chrbta','Bolesť chrbta so slabosťou, mravčením alebo únikom moču','Obličková kolika bez známok šoku','Bolesť pri nádorovom ochorení – zváž RLP alebo RV'],
+  bolest:{N:['Náhla prudká bolesť bez úrazu – hlava, brucho, chrbát','Bolesť chrbta a doplňujúce otázky odhalia únik či zadržanie moču alebo stolice, alebo necitlivosť v rozkroku','Studená, bledá, bolestivá končatina','Neznesiteľná bolesť, bledosť, známky šoku','Kolaps pri bolesti'],
+    M:['Silná, postupne vzniknutá bolesť hlavy, brucha či chrbta','Bolesť chrbta s mravčením do nohy – moč a stolicu udrží, v rozkroku cíti normálne','Obličková kolika bez známok šoku','Bolesť pri nádorovom ochorení – zváž RLP alebo RV'],
     O:['Dlhodobá bolesť bez náhleho zhoršenia','Rada volajúcemu, 116117']},
   kardio:{K:['Bolesť na hrudi s bledosťou, studeným potom, dýchavicou, zvracaním','Porucha rytmu s kolapsom alebo dýchavicou','Opakované výboje defibrilátora, zmätenosť po výboji','Opakovaný kolaps, šok'],
     N:['Srdcová bolesť na hrudi (tlak, pálenie, vyžarovanie) v časovom okne','Pulz nad 150 alebo pod 50 bez kolapsu','Veľmi vysoký tlak (dolný nad 130) s ťažkosťami'],
@@ -936,8 +936,8 @@ const TREE={
 };
 /* riešenie bez výjazdu (stupeň O alebo hovor, ktorý nepatrí na 155) */
 const OPT={rada:'Rada volajúcemu – postup doma', '116117':'Odporučiť 116117 alebo všeobecného lekára', ntic:'Konzultovať s NTIC (toxikologické centrum)',
-  psy:'Odporučiť linku psychologickej pomoci', smrt:'Úmrtie – prehliadka mŕtveho tela, informovať PZ', izs:'Odovzdať na KS IZS 112 (polícia, hasiči)'};
-const OPT_ORDER=['rada','116117','ntic','psy','smrt','izs'];
+  psy:'Odporučiť linku psychologickej pomoci', smrt:'Úmrtie doma – prehliadka mŕtveho tela', smrtpz:'Úmrtie na verejnosti alebo nejasné – prehliadka a polícia', izs:'Odovzdať na KS IZS 112 (polícia, hasiči)'};
+const OPT_ORDER=['rada','116117','ntic','psy','smrt','smrtpz','izs'];
 /* potreba lekára (RLP, RV alebo vrtuľník) a sanitky na prevoz */
 const DOC='RLP|RV|LZS', AMB='RZP|RLP|LZS';
 /* posádky podľa naliehavosti: K – najbližšia posádka a k nej lekár, N – RZP alebo RLP (RLP len ak je bližšie), M – RZP alebo RLP */
@@ -965,8 +965,12 @@ const TPL=[
     v:{ved:'Nereaguje, je studený a mokrý.', dych:'Nedýcha, z úst mu tečie voda!', obeh:'Je modrý.', uraz:'Skočil do vody a už sa nevynoril, vytiahli sme ho po pár minútach.', miesto:'Leží na móle, k vode sa dá prísť autom.'}},
   {cat:'nzo',lvl:'K',w:1,title:'Dojča nedýcha',arrest:1,cpr:'infant',pt:'child',tr:1,work:10,place:'town',texts:['Synček v postieľke nedýcha, je celý modrý!'],
     v:{ved:'Nereaguje, je úplne ochabnutý!', dych:'Nedýcha… nevidím, že by dýchal!', obeh:'Je modrý až sivý.', uraz:'Nie, spal v postieľke.', miesto:'Sme v detskej izbe, som s ním sama.'}},
-  {cat:'nzo',lvl:'O',o:['smrt'],w:2,title:'Isté známky smrti',place:'town',texts:['Dobrý deň… starý otec ráno nevstal. Myslím, že už nežije.'],
+  {cat:'nzo',lvl:'O',o:['smrt'],oWhy:'Doma pri dlho chorom bez podozrenia na cudzie zavinenie polícia netreba.',w:2,title:'Isté známky smrti',place:'town',texts:['Dobrý deň… starý otec ráno nevstal. Myslím, že už nežije.'],
     v:{ved:'Nereaguje. Je studený.', dych:'Nedýcha. Je celý stuhnutý a na chrbte má fialové škvrny.', obeh:'Je bledý a studený, má fialové fľaky.', uraz:'Nie, ležal v posteli, bol dlho chorý.', miesto:'Je v posteli, som tu s babkou.'}},
+  {cat:'nzo',lvl:'O',o:['smrtpz'],oWhy:'Úmrtie na verejnom priestranstve – vždy informuj aj políciu.',w:1,title:'Mŕtvy na lavičke',place:'town',texts:['V parku na lavičke sedí muž, vôbec sa nehýbe a je úplne studený.'],
+    v:{ved:'Nereaguje, ani keď som ním zatriasol.', dych:'Nedýcha, je celý stuhnutý.', obeh:'Je sivý a na rukách má fialové fľaky.', uraz:'Neviem, len tak tu sedí. Nikoho tu nepoznám.', miesto:'Je v parku pri fontáne, na lavičke.'}},
+  {cat:'nzo',lvl:'O',o:['smrtpz'],oWhy:'Rana a nejasné okolnosti – podozrenie na cudzie zavinenie, informuj políciu a nech sa ničoho nedotýkajú.',w:1,title:'Nájdený mŕtvy v byte',place:'town',texts:['Prišla som za bratom, leží v kuchyni na zemi a je studený.'],
+    v:{ved:'Nereaguje, je studený ako ľad.', dych:'Nedýcha, je úplne stuhnutý.', obeh:'Na tvári a rukách má fialové fľaky.', uraz:'Na hlave má ranu a na zemi je zaschnutá krv. Neviem, čo sa stalo.', miesto:'Je v kuchyni na zemi, dvere boli odomknuté.'}},
   /* porucha vedomia */
   {cat:'vedomie',lvl:'K',w:4,title:'Bezvedomie',tr:1,work:9,place:'town',texts:['Suseda leží na chodbe a nedá sa prebrať!'],
     v:{ved:'Nereaguje, ani keď na ňu kričím a zatrasiem ňou.', dych:'Dýcha pravidelne, len trochu chrápe.', obeh:'Je bledá.', uraz:'Neviem, našla som ju tak.', krv:'Nevidím krv.', miesto:'Leží na chodbe pred bytom na treťom poschodí, výťah ide.'}},
@@ -1003,7 +1007,8 @@ const TPL=[
     v:{ved:'Je pri vedomí, stoná.', dych:'Dýcha rýchlo.', obeh:'Je bledý a spotený.'}},
   {cat:'bolest',lvl:'N',w:2,title:'Studená noha',tr:1,work:7,place:'town',texts:['Mame zrazu zbledla noha a strašne ju bolí.'],
     v:{obeh:'Noha je studená, bledá až modrastá. Inak je normálna.', uraz:'Nie, nikde sa neudrela.'}},
-  {cat:'bolest',lvl:'M',self:1,w:3,title:'Bolesť chrbta s mravčením',tr:1,work:6,place:'town',texts:['Od rána ma strašne bolí chrbát, mravčí mi noha a nevládzem chodiť.']},
+  {cat:'bolest',lvl:'M',self:1,w:3,title:'Bolesť chrbta s mravčením',tr:1,work:6,place:'town',texts:['Od rána ma strašne bolí chrbát a mravčí mi noha.']},
+  {cat:'bolest',lvl:'N',self:1,w:2,title:'Bolesť chrbta s únikom moču',tr:1,work:7,place:'town',texts:['Od včera ma strašne bolí chrbát a mravčia mi nohy.']},
   {cat:'bolest',lvl:'M',self:1,w:3,title:'Obličková kolika',tr:1,work:6,place:'town',texts:['Mám strašnú bolesť v boku, vystreľuje to do slabín. Už som mal obličkové kamene.']},
   {cat:'bolest',lvl:'O',o:['116117','rada'],self:1,w:4,title:'Dlhodobá bolesť chrbta',place:'town',texts:['Už mesiac ma bolí chrbát a lieky mi nezaberajú. Čo mám robiť?']},
   /* kardio */
@@ -1389,6 +1394,11 @@ Object.assign(FA, {
     ['Nedávajte mu nič jesť ani piť.',1,'Dobre, nič mu nedám.'],
     ['Dajte mu na brucho termofor.',0,'Dala som mu termofor… bolí ho to ešte viac!','teplo pri náhlej bolesti brucha môže zhoršiť zápal, napríklad slepého čreva.'],
     ['Dajte mu silný liek proti bolesti.',0,'Zapil tabletku… je mu ešte horšie a zvracia.','liek môže zakryť príznaky a pacient môže ísť na operáciu – nesmie nič ústami.']],
+  'Bolesť chrbta s únikom moču':[
+    ['Ľahnite si v polohe, v ktorej vás to bolí najmenej, a už nevstávajte.',1,'Ležím na posteli, nohy mám pokrčené.'],
+    ['Pripravte si doklady a zoznam liekov, nech sú pri vás.',1,'Mám ich pri posteli.'],
+    ['Skúste sa rozchodiť, nech sa chrbát uvoľní.',0,'Skúsil som vstať… noha sa mi podlomila a spadol som!','pri úniku moču a necitlivosti v rozkroku môže ísť o útlak nervov – chôdza hrozí pádom, nech leží.'],
+    ['Zoberte si tabletku proti bolesti a uvidíme.',0,'Zobral som tabletku… ale rozkrok stále necítim.','operátor po telefóne lieky neodporúča – o liečbe rozhodne posádka.']],
   'Studená noha':[
     ['Nech leží a nohu nechá voľne, nižšie ako srdce.',1,'Leží, noha je dole na koberci.'],
     ['Nohu nemasírujte a nezohrievajte.',1,'Dobre, nechávam ju tak.'],
@@ -1503,6 +1513,8 @@ Object.assign(FQ, {
   'Dojča nedýcha':[['Koľko má mesiacov?','Štyri mesiace.',1],['Kedy ste ho videli naposledy v poriadku?','Pred hodinou, keď som ho uložila spať.',1]],
   'Vytiahnutý z vody':[['Ako dlho bol pod vodou?','Asi tri, štyri minúty.',1],['Bola voda studená?','Voda je ešte dosť studená.',1]],
   'Isté známky smrti':[['Kedy ste ho naposledy videli živého?','Večer o desiatej, išiel spať.',1],['Liečil sa u lekára?','Áno, mal rakovinu, chodila k nemu doktorka.',1]],
+  'Mŕtvy na lavičke':[['Kedy ste ho naposledy videli živého?','Neviem, ráno o šiestej tu už sedel.',1],['Poznáte ho?','Nie, nikdy som ho nevidel.',1]],
+  'Nájdený mŕtvy v byte':[['Kedy ste ho naposledy videli živého?','Predvčerom večer mi ešte volal.',1],['Liečil sa u lekára?','Nie, bol zdravý, mal štyridsať rokov.',1]],
   'Bezvedomie':[['Ako dlho tam môže ležať?','Neviem, ráno bola ešte v poriadku.',1],['Má nejakú chorobu, napríklad cukrovku?','Viem, že má cukrovku.',1]],
   'Diabetik v bezvedomí':[['Pichal si dnes inzulín a jedol?','Ráno si pichol a nejedol, nemal chuť.',1],['Máte glukomer?','Áno, ukazuje 1,8.',1]],
   'Kolaps seniorky':[['Koľko má rokov?','Osemdesiatdva.',1],['Berie lieky na srdce alebo na riedenie krvi?','Áno, Warfarín a niečo na tlak.',1]],
@@ -1518,7 +1530,8 @@ Object.assign(FQ, {
   'Zastavené krvácanie z nosa':[['Berie nejaké lieky?','Nie, je to dieťa, nič neberie.',1],['Udrel sa do nosa?','Nie, len si ho šúchal.',1]],
   'Prudká bolesť brucha':[['Kde presne ho bolí?','Vpravo dole a vystreľuje to.',1],['Zvracia, má teplotu?','Zvracal dvakrát, teplotu má 38.',1]],
   'Studená noha':[['Kedy to začalo?','Asi pred hodinou, zrazu.',1],['Má nepravidelný pulz alebo problémy so srdcom?','Má fibriláciu, berie lieky.',1]],
-  'Bolesť chrbta s mravčením':[['Udržíte moč a stolicu?','Neviem… pred chvíľou som sa pomočil.',1],['Zdvíhali ste niečo ťažké?','Áno, ráno som nosil cement.',1]],
+  'Bolesť chrbta s mravčením':[['Udržíte moč a stolicu?','Áno, s tým problém nemám.',1],['Cítite normálne dotyk v rozkroku?','Áno, tam cítim normálne.',1]],
+  'Bolesť chrbta s únikom moču':[['Udržíte moč a stolicu?','Neviem… pred chvíľou som sa pomočil a ani som to necítil.',1],['Cítite normálne dotyk v rozkroku?','Nie, je to tam akoby znecitlivené.',1]],
   'Obličková kolika':[['Máte teplotu alebo zimnicu?','Nie, teplotu nemám.',1],['Je v moči krv?','Trochu ružový je.',1]],
   'Dlhodobá bolesť chrbta':[['Je bolesť horšia ako zvyčajne alebo vám mravčí noha?','Nie, je to stále rovnaké.',1],['Ste sledovaný u lekára?','Áno, kontrolu mám o mesiac.',1]],
   'Tlak na hrudi':[['Kedy presne bolesť začala?','Asi pred dvoma hodinami.',1],['Mal už infarkt alebo stent?','Pred dvoma rokmi mu dávali stent.',1]],
@@ -1895,7 +1908,7 @@ const canonText = t => t.replace(/\s*(Bývame|Sme) \{loc\}\./,'').replace(/\s*\{
 /* kto volá: žena (Ž) alebo muž (M) – podľa tvarov v jeho vetách; ostatné udalosti môže hovoriť ktokoľvek */
 const CALLER_G={'Dojča nedýcha':'Ž','Zástava srdca':'Ž','Zástava srdca na ulici':'Ž','Vytiahnutý z vody':'Ž','Bolesť na hrudi':'Ž','Tlak na hrudi':'Ž','Pád seniorky':'Ž','Anafylaxia':'M','Mozgová príhoda':'M','Dusenie':'M','Pôrod':'M','Zrazený chodec':'M',
   'Otrava CO':'M','Zranený turista':'M','Vyčerpaná turistka':'M','Bezvedomie':'Ž','Diabetik v bezvedomí':'Ž','Mdloba, ktorá prešla':'Ž','Ležiaci muž, volajúci odchádza':'M','Ťažká dýchavica':'Ž',
-  'Kašeľ a teplota':'Ž','Zvracanie krvi':'Ž','Prudká bolesť brucha':'Ž','Studená noha':'Ž','Bolesť chrbta s mravčením':'M','Obličková kolika':'M','Búšenie srdca':'M','Nepravidelný pulz':'M',
+  'Kašeľ a teplota':'Ž','Zvracanie krvi':'Ž','Prudká bolesť brucha':'Ž','Studená noha':'Ž','Bolesť chrbta s mravčením':'M','Bolesť chrbta s únikom moču':'M','Mŕtvy na lavičke':'M','Nájdený mŕtvy v byte':'Ž','Obličková kolika':'M','Búšenie srdca':'M','Nepravidelný pulz':'M',
   'Zabudnutá tabletka na tlak':'Ž','Vysoký tlak':'Ž','Kŕče, ktoré neprestávajú':'Ž','Horúčkové kŕče':'Ž','Hrozí skokom':'M','Agresívny pacient':'Ž','Úzkosť':'M','Zmätený diabetik':'Ž','Nízky cukor':'M',
   'Vysoký cukor bez ťažkostí':'M','Rana motorovou pílou':'Ž','Zlomená ruka':'M','Ťažký pacient na zemi':'Ž','Krvácanie v tehotenstve':'Ž','Menštruačné bolesti':'Ž'};
 const REPEAT_OPEN='Haló, to som zase ja, pred chvíľou sme spolu hovorili! ';
@@ -2747,7 +2760,7 @@ function pickLvl(c, lvl){
 }
 const OPT_SAY={rada:'Poradím vám, čo robiť doma. Keby sa to zhoršilo, hneď volajte znova.', '116117':'Toto nie je stav pre záchranku. Zavolajte na 116117 alebo k svojmu lekárovi.',
   ntic:'Spojím vás s toxikologickým centrom, poradia vám presný postup.', psy:'Dám vám číslo na linku psychologickej pomoci, sú tam pre vás nonstop.',
-  smrt:'Je mi to veľmi ľúto. Zariadim prehliadku mŕtveho tela a informujem políciu.', izs:'Toto nie je pre záchrannú službu, prepájam vás na linku 112.'};
+  smrt:'Je mi to veľmi ľúto. Zariadim prehliadku mŕtveho tela, lekár za vami príde.', smrtpz:'Je mi to veľmi ľúto. Zariadim prehliadku mŕtveho tela a informujem políciu. Prosím, ničoho sa nedotýkajte.', izs:'Toto nie je pre záchrannú službu, prepájam vás na linku 112.'};
 function resolveO(c, opt){
   if(!c || c.state!=='talk' || !running() || !OPT[opt] || !c.cat || c.kind==='repeat') return;
   G.stats.cls++;
@@ -2759,9 +2772,14 @@ function resolveO(c, opt){
     const ok=t.o.includes(opt), catOk=c.cat===t.cat || t.alt.includes(c.cat);
     let pts=(ok ? 40 : 15)-(catOk ? 0 : 10);
     if(ok) pts=Math.round(pts*comboK());
+    /* úmrtie na verejnosti alebo za nejasných okolností bez polície: chýba súčinnosť */
+    const noPz = t.o[0]==='smrtpz' && opt!=='smrtpz';
+    if(noPz){ pts=-20; dec('izsmiss'); }
     G.score+=pts; gainXP(ok ? 3 : 1); G.stats.triOk=(G.stats.triOk||0)+1;
+    const why = t.oWhy ? ' '+t.oWhy : '';
     if(ok){ comboAdd(); G.stats.oOk=(G.stats.oOk||0)+1; say('Správne bez výjazdu: '+OPT[opt].toLowerCase()+'. Posádky ostali voľné pre vážne prípady. +'+pts, 'good'); }
-    else say('Bez výjazdu je to v poriadku, ale lepšie by bolo: '+OPT[t.o[0]].toLowerCase()+'. +'+pts);
+    else if(noPz){ comboBreak(); say('Chýba polícia.'+why+' −'+Math.abs(pts), 'bad'); }
+    else say('Bez výjazdu je to v poriadku, ale lepšie by bolo: '+OPT[t.o[0]].toLowerCase()+'.'+why+' +'+pts);
   } else {
     scheduleRecall(c);
     say('Hovor uzavretý bez výjazdu: '+OPT[opt].toLowerCase()+'.');

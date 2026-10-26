@@ -4,7 +4,7 @@ Sem patria nahrávky viet, ktoré hovoria volajúci na linke 155. Hra si ich pre
 (orezaný zvuk ako v telefóne). Veta bez nahrávky ostane len ako text, lebo hlas prehliadača je zatiaľ vypnutý.
 Zatiaľ len po slovensky.
 
-`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 775 slovenských viet:
+`scenar.csv` (alebo `scenar.html` v prehliadači) obsahuje všetkých 798 slovenských viet:
 
 | Stĺpec | Význam |
 |---|---|
@@ -29,7 +29,7 @@ Skript `generuj-hlasy.py` vytvorí všetky nahrávky naraz. Stačí Python 3, ni
    napríklad `"udalosti": {"Pôrod": "b"}`. Prirodzenejšie znejú hlasy so slovenským prízvukom z Voice Library –
    pridaj si ich do svojich hlasov a spusti `--hlasy` znova.
 3. `python3 generuj-hlasy.py --odhad` spočíta, koľko znakov (kreditov) generovanie spotrebuje.
-   So štyrmi hlasmi je to asi 69 000 znakov aj so značkami emócií. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
+   So štyrmi hlasmi je to asi 71 000 znakov aj so značkami emócií. Porovnaj to s kreditmi svojho plánu na elevenlabs.io.
 4. `python3 generuj-hlasy.py --max 10` vyskúša prvých 10 nahrávok. Keď sa ti páčia,
    `python3 generuj-hlasy.py` dorobí zvyšok. Hotové súbory preskakuje, takže ho môžeš prerušiť a spustiť znova.
    `--len "Zástava"` vygeneruje len vety udalostí, ktorých názov obsahuje zadaný text.
