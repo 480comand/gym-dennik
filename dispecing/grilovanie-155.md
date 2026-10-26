@@ -207,31 +207,51 @@ Odpoveď: neodpovedané – opakovať v kole 5.
 
 **Q27 (znova) – Hra na mobile.** Skúšal si hru na svojom mobile? Ide 3D mapa plynulo, alebo sa seká?
 Ak si ju neskúšal, vyskúšaj ju prosím – podľa toho rozhodneme o úspornom režime.
-Odpoveď: …
+Odpoveď: na telefóne ide plynulo, ale je dosť neprehľadná.
 
 **Q29 (znova) – Hlasy volajúcich.** Hlasy a ElevenLabs nechávame mimo plánu, kým nebude hotový kurz a skúška.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q30 – Obrázok s výsledkom skúšky** (zosúladenie Q16 a Q28).
 V Q16 si súhlasil s obrázkom na ukázanie učiteľovi, v Q28 si výsledky pre učiteľa vynechal.
 Obrázok vynecháme a po skúške ostane len hodnotenie na obrazovke.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno – obrázok vynechať, len hodnotenie na obrazovke.
 
 **Q31 – Prvé spustenie.** Nový hráč začne lekciou 1 kurzu (dá sa preskočiť), skúsený ide rovno do menu.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q32 – Herné prvky.** Schopnosti a odomykanie posádok, výzvy s hviezdičkami, denná výzva a medaily ostávajú.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno.
 
 **Q33 – Chýbajúce kategórie.** Strom pre úrazy nechám svoj (overíš ho v Exceli). Asistencie a neodkladnú
 prepravu osoby zatiaľ do hry nedávam.
 Odporúčanie: áno.
-Odpoveď: …
+Odpoveď: áno – asistencie a neodkladnú prepravu osoby netreba vôbec.
 
 **Q34 – Hovory v cudzom jazyku.** Hovory po maďarsky, ukrajinsky a anglicky s tlmočníkom ostávajú (text, bez hlasu).
+Odporúčanie: áno.
+Odpoveď: áno.
+
+### Zistené po kole 5 – rýchly audit hry na mobile (390 × 844)
+
+1. Počas príjmu hovoru zaberá mapa asi 40 % výšky, na rozhovor ostáva menej ako polovica – veľa posúvania.
+2. Horná lišta má dva riadky (hodiny, úroveň, skóre, dôvera, pauza, menu) – zaberá miesto a nie je dôležitá pri hovore.
+3. Tlačidlá otázok vyzerajú ako bubliny rozhovoru – otázky a odpovede sa ťažko rozlišujú, rozhovor odsúva tlačidlá nadol.
+4. V karte udalosti je najdôležitejšie tlačidlo (Vyslať) až dole – pred ním je dlhý text o súčinnosti a pokyny prvej pomoci.
+5. Hlásenia (toasty) prekrývajú mapu a pri rýchlom hraní sa hromadia.
+
+## Kolo 6
+
+**Q35 – Čo je na mobile neprehľadné.** Sedí audit vyššie s tým, čo ti prekáža? Ak ťa trápi ešte niečo iné, dopíš to.
+Odporúčanie: áno, všetkých 5 bodov.
+Odpoveď: …
+
+**Q36 – Poradie práce po zistení z mobilu** (mení Q25).
+1. pripraviť Excel na kontrolu obsahu (kým ho kontroluješ ty a kolega, robím ďalej), 2. prehľadnosť na mobile,
+3. rozbor hovoru, 4. kurz, 5. kazuistiky, 6. skúška, 7. AED, odklad, konzultácia s lekárom.
 Odporúčanie: áno.
 Odpoveď: …
