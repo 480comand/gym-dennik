@@ -89,10 +89,13 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
 - Scenár všetkých 798 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
-**Mapa a tempo:** terén je skutočný reliéf kraja (výškové dáta Terrain Tiles – SRTM, EU-DEM) potiahnutý
-satelitnou snímkou z družíc Copernicus Sentinel-2 (letá 2022–2025, mozaika upravená na farby;
-`img/kosicky-kraj-satelit.jpg`). Pri otvorení súboru priamo z disku (file://) prehliadač satelitnú snímku
-nenačíta a ukáže sa kreslená mapa. Hra beží pokojným tempom: pri ×1 je sekunda pol minúty hry a hovory chodia
+**Vzhľad a mapa:** svetlý vzhľad „pracovná stanica“ (biele karty, jedna modrá, farby len pre naliehavosť K/N/M/O,
+písmo IBM Plex). Mapa je svetlá 3D zo skutočného reliéfu (výškové dáta Terrain Tiles – SRTM, EU-DEM). Košický kraj
+je zvýraznený modrou hranicou; okolie – Prešovský a Banskobystrický kraj, Maďarsko a Ukrajina – je len na orientáciu
+(mestá, hlavné cesty, čiarkované hranice, opar na obzore). Na mobile je počas príjmu hovoru hore len čas a pauza,
+naraz je vidno jedno hlásenie a staršie sú v zozname „Hlásenia“. Návrh: `navrh-vzhlad-a-prijem.md`.
+
+**Tempo:** hra beží pokojným tempom: pri ×1 je sekunda pol minúty hry a hovory chodia
 zhruba každých 15 minút hry, neskôr každých 9; zrýchliť sa dá tlačidlom ×2/×4.
 
 **Ciele**
