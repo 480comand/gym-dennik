@@ -113,7 +113,7 @@ pokyny aj TANR. Dve situácie sú **skryté H3**: z úvodu to nie je poznať a v
 - Kontrola odborného obsahu: `kontrola/Linka155-kontrola-obsahu.xlsx` (situácie, otázky k problému, rady pri O,
   stromy K/N/M/O, TANR, kazuistiky so zdrojmi, lekcie kurzu, stĺpce na pripomienky).
 
-**Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka z ďaleka a dôsledky zlého vyslania,
+**Ďalej v hre:** opakované hovory pri zhoršení, režim jednej udalosti, posádka zďaleka a dôsledky zlého vyslania,
 pokrytie kraja, neznáma poloha volajúceho, hovory v cudzom jazyku s tlmočníkom, zneužitie linky,
 mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov a políciu riadi KS IZS sama.
 
