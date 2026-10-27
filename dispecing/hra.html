@@ -1236,7 +1236,7 @@ const TPL=[
     v:{ved:'Nereaguje… ani keď ho štipnem. Ale chrápe, takže spí, nie?', dych:'Áno, dýcha… tak nahlas chrápe, raz za čas.', obeh:'Okolo úst je taký sivý.', uraz:'Nie, ležal na gauči pri telke.', krv:'Nie.', miesto:'Sme v obývačke na treťom poschodí, výťah ide.'},
     cqa:{dych2:'Nie normálne… zachrčí a potom dlho nič. Tak raz za desať sekúnd.', kedy:'Pred chvíľou ešte rozprával, potom sa zviezol na gauči.', kpr:'Nie, nikto.', aed:'Neviem o žiadnom.', znamky:'Nie, je teplý.', choroby:'Berie lieky na tlak a na srdce.', vek:'Šesťdesiatsedem.', pomoc:'Áno, je tu dcéra.'},
     key:['dych2','pomoc']},
-  {cat:'nzo',lvl:'K',w:0,caseOnly:1,help:1,title:'Zrútil sa na tribúne',arrest:1,izsOk:['PZ','MSP'],pt:'cardio',tr:1,work:10,place:'i_zs',texts:['Na tribúne sa zrútil fanúšik, leží medzi sedadlami a nehýbe sa!'],
+  {cat:'nzo',lvl:'K',w:0,caseOnly:1,help:1,title:'Zrútil sa na tribúne',arrest:1,izs:['PZ'],izsOk:['MSP'],pt:'cardio',tr:1,work:10,place:'i_zs',texts:['Na tribúne sa zrútil fanúšik, leží medzi sedadlami a nehýbe sa!'],
     v:{ved:'Nereaguje, oči má otvorené.', dych:'Neviem… teraz zalapal a zase nič.', obeh:'Je bledý, pery má modré.', uraz:'Nie, len sa zvalil zo sedadla.', krv:'Nie.', miesto:'Sme na tribúne pri vchode B, je tu veľa ľudí aj usporiadatelia.'},
     cqa:{dych2:'Len raz za čas zalapá, inak nič.', kedy:'Teraz, pred minútou.', kpr:'Nie, nikto sa ho neodváži dotknúť.', aed:'Áno, usporiadateľ hovorí, že pri vchode B visí defibrilátor.', znamky:'Nie.', choroby:'Neviem, nepoznám ho.', vek:'Asi päťdesiat.', pomoc:'Áno, je nás tu veľa, aj usporiadatelia.'},
     key:['dych2','pomoc','aed']},
@@ -1674,6 +1674,7 @@ Object.assign(FA, {
   'Horúčkové kŕče':[
     ['Položte ju na bok na mäkké, ďaleko od hrán.',1,'Leží na boku na posteli.'],
     ['Vyzlečte ju do ľahkého a neprikrývajte ju.',1,'Vyzliekla som ju do body.'],
+    ['Pozrite sa na hodinky a merajte, ako dlho záchvat trvá.',1,'Trvalo to asi dve minúty, už sa netrasie.'],
     ['Dajte ju do studenej vane.',0,'Dala som ju do studenej vody… kŕčuje ešte viac!','studený kúpeľ je pre telo šok. Stačí ľahké oblečenie.']],
   'Hrozí skokom':[
     ['Hovorte s ním pokojne, nekričte a nehádajte sa.',1,'Hovorím s ním potichu, počúva.'],
@@ -2165,7 +2166,7 @@ const LESSONS=[
     tips:['Horúčka u čulého dieťaťa, ktoré pije, je O. Opýtaj sa však na vyrážky, stuhnutý krk a spavosť.','Dehydratácia so zmätenosťou u seniorky je M.','Túlavý pes je vec pre 112, odovzdaj hovor.','Vždy sa opýtaj: „Ste pri pacientovi?“ Volajúci, ktorý pri ňom nie je, odpovedá z pamäti.']},
 ];
 /* skúška: 10 hovorov, strom kritérií skrytý, výsledok v percentách, úspech od 80 % */
-const EXAM_N=10, EXAM_PASS=80;
+const EXAM_N=10, EXAM_PASS=80, EXAM_LVL=8;   // úspech: aspoň 80 %, aspoň 8 z 10 správnych naliehavostí a žiadna podcenená K
 /* kazuistiky: jeden hovor od prijatia po príchod posádky a rozbor krok po kroku.
    Prípady sú prerozprávané podľa typického priebehu opísaného v odbornej literatúre – mená, miesta a čísla sú vymyslené.
    kroky: [čo urobiť, prečo, kontrola] – kontrola: q:… základná otázka, cq:… otázka k problému, cat, lvl, disp, tanr, aed, fa, izs, h1 */
@@ -2190,6 +2191,7 @@ const CASES=[
       ['Vedomie a dýchanie: nereaguje, len občas zalapá','Lapavé dychy = zástava.','q:dych'],
       ['Náhle zastavenie obehu, stupeň K','','lvl'],
       ['Posádka a lekár do 90 s','','disp'],
+      ['Súčinnosť: polícia k resuscitácii na verejnosti','Štadión je verejné miesto, preto k zástave ide aj polícia.','izs'],
       ['„Je tam ešte niekto?“ a „Je nablízku defibrilátor?“','Keď je pri pacientovi viac ľudí, jeden stláča a druhý beží po AED.','cq:aed'],
       ['TANR a pomocník po AED','AED zapnúť a robiť, čo hovorí. Stláčanie sa prerušuje len na analýzu a výboj.','aed'],
       ['TANR v tempe 100 až 120-krát za minútu','','tanr']],
@@ -2648,9 +2650,21 @@ function earnedMedals(){
 /* ---------- postup hráča (uložený v prehliadači) ---------- */
 const PKEY='linka155-kraj';
 const OLD_COST={z_rlp:2, z_mo:1, h_mi:1};   // zrušené schopnosti zo starších verzií – body sa vrátia
+/* poškodené alebo neúplné uloženie nesmie zhodiť hru: chýbajúce a zlé časti sa doplnia, platné ostanú */
+function normProg(p){
+  const obj = x => x && typeof x==='object' && !Array.isArray(x), num = (x, d) => Number.isFinite(x) ? x : d;
+  p.xp=num(p.xp,0); p.level=Math.max(1, num(p.level,1)); p.points=num(p.points,1); p.best=num(p.best,0); p.sessions=num(p.sessions,0);
+  if(!Array.isArray(p.skills)) p.skills=[];
+  if(!obj(p.stars)) delete p.stars;
+  if(p.course!==undefined){ if(!obj(p.course)) p.course={}; if(!obj(p.course.best)) p.course.best={}; p.course.open=Math.max(1, num(p.course.open,1)); }
+  if(p.cases!==undefined && !obj(p.cases)) p.cases={};
+  if(p.exam!==undefined){ if(!obj(p.exam)) p.exam={}; p.exam.best=num(p.exam.best,0); p.exam.passed=num(p.exam.passed,0); }
+  if(p.daily!==undefined && !obj(p.daily)) delete p.daily;
+  return p;
+}
 function loadProg(){
   try{ const p=JSON.parse(localStorage.getItem(PKEY)||'null');
-    if(p && p.v===1){ if(p.voiceV!==2){ p.voice=false; p.voiceV=2; } for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
+    if(p && p.v===1){ normProg(p); if(p.voiceV!==2){ p.voice=false; p.voiceV=2; } for(const id of p.skills) if(!SKILLS.some(s=>s.id===id)) p.points+=OLD_COST[id]||1; p.skills=p.skills.filter(id=>SKILLS.some(s=>s.id===id)); return p; } }catch(e){}
   return {v:1, xp:0, level:1, points:1, skills:[], best:0, light:'day', sessions:0, voice:false, voiceV:2}; }
 let PROG=loadProg();
 function saveProg(){ try{ localStorage.setItem(PKEY, JSON.stringify(PROG)); }catch(e){} }
@@ -3347,6 +3361,7 @@ function consequences(inc, ghostBest){
 function giveAid(inc, i){
   const f=inc && inc.fa, list=f && faOf(inc), it=list && list[i];
   if(!it || f.given.includes(i) || inc.metAt || G.t<f.busy || !running()) return;
+  if(!inc.intake && !quiet()) return;   // pokyny len počas príjmu, neskôr len pri opakovanom hovore (repeatAid)
   aidEffect(inc, f, list, i);
   speak({id:'I'+inc.id, lang:'sk', vp:inc.vp, vr:inc.vr, vi:inc.vi, voiceSfx:inc.voiceSfx, textKey:inc.tpl && inc.tpl.texts && canonText(inc.tpl.texts[0]), tpl:inc.tpl}, it[2], it[2], it[1] ? 'ulava' : 'zdesenie');
 }
@@ -4054,8 +4069,16 @@ const TANR_STEPS={
     [['Ak viete, najprv 5-krát jemne vdýchnite do úst aj nosa naraz, potom 15 stlačení a 2 vdychy. Ak nie, len stláčajte asi 4 cm, rýchlo.',1],['Zatraste ním, nech sa preberie.',0,'trasenie dojčaťa je nebezpečné a stráca čas. Treba hneď stláčať.']]]};
 const tanrSteps = inc => TANR_STEPS[(inc.tpl && inc.tpl.cpr) || 'adult'];
 const tanrPending = inc => inc.cat==='nzo' && inc.lvl==='K' && !(inc.cpr && (inc.cpr.at || inc.cpr.skip));
-function endIntakeMaybe(inc){}   // príjem sa končí len tlačidlom „Ukončiť príjem“, príchodom posádky alebo prijatím ďalšieho hovoru
+function endIntakeMaybe(inc){}   // príjem končí tlačidlom „Ukončiť príjem“, príchodom posádky, prijatím ďalšieho hovoru alebo sám po 5 min
+/* pri zástave (K, NZO) sa príjem tlačidlom ukončí až po spustení TANR alebo jeho vedomom vynechaní */
+const tanrBlocks = inc => !!inc && inc.intake && !quiet() && tanrPending(inc) && inc.atPatient!==false;
+function endIntakeBtn(inc){
+  if(tanrBlocks(inc)){ say('#'+inc.no+': pri zástave ukonči príjem až po spustení TANR.', 'bad'); SND.bad(); return; }
+  finishIntake(inc);
+}
 const faNeeded = inc => !!inc && inc.fromCall && !inc.prank && !inc.mimo && (inc.trueLvl==='K' || inc.trueLvl==='N') && inc.atPatient!==false && !!inc.fa && !(inc.tpl && inc.tpl.arrest);
+/* to isté pre zobrazenie: podľa naliehavosti, ktorú zvolil hráč, aby štítok „povinné“ neprezradil skutočnú (bodovanie ostáva podľa skutočnej) */
+const faNeededUi = inc => !!inc && inc.fromCall && !inc.prank && !inc.mimo && (inc.lvl==='K' || inc.lvl==='N') && inc.atPatient!==false && !!inc.fa && !(inc.cat==='nzo' && inc.lvl==='K');
 const faDone = inc => !!inc.fa && inc.fa.given.some(i=>faOf(inc)[i][1]);
 function finishIntake(inc){
   if(!inc || !inc.intake) return;
@@ -4467,7 +4490,7 @@ function init3D(){
   if(!window.THREE){ cv.insertAdjacentHTML('afterend','<div class="nogl">3D mapu sa nepodarilo načítať. Skontroluj pripojenie na internet.</div>'); return; }
   try{ R3=new THREE.WebGLRenderer({canvas:cv, antialias:true, powerPreference:'high-performance'}); }
   catch(e){ cv.insertAdjacentHTML('afterend','<div class="nogl">Tento prehliadač nepodporuje 3D grafiku (WebGL).</div>'); return; }
-  R3.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+  R3.setPixelRatio(Math.min(window.innerWidth<700 ? 1.5 : 2, window.devicePixelRatio||1));   // na telefóne stačí 1,5 – menej práce pre GPU
   R3.shadowMap.enabled=true; R3.shadowMap.type=THREE.PCFSoftShadowMap;
   scene=new THREE.Scene();
   camera=new THREE.PerspectiveCamera(42, 1, .5, 1200);
@@ -5367,10 +5390,10 @@ function render3D(now){
   syncUnits(now); syncIncidents(now);
   for(const id of [...incObj.keys()]) if(!incById(id)) dropIncMesh(id);
   stepParticles(addP, dt); stepParticles(norP, dt);
-  for(const L of staticLabels) placeLabel(L);
-  declutter();
-  for(let i=FX.length-1;i>=0;i--){ const L=FX[i]; if(now-L.t0>1600){ L.el.remove(); FX.splice(i,1); } else placeLabel(L); }
-  R3.render(scene, camera);
+  const shown=cv.offsetWidth>0;   // na mobile počas príjmu je mapa skrytá – nevykresľuj ju zbytočne (batéria)
+  if(shown){ for(const L of staticLabels) placeLabel(L); declutter(); }
+  for(let i=FX.length-1;i>=0;i--){ const L=FX[i]; if(now-L.t0>1600){ L.el.remove(); FX.splice(i,1); } else if(shown) placeLabel(L); }
+  if(shown) R3.render(scene, camera);
 }
 
 /* ============================================================
@@ -5397,15 +5420,15 @@ function repeatFaBlock(c){
 function faBlock(inc){
   const f=inc.fa;
   if(!f) return inc.faNo && !inc.metAt ? `<p class="keys">${esc(inc.faNo)}</p>` : '';
-  const list=faOf(inc), nOk=f.given.filter(i=>list[i][1]).length, nBad=f.given.length-nOk, done=!!inc.metAt, busy=G.t<f.busy;
-  const open=f.open || inc.intake, must=faNeeded(inc);
+  const list=faOf(inc), nOk=f.given.filter(i=>list[i][1]).length, nBad=f.given.length-nOk, done=!!inc.metAt, busy=G.t<f.busy, closed=!done && !inc.intake && !quiet();
+  const open=f.open || inc.intake, must=faNeededUi(inc);
   let h=`<div class="fa"><button class="fahead" data-act="faopen" data-id="${inc.id}" aria-expanded="${open}"><span class="k">Pokyny volajúcemu</span>
     <span class="sub">${f.given.length ? nOk+' dobré'+(nBad ? ' · '+nBad+' zlé' : '') : must ? 'povinné' : 'voliteľné'}</span><span class="chev">${open ? '▴' : '▾'}</span></button>`;
   if(open){
     h+=`<div class="faopts">${f.order.map(i=>{ const g=f.given.includes(i), ok=list[i][1];
-      return `<button class="faopt${g ? (ok ? ' ok' : ' bad') : ''}" data-act="fa" data-id="${inc.id}" data-type="${i}" ${g || done || busy ? 'disabled' : ''}><i>${g ? (ok ? '✓' : '✗') : ''}</i><span>${esc(list[i][0])}</span></button>`; }).join('')}</div>`;
+      return `<button class="faopt${g ? (ok ? ' ok' : ' bad') : ''}" data-act="fa" data-id="${inc.id}" data-type="${i}" ${g || done || busy || closed ? 'disabled' : ''}><i>${g ? (ok ? '✓' : '✗') : ''}</i><span>${esc(list[i][0])}</span></button>`; }).join('')}</div>`;
     if(f.last) h+=`<p class="m c fareply${f.lastBad ? ' bad' : ''}">${esc(f.last)}</p>`;
-    h+=`<p class="keys">${done ? 'Posádka je na mieste, volajúci už rady nepotrebuje.' : busy ? 'Volajúci robí, čo si mu povedal…' : 'Zaškrtni, čo má volajúci urobiť, kým príde pomoc. Dobrá rada pomôže, zlá ublíži.'}</p>`;
+    h+=`<p class="keys">${done ? 'Posádka je na mieste, volajúci už rady nepotrebuje.' : closed ? 'Príjem hovoru je ukončený. Pokyny sa dávajú počas príjmu, neskôr len pri opakovanom hovore.' : busy ? 'Volajúci robí, čo si mu povedal…' : 'Zaškrtni, čo má volajúci urobiť, kým príde pomoc. Dobrá rada pomôže, zlá ublíži.'}</p>`;
   }
   return h+'</div>';
 }
@@ -5585,7 +5608,7 @@ function renderDispatch(){
     const cur=Math.max(G.istep||4, 1), ring=G.calls.find(c=>c.state==='ring');
     const send = inc.lost ? '' : (rows || `<p class="empty">${info.met ? 'Všetky potrebné posádky sú na mieste.' : info.missing.every(n=>IZS_KINDS.includes(n)) ? 'Posádky ZZS sú vyslané, čaká sa na zložky IZS.' : 'Žiadna vhodná posádka nie je voľná.'}</p>`)
       + (rec.length>1 ? `<button class="btn go" data-act="sendall" data-id="${inc.id}">Vyslať odporúčané (${rec.length}) <kbd>Enter</kbd></button>` : '');
-    const must = faNeeded(inc);
+    const must = faNeededUi(inc);
     setHTML(box, `<div class="disp intakev" data-cur="${cur}" style="--pc:${LV_COL[inc.lvl]||'var(--p'+inc.prio+')'}">
       <div class="row">${lvChip(inc)}${catIco(inc.cat)}<span class="ttl grow">#${inc.no} ${esc(incName(inc))}</span><b class="ctime" data-call="${inc.callAt}">0:00</b></div>
       ${ring ? `<button class="btn sm ringme" data-act="answer" data-id="${ring.id}">${ICON.phone} Zvoní ďalší hovor: ukončiť príjem a prijať</button>` : ''}
@@ -5609,7 +5632,8 @@ function renderDispatch(){
       <section class="istep" data-step="5">
         ${must && !faDone(inc) ? '<p class="keys warnt">Pri K a N sú pokyny volajúcemu povinné. Daj aspoň jeden správny.</p>' : ''}
         ${faBlock(inc)}
-        <button class="btn${must && !faDone(inc) ? '' : ' go'}" data-act="endintake" data-id="${inc.id}">Ukončiť príjem hovoru</button>
+        ${tanrBlocks(inc) ? '<p class="keys warnt">Pri zástave najprv spusti TANR, až potom ukonči príjem.</p>' : ''}
+        <button class="btn${must && !faDone(inc) || tanrBlocks(inc) ? '' : ' go'}" data-act="endintake" data-id="${inc.id}" ${tanrBlocks(inc) ? 'disabled' : ''}>Ukončiť príjem hovoru</button>
       </section>
       ${stepNav(cur)}
     </div>`);
@@ -5619,7 +5643,7 @@ function renderDispatch(){
     <div class="row">${lvChip(inc)}${catIco(inc.cat)}<span class="ttl grow">#${inc.no} ${esc(incName(inc))}</span>
       ${inc.metAt ? `<span class="timer">zásah</span>` : `<span class="timer" data-to="${inc.deadline}" data-txt="1"></span>`}
       <button class="btn sm ghost" data-act="desel" aria-label="Zavrieť">✕</button></div>
-    ${inc.intake ? `<div class="intakebar"><span class="k">Príjem hovoru</span><b class="ctime" data-call="${inc.callAt}">0:00</b><span class="sub grow">${inc.dispAt ? 'posádka vyslaná za '+fmtSec(inc.dispSec) : 'vyšli posádku'+(inc.lvl==='M' ? '' : ' do 90 s')}${tanrPending(inc) ? ' · začni TANR' : ''}</span><button class="btn sm ghost" data-act="endintake" data-id="${inc.id}">Ukončiť príjem</button></div>` : ''}
+    ${inc.intake ? `<div class="intakebar"><span class="k">Príjem hovoru</span><b class="ctime" data-call="${inc.callAt}">0:00</b><span class="sub grow">${inc.dispAt ? 'posádka vyslaná za '+fmtSec(inc.dispSec) : 'vyšli posádku'+(inc.lvl==='M' ? '' : ' do 90 s')}${tanrPending(inc) ? ' · začni TANR' : ''}</span><button class="btn sm ghost" data-act="endintake" data-id="${inc.id}" ${tanrBlocks(inc) ? 'disabled' : ''}>Ukončiť príjem</button></div>` : ''}
     <div class="addr">${inc.lost ? 'Poloha neznáma' : esc(inc.addr)}</div>
     <p class="quote">${esc(inc.text)}</p>
     ${inc.brief && inc.brief.length ? `<div class="brief"><span class="k">Z hovoru</span><ul>${inc.brief.map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>` : ''}
@@ -5819,7 +5843,7 @@ function showMenu(tab){
     const E=PROG.exam;
     body=`<div class="chal daily"><span class="row"><b class="grow">Skúška · ${EXAM_N} hovorov</b>${E ? `<span class="sub">najlepšie ${E.best} %${E.passed ? ' · úspešná '+E.passed+'×' : ''}</span>` : ''}</span>
         <span class="sub">3 kritické, 3 naliehavé, 2 menej naliehavé a 2 odkladné hovory v náhodnom poradí. Kritériá naliehavosti sú skryté, lekár OS nie je k dispozícii a príjem beží v reálnom čase. Rozbory uvidíš až na konci.</span>
-        <span class="goals">· naliehavosť 40 % · čas do vyslania 15 % · TANR 15 % · súčinnosť IZS 15 % · pokyny 15 %<br>· úspech od ${EXAM_PASS} %</span></div>
+        <span class="goals">· naliehavosť 40 % · čas do vyslania 15 % · TANR 15 % · súčinnosť IZS 15 % · pokyny 15 %<br>· úspech od ${EXAM_PASS} %, aspoň ${EXAM_LVL} z ${EXAM_N} správnych naliehavostí, žiadna podcenená K</span></div>
       <div class="acts"><button class="btn go" data-act="exam">Začať skúšku</button></div>`;
   } else if(MENU_TAB==='free'){
     body=`<div class="gmode"><span class="k">Udalosti</span><div class="seg two">${[['multi','Viac naraz'],['single','Jedna po druhej']].map(([k,t])=>`<button class="btn${(k==='single')===!!PROG.single ? ' on' : ''}" data-act="gmode" data-id="${k}" aria-pressed="${(k==='single')===!!PROG.single}">${t}</button>`).join('')}</div>
@@ -6015,11 +6039,16 @@ function scriptEnd(){
       <p class="lead">Správne ${ok} zo ${res.length} hovorov.${pass ? (sc.id<LESSONS.length ? ' Odomkla sa ďalšia lekcia.' : ' Prešiel si celý kurz. Vyskúšaj kazuistiky a skúšku.') : ' Na odomknutie ďalšej lekcie treba 3 správne zo 4.'}</p>${list}
       <div class="acts">${pass && sc.id<LESSONS.length ? `<button class="btn go" data-act="lesson" data-id="${sc.id+1}">Ďalšia lekcia</button>` : ''}<button class="btn${pass ? '' : ' go'}" data-act="lesson" data-id="${sc.id}">Opakovať lekciu</button><button class="btn" data-act="menu">Menu</button></div>`;
   } else if(sc.kind==='exam'){
-    const pct=Math.round(res.reduce((a,r)=>a+r.pct,0)/Math.max(1,EXAM_N)), pass=pct>=EXAM_PASS && res.length===EXAM_N;
+    const pct=Math.round(res.reduce((a,r)=>a+r.pct,0)/Math.max(1,EXAM_N)),
+      nLvl=res.filter(r=>r.d.tri.lvlOk).length, kUnder=res.filter(r=>r.d.tri.lvlTrue==='K' && r.d.tri.lvl!=='K'),
+      pass=pct>=EXAM_PASS && res.length===EXAM_N && nLvl>=EXAM_LVL && !kUnder.length,
+      why = pass ? '' : kUnder.length ? 'Podcenená K: '+kUnder.map(r=>r.title).join(', ')+'. Pri podcenení K skúška neprejde.'
+        : nLvl<EXAM_LVL ? 'Správna naliehavosť len pri '+nLvl+' z '+EXAM_N+' hovorov, treba aspoň '+EXAM_LVL+'.' : '';
     PROG.exam={best:Math.max((PROG.exam||{}).best||0, pct), passed:((PROG.exam||{}).passed||0)+(pass ? 1 : 0)}; saveProg();
     h=`<div class="k">Skúška</div><h2 class="grade">${pass ? 'Skúška úspešná' : 'Skúška neúspešná'}</h2>
-      <div class="sumgrid"><div><b>${pct} %</b><span class="k">výsledok</span></div><div><b>${ok} / ${EXAM_N}</b><span class="k">správna naliehavosť</span></div><div><b>${EXAM_PASS} %</b><span class="k">hranica úspechu</span></div></div>
-      <p class="keys">Každý hovor: naliehavosť 40 %, čas do vyslania 15 %, TANR 15 %, súčinnosť IZS 15 %, pokyny 15 %.</p>${list}
+      <div class="sumgrid"><div><b>${pct} %</b><span class="k">výsledok</span></div><div><b>${nLvl} / ${EXAM_N}</b><span class="k">správna naliehavosť</span></div><div><b>${EXAM_PASS} %</b><span class="k">hranica úspechu</span></div></div>
+      ${why ? `<p class="keys warnt">${esc(why)}</p>` : ''}
+      <p class="keys">Každý hovor: naliehavosť 40 %, čas do vyslania 15 %, TANR 15 %, súčinnosť IZS 15 %, pokyny 15 %. Na úspech treba aspoň ${EXAM_PASS} %, aspoň ${EXAM_LVL} z ${EXAM_N} správnych naliehavostí a žiadnu podcenenú K.</p>${list}
       <div class="acts"><button class="btn go" data-act="exam">Nová skúška</button><button class="btn" data-act="menu">Menu</button></div>`;
   } else {
     const C=CASES.find(x=>x.id===sc.id); PROG.cases=PROG.cases||{}; if(res[0]) PROG.cases[sc.id]=Math.max(PROG.cases[sc.id]||0, res[0].ok ? 2 : 1); saveProg();
@@ -6125,7 +6154,7 @@ function act(el){
   else if(a==='defer') deferInc(incById(id));
   else if(a==='undefer'){ const inc=incById(id); if(inc){ inc.defer=false; dirty(); } }
   else if(a==='consult') askConsult(callById(id));
-  else if(a==='endintake') finishIntake(incById(id));
+  else if(a==='endintake') endIntakeBtn(incById(id));
   else if(a==='hmark') markH(callById(id), +el.dataset.type);
   else if(a==='cq') askCq(callById(id), el.dataset.type);
   else if(a==='trap') askTrap(callById(id), +el.dataset.type);
@@ -6227,6 +6256,10 @@ new ResizeObserver(()=>{ resize3D(); }).observe($('#mapbox'));
 showMenu();
 renderUI();
 requestAnimationFrame(frame);
+</script>
+<script>
+/* offline: rovnaký service worker ako Dispečing (scope ./), hra má v ňom vlastnú stránku aj 3D knižnice */
+if('serviceWorker' in navigator && location.protocol!=='file:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>

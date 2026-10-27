@@ -45,7 +45,9 @@ Hra nie je oficiálnou pomôckou operačného strediska. Kritériá naliehavosti
    112) a pri rade aj **konkrétne vety** – správne +5, chybné −10 a povinná veta „ak sa to zhorší, volajte znova“
    (bez nej −10).
 5. **Pokyny:** pri K a N sú pokyny volajúcemu **povinné** – bez aspoň jedného správneho −20 a stav sa zhorší.
-   Príjem končí len tlačidlom **Ukončiť príjem**, príchodom posádky alebo prijatím ďalšieho hovoru.
+   Pokyny sa dávajú len počas príjmu, po jeho ukončení len pri opakovanom hovore.
+   Príjem končí tlačidlom **Ukončiť príjem**, príchodom posádky, prijatím ďalšieho hovoru alebo sám po 5 minútach.
+   Pri zástave sa tlačidlo odomkne až po spustení TANR.
 
 **Typ volajúceho:** H1 volá sám pacient (vedomie sa nepýta, za vedomie ani dýchanie sa nestrháva), H2 je pri
 pacientovi, H3 nie je pri pacientovi. Správne označenie +5, nesprávne −5. Pri H3 treba zistiť, že volajúci nie je
@@ -73,7 +75,7 @@ pokyny aj TANR. Dve situácie sú **skryté H3**: z úvodu to nie je poznať a v
   AED s pomocou operátora a ďalšie), anonymizované, detaily sú vymyslené.
 - **Skúška:** 10 hovorov (3 K, 3 N, 2 M, 2 O) v náhodnom poradí, kritériá naliehavosti skryté, bez lekára OS.
   Každý hovor: naliehavosť 40 %, čas do vyslania 15 %, TANR 15 %, súčinnosť IZS 15 %, pokyny 15 %.
-  Úspech od 80 %, výsledok len na obrazovke.
+  Úspech od 80 %, ak sú zároveň aspoň 8 z 10 naliehavostí správne a žiadna K nie je podcenená. Výsledok len na obrazovke.
 
 **Vysielanie posádok**
 - K: najbližšia voľná posádka a k nej lekár – RLP, alebo RZP spolu s RV či RLP.
@@ -121,7 +123,7 @@ mimoriadne udalosti s hromadným postihnutím osôb (UHPO) – pri nich hasičov
 - Hra prehrá len nahrávky z priečinka `audio/volajuci/`, buď vlastné, alebo z ElevenLabs (skript `generuj-hlasy.py`).
   Zvuk ide cez telefónnu linku. Vety bez nahrávky ostanú len ako text.
 - Hlas prehliadača a umelé zvuky z miesta sú vypnuté (prepínače `USE_TTS` a `USE_AMBIENCE` v kóde hry).
-- Scenár všetkých 1290 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
+- Scenár všetkých 1291 slovenských viet s emóciou a návod sú v `audio/volajuci/` (`scenar.csv`, `scenar.html`, `README.md`).
 
 **Vzhľad a mapa:** svetlý vzhľad „pracovná stanica“ (biele karty, jedna modrá, farby len pre naliehavosť K/N/M/O,
 písmo IBM Plex). Mapa je svetlá 3D zo skutočného reliéfu (výškové dáta Terrain Tiles – SRTM, EU-DEM). Košický kraj
@@ -145,10 +147,9 @@ prehľadu [SITA](https://sita.sk/vzdravotnictve/vo-svidniku-vlani-liecili-najvia
 zjednodušené.
 
 Ovládanie: `A` prijať hovor, `1`–`8` otázky rozhovoru, `Z` `X` `C` doplňujúce otázky, `K` `N` `M` `O` naliehavosť,
-`S` TANR a tempo stláčania, `T` tlmočník, `Enter` vyslať odporúčané (so schopnosťou), `Esc` zrušiť výber, medzerník pauza. Na telefóne je mapa cez celú obrazovku a dole panel so záložkami.
+`S` TANR a tempo stláčania, `T` tlmočník, `Enter` vyslať odporúčané (so schopnosťou), `Esc` zrušiť výber, medzerník pauza. Na telefóne ide príjem hovoru cez celú obrazovku po krokoch, mimo príjmu je mapa a dole panel so záložkami.
 Potrebuje prehliadač s WebGL.
 
 Knižnice a dáta: `vendor/three/` – three.js r147 (MIT), `vendor/amcharts-geodata/` – licencia amCharts
-geodát (linkware), z ktorých je zjednodušená hranica kraja. Satelitná snímka obsahuje upravené dáta Copernicus
-Sentinel-2 (2022–2025); reliéf: Terrain Tiles (Mapzen/AWS; SRTM, EU-DEM – Copernicus). Polohy obcí, ciest, riek a pohorí aj špecializácie
+geodát (linkware), z ktorých je zjednodušená hranica kraja. Reliéf: Terrain Tiles (Mapzen/AWS; SRTM, EU-DEM – Copernicus). Polohy obcí, ciest, riek a pohorí aj špecializácie
 nemocníc sú zjednodušené.

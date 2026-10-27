@@ -372,3 +372,14 @@ Hotové naraz podľa pokynu „dokonči to celé naraz“:
 Na overenie v Exceli (hárky Kazuistiky a Kurz): netypický infarkt u ženy je K (bledá, studený pot, dýchavica) – nemá byť N?
 Horúčka so spavosťou a nezblednúcimi fľakmi je N (nové kritérium N v strome Ochorenia) – nemá byť K?
 
+
+## Opravy po code review (27. 10. 2026)
+
+- Pokyny volajúcemu sa dajú dať len počas príjmu. Po jeho ukončení len pri opakovanom hovore.
+- Pri zástave sa príjem tlačidlom ukončí až po spustení TANR (prvé stlačenie) alebo jeho vynechaní.
+- „Zrútil sa na tribúne“: polícia je povinná (resuscitácia na verejnosti), kazuistika má nový krok súčinnosti.
+- Hra funguje offline: service worker Dispečingu ukladá aj `hra.html` a 3D knižnice, gym denník priečinok `dispecing/` nechá tak.
+- **Skúška (schválené používateľom):** úspech od 80 % a zároveň aspoň 8 z 10 správnych naliehavostí a žiadna podcenená K.
+- Štítok „povinné“ pri pokynoch sa riadi naliehavosťou, ktorú zvolil hráč, aby neprezradil skutočnú.
+- Horúčkové kŕče: pridaný pokyn „merajte, ako dlho záchvat trvá“ (nová veta v `scenar.csv`, nahrávka chýba).
+- Poškodené uloženie hry ju pri štarte nezhodí, mapa sa na mobile počas príjmu nevykresľuje.

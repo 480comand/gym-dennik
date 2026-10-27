@@ -17,7 +17,9 @@ self.addEventListener('activate', e => {
 /* network-first: aktualizácie sa stiahnu hneď, offline padá na cache */
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  if (new URL(e.request.url).origin !== self.location.origin) return; // Strava API nechaj tak
+  const url = new URL(e.request.url);
+  if (url.origin !== self.location.origin) return; // Strava API nechaj tak
+  if (url.pathname.includes('/dispecing/')) return; // Dispečing a hra Linka 155 majú vlastný service worker
   e.respondWith(
     fetch(e.request)
       .then(r => {
